@@ -1,16 +1,16 @@
-import { View, TextField, Text, Button } from "react-native-ui-lib";
+import { View, TextField, Text, Button, Colors } from "react-native-ui-lib";
 
 export const HomeScreen = () => {
   return (
     <View flex paddingH-25 paddingT-120>
-      <Text blue50 text20>
-        Welcome
-      </Text>
-      <TextField text50 placeholder="username" grey10 />
-      <TextField text50 placeholder="password" secureTextEntry grey10 />
+      <Text fieldLabel>Field label</Text>
+      <TextField placeholder="username" grey10 />
+      <Text fieldLabel>Field label password</Text>
+      <TextField placeholder="password" secureTextEntry grey10 />
       <View marginT-100 center>
-        <Button text70 white background-orange30 label="Login" />
-        <Button link text70 orange30 label="Sign Up" marginT-20 />
+        <Button BlueButton label="Login" marginT-20 />
+        <Button grayButton label="Login with Google" marginT-20 />
+        <Button whiteTransparentButton label="Accedi" marginT-20 />
       </View>
     </View>
   );
