@@ -13,12 +13,12 @@ export const LoaderScreen = () => {
   useEffect(() => {
     const loadingDelay = setTimeout(() => {
       navigation.replace("Home");
-    }, 3000);
+    }, 5000);
 
     Animated.loop(
       Animated.timing(rotation, {
         toValue: 1,
-        duration: 1500,
+        duration: 1000,
         easing: Easing.linear,
         useNativeDriver: true,
       }),
@@ -26,7 +26,7 @@ export const LoaderScreen = () => {
 
     Animated.timing(progressBarWidth, {
       toValue: 1,
-      duration: 3000,
+      duration: 5000,
       easing: Easing.linear,
       useNativeDriver: false,
     }).start();
@@ -39,7 +39,7 @@ export const LoaderScreen = () => {
 
   const rotateInterpolate = rotation.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"],
+    outputRange: ["360deg", "0deg"],
   });
 
   return (
