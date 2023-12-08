@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Colors, Image } from "react-native-ui-lib";
+import { View, Colors } from "react-native-ui-lib";
 import { Animated, Easing } from "react-native";
+import UnionSVG from "../../../assets/images/Union.svg";
+import LogoSVG from "../../../assets/images/Logo.svg";
 
 export const LoaderScreen = () => {
   const navigation = useNavigation<any>();
@@ -42,11 +44,16 @@ export const LoaderScreen = () => {
 
   return (
     <View flex centerV centerH backgroundColor="#011820">
-      <Animated.Image
-        source={require("../../../assets/images/Union.png")}
-        style={{ transform: [{ rotate: rotateInterpolate }] }}
-      />
-      <Image marginT-41 source={require("../../../assets/images/Logo.png")} />
+      <Animated.View
+        style={{
+          transform: [{ rotate: rotateInterpolate }],
+        }}
+      >
+        <UnionSVG />
+      </Animated.View>
+      <View marginT-41>
+        <LogoSVG />
+      </View>
       <View marginT-41>
         <View
           style={{

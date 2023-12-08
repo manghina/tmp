@@ -22,7 +22,7 @@ export default function App() {
   }
 
   if (fontError) {
-    console.error("Errore durante il caricamento del carattere:", fontError);
+    console.error("Error loading font:", fontError);
   }
   initTheme();
 
