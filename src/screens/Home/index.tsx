@@ -1,4 +1,4 @@
-import { View, TextField, Text, Button, Colors } from "react-native-ui-lib";
+import { View, TextField, Text, Button } from "react-native-ui-lib";
 
 export const HomeScreen = () => {
   return (

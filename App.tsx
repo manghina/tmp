@@ -1,15 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "@app/screens/Home";
+import { LoaderScreen } from "@app/screens/Loader";
 import { useFonts } from "expo-font";
 import { initTheme } from "@app/theme";
 import { Colors } from "react-native-ui-lib";
 
 const Stack = createNativeStackNavigator();
 
-const initFonts = () => {};
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     HelveticaNeue: require("./assets/fonts/HelveticaNeue.ttf"),
@@ -29,7 +28,14 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Loader">
+        <Stack.Screen
+          name="Loader"
+          component={LoaderScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
