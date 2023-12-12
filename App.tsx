@@ -29,7 +29,7 @@ export default function App() {
             title: "Accedi",
             headerTitleAlign: "center",
             headerTitleStyle: {
-              fontFamily: "HelveticaNeueCondensedBlack",
+              fontFamily: "HelveticaNeue-CondensedBlack",
               fontSize: 32,
               color: Colors.blackText,
             },
