@@ -1,46 +1,12 @@
-import React, { useEffect, useRef } from "react";
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import { View, Colors } from "react-native-ui-lib";
-import { Animated, Easing } from "react-native";
+import { Animated } from "react-native";
 import UnionSVG from "../../../assets/images/Union.svg";
 import LogoSVG from "../../../assets/images/Logo.svg";
+import {useLoaderScreen} from "./index.hooks";
 
 export const LoaderScreen = () => {
-  const navigation = useNavigation<any>();
-  const rotation = useRef(new Animated.Value(0)).current;
-  const progressBarWidth = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    const loadingDelay = setTimeout(() => {
-      navigation.replace("Home");
-    }, 5000);
-
-    Animated.loop(
-      Animated.timing(rotation, {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-    ).start();
-
-    Animated.timing(progressBarWidth, {
-      toValue: 1,
-      duration: 5000,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-
-    return () => {
-      clearTimeout(loadingDelay);
-      progressBarWidth.setValue(0);
-    };
-  }, [navigation, rotation, progressBarWidth]);
-
-  const rotateInterpolate = rotation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["360deg", "0deg"],
-  });
+  const { rotateInterpolate, progressBarWidth } = useLoaderScreen();
 
   return (
     <View flex centerV centerH backgroundColor="#011820">
