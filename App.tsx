@@ -10,20 +10,6 @@ import { Colors } from "react-native-ui-lib";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [fontsLoaded, fontError] = useFonts({
-    HelveticaNeue: require("./assets/fonts/HelveticaNeue.ttf"),
-    HelveticaNeueBold: require("./assets/fonts/HelveticaNeue-Bold.ttf"),
-    HelveticaNeueCondensedBlack: require("./assets/fonts/HelveticaNeue-CondensedBlack.ttf"),
-    HelveticaNeueCondensedBold: require("./assets/fonts/HelveticaNeue-CondensedBold.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  if (fontError) {
-    console.error("Error loading font:", fontError);
-  }
   initTheme();
 
   return (

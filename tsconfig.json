@@ -17,8 +17,8 @@
     "paths": {
       "@app/*": ["src/*/index", "src/*"]
     },
-    "files": ["globals.d.ts"],
   },
+  "files": ["globals.d.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",
