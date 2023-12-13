@@ -36,5 +36,5 @@ yarn-error.*
 
 # jetbrains
 .idea/
-./ios
-./android
+ios
+android
