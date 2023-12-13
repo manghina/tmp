@@ -1,35 +1,27 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "@app/screens/Home";
+import { LoaderScreen } from "@app/screens/Loader";
 import { useFonts } from "expo-font";
 import { initTheme } from "@app/theme";
 import { Colors } from "react-native-ui-lib";
 
 const Stack = createNativeStackNavigator();
 
-const initFonts = () => {};
 export default function App() {
-  const [fontsLoaded, fontError] = useFonts({
-    HelveticaNeue: require("./assets/fonts/HelveticaNeue.ttf"),
-    HelveticaNeueBold: require("./assets/fonts/HelveticaNeue-Bold.ttf"),
-    HelveticaNeueCondensedBlack: require("./assets/fonts/HelveticaNeue-CondensedBlack.ttf"),
-    HelveticaNeueCondensedBold: require("./assets/fonts/HelveticaNeue-CondensedBold.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  if (fontError) {
-    console.error("Errore durante il caricamento del carattere:", fontError);
-  }
   initTheme();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Loader">
+        <Stack.Screen
+          name="Loader"
+          component={LoaderScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -37,7 +29,7 @@ export default function App() {
             title: "Accedi",
             headerTitleAlign: "center",
             headerTitleStyle: {
-              fontFamily: "HelveticaNeueCondensedBlack",
+              fontFamily: "HelveticaNeue-CondensedBlack",
               fontSize: 32,
               color: Colors.blackText,
             },

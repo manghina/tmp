@@ -1,4 +1,3 @@
-import { useFonts } from "expo-font";
 import { Colors, ThemeManager, Typography } from "react-native-ui-lib";
 
 export const initTheme = () => {
@@ -8,6 +7,7 @@ export const initTheme = () => {
     grayText: "#ABB0BC",
     whiteText: "#F6F6F6",
     buttonGray: "#E5E6E6",
+    loadingBlue: "#427BEA",
     buttonBlue: "#3C77E8",
     disabledBlue: "#6784BD",
   });

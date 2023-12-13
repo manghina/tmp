@@ -15,16 +15,31 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "ai.sweepit.consumer"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "ai.sweepit.consumer"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/HelveticaNeue.ttf",
+            "./assets/fonts/HelveticaNeue-Bold.ttf",
+            "./assets/fonts/HelveticaNeue-CondensedBlack.ttf",
+            "./assets/fonts/HelveticaNeue-CondensedBold.ttf"
+          ]
+        }
+      ]
+    ]
   }
 }
