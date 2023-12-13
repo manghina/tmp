@@ -4,7 +4,6 @@ module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts, ...restResolver },
     transformer,
-    resolver,
     ...rest
   } = await getDefaultConfig(__dirname);
 

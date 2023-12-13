@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Colors } from "react-native-ui-lib";
 import { Animated } from "react-native";
-import UnionSVG from "../../../assets/images/Union.svg";
-import LogoSVG from "../../../assets/images/Logo.svg";
-import {useLoaderScreen} from "./index.hooks";
+import UnionSVG from "@app/svg/union.svg";
+import LogoSVG from "@app/svg/logo.svg";
+import { useLoaderScreen } from "./index.hooks";
 
 export const LoaderScreen = () => {
   const { rotateInterpolate, progressBarWidth } = useLoaderScreen();
