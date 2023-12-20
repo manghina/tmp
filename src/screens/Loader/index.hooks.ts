@@ -10,7 +10,7 @@ export const useLoaderScreen = () => {
   useEffect(() => {
     const loadingDelay = setTimeout(() => {
       navigation.replace("Home");
-    }, 3000);
+    }, 50);
 
     Animated.loop(
       Animated.timing(rotation, {

@@ -69,13 +69,13 @@ export const initTheme = () => {
       color: Colors.red10,
       borderRadius: 12,
       labelStyle: {
-        color: props.grayButton ? Colors.blackText : Colors.whiteText,
+        color: props.GrayButton ? Colors.blackText : Colors.whiteText,
         fontWeight: "500",
         fontSize: 16,
         fontFamily: "HelveticaNeue",
       },
       backgroundColor: (() => {
-        if (props.grayButton) {
+        if (props.GrayButton) {
           return Colors.buttonGray;
         } else if (props.whiteTransparentButton) {
           return Colors.transparent;
