@@ -1,4 +1,5 @@
 import { View, Text, Button, Image, Modal } from "react-native-ui-lib";
+import { Colors, Typography } from "react-native-ui-lib";
 import { useNavigation } from "@react-navigation/native";
 import SignupSVG from "@app/svg/Home/signup-button.svg";
 import GoogleSVG from "@app/svg/Home/google.svg";
@@ -12,8 +13,15 @@ export const HomeScreen = () => {
 
   return (
     <View flex paddingH-25 paddingT-10>
-      <Text Title>Registrati</Text>
-      <Text Title>Benvenuto in Sweep</Text>
+      <Text Title defaultColor>
+        Registrati
+      </Text>
+      <Text regular16>
+        Benvenuto in{" "}
+        <Text defaultColor style={{ fontStyle: "italic", fontWeight: "bold" }}>
+          Sweep
+        </Text>
+      </Text>
       <Image
         marginT-24
         source={require("../../../assets/img/HomeScreenWelcomeImg.png")}
@@ -44,12 +52,14 @@ export const HomeScreen = () => {
             <SignupSVG />
           </View>
         </Button>
-        <Text marginT-16>in alternativa</Text>
+        <Text marginT-16 regular14>
+          in alternativa
+        </Text>
       </View>
       <Button
         GrayButton
         label="Continua con Google"
-        marginT-20
+        marginT-16
         paddingH-32
         style={{ width: "100%", height: 52 }}
         onPress={() => {}}
@@ -61,7 +71,7 @@ export const HomeScreen = () => {
       <Button
         GrayButton
         label="Continua con Apple"
-        marginT-20
+        marginT-16
         paddingH-32
         style={{ width: "100%", height: 52 }}
         onPress={() => {}}
@@ -72,16 +82,37 @@ export const HomeScreen = () => {
           </View>
         </View>
       </Button>
-      <Text Title marginT-24>
+      <Text default14 marginT-24>
         Hai già un profilo?{" "}
-        <Text onPress={() => navigation.replace("Login")}>Accedi</Text>
+        <Text
+          link
+          style={{ fontStyle: "italic" }}
+          onPress={() => navigation.replace("Login")}
+        >
+          Accedi
+        </Text>
       </Text>
 
-      <Text marginT-24>
+      <Text marginT-24 gray12>
         Continuando si accettano{" "}
-        <Text onPress={() => setVisibleWebView(true)}>T&C</Text> e{" "}
-        <Text onPress={() => setVisibleWebView(true)}>Privacy Policy</Text> di
-        Sweep AI.
+        <Text
+          link
+          underline
+          style={{ fontStyle: "italic" }}
+          onPress={() => setVisibleWebView(true)}
+        >
+          T&C
+        </Text>{" "}
+        e{" "}
+        <Text
+          link
+          underline
+          style={{ fontStyle: "italic" }}
+          onPress={() => setVisibleWebView(true)}
+        >
+          Privacy Policy
+        </Text>{" "}
+        di Sweep AI.
       </Text>
 
       <Modal

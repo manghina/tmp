@@ -3,7 +3,7 @@ import { Colors, ThemeManager, Typography } from "react-native-ui-lib";
 export const initTheme = () => {
   Colors.loadColors({
     blackText: "#181818",
-    defaultText: "#002A38",
+    defaultColor: "#002A38",
     grayText: "#ABB0BC",
     whiteText: "#F6F6F6",
     buttonGray: "#E5E6E6",
@@ -18,14 +18,19 @@ export const initTheme = () => {
       fontWeight: "500",
     },
     Title: {
-      fontFamily: "HelveticaNeue",
+      fontFamily: "HelveticaNeue-CondensedBlack",
       color: Colors.blackText,
-      fontSize: 24,
-      fontWeight: "900",
+      fontSize: 32,
+    },
+    link: {
+      fontFamily: "HelveticaNeue",
+      color: Colors.buttonBlue,
+      fontSize: 14,
+      fontWeight: "700",
     },
     regular14: {
       fontFamily: "HelveticaNeue",
-      color: Colors.defaultText,
+      color: Colors.defaultColor,
       fontSize: 14,
       fontWeight: "500",
     },
@@ -36,7 +41,7 @@ export const initTheme = () => {
     },
     regular16: {
       fontFamily: "HelveticaNeue",
-      color: Colors.defaultText,
+      color: Colors.defaultColor,
       fontSize: 16,
       fontWeight: "500",
     },
@@ -44,6 +49,12 @@ export const initTheme = () => {
       fontFamily: "HelveticaNeue",
       color: Colors.whiteText,
       fontSize: 16,
+      fontWeight: "500",
+    },
+    gray12: {
+      fontFamily: "HelveticaNeue",
+      color: Colors.grayText,
+      fontSize: 12,
       fontWeight: "500",
     },
   });

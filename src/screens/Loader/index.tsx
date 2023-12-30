@@ -25,7 +25,7 @@ export const LoaderScreen = () => {
           style={{
             width: 266,
             height: 8,
-            backgroundColor: Colors.defaultText,
+            backgroundColor: Colors.defaultColor,
             borderRadius: 2,
             overflow: "hidden",
           }}
