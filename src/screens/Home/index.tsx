@@ -1,5 +1,4 @@
 import { View, Text, Button, Image, Modal } from "react-native-ui-lib";
-import { Colors, Typography } from "react-native-ui-lib";
 import { useNavigation } from "@react-navigation/native";
 import SignupSVG from "@app/svg/Home/signup-button.svg";
 import GoogleSVG from "@app/svg/Home/google.svg";
@@ -25,6 +24,7 @@ export const HomeScreen = () => {
       <Image
         marginT-24
         source={require("../../../assets/img/HomeScreenWelcomeImg.png")}
+        style={{ width: "100%" }}
       />
       <View
         style={{
@@ -58,30 +58,24 @@ export const HomeScreen = () => {
       </View>
       <Button
         GrayButton
+        iconSource={GoogleSVG}
+        iconStyle={{}}
         label="Continua con Google"
         marginT-16
         paddingH-32
         style={{ width: "100%", height: 52 }}
         onPress={() => {}}
-      >
-        <View>
-          <GoogleSVG />
-        </View>
-      </Button>
+      />
       <Button
         GrayButton
+        iconSource={AppleSVG}
+        iconStyle={{}}
         label="Continua con Apple"
         marginT-16
         paddingH-32
         style={{ width: "100%", height: 52 }}
         onPress={() => {}}
-      >
-        <View flex left>
-          <View flex left>
-            <AppleSVG />
-          </View>
-        </View>
-      </Button>
+      />
       <Text default14 marginT-24>
         Hai già un profilo?{" "}
         <Text
