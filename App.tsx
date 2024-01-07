@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen } from "@app/screens/Home";
+import { LoginScreen } from "./src/screens/Login";
 import { LoaderScreen } from "@app/screens/Loader";
-import { useFonts } from "expo-font";
+import { HomeScreen } from "./src/screens/Home";
 import { initTheme } from "@app/theme";
 import { Colors } from "react-native-ui-lib";
 
@@ -25,6 +25,13 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
           options={{
             title: "Accedi",
             headerTitleAlign: "center",
