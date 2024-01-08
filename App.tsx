@@ -6,6 +6,7 @@ import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "./src/screens/Home";
 import { initTheme } from "@app/theme";
 import { Colors } from "react-native-ui-lib";
+import { TutorialScreen } from "./src/screens/Tutorial";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +15,14 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Loader">
+      <Stack.Navigator initialRouteName="Tutorial">
+        <Stack.Screen
+          name="Tutorial"
+          component={TutorialScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Loader"
           component={LoaderScreen}
