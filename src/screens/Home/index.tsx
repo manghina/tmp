@@ -46,7 +46,7 @@ export const HomeScreen = () => {
           marginT-20
           paddingH-32
           style={{ width: "100%" }}
-          onPress={() => navigation.replace("Login")}
+          onPress={() => navigation.navigate("Register")}
         >
           <View>
             <SignupSVG />
@@ -81,7 +81,7 @@ export const HomeScreen = () => {
         <Text
           link
           style={{ fontStyle: "italic" }}
-          onPress={() => navigation.replace("Login")}
+          onPress={() => navigation.navigate("Login")}
         >
           Accedi
         </Text>

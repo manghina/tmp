@@ -65,6 +65,7 @@ export const initTheme = () => {
 
   ThemeManager.setComponentTheme("TextField", {
     regular16: true,
+    selectionColor: Colors.buttonBlue,
   });
 
   ThemeManager.setComponentTheme("Button", {
