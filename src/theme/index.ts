@@ -57,6 +57,11 @@ export const initTheme = () => {
       fontSize: 12,
       fontWeight: "500",
     },
+    gray24stepper: {
+      fontFamily: "HelveticaNeue-CondensedBlack",
+      color: Colors.grayText,
+      fontSize: 24,
+    },
   });
 
   ThemeManager.setComponentTheme("Text", {

@@ -1,14 +1,13 @@
-import {StyleSheet, Touchable} from "react-native";
-import {NavigationContainer, useNavigation} from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LoginScreen } from "./src/screens/Login";
 import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "./src/screens/Home";
 import { initTheme } from "@app/theme";
-import {Button, Colors, TouchableOpacity} from "react-native-ui-lib";
-import {RegisterScreen} from "./src/screens/Register";
-import {ArrowDown} from "./src/screens/Register/arrowDown";
-import {RegisterStepCounter} from "./src/screens/Register/registerStepCounter";
+import { Colors } from "react-native-ui-lib";
+import { RegisterScreen } from "./src/screens/Register";
+import { ArrowDown } from "./src/screens/Register/arrowDown";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,14 +55,9 @@ export default function App() {
               fontSize: 32,
               color: Colors.blackText,
             },
-            animationTypeForReplace: 'push',
-            animation: 'slide_from_bottom',
-            headerLeft: () => (
-              <ArrowDown/>
-            ),
-            headerRight: () => (
-              <RegisterStepCounter/>
-            )
+            animationTypeForReplace: "push",
+            animation: "slide_from_bottom",
+            headerLeft: () => <ArrowDown />,
           }}
         />
       </Stack.Navigator>

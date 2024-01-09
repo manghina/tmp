@@ -1,15 +1,27 @@
 import { View, TextField, Text, Button, Colors } from "react-native-ui-lib";
 import { useNavigation } from "@react-navigation/native";
 import { useRegisterScreen } from "./index.hooks";
+import React from "react";
+import { RegisterStepCounter } from "./registerStepCounter";
 
 export const RegisterScreen = () => {
-  const {} = useRegisterScreen();
+  const { stepperCounter, setStepperCounter, registrationProgressLine } =
+    useRegisterScreen();
+  const navigation = useNavigation();
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <RegisterStepCounter stepperCounter={stepperCounter} />
+      ),
+    });
+  }, [navigation, stepperCounter]);
 
   return (
     <View height="100%">
       <View
         backgroundColor={Colors.buttonBlue}
-        style={{ width: "25%", height: 4 }}
+        style={{ width: `${registrationProgressLine}%`, height: 4 }}
       ></View>
       <View flex paddingH-20 paddingT-20>
         <Text fieldLabel>Nome</Text>
@@ -68,7 +80,7 @@ export const RegisterScreen = () => {
           marginT-8
           style={{ width: "100%" }}
           onPress={() => {
-            //WIP
+            setStepperCounter(stepperCounter + 1);
           }}
           disabledBackgroundColor={Colors.disabledBlue}
           disabled={true}
