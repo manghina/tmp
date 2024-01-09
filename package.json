@@ -19,6 +19,7 @@
     "expo-status-bar": "0.0.1-canary-20231205-250b31f",
     "expo-system-ui": "^0.0.1-canary-20231205-250b31f",
     "react": "18.2.0",
+    "react-hook-form": "^7.49.3",
     "react-native": "^0.73.0",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-reanimated": "~3.6.0",

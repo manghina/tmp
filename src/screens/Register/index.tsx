@@ -5,8 +5,14 @@ import React from "react";
 import { RegisterStepCounter } from "./registerStepCounter";
 
 export const RegisterScreen = () => {
-  const { stepperCounter, setStepperCounter, registrationProgressLine } =
-    useRegisterScreen();
+  const {
+    stepperCounter,
+    setStepperCounter,
+    registrationProgressLine,
+    isFocused,
+    handleInputFocus,
+    handleInputBlur,
+  } = useRegisterScreen();
   const navigation = useNavigation();
 
   React.useLayoutEffect(() => {
@@ -28,7 +34,10 @@ export const RegisterScreen = () => {
         <TextField
           marginT-8
           grey10
+          onFocus={() => handleInputFocus("nome")}
+          onBlur={() => handleInputBlur("nome")}
           style={{
+            backgroundColor: isFocused.nome ? "white" : "transparent",
             paddingTop: 16,
             paddingLeft: 16,
             paddingRight: 16,
@@ -44,7 +53,10 @@ export const RegisterScreen = () => {
         <TextField
           marginT-8
           grey10
+          onFocus={() => handleInputFocus("cognome")}
+          onBlur={() => handleInputBlur("cognome")}
           style={{
+            backgroundColor: isFocused.cognome ? "white" : "transparent",
             paddingTop: 16,
             paddingLeft: 16,
             paddingRight: 16,
@@ -60,7 +72,10 @@ export const RegisterScreen = () => {
         <TextField
           marginT-8
           grey10
+          onFocus={() => handleInputFocus("datanascita")}
+          onBlur={() => handleInputBlur("datanascita")}
           style={{
+            backgroundColor: isFocused.datanascita ? "white" : "transparent",
             paddingTop: 16,
             paddingLeft: 16,
             paddingRight: 16,
