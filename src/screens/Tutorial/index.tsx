@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   StyleSheet,
 } from "react-native";
+import { useSelector } from "react-redux";
+import { selectors } from "../../redux-store";
 
 const styles = StyleSheet.create({
   defaultAnimatedBarStyles: {
