@@ -4,6 +4,9 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 
 import { actions, sagas, reducers, selectors } from "./slices";
+import { LogBox } from "react-native";
+
+LogBox.ignoreLogs(["Require cycle:"]);
 
 const rootSaga = function* () {
   yield all(sagas.map((s) => s()));
