@@ -73,20 +73,16 @@ export const initTheme = () => {
     selectionColor: Colors.buttonBlue,
   });
 
-  ThemeManager.setComponentTheme("Button", {
-    fontFamily: "HelveticaNeue",
-    color: Colors.whiteText,
-    fontSize: 16,
-    fontWeight: "500",
-    backgroundColor: Colors.buttonBlue,
-  });
-
   ThemeManager.setComponentTheme("Button", (props: any, context: any) => {
     return {
       color: Colors.red10,
       borderRadius: 12,
       labelStyle: {
-        color: props.GrayButton ? Colors.blackText : Colors.whiteText,
+        color: props.disabled
+          ? Colors.grayText
+          : props.GrayButton
+            ? Colors.blackText
+            : Colors.whiteText,
         fontWeight: "500",
         fontSize: 16,
         fontFamily: "HelveticaNeue",
