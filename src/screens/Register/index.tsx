@@ -16,7 +16,7 @@ export const RegisterScreen = () => {
   const {
     stepperCounter,
     setStepperCounter,
-    registrationProgressLine,
+    registrationProgressLine1,
     isFocused,
     handleInputFocus,
     handleInputBlur,
@@ -26,6 +26,10 @@ export const RegisterScreen = () => {
     setOpenDatePicker,
     datePicked,
     setDatePicked,
+    setNome,
+    setCognome,
+    setDataNascita,
+    calculateRegistrationProgressLine1,
   } = useRegisterScreen();
   const navigation = useNavigation();
 
@@ -41,7 +45,10 @@ export const RegisterScreen = () => {
     <View height="100%">
       <View
         backgroundColor={Colors.buttonBlue}
-        style={{ width: `${registrationProgressLine}%`, height: 4 }}
+        style={{
+          width: `${(registrationProgressLine1 / 3) * 100}%`,
+          height: 4,
+        }}
       ></View>
       <View flex paddingH-20 paddingT-20>
         <Text fieldLabel>Nome</Text>
@@ -50,15 +57,13 @@ export const RegisterScreen = () => {
           grey10
           onFocus={() => handleInputFocus("nome")}
           onBlur={() => handleInputBlur("nome")}
+          onChangeText={(newText) => {
+            setNome(newText);
+            calculateRegistrationProgressLine1();
+          }}
           style={{
+            ...TextInputStyle,
             backgroundColor: isFocused.nome ? "white" : "transparent",
-            paddingTop: 16,
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingBottom: 16,
-            borderWidth: 1.5,
-            borderRadius: 12,
-            borderColor: "black",
           }}
         />
         <Text fieldLabel marginT-16>
@@ -69,15 +74,13 @@ export const RegisterScreen = () => {
           grey10
           onFocus={() => handleInputFocus("cognome")}
           onBlur={() => handleInputBlur("cognome")}
+          onChangeText={(newText) => {
+            setCognome(newText);
+            calculateRegistrationProgressLine1();
+          }}
           style={{
+            ...TextInputStyle,
             backgroundColor: isFocused.cognome ? "white" : "transparent",
-            paddingTop: 16,
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingBottom: 16,
-            borderWidth: 1.5,
-            borderRadius: 12,
-            borderColor: "black",
           }}
         />
         <Text fieldLabel marginT-16>
@@ -98,18 +101,12 @@ export const RegisterScreen = () => {
             onFocus={() => handleInputFocus("datanascita")}
             onBlur={() => handleInputBlur("datanascita")}
             style={{
+              ...TextInputStyle,
               backgroundColor: isFocused.datanascita ? "white" : "transparent",
-              paddingTop: 16,
-              paddingLeft: 16,
-              paddingRight: 16,
-              paddingBottom: 16,
-              borderWidth: 1.5,
-              borderRadius: 12,
-              borderColor: "black",
             }}
           />
         </TouchableOpacity>
-        <Text center grayText marginT-24>
+        <Text center grayText={registrationProgressLine1 < 3} marginT-24>
           {" "}
           Ci sei quasi...
         </Text>
@@ -122,7 +119,7 @@ export const RegisterScreen = () => {
             setStepperCounter(stepperCounter + 1);
           }}
           disabledBackgroundColor={Colors.disabledBlue}
-          disabled={true}
+          disabled={registrationProgressLine1 < 3}
         ></Button>
       </View>
       <DatePicker
@@ -135,6 +132,12 @@ export const RegisterScreen = () => {
           setOpenDatePicker(false);
           setDateInitialized(true);
           setDatePicked(date);
+          setDataNascita(
+            `${date.getDate().toString()} / ${(
+              date.getMonth() + 1
+            ).toString()} / ${date.getFullYear().toString()}`,
+          );
+          calculateRegistrationProgressLine1();
         }}
         onCancel={() => {
           setOpenDatePicker(false);
@@ -142,4 +145,14 @@ export const RegisterScreen = () => {
       />
     </View>
   );
+};
+
+const TextInputStyle = {
+  paddingTop: 16,
+  paddingLeft: 16,
+  paddingRight: 16,
+  paddingBottom: 16,
+  borderWidth: 1.5,
+  borderRadius: 12,
+  borderColor: "black",
 };
