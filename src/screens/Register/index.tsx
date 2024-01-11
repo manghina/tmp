@@ -11,16 +11,23 @@ export const RegisterScreen = () => {
   const {
     formData,
     stepperCounter,
-    setStepperCounter,
     firstStepFilled,
     firstStepCompletionPercentage,
     secondStepFilled,
     secondStepCompletionPercentage,
     canGoToNextStep,
+    onNextStepButtonPressed,
+    onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
   } = useRegisterScreen();
 
+  {
+    /* 
+      Senza questo <FormProvider> non è possibile utilizzare i nuovi componenti perché
+      va a creare un React Context che viene utilizzato dai componenti per accedere ai dati
+   */
+  }
   return (
     <FormProvider {...formData}>
       {stepperCounter == 1 ? (
@@ -44,9 +51,7 @@ export const RegisterScreen = () => {
               label="Prosegui"
               marginT-8
               style={{ width: "100%" }}
-              onPress={() => {
-                setStepperCounter(stepperCounter + 1);
-              }}
+              onPress={onNextStepButtonPressed}
               disabledBackgroundColor={Colors.disabledBlue}
               disabled={!canGoToNextStep}
             ></Button>
@@ -85,7 +90,7 @@ export const RegisterScreen = () => {
               underline
               default14Text
               marginT-16
-              onPress={() => setStepperCounter(1)}
+              onPress={onPreviousStepButtonPressed}
             >
               Torna indietro
             </Text>

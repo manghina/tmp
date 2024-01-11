@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+// Questa interfaccia rappresenta i dati che vengono raccolti dal form
 interface SignUpFormData {
   firstName: string;
   lastName: string;
@@ -12,6 +13,8 @@ interface SignUpFormData {
   birthDate: Date;
 }
 
+// Questo schema viene utilizzato al momento del submit per validare i dati
+// inseriti dall'utente e in caso di errore viene mostrato un messaggio
 const schema = yup.object().shape({
   firstName: yup.string().required("Inserisci il tuo nome"),
   lastName: yup.string().required("Inserisci il tuo cognome"),
@@ -52,6 +55,8 @@ export const useRegisterScreen = () => {
     formState: { errors, isValid, isSubmitted, isDirty },
   } = formData;
 
+  // Questo hook serve per tenere traccia dei valori dei campi in caso sia necessario
+  // eseguire delle operazioni in base a questi valori
   const [firstName, lastName, birthDate, email, password, confirmPassword] =
     useWatch({
       control,
@@ -64,6 +69,15 @@ export const useRegisterScreen = () => {
         "confirmPassword",
       ],
     });
+
+  const onNextStepButtonPressed = useCallback(
+    () => setStepperCounter(2),
+    [setStepperCounter],
+  );
+  const onPreviousStepButtonPressed = useCallback(
+    () => setStepperCounter(1),
+    [setStepperCounter],
+  );
 
   const firstStepFilled = useMemo(
     () => Boolean(firstName) && Boolean(lastName) && Boolean(birthDate),
@@ -97,6 +111,8 @@ export const useRegisterScreen = () => {
   const triggerSubmit = useMemo(
     () =>
       handleSubmit((data) => {
+        // Se siamo qui dentro, la validazione ha avuto successo
+        // e possiamo inviare i dati al backend o fare altro
         console.log(data);
       }),
     [handleSubmit],
@@ -106,6 +122,8 @@ export const useRegisterScreen = () => {
 
   useEffect(() => {
     if (firstStepFilled) {
+      // Attivo manualmente la validazione di questi campi per capire
+      // se sono validi o meno e quindi se posso attivare il pulsante
       trigger("firstName").then();
       trigger("lastName").then();
       trigger("birthDate").then();
@@ -124,12 +142,13 @@ export const useRegisterScreen = () => {
   return {
     formData,
     stepperCounter,
-    setStepperCounter,
     firstStepFilled,
     firstStepCompletionPercentage,
     secondStepFilled,
     secondStepCompletionPercentage,
     canGoToNextStep,
+    onNextStepButtonPressed,
+    onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
   };
