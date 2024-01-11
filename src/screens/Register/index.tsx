@@ -1,11 +1,12 @@
 import { View, Text, Button, Colors } from "react-native-ui-lib";
 import { useRegisterScreen } from "./index.hooks";
-import React from "react";
+import React, {useLayoutEffect} from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "../../components/_form/FormTextField";
 import { FormHiddenTextField } from "@app/components/_form/FormHiddenTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
+import {RegisterStepCounter} from "./registerStepCounter";
 
 export const RegisterScreen = () => {
   const {
@@ -20,7 +21,16 @@ export const RegisterScreen = () => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
+    navigation,
   } = useRegisterScreen();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <RegisterStepCounter stepperCounter={stepperCounter} />
+      ),
+    });
+  }, [navigation, stepperCounter]);
 
   {
     /* 

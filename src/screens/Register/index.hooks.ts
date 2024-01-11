@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {useCallback, useEffect, useLayoutEffect, useMemo, useState} from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {useNavigation} from "@react-navigation/native";
 import * as yup from "yup";
 
 // Questa interfaccia rappresenta i dati che vengono raccolti dal form
@@ -35,6 +36,7 @@ const schema = yup.object().shape({
 
 export const useRegisterScreen = () => {
   const [stepperCounter, setStepperCounter] = useState(1);
+  const navigation = useNavigation<any>();
 
   const formData = useForm<SignUpFormData>({
     resolver: yupResolver(schema),
@@ -130,15 +132,6 @@ export const useRegisterScreen = () => {
     }
   }, [trigger, firstStepFilled]);
 
-  // Non so a cosa serva ma qui per qualche motivo non funziona a livello di sintassi
-  /*useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <RegisterStepCounter stepperCounter={stepperCounter} />
-  ),
-    });
-  }, [navigation, stepperCounter]);*/
-
   return {
     formData,
     stepperCounter,
@@ -151,5 +144,6 @@ export const useRegisterScreen = () => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
+    navigation,
   };
 };
