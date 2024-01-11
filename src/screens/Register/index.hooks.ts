@@ -1,124 +1,136 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+interface SignUpFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  birthDate: Date;
+}
+
+const schema = yup.object().shape({
+  firstName: yup.string().required("Inserisci il tuo nome"),
+  lastName: yup.string().required("Inserisci il tuo cognome"),
+  email: yup
+    .string()
+    .email("Inserisci un indirizzo email valido")
+    .required("Inserisci il tuo indirizzo email"),
+  password: yup
+    .string()
+    .min(8, "La password deve essere di almeno 8 caratteri")
+    .required("Inserisci la tua password"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Le password devono coincidere")
+    .required("Conferma la tua password"),
+  birthDate: yup.date().required("Inserisci la tua data di nascita"),
+});
 
 export const useRegisterScreen = () => {
   const [stepperCounter, setStepperCounter] = useState(1);
-  const [registrationProgressLine1, setRegistrationProgressLine1] = useState(0);
-  const [registrationProgressLine2, setRegistrationProgressLine2] = useState(0);
-  const [dateInitialized, setDateInitialized] = useState(false);
-  const [datePicked, setDatePicked] = useState(new Date());
-  const [openDatePicker, setOpenDatePicker] = useState(false);
-  const [isFocused, setIsFocused] = useState({
-    nome: false,
-    cognome: false,
-    datanascita: false,
-    email: false,
-    password: false,
-    confermaPassword: false,
+
+  const formData = useForm<SignUpFormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      birthDate: undefined,
+    },
   });
-  const [nome, setNome] = useState("");
-  const [cognome, setCognome] = useState("");
-  const [dataNascita, setDataNascita] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confermaPassword, setConfermaPassword] = useState("");
 
-  useEffect(() => {
-    calculateRegistrationProgressLine1();
-  }, [nome, cognome, dataNascita]);
+  const {
+    control,
+    trigger,
+    handleSubmit,
+    formState: { errors, isValid, isSubmitted, isDirty },
+  } = formData;
 
-  useEffect(() => {
-    calculateRegistrationProgressLine2();
-  }, [email, password, confermaPassword]);
-
-  useEffect(() => {
-    setIsFocused({
-      nome: false,
-      cognome: false,
-      datanascita: false,
-      email: false,
-      password: false,
-      confermaPassword: false,
+  const [firstName, lastName, birthDate, email, password, confirmPassword] =
+    useWatch({
+      control,
+      name: [
+        "firstName",
+        "lastName",
+        "birthDate",
+        "email",
+        "password",
+        "confirmPassword",
+      ],
     });
-  }, [stepperCounter]);
 
-  const handleInputFocus = (textinput: string) => {
-    setIsFocused((prevIsFocused) => ({
-      ...prevIsFocused,
-      [textinput]: true,
-    }));
-  };
+  const firstStepFilled = useMemo(
+    () => Boolean(firstName) && Boolean(lastName) && Boolean(birthDate),
+    [firstName, lastName, birthDate],
+  );
 
-  const handleInputBlur = (textinput: string) => {
-    setIsFocused((prevIsFocused) => ({
-      ...prevIsFocused,
-      [textinput]: false,
-    }));
-  };
+  const secondStepFilled = useMemo(
+    () => Boolean(email) && Boolean(password) && Boolean(confirmPassword),
+    [email, password, confirmPassword],
+  );
 
-  function calculateRegistrationProgressLine1() {
-    let filledInputs = 0;
+  const firstStepCompletionPercentage = useMemo(
+    () => ([firstName, lastName, birthDate].filter(Boolean).length / 3) * 100,
+    [firstName, lastName, birthDate],
+  );
 
-    if (nome.trim() !== "") {
-      filledInputs++;
+  const secondStepCompletionPercentage = useMemo(
+    () => ([email, password, confirmPassword].filter(Boolean).length / 3) * 100,
+    [email, password, confirmPassword],
+  );
+
+  const canGoToNextStep = useMemo(
+    () =>
+      firstStepFilled &&
+      !errors.firstName &&
+      !errors.lastName &&
+      !errors.birthDate,
+    [firstStepFilled, secondStepFilled],
+  );
+
+  const triggerSubmit = useMemo(
+    () =>
+      handleSubmit((data) => {
+        console.log(data);
+      }),
+    [handleSubmit],
+  );
+
+  const submitDisabled = (isSubmitted && !isValid) || !isDirty;
+
+  useEffect(() => {
+    if (firstStepFilled) {
+      trigger("firstName").then();
+      trigger("lastName").then();
+      trigger("birthDate").then();
     }
+  }, [trigger, firstStepFilled]);
 
-    if (cognome.trim() !== "") {
-      filledInputs++;
-    }
-
-    if (dataNascita.trim() !== "") {
-      filledInputs++;
-    }
-
-    setRegistrationProgressLine1(filledInputs);
-  }
-
-  function calculateRegistrationProgressLine2() {
-    let filledInputs = 0;
-
-    if (email.trim() !== "") {
-      filledInputs++;
-    }
-
-    if (password.trim() !== "") {
-      filledInputs++;
-    }
-
-    if (confermaPassword.trim() !== "") {
-      filledInputs++;
-    }
-
-    setRegistrationProgressLine2(filledInputs);
-  }
+  // Non so a cosa serva ma qui per qualche motivo non funziona a livello di sintassi
+  /*useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <RegisterStepCounter stepperCounter={stepperCounter} />
+  ),
+    });
+  }, [navigation, stepperCounter]);*/
 
   return {
+    formData,
     stepperCounter,
     setStepperCounter,
-    registrationProgressLine1,
-    setRegistrationProgressLine1,
-    registrationProgressLine2,
-    setRegistrationProgressLine2,
-    isFocused,
-    handleInputFocus,
-    handleInputBlur,
-    dateInitialized,
-    setDateInitialized,
-    openDatePicker,
-    setOpenDatePicker,
-    datePicked,
-    setDatePicked,
-    nome,
-    setNome,
-    cognome,
-    setCognome,
-    dataNascita,
-    setDataNascita,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    confermaPassword,
-    setConfermaPassword,
-    calculateRegistrationProgressLine1,
+    firstStepFilled,
+    firstStepCompletionPercentage,
+    secondStepFilled,
+    secondStepCompletionPercentage,
+    canGoToNextStep,
+    submitDisabled,
+    triggerSubmit,
   };
 };
