@@ -25,14 +25,17 @@ interface SignUpFormData {
 const schema = yup.object().shape({
   firstName: yup.string().required("Inserisci il tuo nome"),
   lastName: yup.string().required("Inserisci il tuo cognome"),
-  email: yup
-    .string()
-    .email("Inserisci un indirizzo email valido")
-    .required("Inserisci il tuo indirizzo email"),
+  email: yup.string().email("Inserisci un indirizzo email valido").required(),
   password: yup
     .string()
-    .min(8, "La password deve essere di almeno 8 caratteri")
-    .required("Inserisci la tua password"),
+    .min(8, "La password deve contenere almeno 8 caratteri")
+    .matches(
+      /[A-Z]/,
+      "La password deve contenere almeno un carattere maiuscolo",
+    )
+    .matches(/[0-9]/, "La password deve contenere almeno un numero")
+    .matches(/[-!|]/, "La password deve contenere almeno uno tra -!|")
+    .required(),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Le password devono coincidere")

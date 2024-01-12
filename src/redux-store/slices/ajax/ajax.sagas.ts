@@ -1,17 +1,9 @@
-import {
-  takeEvery,
-  fork,
-  take,
-  put,
-  delay,
-  race,
-  select,
-} from "redux-saga/effects";
+import { takeEvery, fork, take, put, delay, race } from "redux-saga/effects";
 import { Action } from "redux";
 import axios, { CancelTokenSource, AxiosError } from "axios";
 import { ApiRequestAction } from "@app/redux-store/extra-actions/apis/api-builder";
 import { apiBaseUrl } from "@app/config";
-import { actions, selectors } from "@app/redux-store";
+import { actions } from "@app/redux-store";
 
 function* ajaxTask(
   requestAction: ApiRequestAction<any>,

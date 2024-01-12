@@ -7,7 +7,13 @@ import {
   HttpMethod,
 } from "../api-builder";
 
-export interface PostAccountsParams {}
+export interface PostAccountsParams {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  birthDate: Date;
+}
 export interface PostAccountsResponseData {}
 export default apiActionBuilder<
   PostAccountsParams,
@@ -20,6 +26,7 @@ export default apiActionBuilder<
       {
         path: "/accounts",
         method: HttpMethod.POST,
+        body: params,
       },
       options ?? {
         requestDelay: 0,

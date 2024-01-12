@@ -40,7 +40,7 @@ export const apiRequestPayloadBuilder: <T>(
   prepareParams?: T,
 ) => ApiRequestPayloadType<T> = (params, options?, prepareParams?) => ({
   params,
-  options,
+  options: options,
   prepareParams,
 });
 
