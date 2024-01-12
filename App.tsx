@@ -5,10 +5,17 @@ import { LoginScreen } from "./src/screens/Login";
 import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "./src/screens/Home";
 import { initTheme } from "@app/theme";
-import { Colors } from "react-native-ui-lib";
+import { Assets, Colors } from "react-native-ui-lib";
+import { RegisterScreen } from "./src/screens/Register";
+import { ArrowDown } from "./src/screens/Register/arrowDown";
 import { TutorialScreen } from "./src/screens/Tutorial";
 import store from "./src/redux-store";
 import { Provider } from "react-redux";
+
+Assets.loadAssetsGroup("icons", {
+  visibility: require("./assets/icons/visibility.png"),
+  visibilityOff: require("./assets/icons/visibilityOff.png"),
+});
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +58,22 @@ export default function App() {
                 fontSize: 32,
                 color: Colors.blackText,
               },
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{
+              title: "Registrati",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontFamily: "HelveticaNeue-CondensedBlack",
+                fontSize: 32,
+                color: Colors.blackText,
+              },
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <ArrowDown />,
             }}
           />
         </Stack.Navigator>

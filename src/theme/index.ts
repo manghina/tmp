@@ -57,6 +57,11 @@ export const initTheme = () => {
       fontSize: 12,
       fontWeight: "500",
     },
+    gray24stepper: {
+      fontFamily: "HelveticaNeue-CondensedBlack",
+      color: Colors.grayText,
+      fontSize: 24,
+    },
   });
 
   ThemeManager.setComponentTheme("Text", {
@@ -65,14 +70,7 @@ export const initTheme = () => {
 
   ThemeManager.setComponentTheme("TextField", {
     regular16: true,
-  });
-
-  ThemeManager.setComponentTheme("Button", {
-    fontFamily: "HelveticaNeue",
-    color: Colors.whiteText,
-    fontSize: 16,
-    fontWeight: "500",
-    backgroundColor: Colors.buttonBlue,
+    selectionColor: Colors.buttonBlue,
   });
 
   ThemeManager.setComponentTheme("Button", (props: any, context: any) => {
@@ -80,7 +78,11 @@ export const initTheme = () => {
       color: Colors.red10,
       borderRadius: 12,
       labelStyle: {
-        color: props.GrayButton ? Colors.blackText : Colors.whiteText,
+        color: props.disabled
+          ? Colors.grayText
+          : props.GrayButton
+            ? Colors.blackText
+            : Colors.whiteText,
         fontWeight: "500",
         fontSize: 16,
         fontFamily: "HelveticaNeue",
