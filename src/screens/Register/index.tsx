@@ -1,12 +1,11 @@
 import { View, Text, Button, Colors } from "react-native-ui-lib";
 import { useRegisterScreen } from "./index.hooks";
-import React, {useLayoutEffect} from "react";
+import React from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "../../components/_form/FormTextField";
 import { FormHiddenTextField } from "@app/components/_form/FormHiddenTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
-import {RegisterStepCounter} from "./registerStepCounter";
 
 export const RegisterScreen = () => {
   const {
@@ -21,23 +20,8 @@ export const RegisterScreen = () => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
-    navigation,
   } = useRegisterScreen();
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <RegisterStepCounter stepperCounter={stepperCounter} />
-      ),
-    });
-  }, [navigation, stepperCounter]);
-
-  {
-    /* 
-      Senza questo <FormProvider> non è possibile utilizzare i nuovi componenti perché
-      va a creare un React Context che viene utilizzato dai componenti per accedere ai dati
-   */
-  }
   return (
     <FormProvider {...formData}>
       {stepperCounter == 1 ? (

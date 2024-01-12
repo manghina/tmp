@@ -1,10 +1,18 @@
-import {useCallback, useEffect, useLayoutEffect, useMemo, useState} from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
+import { actions } from "../../redux-store";
+import { useDispatch } from "react-redux";
+import { RegisterStepCounter } from "./registerStepCounter";
 
-// Questa interfaccia rappresenta i dati che vengono raccolti dal form
 interface SignUpFormData {
   firstName: string;
   lastName: string;
@@ -14,8 +22,6 @@ interface SignUpFormData {
   birthDate: Date;
 }
 
-// Questo schema viene utilizzato al momento del submit per validare i dati
-// inseriti dall'utente e in caso di errore viene mostrato un messaggio
 const schema = yup.object().shape({
   firstName: yup.string().required("Inserisci il tuo nome"),
   lastName: yup.string().required("Inserisci il tuo cognome"),
@@ -35,6 +41,8 @@ const schema = yup.object().shape({
 });
 
 export const useRegisterScreen = () => {
+  const dispatch = useDispatch();
+
   const [stepperCounter, setStepperCounter] = useState(1);
   const navigation = useNavigation<any>();
 
@@ -57,8 +65,6 @@ export const useRegisterScreen = () => {
     formState: { errors, isValid, isSubmitted, isDirty },
   } = formData;
 
-  // Questo hook serve per tenere traccia dei valori dei campi in caso sia necessario
-  // eseguire delle operazioni in base a questi valori
   const [firstName, lastName, birthDate, email, password, confirmPassword] =
     useWatch({
       control,
@@ -113,24 +119,28 @@ export const useRegisterScreen = () => {
   const triggerSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        // Se siamo qui dentro, la validazione ha avuto successo
-        // e possiamo inviare i dati al backend o fare altro
-        console.log(data);
+        dispatch(actions.postAccounts.request(data));
       }),
-    [handleSubmit],
+    [dispatch, handleSubmit],
   );
 
   const submitDisabled = (isSubmitted && !isValid) || !isDirty;
 
   useEffect(() => {
     if (firstStepFilled) {
-      // Attivo manualmente la validazione di questi campi per capire
-      // se sono validi o meno e quindi se posso attivare il pulsante
       trigger("firstName").then();
       trigger("lastName").then();
       trigger("birthDate").then();
     }
   }, [trigger, firstStepFilled]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <RegisterStepCounter stepperCounter={stepperCounter} />
+      ),
+    });
+  }, [navigation, stepperCounter]);
 
   return {
     formData,
@@ -144,6 +154,5 @@ export const useRegisterScreen = () => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
-    navigation,
   };
 };

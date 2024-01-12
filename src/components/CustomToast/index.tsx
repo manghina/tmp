@@ -70,6 +70,8 @@ export const CustomToast = memo(() => {
           backgroundColor,
           padding: 10,
           marginHorizontal: 10,
+          borderColor: color,
+          borderWidth: 1,
           borderRadius: 5,
           flexDirection: "row",
           alignItems: "center",

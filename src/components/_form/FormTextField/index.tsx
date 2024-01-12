@@ -15,7 +15,7 @@ const TextInputStyle: TextFieldProps["style"] = {
 export type FormTextFieldProps = {
   name: string;
   label?: string;
-};
+} & Omit<TextFieldProps, "style">;
 
 export const FormTextField = memo(
   ({ name, label, ...props }: FormTextFieldProps) => {
@@ -29,6 +29,8 @@ export const FormTextField = memo(
         label={label}
         onChangeText={handleChange}
         enableErrors={!!error}
+        autoCapitalize="none"
+        autoCorrect={false}
         style={{
           ...TextInputStyle,
         }}
