@@ -19,7 +19,7 @@ export const initTheme = () => {
     },
     Title: {
       fontFamily: "HelveticaNeue-CondensedBlack",
-      color: Colors.blackText,
+      color: Colors.red,
       fontSize: 32,
     },
     link: {
