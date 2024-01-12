@@ -25,7 +25,7 @@ export const useCustomToast = () => {
         return {
           backgroundColor: "#ffe7e7",
           color: "#570000",
-          iconColor: "#ff0000",
+          iconColor: "#bd0000",
         };
       case "info":
         return {
