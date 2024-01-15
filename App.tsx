@@ -8,7 +8,7 @@ import { enableDebugging } from "./src/utils/debug";
 
 Assets.loadAssetsGroup("icons", {
   visibility: require("./assets/icons/visibility.png"),
-  visibilityOff: require("./assets/icons/visibilityOff.png"),
+  visibilityOff: require("./assets/icons/visibility-off.png"),
 });
 
 if (process.env.NODE_ENV === "development") {

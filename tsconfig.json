@@ -15,10 +15,11 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["src/*/index", "src/*"]
+      "@app/*": ["src/*/index", "src/*"],
+      "@assets/*": ["assets/*"],
     },
   },
-  "files": ["globals.d.ts"],
+  "files": ["global.d.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",

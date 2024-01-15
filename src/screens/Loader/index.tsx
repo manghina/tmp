@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Colors } from "react-native-ui-lib";
 import { Animated } from "react-native";
-import UnionSVG from "@app/svg/union.svg";
-import LogoSVG from "@app/svg/logo.svg";
+import UnionSVG from "@assets/img/union.svg";
+import LogoSVG from "@assets/img/logo.svg";
 import { useLoaderScreen } from "./index.hooks";
 
 export const LoaderScreen = () => {

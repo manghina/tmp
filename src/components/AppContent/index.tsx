@@ -7,7 +7,7 @@ import { HomeScreen } from "../../screens/Home";
 import { LoginScreen } from "../../screens/Login";
 import { Colors } from "react-native-ui-lib";
 import { RegisterScreen } from "../../screens/Register";
-import { ArrowDown } from "../../screens/Register/arrowDown";
+import { ArrowDown } from "../../screens/Register/ArrowDown";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -20,17 +20,17 @@ export const AppContent: FC = memo(({}) => {
     <>
       <CustomToast />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Tutorial">
+        <Stack.Navigator initialRouteName="Loader">
           <Stack.Screen
-            name="Tutorial"
-            component={TutorialScreen}
+            name="Loader"
+            component={LoaderScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="Loader"
-            component={LoaderScreen}
+            name="Tutorial"
+            component={TutorialScreen}
             options={{
               headerShown: false,
             }}

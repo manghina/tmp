@@ -10,7 +10,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@expo/metro-config": "^0.10.7",

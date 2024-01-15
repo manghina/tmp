@@ -1,10 +1,10 @@
 import { View, Text, Button, Image, Modal } from "react-native-ui-lib";
 import { useNavigation } from "@react-navigation/native";
-import SignupSVG from "@app/svg/Home/signup-button.svg";
-import GoogleSVG from "@app/svg/Home/google.svg";
-import AppleSVG from "@app/svg/Home/apple.svg";
+import SignupSVG from "@assets/icons/signup-button.svg";
+import GoogleSVG from "@assets/icons/google.svg";
+import AppleSVG from "@assets/icons/apple.svg";
 import WebView from "react-native-webview";
-import HomeBgImage from "@app/../assets/img/HomeScreenWelcomeImg.png";
+import HomeBgImage from "@assets/img/home-screen-welcome.png";
 import { useState } from "react";
 import { SafeAreaView } from "react-native";
 
