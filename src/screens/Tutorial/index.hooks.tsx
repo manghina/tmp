@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import tutorialImage1 from "@assets/img/tutorial-image-1.jpeg";
+import tutorialImage2 from "@assets/img/tutorial-image-2.jpeg";
+import tutorialImage3 from "@assets/img/tutorial-image-3.jpeg";
 
 const intervalBetweenImages = 5000;
 
-const bgImages = [
-  require("../../../assets/img/tutorial-image-1.jpeg"),
-  require("../../../assets/img/tutorial-image-2.jpeg"),
-  require("../../../assets/img/tutorial-image-3.jpeg"),
-];
+const bgImages = [tutorialImage1, tutorialImage2, tutorialImage3];
 
 const subtitles: string[] = [
   "Racconta a Sweep il problema di salute che vuoi risolvere",

@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 import { actions } from "../../redux-store";
 import { useDispatch } from "react-redux";
-import { RegisterStepCounter } from "./registerStepCounter";
+import { RegisterStepCounter } from "./RegisterStepCounter";
 
 interface SignUpFormData {
   firstName: string;
