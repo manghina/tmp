@@ -4,12 +4,13 @@ import { CustomToast } from "../CustomToast";
 import { TutorialScreen } from "../../screens/Tutorial";
 import { LoaderScreen } from "../../screens/Loader";
 import { HomeScreen } from "../../screens/Home";
-import { LoginScreen } from "../../screens/Login";
+import { LoginOptionsScreen } from "../../screens/LoginOptions";
 import { Colors } from "react-native-ui-lib";
 import { RegisterScreen } from "../../screens/Register";
 import { ArrowDown } from "../../screens/Register/ArrowDown";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { LoginByMailScreen } from "../../screens/LoginByMailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,9 +43,10 @@ export const AppContent: FC = memo(({}) => {
               headerShown: false,
             }}
           />
+          <Stack.Screen name="LoginOptions" component={LoginOptionsScreen} />
           <Stack.Screen
-            name="Login"
-            component={LoginScreen}
+            name="LoginWithMail"
+            component={LoginByMailScreen}
             options={{
               title: "Accedi",
               headerTitleAlign: "center",
