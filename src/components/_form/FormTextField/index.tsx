@@ -35,6 +35,7 @@ export const FormTextField = memo(
         style={{
           ...TextInputStyle,
         }}
+        {...(props as any)}
       />
     );
   },

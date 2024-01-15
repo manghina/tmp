@@ -43,7 +43,13 @@ export const AppContent: FC = memo(({}) => {
               headerShown: false,
             }}
           />
-          <Stack.Screen name="LoginOptions" component={LoginOptionsScreen} />
+          <Stack.Screen
+            name="LoginOptions"
+            component={LoginOptionsScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
           <Stack.Screen
             name="LoginWithMail"
             component={LoginByMailScreen}
@@ -55,6 +61,8 @@ export const AppContent: FC = memo(({}) => {
                 fontSize: 32,
                 color: Colors.blackText,
               },
+              animation: "slide_from_bottom",
+              headerLeft: () => <ArrowDown />,
             }}
           />
           <Stack.Screen

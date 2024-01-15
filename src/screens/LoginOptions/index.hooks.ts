@@ -32,7 +32,7 @@ export const useLoginOptionsScreen = () => {
   const triggerSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        navigation.replace("LoginWithMail", { email: data.email });
+        navigation.push("LoginWithMail", { email: data.email });
       }),
     [navigation, handleSubmit],
   );
