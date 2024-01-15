@@ -48,7 +48,7 @@ export const RegisterScreen = () => {
               onPress={onNextStepButtonPressed}
               disabledBackgroundColor={Colors.disabledBlue}
               disabled={!canGoToNextStep}
-            ></Button>
+            />
           </View>
         </View>
       ) : (

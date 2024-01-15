@@ -71,7 +71,7 @@ export const useTutorialScreen = () => {
   }, [navigation]);
 
   const onLoginButtonClick = useCallback(() => {
-    navigation.replace("Login");
+    navigation.replace("LoginOptions");
   }, [navigation]);
 
   useEffect(() => {
