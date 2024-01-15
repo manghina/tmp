@@ -1,7 +1,7 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { actions } from "../../redux-store";
@@ -39,11 +39,24 @@ export const useLoginByMailScreen = () => {
   });
 
   const {
+    control,
     handleSubmit,
     formState: { isDirty, isValid, isSubmitted },
   } = formData;
 
   const submitDisabled = !isDirty || (!isValid && isSubmitted);
+
+  const [email, password] = useWatch({ control, name: ["email", "password"] });
+
+  const allFieldsFilled = useMemo(
+    () => Boolean(email) && Boolean(password),
+    [email, password],
+  );
+
+  const completionPercentage = useMemo(
+    () => ([email, password].filter(Boolean).length / 2) * 100,
+    [email, password],
+  );
 
   const triggerSubmit = useMemo(
     () =>
@@ -53,5 +66,11 @@ export const useLoginByMailScreen = () => {
     [dispatch, handleSubmit],
   );
 
-  return { formData, triggerSubmit, submitDisabled };
+  return {
+    formData,
+    triggerSubmit,
+    submitDisabled,
+    allFieldsFilled,
+    completionPercentage,
+  };
 };
