@@ -1,4 +1,4 @@
-import { Button, Text, View } from "react-native-ui-lib";
+import { Button, Text, Incubator, View, Colors } from "react-native-ui-lib";
 import { useTutorialScreen } from "./index.hooks";
 import {
   Animated,
