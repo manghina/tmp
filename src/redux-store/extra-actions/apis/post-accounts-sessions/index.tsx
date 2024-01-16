@@ -7,24 +7,30 @@ import {
   HttpMethod,
 } from "../api-builder";
 
-export interface PostAccountsParams {
+export interface PostAccountsSessionsParams {
   email: string;
   password: string;
 }
-export interface PostAccountsResponseData {
+export interface PostAccountsSessionsResponseData {
   cookie: {
     name: string;
     value: string;
   };
 }
 export default apiActionBuilder<
-  PostAccountsParams,
-  ApiSuccessAction<PostAccountsResponseData, PostAccountsParams>,
-  ApiFailAction<PostAccountsParams>
+  PostAccountsSessionsParams,
+  ApiSuccessAction<
+    PostAccountsSessionsResponseData,
+    PostAccountsSessionsParams
+  >,
+  ApiFailAction<PostAccountsSessionsParams>
 >(
   "apis/accounts/sessions/post",
-  (params: PostAccountsParams, options?: ApiRequestPayloadBuilderOptions) => ({
-    payload: apiRequestPayloadBuilder<PostAccountsParams>(
+  (
+    params: PostAccountsSessionsParams,
+    options?: ApiRequestPayloadBuilderOptions,
+  ) => ({
+    payload: apiRequestPayloadBuilder<PostAccountsSessionsParams>(
       {
         path: "/accounts/sessions",
         method: HttpMethod.POST,
