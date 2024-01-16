@@ -2,12 +2,104 @@ import React, { memo } from "react";
 import { usePatientHomeScreen } from "./index.hooks";
 import { View, Text, Button } from "react-native-ui-lib";
 import { SafeAreaView } from "react-native";
+import SweepSvg from "@app/components/SweepSvg";
+
+const HomeGraphics = memo(() => {
+  return (
+    <View
+      style={{
+        position: "absolute",
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
+    >
+      <View
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 1000,
+            width: "70%",
+            aspectRatio: 1,
+            right: "-40%",
+            top: "20%",
+            backgroundColor: "rgba(221, 222, 222, 0.5)",
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 1000,
+            width: "70%",
+            aspectRatio: 1,
+            left: "-40%",
+            bottom: "20%",
+            backgroundColor: "rgba(221, 222, 222, 0.5)",
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 1000,
+            width: "100%",
+            aspectRatio: 1,
+            backgroundColor: "rgba(221, 222, 222, 0.25)",
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 1000,
+            width: "90%",
+            aspectRatio: 1,
+            backgroundColor: "rgba(221, 222, 222, 0.50)",
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 1000,
+            width: "80%",
+            aspectRatio: 1,
+            backgroundColor: "rgba(221, 222, 222, 0.50)",
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 1000,
+            width: "70%",
+            aspectRatio: 1,
+            backgroundColor: "#DBDCDC",
+          }}
+        />
+        <View
+          style={{
+            position: "absolute",
+          }}
+        >
+          <SweepSvg />
+        </View>
+      </View>
+    </View>
+  );
+});
 
 export const PatientHomeScreen = memo(() => {
   const { me } = usePatientHomeScreen();
 
   return (
     <SafeAreaView style={{ height: "100%" }}>
+      <HomeGraphics />
       <View
         padding-20
         style={{
@@ -30,7 +122,6 @@ export const PatientHomeScreen = memo(() => {
             Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
             metus.
           </Text>
-          <Text>TODO: Aggiungi qui lista prenotazioni</Text>
         </View>
         <View
           style={{
