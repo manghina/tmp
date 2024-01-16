@@ -20,6 +20,7 @@ import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
 import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "../../models/NavigationService";
 import { PatientHomeScreen } from "../../screens/PatientHome";
+import { PatientHeader } from "../PatientHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -100,15 +101,7 @@ export const AppContent: FC = memo(({}) => {
             name="PatientHome"
             component={PatientHomeScreen}
             options={{
-              title: "Home Paziente",
-              headerTitleAlign: "center",
-              headerTitleStyle: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
-                color: Colors.blackText,
-              },
-              animationTypeForReplace: "push",
-              animation: "slide_from_bottom",
+              header: () => <PatientHeader />,
             }}
           />
         </Stack.Navigator>
