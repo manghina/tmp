@@ -13,7 +13,7 @@ Assets.loadAssetsGroup("icons", {
 });
 
 if (process.env.NODE_ENV === "development") {
-  // renableDebugging().then();
+  enableDebugging().then();
 }
 
 export default function App() {
