@@ -29,11 +29,13 @@ export const FormTextField = memo(
         label={label}
         onChangeText={handleChange}
         enableErrors={!!error}
+        validationMessage={error ?? undefined}
         autoCapitalize="none"
         autoCorrect={false}
         style={{
           ...TextInputStyle,
         }}
+        {...(props as any)}
       />
     );
   },
