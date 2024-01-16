@@ -1,16 +1,26 @@
 import { FC, memo } from "react";
-import { useAppContent } from "./index.hooks";
-import { CustomToast } from "../CustomToast";
-import { TutorialScreen } from "../../screens/Tutorial";
-import { LoaderScreen } from "../../screens/Loader";
-import { HomeScreen } from "../../screens/Home";
-import { LoginOptionsScreen } from "../../screens/LoginOptions";
-import { Colors } from "react-native-ui-lib";
-import { RegisterScreen } from "../../screens/Register";
-import { ArrowDown } from "../../screens/Register/ArrowDown";
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { LoginByMailScreen } from "../../screens/LoginByMailScreen";
+
+import { Colors } from "react-native-ui-lib";
+
+import { useAppContent } from "./index.hooks";
+
+import { TutorialScreen } from "@app/screens/Tutorial";
+import { LoaderScreen } from "@app/screens/Loader";
+import { HomeScreen } from "@app/screens/Home";
+import { LoginOptionsScreen } from "@app/screens/LoginOptions";
+import { RegisterScreen } from "@app/screens/Register";
+import { ArrowDown } from "@app/screens/Register/ArrowDown";
+import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
+
+import { CustomToast } from "@app/components/CustomToast";
+import NavigationService from "../../models/NavigationService";
+import { PatientHomeScreen } from "../../screens/PatientHome";
+import { PatientHeader } from "../PatientHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,8 +30,14 @@ export const AppContent: FC = memo(({}) => {
   return (
     <>
       <CustomToast />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Loader">
+      <NavigationContainer
+        ref={(navRef) => {
+          if (navRef) {
+            NavigationService.setNavigationRef(navRef);
+          }
+        }}
+      >
+        <Stack.Navigator initialRouteName="Tutorial">
           <Stack.Screen
             name="Loader"
             component={LoaderScreen}
@@ -79,6 +95,13 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               headerLeft: () => <ArrowDown />,
+            }}
+          />
+          <Stack.Screen
+            name="PatientHome"
+            component={PatientHomeScreen}
+            options={{
+              header: () => <PatientHeader />,
             }}
           />
         </Stack.Navigator>

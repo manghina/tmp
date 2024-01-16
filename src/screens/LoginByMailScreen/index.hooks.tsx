@@ -44,7 +44,7 @@ export const useLoginByMailScreen = () => {
     formState: { isDirty, isValid, isSubmitted },
   } = formData;
 
-  const submitDisabled = !isDirty || (!isValid && isSubmitted);
+  const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
 
   const [email, password] = useWatch({ control, name: ["email", "password"] });
 

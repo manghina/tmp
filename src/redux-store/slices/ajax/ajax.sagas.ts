@@ -1,9 +1,18 @@
-import { takeEvery, fork, take, put, delay, race } from "redux-saga/effects";
+import {
+  takeEvery,
+  fork,
+  take,
+  put,
+  delay,
+  race,
+  select,
+} from "redux-saga/effects";
 import { Action } from "redux";
 import axios, { CancelTokenSource, AxiosError } from "axios";
 import { ApiRequestAction } from "@app/redux-store/extra-actions/apis/api-builder";
 import { apiBaseUrl } from "@app/config";
 import { actions } from "@app/redux-store";
+import { getCookie } from "../user/user.selectors";
 
 function* ajaxTask(
   requestAction: ApiRequestAction<any>,
@@ -32,13 +41,19 @@ function* ajaxTask(
       }
     }
 
+    const cookie = yield select(getCookie);
+
     const { response } = yield race({
-      response: axios({
+      response: axios.request({
         url: options?.absolutePath ? path : `${apiBaseUrl()}${path}`,
         method,
         data: body,
         params: { ...query },
         cancelToken: cancelToken.token,
+        withCredentials: true,
+        headers: {
+          Cookie: cookie ? `${cookie.name}=${cookie.value}` : undefined,
+        },
       }),
       timeout: take(type),
     });
@@ -82,6 +97,8 @@ function* ajaxTask(
           isLoading: false,
         }),
       );
+    } else {
+      console.log(e);
     }
   }
 }
