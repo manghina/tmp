@@ -2,9 +2,10 @@ import React, { memo } from "react";
 import { View, Button, Colors, Text } from "react-native-ui-lib";
 import { useLoginByMailScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
-import { FormTextField } from "../../components/_form/FormTextField";
-import { FormHiddenTextField } from "../../components/_form/FormHiddenTextField";
-export const LoginByMailScreen = memo((props) => {
+import { FormTextField } from "@app/components/_form/FormTextField";
+import { FormHiddenTextField } from "@app/components/_form/FormHiddenTextField";
+
+export const LoginByMailScreen = memo(() => {
   const {
     formData,
     triggerSubmit,

@@ -1,6 +1,7 @@
 import { put, select, take, takeEvery } from "redux-saga/effects";
 import { actions, RootState } from "@app/redux-store";
 import { getCookie } from "./user.selectors";
+import NavigationService from "../../../models/NavigationService";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -49,5 +50,11 @@ export function* userDataSaga() {
     yield take(actions.postUsers.success);
 
     yield put(actions.getUsersMe.request({}));
+  });
+}
+
+export function* autoLoginSaga() {
+  yield takeEvery(actions.getUsersMe.success, function* () {
+    NavigationService.replace("PatientHome");
   });
 }
