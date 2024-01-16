@@ -132,6 +132,7 @@ export const PatientHomeScreen = memo(() => {
           <Text center>Lancia una nuova ricerca</Text>
           <Button label="Sweep Now" />
           <View
+            marginT-20
             style={{
               flexDirection: "row",
               gap: 5,
