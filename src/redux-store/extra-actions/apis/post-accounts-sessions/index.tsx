@@ -11,7 +11,12 @@ export interface PostAccountsParams {
   email: string;
   password: string;
 }
-export interface PostAccountsResponseData {}
+export interface PostAccountsResponseData {
+  cookie: {
+    name: string;
+    value: string;
+  };
+}
 export default apiActionBuilder<
   PostAccountsParams,
   ApiSuccessAction<PostAccountsResponseData, PostAccountsParams>,

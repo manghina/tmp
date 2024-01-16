@@ -1,10 +1,11 @@
 import { initTheme } from "@app/theme";
-import { Assets } from "react-native-ui-lib";
+import { Assets, LoaderScreen } from "react-native-ui-lib";
 
 import { AppContent } from "./src/components/AppContent";
 import { Provider } from "react-redux";
-import store from "./src/redux-store";
+import store, { persistor } from "./src/redux-store";
 import { enableDebugging } from "./src/utils/debug";
+import { PersistGate } from "redux-persist/integration/react";
 
 Assets.loadAssetsGroup("icons", {
   visibility: require("./assets/icons/visibility.png"),
@@ -20,7 +21,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <AppContent />
+      <PersistGate persistor={persistor} loading={<LoaderScreen />}>
+        <AppContent />
+      </PersistGate>
     </Provider>
   );
 }

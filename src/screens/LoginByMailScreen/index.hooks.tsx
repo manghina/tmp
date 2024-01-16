@@ -33,7 +33,7 @@ export const useLoginByMailScreen = () => {
   const formData = useForm<LoginByMailFormData>({
     defaultValues: {
       email: route.params.email,
-      password: "",
+      password: "Antonio.Ascone1997!",
     },
     resolver: yupResolver(schema),
   });
@@ -44,7 +44,7 @@ export const useLoginByMailScreen = () => {
     formState: { isDirty, isValid, isSubmitted },
   } = formData;
 
-  const submitDisabled = !isDirty || (!isValid && isSubmitted);
+  const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
 
   const [email, password] = useWatch({ control, name: ["email", "password"] });
 

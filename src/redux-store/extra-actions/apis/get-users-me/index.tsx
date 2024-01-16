@@ -6,9 +6,12 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
+import { IUser } from "../../../../models/User";
 
 export interface GetUsersMeParams {}
-export interface GetUsersMeResponseData {}
+export interface GetUsersMeResponseData {
+  user: IUser;
+}
 export default apiActionBuilder<
   GetUsersMeParams,
   ApiSuccessAction<GetUsersMeResponseData, GetUsersMeParams>,

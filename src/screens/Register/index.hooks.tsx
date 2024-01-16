@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { actions } from "../../redux-store";
 import { useDispatch } from "react-redux";
 import { RegisterStepCounter } from "./RegisterStepCounter";
+import moment from "moment";
 
 interface SignUpFormData {
   firstName: string;
@@ -122,7 +123,12 @@ export const useRegisterScreen = () => {
   const triggerSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(actions.postAccounts.request(data));
+        dispatch(
+          actions.registrationFormSubmitted({
+            ...data,
+            birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
+          }),
+        );
       }),
     [dispatch, handleSubmit],
   );
