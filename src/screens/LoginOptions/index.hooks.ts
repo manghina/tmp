@@ -21,7 +21,7 @@ export const useLoginOptionsScreen = () => {
   const formData = useForm<LoginOptionsFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "antonio.ascone997@gmail.com",
+      email: "",
     },
   });
 

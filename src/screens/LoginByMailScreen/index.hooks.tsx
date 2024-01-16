@@ -33,7 +33,7 @@ export const useLoginByMailScreen = () => {
   const formData = useForm<LoginByMailFormData>({
     defaultValues: {
       email: route.params.email,
-      password: "Antonio.Ascone1997!",
+      password: "",
     },
     resolver: yupResolver(schema),
   });
