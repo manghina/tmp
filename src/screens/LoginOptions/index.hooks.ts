@@ -20,6 +20,9 @@ export const useLoginOptionsScreen = () => {
 
   const formData = useForm<LoginOptionsFormData>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+    },
   });
 
   const {
@@ -27,7 +30,7 @@ export const useLoginOptionsScreen = () => {
     formState: { isDirty, isSubmitted, isValid },
   } = formData;
 
-  const submitDisabled = !isDirty || (isSubmitted && !isValid);
+  const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
 
   const triggerSubmit = useMemo(
     () =>

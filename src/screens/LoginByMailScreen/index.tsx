@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import { View, Button, Colors, Text } from "react-native-ui-lib";
 import { useLoginByMailScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
-import { FormTextField } from "../../components/_form/FormTextField";
-import { FormHiddenTextField } from "../../components/_form/FormHiddenTextField";
-export const LoginByMailScreen = memo((props) => {
+import { FormTextField } from "@app/components/_form/FormTextField";
+
+export const LoginByMailScreen = memo(() => {
   const {
     formData,
     triggerSubmit,
@@ -25,7 +25,7 @@ export const LoginByMailScreen = memo((props) => {
       <View paddingH-20 paddingT-20>
         <FormProvider {...formData}>
           <FormTextField name="email" label="Indirizzo email" />
-          <FormHiddenTextField name="password" label="Password segreta" />
+          <FormTextField name="password" label="Password" type="password" />
           <Text center grayText={!allFieldsFilled} marginT-24>
             Ci sei quasi...
           </Text>

@@ -1,7 +1,9 @@
 import useFormField from "@app/hooks/useFormField";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
-export const useFormTextField = (name: string) => {
+export const useFormTextField = (name: string, type: "text" | "password") => {
+  const [hideText, setHideText] = useState(type === "password");
+
   const { value, setValue, error } = useFormField<string>({
     name,
   });
@@ -13,9 +15,15 @@ export const useFormTextField = (name: string) => {
     [setValue],
   );
 
+  const onVisibilityIconTapped = useCallback(() => {
+    setHideText((prev) => !prev);
+  }, []);
+
   return {
+    hideText,
     value,
     handleChange,
     error,
+    onVisibilityIconTapped,
   };
 };
