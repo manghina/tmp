@@ -3,8 +3,7 @@ import { useRegisterScreen } from "./index.hooks";
 import React from "react";
 
 import { FormProvider } from "react-hook-form";
-import { FormTextField } from "../../components/_form/FormTextField";
-import { FormHiddenTextField } from "@app/components/_form/FormHiddenTextField";
+import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 
 export const RegisterScreen = () => {
@@ -62,10 +61,11 @@ export const RegisterScreen = () => {
           ></View>
           <View flex paddingH-20 paddingT-20>
             <FormTextField name="email" label="Email" />
-            <FormHiddenTextField name="password" label="Password" />
-            <FormHiddenTextField
+            <FormTextField name="password" label="Password" type="password" />
+            <FormTextField
               name="confirmPassword"
               label="Conferma password"
+              type="password"
             />
             <Text center grayText={!secondStepFilled} marginT-24>
               Iscrizione completata!
