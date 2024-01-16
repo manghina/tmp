@@ -12,14 +12,16 @@ export const RegisterStepCounter: React.FC<RegisterStepCounterProps> = ({
     <View row style={{ alignItems: "flex-end" }}>
       {stepperCounter === 1 ? (
         <>
-          <Text Title marginR-4>01</Text>
+          <Text Title marginR-4>
+            01
+          </Text>
           <Text gray24stepper marginB-2>
             02
           </Text>
         </>
       ) : (
         <>
-          <Text gray24stepper marginB- marginR-4>
+          <Text gray24stepper marginB-2 marginR-4>
             01
           </Text>
           <Text Title>02</Text>

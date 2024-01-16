@@ -77,7 +77,7 @@ export const RegisterScreen = () => {
               style={{ width: "100%" }}
               onPress={triggerSubmit}
               disabledBackgroundColor={Colors.disabledBlue}
-              disabled={submitDisabled}
+              disabled={!secondStepFilled || submitDisabled}
             />
             <Text
               center
