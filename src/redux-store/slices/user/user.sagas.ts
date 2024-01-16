@@ -1,16 +1,12 @@
 import { put, select, take, takeEvery } from "redux-saga/effects";
 import { actions, RootState } from "@app/redux-store";
 import { getCookie } from "./user.selectors";
-import NavigationService from "../../../models/NavigationService";
-import {
-  ApiFailAction,
-  ApiFailData,
-} from "../../extra-actions/apis/api-builder";
-import { PayloadActionCreator } from "@reduxjs/toolkit";
+import NavigationService from "@app/models/NavigationService";
+import { ApiFailData } from "../../extra-actions/apis/api-builder";
 import { PostAccountsParams } from "@app/redux-store/extra-actions/apis/post-accounts";
 import { PostAccountsSessionsParams } from "@app/redux-store/extra-actions/apis/post-accounts-sessions";
-import { PostUsersParams } from "../../extra-actions/apis/post-users";
-import { GetUsersMeParams } from "../../extra-actions/apis/get-users-me";
+import { PostUsersParams } from "@app/redux-store/extra-actions/apis/post-users";
+import { GetUsersMeParams } from "@app/redux-store/extra-actions/apis/get-users-me";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
