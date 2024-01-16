@@ -4,6 +4,7 @@ import { useLoginByMailScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormHiddenTextField } from "@app/components/_form/FormHiddenTextField";
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginByMailScreen = memo(() => {
   const {
@@ -13,6 +14,7 @@ export const LoginByMailScreen = memo(() => {
     allFieldsFilled,
     completionPercentage,
   } = useLoginByMailScreen();
+  const navigation = useNavigation<any>();
 
   return (
     <View>
@@ -41,12 +43,16 @@ export const LoginByMailScreen = memo(() => {
             style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
             marginT-20
           >
-            <Text>Password dimenticata?</Text>
-            <Button link>
-              <Text color="#3C77E8" style={{ fontStyle: "italic" }}>
+            <Text default14 marginT-24>
+              Password dimenticata?{" "}
+              <Text
+                link
+                style={{ fontStyle: "italic" }}
+                onPress={() => navigation.navigate("ForgotPassword")}
+              >
                 Clicca qui
               </Text>
-            </Button>
+            </Text>
           </View>
         </FormProvider>
       </View>

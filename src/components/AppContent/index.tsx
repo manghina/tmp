@@ -21,6 +21,7 @@ import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "../../models/NavigationService";
 import { PatientHomeScreen } from "../../screens/PatientHome";
 import { PatientHeader } from "../PatientHeader";
+import { ForgotPasswordScreen } from "../../screens/ForgotPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -79,6 +80,15 @@ export const AppContent: FC = memo(({}) => {
               },
               animation: "slide_from_bottom",
               headerLeft: () => <ArrowDown />,
+            }}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswordScreen}
+            options={{
+              title: "",
+              headerLeft: () => <ArrowDown />,
+              animation: "slide_from_bottom",
             }}
           />
           <Stack.Screen

@@ -58,3 +58,9 @@ export function* autoLoginSaga() {
     NavigationService.replace("PatientHome");
   });
 }
+
+export function* postLoginSaga() {
+  yield takeEvery(actions.postAccountsSessions.success, function* () {
+    yield put(actions.getUsersMe.request({}));
+  });
+}
