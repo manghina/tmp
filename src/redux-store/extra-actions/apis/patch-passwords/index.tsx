@@ -17,7 +17,7 @@ export interface PatchPasswordsResponseData {
 }
 export default apiActionBuilder<
   PatchPasswordsParams,
-  ApiSuccessAction<PatchPasswordsParams, PatchPasswordsParams>,
+  ApiSuccessAction<PatchPasswordsResponseData, PatchPasswordsParams>,
   ApiFailAction<PatchPasswordsParams>
 >(
   "apis/accounts/patch",
