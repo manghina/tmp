@@ -2,21 +2,14 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
-import React, { useLayoutEffect, useMemo, useState } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { actions } from "../../redux-store";
 import { ForgotPasswordStepCounter } from "./ForgotPasswordStepCounter";
 
-// Route params
-type ParamList = {
-  Detail: {
-    email: string;
-  };
-};
-
 type PasswordResetFormData = {
   email: string;
-  recoveryPasswordToken: string;
+  recoveryToken: string;
   newPassword: string;
   confirmNewPassword: string;
 };
@@ -26,13 +19,13 @@ const schema = yup.object().shape({
     .string()
     .email("Inserisci una mail valida")
     .required("La mail è obbligatoria"),
+  recoveryToken: yup.string().required("Inserisci il codice di recupero"),
   newPassword: yup.string().required("Inserisci la nuova password"),
   confirmNewPassword: yup.string().required("Conferma la nuova password"),
 });
 
 export const useForgotPasswordScreen = () => {
   const dispatch = useDispatch();
-  const route = useRoute<RouteProp<ParamList, "Detail">>();
   const [stepperCounter, setStepperCounter] = useState(1);
   const navigation = useNavigation<any>();
 
@@ -59,38 +52,72 @@ export const useForgotPasswordScreen = () => {
 
   const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
 
-  const [email, newPassword, confirmNewPassword] = useWatch({
+  const [email, recoveryToken, newPassword, confirmNewPassword] = useWatch({
     control,
-    name: ["email", "newPassword", "confirmNewPassword"],
+    name: ["email", "recoveryToken", "newPassword", "confirmNewPassword"],
   });
 
-  const emailFilled = useMemo(() => Boolean(email), [email]);
+  const step1Filled = useMemo(() => Boolean(email), [email]);
+  const step2Filled = useMemo(() => Boolean(recoveryToken), [recoveryToken]);
+  const step3Filled = useMemo(
+    () => Boolean(newPassword) && Boolean(confirmNewPassword),
+    [newPassword, confirmNewPassword],
+  );
 
   const allFieldsFilled = useMemo(
-    () => Boolean(email) && Boolean(newPassword) && Boolean(confirmNewPassword),
+    () =>
+      Boolean(email) &&
+      Boolean(recoveryToken) &&
+      Boolean(newPassword) &&
+      Boolean(confirmNewPassword),
     [email, newPassword, confirmNewPassword],
   );
 
   const completionPercentage = useMemo(
     () =>
-      ([email, newPassword, confirmNewPassword].filter(Boolean).length / 4) *
+      ([email, recoveryToken, newPassword, confirmNewPassword].filter(Boolean)
+        .length /
+        4) *
       100,
-    [email, newPassword, confirmNewPassword],
+    [email, recoveryToken, newPassword, confirmNewPassword],
   );
 
-  const triggerSubmit = useMemo(
+  const triggerRecoveryTokenSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(actions.postAccountsSessions.request(data));
+        dispatch(actions.postAccounts.request(data));
       }),
     [dispatch, handleSubmit],
   );
 
+  const triggerPasswordChangeSubmit = useMemo(
+    () =>
+      handleSubmit((data) => {
+        dispatch(actions.postUsers.request(data));
+      }),
+    [dispatch, handleSubmit],
+  );
+
+  const onNextStepButtonPressed = useCallback(
+    () => setStepperCounter(stepperCounter + 1),
+    [setStepperCounter, stepperCounter],
+  );
+  const onPreviousStepButtonPressed = useCallback(
+    () => setStepperCounter(1),
+    [setStepperCounter, stepperCounter],
+  );
+
   return {
     formData,
-    triggerSubmit,
+    triggerRecoveryTokenSubmit,
+    triggerPasswordChangeSubmit,
     submitDisabled,
-    emailFilled,
+    step1Filled,
+    step2Filled,
+    step3Filled,
     completionPercentage,
+    stepperCounter,
+    onNextStepButtonPressed,
+    onPreviousStepButtonPressed,
   };
 };

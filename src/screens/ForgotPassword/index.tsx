@@ -3,15 +3,21 @@ import { View, Button, Colors, Text } from "react-native-ui-lib";
 import { useForgotPasswordScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
-import { FormHiddenTextField } from "@app/components/_form/FormHiddenTextField";
+import { FormHiddenTextField } from "../../components/_form/FormHiddenTextField";
 
 export const ForgotPasswordScreen = memo(() => {
   const {
     formData,
-    triggerSubmit,
+    triggerRecoveryTokenSubmit,
+    triggerPasswordChangeSubmit,
     submitDisabled,
-    emailFilled,
+    step1Filled,
+    step2Filled,
+    step3Filled,
     completionPercentage,
+    stepperCounter,
+    onNextStepButtonPressed,
+    onPreviousStepButtonPressed,
   } = useForgotPasswordScreen();
 
   return (
@@ -28,19 +34,107 @@ export const ForgotPasswordScreen = memo(() => {
           Password dimenticata?
         </Text>
         <Text regular16Text>
-          Abbiamo la soluzione e siamo qui per aiutarti a impostarne una tutta nuova.
+          Abbiamo la soluzione e siamo qui per aiutarti a impostarne una tutta
+          nuova.
         </Text>
         <FormProvider {...formData}>
-          <FormTextField marginT-24 name="email" label="Indirizzo email usato in fase di registrazione" />
-          <Text center grayText={!emailFilled} marginT-24>
-            Ci sei quasi...
-          </Text>
-          <Button
-            marginT-8
-            label="Prosegui"
-            onPress={triggerSubmit}
-            disabled={!emailFilled}
-          />
+          {(() => {
+            switch (stepperCounter) {
+              case 1:
+                return (
+                  <View key="step1" height="100%">
+                    <FormTextField
+                      marginT-24
+                      name="email"
+                      label="Indirizzo email usato in fase di registrazione"
+                    />
+                    <Text center grayText={!step1Filled} marginT-24>
+                      Ci sei quasi...
+                    </Text>
+                    <Button
+                      marginT-8
+                      label="Prosegui"
+                      onPress={onNextStepButtonPressed}
+                      disabled={!step1Filled}
+                    />
+                  </View>
+                );
+              case 2:
+                return (
+                  <View key="step2" height="100%">
+                    <FormTextField
+                      marginT-24
+                      name="recoveryToken"
+                      label="Codice di verifica ricevuto via email"
+                    />
+                    <Text default14 marginT-24>
+                      Non hai ricevuto il codice?{" "}
+                      <Text
+                        link
+                        style={{ fontStyle: "italic" }}
+                        onPress={() => {}}
+                      >
+                        Clicca qui
+                      </Text>
+                    </Text>
+                    <Button
+                      marginT-8
+                      label="Verifica"
+                      onPress={onNextStepButtonPressed}
+                      disabled={!step2Filled}
+                    />
+                    <Button
+                      marginT-8
+                      label="-- Skip --"
+                      onPress={onNextStepButtonPressed}
+                    />
+                    <Text
+                      center
+                      underline
+                      default14Text
+                      marginT-16
+                      onPress={onPreviousStepButtonPressed}
+                    >
+                      Torna indietro
+                    </Text>
+                  </View>
+                );
+              case 3:
+                return (
+                  <View key="step3" height="100%">
+                    <FormHiddenTextField
+                      marginT-24
+                      name="newPassword"
+                      label="Crea nuova password"
+                    />
+                    <FormHiddenTextField
+                      marginT-24
+                      name="confirmNewPassword"
+                      label="Comferma password"
+                    />
+                    <Text center grayText={!step3Filled} marginT-24>
+                      Un ultimo sforzo...
+                    </Text>
+                    <Button
+                      marginT-8
+                      label="Conferma"
+                      onPress={triggerPasswordChangeSubmit}
+                      disabled={!step3Filled}
+                    />
+                    <Text
+                      center
+                      underline
+                      default14Text
+                      marginT-16
+                      onPress={onPreviousStepButtonPressed}
+                    >
+                      Torna indietro
+                    </Text>
+                  </View>
+                );
+            }
+            return <></>;
+          })()}
         </FormProvider>
       </View>
     </View>
