@@ -8,7 +8,7 @@ import { FormHiddenTextField } from "../../components/_form/FormHiddenTextField"
 export const ForgotPasswordScreen = memo(() => {
   const {
     formData,
-    triggerRecoveryTokenSubmit,
+    triggerRecoveryPasswordTokenSubmit,
     triggerPasswordChangeSubmit,
     submitDisabled,
     step1Filled,
@@ -64,7 +64,7 @@ export const ForgotPasswordScreen = memo(() => {
                   <View key="step2" height="100%">
                     <FormTextField
                       marginT-24
-                      name="recoveryToken"
+                      name="recoveryPasswordToken"
                       label="Codice di verifica ricevuto via email"
                     />
                     <Text default14 marginT-24>
@@ -72,7 +72,7 @@ export const ForgotPasswordScreen = memo(() => {
                       <Text
                         link
                         style={{ fontStyle: "italic" }}
-                        onPress={() => {}}
+                        onPress={triggerRecoveryPasswordTokenSubmit}
                       >
                         Clicca qui
                       </Text>
@@ -80,7 +80,7 @@ export const ForgotPasswordScreen = memo(() => {
                     <Button
                       marginT-8
                       label="Verifica"
-                      onPress={onNextStepButtonPressed}
+                      onPress={() => {}}
                       disabled={!step2Filled}
                     />
                     <Button

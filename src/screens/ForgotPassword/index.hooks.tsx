@@ -9,7 +9,7 @@ import { ForgotPasswordStepCounter } from "./ForgotPasswordStepCounter";
 
 type PasswordResetFormData = {
   email: string;
-  recoveryToken: string;
+  recoveryPasswordToken: string;
   newPassword: string;
   confirmNewPassword: string;
 };
@@ -19,7 +19,9 @@ const schema = yup.object().shape({
     .string()
     .email("Inserisci una mail valida")
     .required("La mail è obbligatoria"),
-  recoveryToken: yup.string().required("Inserisci il codice di recupero"),
+  recoveryPasswordToken: yup
+    .string()
+    .required("Inserisci il codice di recupero"),
   newPassword: yup.string().required("Inserisci la nuova password"),
   confirmNewPassword: yup.string().required("Conferma la nuova password"),
 });
@@ -52,13 +54,22 @@ export const useForgotPasswordScreen = () => {
 
   const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
 
-  const [email, recoveryToken, newPassword, confirmNewPassword] = useWatch({
-    control,
-    name: ["email", "recoveryToken", "newPassword", "confirmNewPassword"],
-  });
+  const [email, recoveryPasswordToken, newPassword, confirmNewPassword] =
+    useWatch({
+      control,
+      name: [
+        "email",
+        "recoveryPasswordToken",
+        "newPassword",
+        "confirmNewPassword",
+      ],
+    });
 
   const step1Filled = useMemo(() => Boolean(email), [email]);
-  const step2Filled = useMemo(() => Boolean(recoveryToken), [recoveryToken]);
+  const step2Filled = useMemo(
+    () => Boolean(recoveryPasswordToken),
+    [recoveryPasswordToken],
+  );
   const step3Filled = useMemo(
     () => Boolean(newPassword) && Boolean(confirmNewPassword),
     [newPassword, confirmNewPassword],
@@ -67,7 +78,7 @@ export const useForgotPasswordScreen = () => {
   const allFieldsFilled = useMemo(
     () =>
       Boolean(email) &&
-      Boolean(recoveryToken) &&
+      Boolean(recoveryPasswordToken) &&
       Boolean(newPassword) &&
       Boolean(confirmNewPassword),
     [email, newPassword, confirmNewPassword],
@@ -75,17 +86,18 @@ export const useForgotPasswordScreen = () => {
 
   const completionPercentage = useMemo(
     () =>
-      ([email, recoveryToken, newPassword, confirmNewPassword].filter(Boolean)
-        .length /
+      ([email, recoveryPasswordToken, newPassword, confirmNewPassword].filter(
+        Boolean,
+      ).length /
         4) *
       100,
-    [email, recoveryToken, newPassword, confirmNewPassword],
+    [email, recoveryPasswordToken, newPassword, confirmNewPassword],
   );
 
-  const triggerRecoveryTokenSubmit = useMemo(
+  const triggerRecoveryPasswordTokenSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(actions.postAccounts.request(data));
+        dispatch(actions.postRecoveryPasswordTokens.request(data));
       }),
     [dispatch, handleSubmit],
   );
@@ -93,7 +105,7 @@ export const useForgotPasswordScreen = () => {
   const triggerPasswordChangeSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(actions.postUsers.request(data));
+        dispatch(actions.patchPasswords.request(data));
       }),
     [dispatch, handleSubmit],
   );
@@ -109,7 +121,7 @@ export const useForgotPasswordScreen = () => {
 
   return {
     formData,
-    triggerRecoveryTokenSubmit,
+    triggerRecoveryPasswordTokenSubmit,
     triggerPasswordChangeSubmit,
     submitDisabled,
     step1Filled,
