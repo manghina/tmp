@@ -4,13 +4,28 @@ import * as selectors from "./appointments.selectors";
 import * as sagas from "./appointments.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
 
+import { AppointmentStatus } from "@app/models/Appointment";
+
+const initialState: AppointmentsState = {
+  list: Object.values(AppointmentStatus)
+    .filter(() => true)
+    .map((status, index) => ({
+      _id: index.toString(),
+      status,
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+    })),
+};
+
 export const appointmentsStore = createSlice({
   name: "appointments",
-  initialState: {
-    list: [],
-  } as AppointmentsState,
+  initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(extraActions.appStartup, (state) => {
+      state.list = initialState.list;
+    });
+  },
 });
 
 export { selectors, sagas };

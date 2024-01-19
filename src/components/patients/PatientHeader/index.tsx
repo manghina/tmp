@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Avatar, View } from "react-native-ui-lib";
 import { usePatientHeader } from "./index.hooks";
-import { Logo } from "../Logo";
+import { Logo } from "@app/components/Logo";
 import { SafeAreaView } from "react-native";
 
 export const PatientHeader = memo(({}) => {

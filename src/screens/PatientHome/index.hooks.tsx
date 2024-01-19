@@ -7,6 +7,7 @@ export const usePatientHomeScreen = () => {
   const navigation = useNavigation<any>();
 
   const me = useSelector(selectors.getUserMe);
+  const appointmentsList = useSelector(selectors.getAppointmentsList);
 
   useEffect(() => {
     if (!me) {
@@ -14,5 +15,5 @@ export const usePatientHomeScreen = () => {
     }
   }, [me, navigation]);
 
-  return { me };
+  return { me, appointmentsList };
 };
