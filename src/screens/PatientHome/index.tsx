@@ -25,47 +25,49 @@ const HomeGraphics = memo(() => {
 export const PatientHomeScreen = memo(() => {
   const { me, appointmentsList } = usePatientHomeScreen();
 
+  const renderPageContent = () => (
+    <View
+      padding-20
+      paddingB-90={appointmentsList.length > 0}
+      style={patientHomeStyles.mainViewContainer}
+    >
+      <View style={patientHomeStyles.greetingsContainer}>
+        <Text Title style={patientHomeStyles.greetingsTitle}>
+          Ciao {me?.name},
+        </Text>
+        <Text>
+          Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
+        </Text>
+        <View marginT-20>
+          {appointmentsList.length > 0 && <PatientAppointmentsList />}
+        </View>
+      </View>
+      {appointmentsList.length === 0 && (
+        <View style={patientHomeStyles.bottomActionsContainer}>
+          <Text center>Lancia una nuova ricerca</Text>
+          <Button label="Sweep Now" />
+          <View marginT-20 style={patientHomeStyles.secondaryActionsContainer}>
+            <Text center>Bisogno di supporto?</Text>
+            <Button link>
+              <Text color="#3C77E8" style={{ fontStyle: "italic" }}>
+                Guarda i tutorial
+              </Text>
+            </Button>
+          </View>
+        </View>
+      )}
+    </View>
+  );
+
   return (
     <>
       <SafeAreaView style={patientHomeStyles.safeAreaView}>
         {appointmentsList.length === 0 ? <HomeGraphics /> : <></>}
-        <ScrollView>
-          <View
-            padding-20
-            paddingB-90
-            style={patientHomeStyles.mainViewContainer}
-          >
-            <View style={patientHomeStyles.greetingsContainer}>
-              <Text Title style={patientHomeStyles.greetingsTitle}>
-                Ciao {me?.name},
-              </Text>
-              <Text>
-                Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
-                metus.
-              </Text>
-              <View marginT-20>
-                {appointmentsList.length > 0 && <PatientAppointmentsList />}
-              </View>
-            </View>
-            {appointmentsList.length === 0 && (
-              <View style={patientHomeStyles.bottomActionsContainer}>
-                <Text center>Lancia una nuova ricerca</Text>
-                <Button label="Sweep Now" />
-                <View
-                  marginT-20
-                  style={patientHomeStyles.secondaryActionsContainer}
-                >
-                  <Text center>Bisogno di supporto?</Text>
-                  <Button link>
-                    <Text color="#3C77E8" style={{ fontStyle: "italic" }}>
-                      Guarda i tutorial
-                    </Text>
-                  </Button>
-                </View>
-              </View>
-            )}
-          </View>
-        </ScrollView>
+        {appointmentsList.length === 0 ? (
+          renderPageContent()
+        ) : (
+          <ScrollView>{renderPageContent()}</ScrollView>
+        )}
       </SafeAreaView>
       {appointmentsList.length > 0 && (
         <View

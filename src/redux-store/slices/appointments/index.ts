@@ -8,7 +8,7 @@ import { AppointmentStatus } from "@app/models/Appointment";
 
 const initialState: AppointmentsState = {
   list: Object.values(AppointmentStatus)
-    .filter(() => true)
+    .filter(() => false)
     .map((status, index) => ({
       _id: index.toString(),
       status,
