@@ -8,6 +8,7 @@ export enum AppointmentStatus {
   LEAVE_A_REVIEW = "LEAVE_A_REVIEW",
   COMPLETED = "COMPLETED",
   CANCELED = "CANCELED",
+  EXPIRED = "EXPIRED",
 }
 export interface IAppointment {
   _id: string;

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { usePatientAppointmentCard } from "./index.hooks";
 import { Animated } from "react-native";
-import { Text } from "react-native-ui-lib";
+import { Text, View } from "react-native-ui-lib";
 import { Appointment } from "@app/models/Appointment";
 
 type PatientAppointmentCardProps = {
@@ -10,13 +10,22 @@ type PatientAppointmentCardProps = {
 
 export const PatientAppointmentCard = memo(
   ({ appointment }: PatientAppointmentCardProps) => {
-    const { cardContainerStyles, cardTitleStyles, cardDescriptionStyles } =
-      usePatientAppointmentCard(appointment);
+    const {
+      cardContainerStyles,
+      cardTitleStyles,
+      cardDescriptionStyles,
+      cardIcon,
+    } = usePatientAppointmentCard(appointment);
 
     return (
       <Animated.View style={cardContainerStyles}>
-        <Text style={cardTitleStyles}>{appointment.status}</Text>
-        <Text style={cardDescriptionStyles}>{appointment.description}</Text>
+        <View style={{ flexDirection: "row", gap: 15 }}>
+          {cardIcon}
+          <View flex style={{ gap: 10 }}>
+            <Text style={cardTitleStyles}>{appointment.status}</Text>
+            <Text style={cardDescriptionStyles}>{appointment.description}</Text>
+          </View>
+        </View>
       </Animated.View>
     );
   },

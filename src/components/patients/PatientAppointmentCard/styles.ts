@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   cardContainer: {
     width: "100%",
     borderRadius: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     paddingVertical: 15,
     gap: 10,
   },
@@ -24,15 +24,6 @@ export const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: "bold",
-  },
-  cardTitleTextUserInputAwaited: {
-    color: "#FF8F1F",
-  },
-  cardTitleTextAiInputAwaited: {
-    color: "#3C77E8",
-  },
-  cardTitleTextContactTerminated: {
-    color: "#181818",
   },
   cardDescription: {
     fontSize: 14,
