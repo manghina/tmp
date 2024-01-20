@@ -22,14 +22,14 @@ export default apiActionBuilder<
   >,
   ApiFailAction<PostRecoveryPasswordTokensParams>
 >(
-  "apis/accounts/post",
+  "apis/accounts/recovery-password-tokens/post",
   (
     params: PostRecoveryPasswordTokensParams,
     options?: ApiRequestPayloadBuilderOptions,
   ) => ({
     payload: apiRequestPayloadBuilder<PostRecoveryPasswordTokensParams>(
       {
-        path: "/recovery-password-tokens",
+        path: "/accounts/recovery-password-tokens",
         method: HttpMethod.POST,
         body: params,
       },

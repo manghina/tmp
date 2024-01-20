@@ -21,9 +21,23 @@ const schema = yup.object().shape({
     .required("La mail è obbligatoria"),
   recoveryPasswordToken: yup
     .string()
-    .required("Inserisci il codice di recupero"),
-  newPassword: yup.string().required("Inserisci la nuova password"),
-  confirmNewPassword: yup.string().required("Conferma la nuova password"),
+    .required("Inserisci il codice di recupero")
+    .test("validazione codice", "Il codice deve essere di 6 cifre", (value) => {
+      return /\d{6}/.test(value);
+    }),
+  newPassword: yup
+    .string()
+    .min(8, "La password deve contenere almeno 8 caratteri")
+    .matches(
+      /[A-Z]/,
+      "La password deve contenere almeno un carattere maiuscolo",
+    )
+    .matches(/[0-9]/, "La password deve contenere almeno un numero")
+    .matches(/[-!|]/, "La password deve contenere almeno uno tra -!|")
+    .required(),
+  confirmNewPassword: yup
+    .string()
+    .oneOf([yup.ref("newPassword")], "Le password non coincidono"),
 });
 
 export const useForgotPasswordScreen = () => {
@@ -50,6 +64,7 @@ export const useForgotPasswordScreen = () => {
     control,
     handleSubmit,
     formState: { isDirty, isValid, isSubmitted },
+    trigger,
   } = formData;
 
   const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
@@ -94,18 +109,21 @@ export const useForgotPasswordScreen = () => {
     [email, recoveryPasswordToken, newPassword, confirmNewPassword],
   );
 
-  const triggerRecoveryPasswordTokenSubmit = useMemo(
-    () =>
-      handleSubmit((data) => {
-        dispatch(actions.postRecoveryPasswordTokens.request(data));
-      }),
-    [dispatch, handleSubmit],
+  const triggerRecoveryPasswordTokenSubmit = useCallback(
+    () => dispatch(actions.postRecoveryPasswordTokens.request({ email })),
+    [dispatch, email],
   );
 
   const triggerPasswordChangeSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(actions.patchPasswords.request(data));
+        dispatch(
+          actions.patchPasswords.request({
+            email: data.email,
+            newPassword: data.newPassword,
+            recoveryPasswordToken: data.recoveryPasswordToken,
+          }),
+        );
       }),
     [dispatch, handleSubmit],
   );
@@ -131,5 +149,6 @@ export const useForgotPasswordScreen = () => {
     stepperCounter,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
+    trigger,
   };
 };

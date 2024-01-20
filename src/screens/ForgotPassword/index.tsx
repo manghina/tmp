@@ -18,6 +18,7 @@ export const ForgotPasswordScreen = memo(() => {
     stepperCounter,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
+    trigger,
   } = useForgotPasswordScreen();
 
   return (
@@ -63,6 +64,7 @@ export const ForgotPasswordScreen = memo(() => {
                 return (
                   <View key="step2" height="100%">
                     <FormTextField
+                      maxLength={6}
                       marginT-24
                       name="recoveryPasswordToken"
                       label="Codice di verifica ricevuto via email"
@@ -80,7 +82,9 @@ export const ForgotPasswordScreen = memo(() => {
                     <Button
                       marginT-8
                       label="Verifica"
-                      onPress={() => {}}
+                      onPress={() => {
+                        trigger("recoveryPasswordToken").then();
+                      }}
                       disabled={!step2Filled}
                     />
                     <Button

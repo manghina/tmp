@@ -20,14 +20,14 @@ export default apiActionBuilder<
   ApiSuccessAction<PatchPasswordsResponseData, PatchPasswordsParams>,
   ApiFailAction<PatchPasswordsParams>
 >(
-  "apis/accounts/patch",
+  "apis/accounts/passwords/patch",
   (
     params: PatchPasswordsParams,
     options?: ApiRequestPayloadBuilderOptions,
   ) => ({
     payload: apiRequestPayloadBuilder<PatchPasswordsParams>(
       {
-        path: "/password",
+        path: "/accounts/password",
         method: HttpMethod.PATCH,
         body: params,
       },
