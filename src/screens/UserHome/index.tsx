@@ -1,52 +1,52 @@
 import React, { memo } from "react";
-import { usePatientHomeScreen } from "./index.hooks";
+import { useUserHomeScreen } from "./index.hooks";
 import { View, Text, Button } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import SweepSvg from "@app/components/SweepSvg";
-import { patientHomeStyles } from "./styles";
-import { PatientAppointmentsList } from "@app/components/patients/PatientAppointmentsList";
+import { userHomeStyles } from "./styles";
+import { UserAppointmentsList } from "@app/components/users/UserAppointmentsList";
 
 const HomeGraphics = memo(() => {
   return (
-    <View style={patientHomeStyles.graphicsMainContainer}>
-      <View style={patientHomeStyles.graphicsRelativeContainer}>
-        <View style={patientHomeStyles.graphicsRightBlob} />
-        <View style={patientHomeStyles.graphicsLeftBlob} />
-        <View style={patientHomeStyles.graphicsSweepCircle3} />
-        <View style={patientHomeStyles.graphicsSweepCircle2} />
-        <View style={patientHomeStyles.graphicsSweepCircle1} />
-        <View style={patientHomeStyles.graphicsSweepCircle0} />
+    <View style={userHomeStyles.graphicsMainContainer}>
+      <View style={userHomeStyles.graphicsRelativeContainer}>
+        <View style={userHomeStyles.graphicsRightBlob} />
+        <View style={userHomeStyles.graphicsLeftBlob} />
+        <View style={userHomeStyles.graphicsSweepCircle3} />
+        <View style={userHomeStyles.graphicsSweepCircle2} />
+        <View style={userHomeStyles.graphicsSweepCircle1} />
+        <View style={userHomeStyles.graphicsSweepCircle0} />
         <SweepSvg />
       </View>
     </View>
   );
 });
 
-export const PatientHomeScreen = memo(() => {
-  const { me, appointmentsList } = usePatientHomeScreen();
+export const UserHomeScreen = memo(() => {
+  const { me, appointmentsList } = useUserHomeScreen();
 
   const renderPageContent = () => (
     <View
       padding-20
       paddingB-90={appointmentsList.length > 0}
-      style={patientHomeStyles.mainViewContainer}
+      style={userHomeStyles.mainViewContainer}
     >
-      <View style={patientHomeStyles.greetingsContainer}>
-        <Text Title style={patientHomeStyles.greetingsTitle}>
+      <View style={userHomeStyles.greetingsContainer}>
+        <Text Title style={userHomeStyles.greetingsTitle}>
           Ciao {me?.name},
         </Text>
         <Text>
           Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
         </Text>
         <View marginT-20>
-          {appointmentsList.length > 0 && <PatientAppointmentsList />}
+          {appointmentsList.length > 0 && <UserAppointmentsList />}
         </View>
       </View>
       {appointmentsList.length === 0 && (
-        <View style={patientHomeStyles.bottomActionsContainer}>
+        <View style={userHomeStyles.bottomActionsContainer}>
           <Text center>Lancia una nuova ricerca</Text>
           <Button label="Sweep Now" />
-          <View marginT-20 style={patientHomeStyles.secondaryActionsContainer}>
+          <View marginT-20 style={userHomeStyles.secondaryActionsContainer}>
             <Text center>Bisogno di supporto?</Text>
             <Button link>
               <Text color="#3C77E8" style={{ fontStyle: "italic" }}>
@@ -61,7 +61,7 @@ export const PatientHomeScreen = memo(() => {
 
   return (
     <>
-      <SafeAreaView style={patientHomeStyles.safeAreaView}>
+      <SafeAreaView style={userHomeStyles.safeAreaView}>
         {appointmentsList.length === 0 ? <HomeGraphics /> : <></>}
         {appointmentsList.length === 0 ? (
           renderPageContent()
@@ -108,4 +108,4 @@ export const PatientHomeScreen = memo(() => {
   );
 });
 
-PatientHomeScreen.displayName = "PatientHomeScreen";
+UserHomeScreen.displayName = "UserHomeScreen";

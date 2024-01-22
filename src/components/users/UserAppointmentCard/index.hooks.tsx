@@ -14,11 +14,11 @@ const userActionColor = "#FF8F1F";
 const aiActionColor = "#3C77E8";
 const contactTerminatedColor = "#181818";
 
-export const usePatientAppointmentCard = (appointment: Appointment) => {
+export const useUserAppointmentCard = (appointment: Appointment) => {
   const wiggleAnim = useRef(new Animated.Value(0)).current; // Initial value for wiggle angle: 0
 
   const cardContainerStyles = useMemo(() => {
-    const cardStyles = [styles.cardContainer];
+    const cardStyles: any[] = [styles.cardContainer];
 
     switch (appointment.status) {
       case AppointmentStatus.EXPIRING:
@@ -58,7 +58,7 @@ export const usePatientAppointmentCard = (appointment: Appointment) => {
   }, [appointment]);
 
   const cardTitleStyles = useMemo(() => {
-    const titleStyles = [styles.cardTitle];
+    const titleStyles: any[] = [styles.cardTitle];
 
     switch (appointment.status) {
       case AppointmentStatus.EXPIRING:
@@ -91,7 +91,7 @@ export const usePatientAppointmentCard = (appointment: Appointment) => {
   }, [appointment]);
 
   const cardDescriptionStyles = useMemo(() => {
-    const descriptionStyles = [styles.cardDescription];
+    const descriptionStyles: any[] = [styles.cardDescription];
 
     switch (appointment.status) {
       case AppointmentStatus.EXPIRING:

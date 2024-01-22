@@ -1,21 +1,21 @@
 import { memo } from "react";
-import { usePatientAppointmentCard } from "./index.hooks";
+import { useUserAppointmentCard } from "./index.hooks";
 import { Animated } from "react-native";
 import { Text, View } from "react-native-ui-lib";
 import { Appointment } from "@app/models/Appointment";
 
-type PatientAppointmentCardProps = {
+type UserAppointmentCardProps = {
   appointment: Appointment;
 };
 
-export const PatientAppointmentCard = memo(
-  ({ appointment }: PatientAppointmentCardProps) => {
+export const UserAppointmentCard = memo(
+  ({ appointment }: UserAppointmentCardProps) => {
     const {
       cardContainerStyles,
       cardTitleStyles,
       cardDescriptionStyles,
       cardIcon,
-    } = usePatientAppointmentCard(appointment);
+    } = useUserAppointmentCard(appointment);
 
     return (
       <Animated.View style={cardContainerStyles}>
@@ -31,4 +31,4 @@ export const PatientAppointmentCard = memo(
   },
 );
 
-PatientAppointmentCard.displayName = "PatientAppointmentCard";
+UserAppointmentCard.displayName = "UserAppointmentCard";

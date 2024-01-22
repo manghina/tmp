@@ -105,7 +105,7 @@ export function* autoLoginSaga() {
     [actions.getUsersMe.success, actions.getUsersMe.fail],
     function* (action) {
       if (action.type === actions.getUsersMe.success.type) {
-        NavigationService.replace("PatientHome");
+        NavigationService.replace("UserHome");
       } else {
         const { status } = action.payload as ApiFailData<GetUsersMeParams>;
 

@@ -16,8 +16,8 @@ import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
 
 import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
-import { PatientHomeScreen } from "@app/screens/PatientHome";
-import { PatientHeader } from "@app/components/patients/PatientHeader";
+import { UserHomeScreen } from "@app/screens/UserHome";
+import { UserHeader } from "@app/components/users/UserHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -95,10 +95,10 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="PatientHome"
-            component={PatientHomeScreen}
+            name="UserHome"
+            component={UserHomeScreen}
             options={{
-              header: () => <PatientHeader />,
+              header: () => <UserHeader />,
             }}
           />
         </Stack.Navigator>

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const patientHomeStyles = StyleSheet.create({
+export const userHomeStyles = StyleSheet.create({
   graphicsMainContainer: {
     position: "absolute",
     top: 0,
