@@ -1,8 +1,5 @@
 import { FC, memo } from "react";
-import {
-  NavigationContainer,
-  NavigationContainerRef,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Colors } from "react-native-ui-lib";
@@ -18,9 +15,9 @@ import { ArrowDown } from "@app/screens/Register/ArrowDown";
 import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
 
 import { CustomToast } from "@app/components/CustomToast";
-import NavigationService from "../../models/NavigationService";
-import { PatientHomeScreen } from "../../screens/PatientHome";
-import { PatientHeader } from "../PatientHeader";
+import NavigationService from "@app/models/NavigationService";
+import { UserHomeScreen } from "@app/screens/UserHome";
+import { UserHeader } from "@app/components/users/UserHeader";
 
 const Stack = createNativeStackNavigator();
 
@@ -98,10 +95,10 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="PatientHome"
-            component={PatientHomeScreen}
+            name="UserHome"
+            component={UserHomeScreen}
             options={{
-              header: () => <PatientHeader />,
+              header: () => <UserHeader />,
             }}
           />
         </Stack.Navigator>

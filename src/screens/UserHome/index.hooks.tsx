@@ -3,10 +3,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { selectors } from "@app/redux-store";
 
-export const usePatientHomeScreen = () => {
+export const useUserHomeScreen = () => {
   const navigation = useNavigation<any>();
 
   const me = useSelector(selectors.getUserMe);
+  const requestsList = useSelector(selectors.getRequestsList);
 
   useEffect(() => {
     if (!me) {
@@ -14,5 +15,5 @@ export const usePatientHomeScreen = () => {
     }
   }, [me, navigation]);
 
-  return { me };
+  return { me, requestsList };
 };

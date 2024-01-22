@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { selectors } from "@app/redux-store";
 import { useMemo } from "react";
 
-export const usePatientHeader = () => {
+export const useUserHeader = () => {
   const me = useSelector(selectors.getUserMe);
 
   const initials = useMemo(
