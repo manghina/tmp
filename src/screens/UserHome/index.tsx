@@ -4,7 +4,7 @@ import { View, Text, Button } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import SweepSvg from "@app/components/SweepSvg";
 import { userHomeStyles } from "./styles";
-import { UserAppointmentsList } from "@app/components/users/UserAppointmentsList";
+import { UserRequestsList } from "@app/components/users/UserRequestsList";
 
 const HomeGraphics = memo(() => {
   return (
@@ -23,12 +23,12 @@ const HomeGraphics = memo(() => {
 });
 
 export const UserHomeScreen = memo(() => {
-  const { me, appointmentsList } = useUserHomeScreen();
+  const { me, requestsList } = useUserHomeScreen();
 
   const renderPageContent = () => (
     <View
       padding-20
-      paddingB-90={appointmentsList.length > 0}
+      paddingB-90={requestsList.length > 0}
       style={userHomeStyles.mainViewContainer}
     >
       <View style={userHomeStyles.greetingsContainer}>
@@ -39,10 +39,10 @@ export const UserHomeScreen = memo(() => {
           Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
         </Text>
         <View marginT-20>
-          {appointmentsList.length > 0 && <UserAppointmentsList />}
+          {requestsList.length > 0 && <UserRequestsList />}
         </View>
       </View>
-      {appointmentsList.length === 0 && (
+      {requestsList.length === 0 && (
         <View style={userHomeStyles.bottomActionsContainer}>
           <Text center>Lancia una nuova ricerca</Text>
           <Button label="Sweep Now" />
@@ -62,14 +62,14 @@ export const UserHomeScreen = memo(() => {
   return (
     <>
       <SafeAreaView style={userHomeStyles.safeAreaView}>
-        {appointmentsList.length === 0 ? <HomeGraphics /> : <></>}
-        {appointmentsList.length === 0 ? (
+        {requestsList.length === 0 ? <HomeGraphics /> : <></>}
+        {requestsList.length === 0 ? (
           renderPageContent()
         ) : (
           <ScrollView>{renderPageContent()}</ScrollView>
         )}
       </SafeAreaView>
-      {appointmentsList.length > 0 && (
+      {requestsList.length > 0 && (
         <View
           paddingB-30
           paddingT-20

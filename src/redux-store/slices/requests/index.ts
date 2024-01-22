@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AppointmentsState } from "./appointments.interfaces";
-import * as selectors from "./appointments.selectors";
-import * as sagas from "./appointments.sagas";
+import { RequestsState } from "./requests.interfaces";
+import * as selectors from "./requests.selectors";
+import * as sagas from "./requests.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
 
-import { AppointmentStatus } from "@app/models/Appointment";
+import { RequestStatus } from "@app/models/Request";
 
-const initialState: AppointmentsState = {
-  list: Object.values(AppointmentStatus)
+const initialState: RequestsState = {
+  list: Object.values(RequestStatus)
     .filter(() => true) // Set to false in order to see the other version of the home
     .map((status, index) => ({
       _id: index.toString(),
@@ -17,8 +17,8 @@ const initialState: AppointmentsState = {
     })),
 };
 
-export const appointmentsStore = createSlice({
-  name: "appointments",
+export const requestStore = createSlice({
+  name: "request",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

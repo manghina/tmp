@@ -1,4 +1,4 @@
-import { Appointment, AppointmentStatus } from "@app/models/Appointment";
+import { Request, RequestStatus } from "@app/models/Request";
 import { useEffect, useMemo, useRef } from "react";
 import { styles } from "./styles";
 import { Animated } from "react-native";
@@ -14,34 +14,34 @@ const userActionColor = "#FF8F1F";
 const aiActionColor = "#3C77E8";
 const contactTerminatedColor = "#181818";
 
-export const useUserAppointmentCard = (appointment: Appointment) => {
+export const useUserRequestCard = (request: Request) => {
   const wiggleAnim = useRef(new Animated.Value(0)).current; // Initial value for wiggle angle: 0
 
   const cardContainerStyles = useMemo(() => {
     const cardStyles: any[] = [styles.cardContainer];
 
-    switch (appointment.status) {
-      case AppointmentStatus.EXPIRING:
-      case AppointmentStatus.AWAIT_USER_MESSAGE:
-      case AppointmentStatus.LEAVE_A_REVIEW:
-      case AppointmentStatus.PAYMENT_DUE:
+    switch (request.status) {
+      case RequestStatus.EXPIRING:
+      case RequestStatus.AWAIT_USER_MESSAGE:
+      case RequestStatus.LEAVE_A_REVIEW:
+      case RequestStatus.PAYMENT_DUE:
         cardStyles.push(styles.cardContainerUserInputAwaited);
         break;
-      case AppointmentStatus.AWAIT_AI_MESSAGE:
-      case AppointmentStatus.SEARCHING_FOR_DOCTOR:
-      case AppointmentStatus.AWAIT_DOCTOR_ACCEPTANCE:
+      case RequestStatus.AWAIT_AI_MESSAGE:
+      case RequestStatus.SEARCHING_FOR_PROFESSIONAL:
+      case RequestStatus.AWAIT_PROFESSIONAL_ACCEPTANCE:
         cardStyles.push(styles.cardContainerAiInputAwaited);
         break;
-      case AppointmentStatus.CANCELED:
-      case AppointmentStatus.COMPLETED:
-      case AppointmentStatus.EXPIRED:
+      case RequestStatus.CANCELED:
+      case RequestStatus.COMPLETED:
+      case RequestStatus.EXPIRED:
         cardStyles.push(styles.cardContainerContactTerminated);
         break;
       default:
         break;
     }
 
-    if (appointment.status === AppointmentStatus.EXPIRING) {
+    if (request.status === RequestStatus.EXPIRING) {
       cardStyles.push({
         transform: [
           {
@@ -55,30 +55,30 @@ export const useUserAppointmentCard = (appointment: Appointment) => {
     }
 
     return cardStyles;
-  }, [appointment]);
+  }, [request]);
 
   const cardTitleStyles = useMemo(() => {
     const titleStyles: any[] = [styles.cardTitle];
 
-    switch (appointment.status) {
-      case AppointmentStatus.EXPIRING:
-      case AppointmentStatus.AWAIT_USER_MESSAGE:
-      case AppointmentStatus.LEAVE_A_REVIEW:
-      case AppointmentStatus.PAYMENT_DUE:
+    switch (request.status) {
+      case RequestStatus.EXPIRING:
+      case RequestStatus.AWAIT_USER_MESSAGE:
+      case RequestStatus.LEAVE_A_REVIEW:
+      case RequestStatus.PAYMENT_DUE:
         titleStyles.push({
           color: userActionColor,
         });
         break;
-      case AppointmentStatus.AWAIT_AI_MESSAGE:
-      case AppointmentStatus.SEARCHING_FOR_DOCTOR:
-      case AppointmentStatus.AWAIT_DOCTOR_ACCEPTANCE:
+      case RequestStatus.AWAIT_AI_MESSAGE:
+      case RequestStatus.SEARCHING_FOR_PROFESSIONAL:
+      case RequestStatus.AWAIT_PROFESSIONAL_ACCEPTANCE:
         titleStyles.push({
           color: aiActionColor,
         });
         break;
-      case AppointmentStatus.CANCELED:
-      case AppointmentStatus.COMPLETED:
-      case AppointmentStatus.EXPIRED:
+      case RequestStatus.CANCELED:
+      case RequestStatus.COMPLETED:
+      case RequestStatus.EXPIRED:
         titleStyles.push({
           color: contactTerminatedColor,
         });
@@ -88,26 +88,26 @@ export const useUserAppointmentCard = (appointment: Appointment) => {
     }
 
     return titleStyles;
-  }, [appointment]);
+  }, [request]);
 
   const cardDescriptionStyles = useMemo(() => {
     const descriptionStyles: any[] = [styles.cardDescription];
 
-    switch (appointment.status) {
-      case AppointmentStatus.EXPIRING:
-      case AppointmentStatus.AWAIT_USER_MESSAGE:
-      case AppointmentStatus.LEAVE_A_REVIEW:
-      case AppointmentStatus.PAYMENT_DUE:
+    switch (request.status) {
+      case RequestStatus.EXPIRING:
+      case RequestStatus.AWAIT_USER_MESSAGE:
+      case RequestStatus.LEAVE_A_REVIEW:
+      case RequestStatus.PAYMENT_DUE:
         descriptionStyles.push(styles.cardDescriptionTextUserInputAwaited);
         break;
-      case AppointmentStatus.AWAIT_AI_MESSAGE:
-      case AppointmentStatus.SEARCHING_FOR_DOCTOR:
-      case AppointmentStatus.AWAIT_DOCTOR_ACCEPTANCE:
+      case RequestStatus.AWAIT_AI_MESSAGE:
+      case RequestStatus.SEARCHING_FOR_PROFESSIONAL:
+      case RequestStatus.AWAIT_PROFESSIONAL_ACCEPTANCE:
         descriptionStyles.push(styles.cardDescriptionTextAiInputAwaited);
         break;
-      case AppointmentStatus.CANCELED:
-      case AppointmentStatus.COMPLETED:
-      case AppointmentStatus.EXPIRED:
+      case RequestStatus.CANCELED:
+      case RequestStatus.COMPLETED:
+      case RequestStatus.EXPIRED:
         descriptionStyles.push(styles.cardDescriptionTextContactTerminated);
         break;
       default:
@@ -115,34 +115,34 @@ export const useUserAppointmentCard = (appointment: Appointment) => {
     }
 
     return descriptionStyles;
-  }, [appointment]);
+  }, [request]);
 
   const cardIcon = useMemo(() => {
-    switch (appointment.status) {
-      case AppointmentStatus.EXPIRING:
+    switch (request.status) {
+      case RequestStatus.EXPIRING:
         return <AlarmIcon color={userActionColor} />;
-      case AppointmentStatus.AWAIT_USER_MESSAGE:
+      case RequestStatus.AWAIT_USER_MESSAGE:
         return <ChatIcon color={userActionColor} />;
-      case AppointmentStatus.LEAVE_A_REVIEW:
+      case RequestStatus.LEAVE_A_REVIEW:
         return <ReviewIcon color={userActionColor} />;
-      case AppointmentStatus.PAYMENT_DUE:
+      case RequestStatus.PAYMENT_DUE:
         return <CalendarIcon color={userActionColor} />;
-      case AppointmentStatus.AWAIT_AI_MESSAGE:
+      case RequestStatus.AWAIT_AI_MESSAGE:
         return <CalendarErrorIcon color={aiActionColor} />;
-      case AppointmentStatus.SEARCHING_FOR_DOCTOR:
+      case RequestStatus.SEARCHING_FOR_PROFESSIONAL:
         return <CalendarCheckIcon color={aiActionColor} />;
-      case AppointmentStatus.AWAIT_DOCTOR_ACCEPTANCE:
+      case RequestStatus.AWAIT_PROFESSIONAL_ACCEPTANCE:
         return <CalendarIcon color={aiActionColor} />;
-      case AppointmentStatus.CANCELED:
+      case RequestStatus.CANCELED:
         return <ChatIcon color={contactTerminatedColor} />;
-      case AppointmentStatus.COMPLETED:
+      case RequestStatus.COMPLETED:
         return <ChatIcon color={contactTerminatedColor} />;
-      case AppointmentStatus.EXPIRED:
+      case RequestStatus.EXPIRED:
         return <TimerIcon color={contactTerminatedColor} />;
       default:
         return <ChatIcon color={contactTerminatedColor} />;
     }
-  }, [appointment, cardTitleStyles]);
+  }, [request, cardTitleStyles]);
 
   useEffect(() => {
     Animated.loop(
