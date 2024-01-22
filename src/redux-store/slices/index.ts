@@ -3,7 +3,7 @@ import * as ajax from "./ajax";
 import * as feedback from "./feedback";
 import * as ui from "./ui";
 import * as user from "./user";
-import * as request from "./requests";
+import * as request from "./request";
 
 export const reducers = {
   ajax: ajax.ajaxStore.reducer,

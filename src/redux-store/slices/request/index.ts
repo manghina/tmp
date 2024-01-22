@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RequestsState } from "./requests.interfaces";
-import * as selectors from "./requests.selectors";
-import * as sagas from "./requests.sagas";
+import { RequestsState } from "./request.interfaces";
+import * as selectors from "./request.selectors";
+import * as sagas from "./request.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
 
 import { RequestStatus } from "@app/models/Request";
