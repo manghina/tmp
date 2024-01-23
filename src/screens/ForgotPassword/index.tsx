@@ -55,7 +55,11 @@ export const ForgotPasswordScreen = memo(() => {
                     <Button
                       marginT-8
                       label="Prosegui"
-                      onPress={onNextStepButtonPressed}
+                      onPress={() => {
+                        onNextStepButtonPressed();
+                        trigger("email");
+                        triggerRecoveryPasswordTokenSubmit();
+                      }}
                       disabled={!step1Filled}
                     />
                   </View>

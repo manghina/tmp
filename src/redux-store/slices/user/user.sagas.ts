@@ -64,3 +64,9 @@ export function* postLoginSaga() {
     yield put(actions.getUsersMe.request({}));
   });
 }
+
+export function* postResetPasswordSaga() {
+  yield takeEvery(actions.patchPasswords.success, function* () {
+    NavigationService.replace("PasswordResetSuccess");
+  });
+}

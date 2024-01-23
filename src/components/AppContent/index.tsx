@@ -22,6 +22,7 @@ import NavigationService from "../../models/NavigationService";
 import { PatientHomeScreen } from "../../screens/PatientHome";
 import { PatientHeader } from "../PatientHeader";
 import { ForgotPasswordScreen } from "../../screens/ForgotPassword";
+import { PasswordResetSuccessScreen } from "../../screens/PasswordResetSuccess";
 
 const Stack = createNativeStackNavigator();
 
@@ -89,6 +90,13 @@ export const AppContent: FC = memo(({}) => {
               title: "",
               headerLeft: () => <ArrowDown />,
               animation: "slide_from_bottom",
+            }}
+          />
+          <Stack.Screen
+            name="PasswordResetSuccess"
+            component={PasswordResetSuccessScreen}
+            options={{
+              headerShown: false,
             }}
           />
           <Stack.Screen
