@@ -61,7 +61,11 @@ export const RegisterScreen = () => {
             }}
           ></View>
           <View flex paddingH-20 paddingT-20>
-            <FormTextField name="email" label="Email" />
+            <FormTextField
+              keyboardType={"email-address"}
+              name="email"
+              label="Email"
+            />
             <FormHiddenTextField name="password" label="Password" />
             <FormHiddenTextField
               name="confirmPassword"

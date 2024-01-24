@@ -32,6 +32,7 @@ export const LoginOptionsScreen = () => {
         <FormProvider {...formData}>
           <Text fieldLabel>Indirizzo email</Text>
           <FormTextField
+            keyboardType={"email-address"}
             name="email"
             placeholder="email"
             fieldStyle={{ backgroundColor: "#FFF", borderRadius: 12 }}

@@ -10,12 +10,12 @@ export const ForgotPasswordScreen = memo(() => {
     formData,
     triggerRecoveryPasswordTokenSubmit,
     triggerPasswordChangeSubmit,
-    submitDisabled,
     step1Filled,
     step2Filled,
     step3Filled,
     completionPercentage,
     stepperCounter,
+    clearFields,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     trigger,
@@ -45,6 +45,7 @@ export const ForgotPasswordScreen = memo(() => {
                 return (
                   <View key="step1" height="100%">
                     <FormTextField
+                      keyboardType={"email-address"}
                       marginT-24
                       name="email"
                       label="Indirizzo email usato in fase di registrazione"
@@ -56,9 +57,14 @@ export const ForgotPasswordScreen = memo(() => {
                       marginT-8
                       label="Prosegui"
                       onPress={() => {
-                        onNextStepButtonPressed();
-                        trigger("email");
-                        triggerRecoveryPasswordTokenSubmit();
+                        trigger("email").then(
+                          (isEmailValid) =>
+                            isEmailValid &&
+                            (() => {
+                              onNextStepButtonPressed();
+                              triggerRecoveryPasswordTokenSubmit();
+                            })(),
+                        );
                       }}
                       disabled={!step1Filled}
                     />
@@ -68,6 +74,7 @@ export const ForgotPasswordScreen = memo(() => {
                 return (
                   <View key="step2" height="100%">
                     <FormTextField
+                      keyboardType={"number-pad"}
                       maxLength={6}
                       marginT-24
                       name="recoveryPasswordToken"
@@ -85,23 +92,26 @@ export const ForgotPasswordScreen = memo(() => {
                     </Text>
                     <Button
                       marginT-8
-                      label="Verifica"
+                      label="Imposta nuova password"
                       onPress={() => {
-                        trigger("recoveryPasswordToken").then();
+                        trigger("recoveryPasswordToken").then(
+                          (isRecoveryPasswordTokenValid) => {
+                            isRecoveryPasswordTokenValid &&
+                              onNextStepButtonPressed();
+                          },
+                        );
                       }}
                       disabled={!step2Filled}
-                    />
-                    <Button
-                      marginT-8
-                      label="-- Skip --"
-                      onPress={onNextStepButtonPressed}
                     />
                     <Text
                       center
                       underline
                       default14Text
                       marginT-16
-                      onPress={onPreviousStepButtonPressed}
+                      onPress={() => {
+                        clearFields();
+                        onPreviousStepButtonPressed();
+                      }}
                     >
                       Torna indietro
                     </Text>
@@ -134,7 +144,10 @@ export const ForgotPasswordScreen = memo(() => {
                       underline
                       default14Text
                       marginT-16
-                      onPress={onPreviousStepButtonPressed}
+                      onPress={() => {
+                        clearFields();
+                        onPreviousStepButtonPressed();
+                      }}
                     >
                       Torna indietro
                     </Text>

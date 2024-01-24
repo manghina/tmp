@@ -1,4 +1,4 @@
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
@@ -90,6 +90,12 @@ export const useForgotPasswordScreen = () => {
     [newPassword, confirmNewPassword],
   );
 
+  const clearFields = useCallback(() => {
+    formData.setValue("recoveryPasswordToken", "");
+    formData.setValue("newPassword", "");
+    formData.setValue("confirmNewPassword", "");
+  }, [formData]);
+
   const allFieldsFilled = useMemo(
     () =>
       Boolean(email) &&
@@ -141,12 +147,12 @@ export const useForgotPasswordScreen = () => {
     formData,
     triggerRecoveryPasswordTokenSubmit,
     triggerPasswordChangeSubmit,
-    submitDisabled,
     step1Filled,
     step2Filled,
     step3Filled,
     completionPercentage,
     stepperCounter,
+    clearFields,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     trigger,

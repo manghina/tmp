@@ -27,7 +27,11 @@ export const LoginByMailScreen = memo(() => {
       />
       <View paddingH-20 paddingT-20>
         <FormProvider {...formData}>
-          <FormTextField name="email" label="Indirizzo email" />
+          <FormTextField
+            keyboardType={"email-address"}
+            name="email"
+            label="Indirizzo email"
+          />
           <FormHiddenTextField name="password" label="Password segreta" />
           <Text center grayText={!allFieldsFilled} marginT-24>
             Ci sei quasi...
