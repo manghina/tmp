@@ -41,9 +41,11 @@ const schema = yup.object().shape({
 });
 
 export const useForgotPasswordScreen = () => {
+  const navigation = useNavigation<any>();
   const dispatch = useDispatch();
   const [stepperCounter, setStepperCounter] = useState(1);
-  const navigation = useNavigation<any>();
+  const [recoveryPasswordTokenTimer, setRecoveryPasswordTokenTimer] =
+    useState(0);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -89,6 +91,20 @@ export const useForgotPasswordScreen = () => {
     () => Boolean(newPassword) && Boolean(confirmNewPassword),
     [newPassword, confirmNewPassword],
   );
+
+  const startRecoveryPasswordTokenTimer = useCallback(() => {
+    setRecoveryPasswordTokenTimer(30);
+    const timer = setInterval(() => {
+      setRecoveryPasswordTokenTimer((prevSeconds) => {
+        if (prevSeconds === 0) {
+          clearInterval(timer);
+          return 0;
+        } else {
+          return prevSeconds - 1;
+        }
+      });
+    }, 1000);
+  }, []);
 
   const clearFields = useCallback(() => {
     formData.setValue("recoveryPasswordToken", "");
@@ -153,6 +169,8 @@ export const useForgotPasswordScreen = () => {
     completionPercentage,
     stepperCounter,
     clearFields,
+    recoveryPasswordTokenTimer,
+    startRecoveryPasswordTokenTimer,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     trigger,

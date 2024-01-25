@@ -16,6 +16,8 @@ export const ForgotPasswordScreen = memo(() => {
     completionPercentage,
     stepperCounter,
     clearFields,
+    recoveryPasswordTokenTimer,
+    startRecoveryPasswordTokenTimer,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     trigger,
@@ -62,6 +64,7 @@ export const ForgotPasswordScreen = memo(() => {
                             isEmailValid &&
                             (() => {
                               onNextStepButtonPressed();
+                              startRecoveryPasswordTokenTimer();
                               triggerRecoveryPasswordTokenSubmit();
                             })(),
                         );
@@ -74,24 +77,35 @@ export const ForgotPasswordScreen = memo(() => {
                 return (
                   <View key="step2" height="100%">
                     <FormTextField
+                      marginT-24
                       keyboardType={"number-pad"}
                       maxLength={6}
-                      marginT-24
                       name="recoveryPasswordToken"
                       label="Codice di verifica ricevuto via email"
                     />
-                    <Text default14 marginT-24>
-                      Non hai ricevuto il codice?{" "}
-                      <Text
-                        link
-                        style={{ fontStyle: "italic" }}
-                        onPress={triggerRecoveryPasswordTokenSubmit}
-                      >
-                        Clicca qui
+                    {recoveryPasswordTokenTimer > 0 ? (
+                      <Text center grayText marginT-24>
+                        Inserisci il codice entro 00:
+                        {recoveryPasswordTokenTimer.toString().padStart(2, "0")}
                       </Text>
-                    </Text>
+                    ) : (
+                      <Text center default14 marginT-24>
+                        Non hai ricevuto il codice?{" "}
+                        <Text
+                          link
+                          style={{ fontStyle: "italic" }}
+                          onPress={() => {
+                            triggerRecoveryPasswordTokenSubmit();
+                            startRecoveryPasswordTokenTimer();
+                          }}
+                        >
+                          Clicca qui
+                        </Text>
+                      </Text>
+                    )}
+
                     <Button
-                      marginT-8
+                      marginT-40
                       label="Imposta nuova password"
                       onPress={() => {
                         trigger("recoveryPasswordToken").then(
