@@ -4,6 +4,7 @@ import { useLoginByMailScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { useNavigation } from "@react-navigation/native";
+import {actions} from "../../redux-store";
 
 export const LoginByMailScreen = memo(() => {
   const {
@@ -12,6 +13,7 @@ export const LoginByMailScreen = memo(() => {
     submitDisabled,
     allFieldsFilled,
     completionPercentage,
+    dispatch,
   } = useLoginByMailScreen();
   const navigation = useNavigation<any>();
 
@@ -47,7 +49,10 @@ export const LoginByMailScreen = memo(() => {
               <Text
                 link
                 style={{ fontStyle: "italic" }}
-                onPress={() => navigation.navigate("ForgotPassword")}
+                onPress={() => {
+                  dispatch(actions.setForgotPasswordStepperCounter(1));
+                  navigation.navigate("ForgotPassword");
+                }}
               >
                 Clicca qui
               </Text>

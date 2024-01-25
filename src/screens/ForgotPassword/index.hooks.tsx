@@ -3,8 +3,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-import { actions } from "../../redux-store";
+import {useDispatch, useSelector} from "react-redux";
+import {actions, selectors} from "../../redux-store";
 import { ForgotPasswordStepCounter } from "./ForgotPasswordStepCounter";
 
 type PasswordResetFormData = {
@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 export const useForgotPasswordScreen = () => {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch();
-  const [stepperCounter, setStepperCounter] = useState(1);
+  const stepperCounter = useSelector(selectors.getForgotPasswordStepperCounter);
   const [recoveryPasswordTokenTimer, setRecoveryPasswordTokenTimer] =
     useState(0);
 
@@ -151,12 +151,12 @@ export const useForgotPasswordScreen = () => {
   );
 
   const onNextStepButtonPressed = useCallback(
-    () => setStepperCounter(stepperCounter + 1),
-    [setStepperCounter, stepperCounter],
+    () => dispatch(actions.setForgotPasswordStepperCounter(stepperCounter + 1)),
+    [dispatch, stepperCounter],
   );
   const onPreviousStepButtonPressed = useCallback(
-    () => setStepperCounter(1),
-    [setStepperCounter, stepperCounter],
+    () => dispatch(actions.setForgotPasswordStepperCounter(1)),
+    [dispatch, stepperCounter],
   );
 
   return {

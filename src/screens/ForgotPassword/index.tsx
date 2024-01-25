@@ -82,7 +82,7 @@ export const ForgotPasswordScreen = memo(() => {
                       name="recoveryPasswordToken"
                       label="Codice di verifica ricevuto via email"
                     />
-                    {recoveryPasswordTokenTimer > 0 ? (
+                    {/*recoveryPasswordTokenTimer > 0 ? (
                       <Text center grayText marginT-24>
                         Inserisci il codice entro 00:
                         {recoveryPasswordTokenTimer.toString().padStart(2, "0")}
@@ -101,7 +101,7 @@ export const ForgotPasswordScreen = memo(() => {
                           Clicca qui
                         </Text>
                       </Text>
-                    )}
+                    )*/}
 
                     <Button
                       marginT-40

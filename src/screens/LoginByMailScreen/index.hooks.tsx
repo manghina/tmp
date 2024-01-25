@@ -72,5 +72,6 @@ export const useLoginByMailScreen = () => {
     submitDisabled,
     allFieldsFilled,
     completionPercentage,
+    dispatch
   };
 };
