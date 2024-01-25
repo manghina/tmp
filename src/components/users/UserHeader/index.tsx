@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { Avatar, View } from "react-native-ui-lib";
-import { usePatientHeader } from "./index.hooks";
-import { Logo } from "../Logo";
+import { useUserHeader } from "./index.hooks";
+import { Logo } from "@app/components/Logo";
 import { SafeAreaView } from "react-native";
 
-export const PatientHeader = memo(({}) => {
-  const { initials } = usePatientHeader();
+export const UserHeader = memo(({}) => {
+  const { initials } = useUserHeader();
 
   return (
     <SafeAreaView style={{ backgroundColor: "#F2F2F2" }}>

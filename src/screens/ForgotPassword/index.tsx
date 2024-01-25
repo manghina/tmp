@@ -3,7 +3,6 @@ import { View, Button, Colors, Text } from "react-native-ui-lib";
 import { useForgotPasswordScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
-import { FormHiddenTextField } from "../../components/_form/FormHiddenTextField";
 
 export const ForgotPasswordScreen = memo(() => {
   const {
@@ -134,12 +133,12 @@ export const ForgotPasswordScreen = memo(() => {
               case 3:
                 return (
                   <View key="step3" height="100%">
-                    <FormHiddenTextField
+                    <FormTextField
                       marginT-24
                       name="newPassword"
                       label="Crea nuova password"
                     />
-                    <FormHiddenTextField
+                    <FormTextField
                       marginT-24
                       name="confirmNewPassword"
                       label="Comferma password"

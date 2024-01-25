@@ -3,12 +3,14 @@ import * as ajax from "./ajax";
 import * as feedback from "./feedback";
 import * as ui from "./ui";
 import * as user from "./user";
+import * as request from "./request";
 
 export const reducers = {
   ajax: ajax.ajaxStore.reducer,
   feedback: feedback.feedbackStore.reducer,
   ui: ui.uiStore.reducer,
   user: user.userStore.reducer,
+  request: request.requestStore.reducer,
 };
 
 export const actions = {
@@ -17,6 +19,7 @@ export const actions = {
   ...feedback.feedbackStore.actions,
   ...ui.uiStore.actions,
   ...user.userStore.actions,
+  ...request.requestStore.actions,
 };
 
 export const selectors = {
@@ -24,6 +27,7 @@ export const selectors = {
   ...feedback.selectors,
   ...ui.selectors,
   ...user.selectors,
+  ...request.selectors,
 };
 
 export const sagas = [
@@ -31,4 +35,5 @@ export const sagas = [
   ...Object.values(feedback.sagas),
   ...Object.values(ui.sagas),
   ...Object.values(user.sagas),
+  ...Object.values(request.sagas),
 ];
