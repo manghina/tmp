@@ -26,4 +26,15 @@ export class Request implements IRequest {
     this.status = iRequest.status;
     this.description = iRequest.description;
   }
+
+  get isWaitingForExternalAction(): boolean {
+    switch (this.status) {
+      case RequestStatus.AWAIT_AI_MESSAGE:
+      case RequestStatus.SEARCHING_FOR_PROFESSIONAL:
+      case RequestStatus.AWAIT_PROFESSIONAL_ACCEPTANCE:
+        return true;
+      default:
+        return false;
+    }
+  }
 }

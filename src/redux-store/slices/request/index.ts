@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestsState } from "./request.interfaces";
 import * as selectors from "./request.selectors";
 import * as sagas from "./request.sagas";
@@ -15,16 +15,30 @@ const initialState: RequestsState = {
       description:
         "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
     })),
+  currentRequest: null,
 };
 
 export const requestStore = createSlice({
   name: "request",
   initialState,
-  reducers: {},
+  reducers: {
+    messageSubmitted: (state, action: PayloadAction<string>) => {},
+    startPollingRequest: (state) => {},
+    stopPollingRequest: (state) => {},
+  },
   extraReducers: (builder) => {
     builder.addCase(extraActions.appStartup, (state) => {
-      state.list = initialState.list;
+      // state.list = initialState.list;
     });
+    builder.addCase(
+      extraActions.postUsersMeRequests.success,
+      (state, action) => {
+        const { request } = action.payload.data;
+
+        state.list = [request, ...state.list];
+        state.currentRequest = request;
+      },
+    );
   },
 });
 

@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { useUserHomeScreen } from "./index.hooks";
-import { View, Text, Button } from "react-native-ui-lib";
+import { View, Text, Button, TouchableOpacity } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import SweepSvg from "@app/components/SweepSvg";
 import { userHomeStyles } from "./styles";
@@ -23,7 +23,7 @@ const HomeGraphics = memo(() => {
 });
 
 export const UserHomeScreen = memo(() => {
-  const { me, requestsList } = useUserHomeScreen();
+  const { me, requestsList, onSweepNowButtonPressed } = useUserHomeScreen();
 
   const renderPageContent = () => (
     <View
@@ -45,7 +45,7 @@ export const UserHomeScreen = memo(() => {
       {requestsList.length === 0 && (
         <View style={userHomeStyles.bottomActionsContainer}>
           <Text center>Lancia una nuova ricerca</Text>
-          <Button label="Sweep Now" />
+          <Button label="Sweep Now" onPress={onSweepNowButtonPressed} />
           <View marginT-20 style={userHomeStyles.secondaryActionsContainer}>
             <Text center>Bisogno di supporto?</Text>
             <Button link>
@@ -70,39 +70,46 @@ export const UserHomeScreen = memo(() => {
         )}
       </SafeAreaView>
       {requestsList.length > 0 && (
-        <View
-          paddingB-30
-          paddingT-20
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            backgroundColor: "#3C77E8",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 10,
-          }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
-            <View
-              style={{
-                backgroundColor: "#FFF",
-                borderRadius: 100,
-                width: 20,
-                height: 20,
-              }}
-            >
-              <SweepSvg color="#3C77E8" />
-            </View>
-            <Text style={{ color: "#FFF", fontWeight: "900" }}>Sweep Now</Text>
-          </View>
-          <Text
-            style={{ color: "#FFF", fontWeight: "400", fontStyle: "italic" }}
+        <TouchableOpacity onPress={onSweepNowButtonPressed}>
+          <View
+            paddingB-30
+            paddingT-20
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: "#3C77E8",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 10,
+            }}
           >
-            Lancia una nuova ricerca
-          </Text>
-        </View>
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
+            >
+              <View
+                style={{
+                  backgroundColor: "#FFF",
+                  borderRadius: 100,
+                  width: 20,
+                  height: 20,
+                }}
+              >
+                <SweepSvg color="#3C77E8" />
+              </View>
+              <Text style={{ color: "#FFF", fontWeight: "900" }}>
+                Sweep Now
+              </Text>
+            </View>
+
+            <Text
+              style={{ color: "#FFF", fontWeight: "400", fontStyle: "italic" }}
+            >
+              Lancia una nuova ricerca
+            </Text>
+          </View>
+        </TouchableOpacity>
       )}
     </>
   );
