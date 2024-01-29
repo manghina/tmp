@@ -16,6 +16,14 @@ export const useRequestChatScreen = () => {
   const dispatch = useDispatch();
 
   const currentRequest = useSelector(selectors.getCurrentRequest);
+  const isCreatingRequest = useSelector(
+    selectors.getAjaxIsLoadingByApi(actions.postUsersMeRequests.api),
+  );
+  const isSendingMessage = useSelector(
+    selectors.getAjaxIsLoadingByApi(
+      actions.postUsersMeRequestsMessagesByRequestId.api,
+    ),
+  );
   const isFetchingRequest = useSelector(
     selectors.getAjaxIsLoadingByApi(actions.getUsersMeRequestsByRequestId.api),
   );
@@ -26,7 +34,6 @@ export const useRequestChatScreen = () => {
 
   const onUserMessageSendButtonClicked = useCallback(() => {
     dispatch(actions.messageSubmitted(userInput));
-    setUserInput("");
   }, [dispatch, userInput, setUserInput, currentRequest?._id]);
 
   const messages: Array<IMessage> = useMemo(() => {
@@ -44,6 +51,11 @@ export const useRequestChatScreen = () => {
     [isFetchingRequest, messages?.length],
   );
 
+  const writingDisabled = useMemo(
+    () => isLoading || isCreatingRequest || isSendingMessage,
+    [isLoading, isCreatingRequest, isSendingMessage],
+  );
+
   useEffect(() => {
     if (currentRequest?.chatStatus === ChatStatus.PROCESSING ?? false) {
       dispatch(actions.startPollingRequest());
@@ -55,6 +67,12 @@ export const useRequestChatScreen = () => {
       dispatch(actions.stopPollingRequest());
     };
   }, [dispatch, currentRequest?.chatStatus]);
+
+  useEffect(() => {
+    if (!writingDisabled) {
+      setUserInput("");
+    }
+  }, [writingDisabled]);
 
   useLayoutEffect(() => {
     if (currentRequest && messages?.length > 1 && scrollViewRef.current) {
@@ -68,6 +86,7 @@ export const useRequestChatScreen = () => {
 
   return {
     isLoading,
+    writingDisabled,
     scrollViewRef,
     currentRequest,
     messages,

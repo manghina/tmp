@@ -8,6 +8,7 @@ import {
 } from "react-native-ui-lib";
 import { useRequestChatScreen } from "./index.hooks";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -18,12 +19,13 @@ import moment from "moment";
 import { ChatBubble } from "@app/components/ChatBubble";
 import SendMessageSvg from "@app/components/SendMessageSvg";
 import { ChatStatus } from "@app/models/Request";
-import { TypingIndicator } from "../../components/TypingIndicator";
+import { TypingIndicator } from "@app/components/TypingIndicator";
 
 type RequestChatProps = {};
 export const RequestChatScreen = memo(({}: RequestChatProps) => {
   const {
     isLoading,
+    writingDisabled,
     scrollViewRef,
     currentRequest,
     messages,
@@ -136,6 +138,7 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
               <TextField
                 value={userInput}
                 onChangeText={setUserInput}
+                editable={!writingDisabled}
                 multiline
                 numberOfLines={4}
                 fieldStyle={{
@@ -151,13 +154,13 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
                   paddingVertical: 6,
                 }}
                 style={{
-                  color: "#FFF",
+                  color: writingDisabled ? "#909090" : "#FFF",
                   fontSize: 16,
                 }}
               />
             </View>
             <TouchableOpacity
-              disabled={!userInput}
+              disabled={!userInput || writingDisabled}
               onPress={onUserMessageSendButtonClicked}
             >
               <View
@@ -169,10 +172,17 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
                   paddingBottom: 4,
                   paddingLeft: 4,
                   borderRadius: 8,
-                  backgroundColor: userInput ? "#3C77E8" : "#6784BD",
+                  backgroundColor:
+                    userInput && !writingDisabled ? "#3C77E8" : "#6784BD",
                 }}
               >
-                <SendMessageSvg color={userInput ? "#FFF" : "#ABB0BC"} />
+                {writingDisabled ? (
+                  <ActivityIndicator color="#FFF" />
+                ) : (
+                  <SendMessageSvg
+                    color={userInput && !writingDisabled ? "#FFF" : "#ABB0BC"}
+                  />
+                )}
               </View>
             </TouchableOpacity>
           </View>
