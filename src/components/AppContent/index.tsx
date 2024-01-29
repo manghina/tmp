@@ -21,8 +21,8 @@ import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
 import { UserHomeScreen } from "@app/screens/UserHome";
 import { UserHeader } from "@app/components/users/UserHeader";
-import { ForgotPasswordScreen } from "../../screens/ForgotPassword";
-import { PasswordResetSuccessScreen } from "../../screens/PasswordResetSuccess";
+import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
+import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 
 const Stack = createNativeStackNavigator();
 

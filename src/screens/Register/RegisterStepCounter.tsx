@@ -10,23 +10,21 @@ export const RegisterStepCounter: React.FC<RegisterStepCounterProps> = ({
 }) => {
   return (
     <View row style={{ alignItems: "flex-end" }}>
-      {stepperCounter === 1 ? (
-        <>
-          <Text Title marginR-4>
-            01
-          </Text>
-          <Text gray24stepper marginB-2>
-            02
-          </Text>
-        </>
-      ) : (
-        <>
-          <Text gray24stepper marginB-2 marginR-4>
-            01
-          </Text>
-          <Text Title>02</Text>
-        </>
-      )}
+      {(() => {
+        return (
+          <>
+            {[1,2].map(step => {
+              const isActive = step === stepperCounter;
+
+              return (
+                <Text key={step.toString()} marginB-2={!isActive} Title={isActive} gray24stepper={!isActive} marginR-4>
+                  {step.toString().padStart(2,"0")}
+                </Text>
+              )
+            })}
+          </>
+        )
+      })()}
     </View>
   );
 };

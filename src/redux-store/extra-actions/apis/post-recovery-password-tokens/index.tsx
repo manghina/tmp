@@ -11,7 +11,6 @@ export interface PostRecoveryPasswordTokensParams {
   email: string;
 }
 export interface PostRecoveryPasswordTokensResponseData {
-  recoveryPasswordToken: string;
   message: string;
 }
 export default apiActionBuilder<

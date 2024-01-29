@@ -11,50 +11,19 @@ export const ForgotPasswordStepCounter: React.FC<
   return (
     <View row style={{ alignItems: "flex-end" }}>
       {(() => {
-        switch (stepperCounter) {
-          case 1:
-            return (
-              <>
-                <Text Title marginR-4>
-                  01
+        return (
+          <>
+            {[1,2,3].map(step => {
+              const isActive = step === stepperCounter;
+
+              return (
+                <Text key={step.toString()} marginB-2={!isActive} Title={isActive} gray24stepper={!isActive} marginR-4>
+                  {step.toString().padStart(2,"0")}
                 </Text>
-                <Text gray24stepper marginB-2 marginR-4>
-                  02
-                </Text>
-                <Text gray24stepper marginB-2>
-                  03
-                </Text>
-              </>
-            );
-          case 2:
-            return (
-              <>
-                <Text gray24stepper marginB-2 marginR-4>
-                  01
-                </Text>
-                <Text Title marginR-4>
-                  02
-                </Text>
-                <Text gray24stepper marginB-2>
-                  03
-                </Text>
-              </>
-            );
-          case 3:
-            return (
-              <>
-                <Text gray24stepper marginB-2 marginR-4>
-                  01
-                </Text>
-                <Text gray24stepper marginB-2 marginR-4>
-                  02
-                </Text>
-                <Text Title marginR-4>
-                  03
-                </Text>
-              </>
-            );
-        }
+              )
+            })}
+          </>
+        )
       })()}
     </View>
   );

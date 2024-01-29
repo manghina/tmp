@@ -23,7 +23,7 @@ const schema = yup.object().shape({
     .string()
     .required("Inserisci il codice di recupero")
     .test("validazione codice", "Il codice deve essere di 6 cifre", (value) => {
-      return /\d{6}/.test(value);
+      return /^\d{6}$/.test(value);
     }),
   newPassword: yup
     .string()
@@ -69,7 +69,7 @@ export const useForgotPasswordScreen = () => {
     trigger,
   } = formData;
 
-  const submitDisabled = (!isDirty || (isSubmitted && !isValid)) && false;
+  const submitDisabled = (!isDirty || (isSubmitted && !isValid));
 
   const [email, recoveryPasswordToken, newPassword, confirmNewPassword] =
     useWatch({
