@@ -1,3 +1,3 @@
-export const useChatBubble = (sender: "user" | "gpt") => {
+export const useChatBubble = () => {
   return {};
 };

@@ -1,40 +1,55 @@
-export enum RequestStatus {
-  EXPIRING = "EXPIRING",
-  AWAIT_USER_MESSAGE = "AWAIT_USER_MESSAGE",
-  AWAIT_AI_MESSAGE = "AWAIT_AI_MESSAGE",
-  SEARCHING_FOR_PROFESSIONAL = "SEARCHING_FOR_PROFESSIONAL",
-  AWAIT_PROFESSIONAL_ACCEPTANCE = "AWAIT_PROFESSIONAL_ACCEPTANCE",
-  PAYMENT_DUE = "PAYMENT_DUE",
-  LEAVE_A_REVIEW = "LEAVE_A_REVIEW",
-  COMPLETED = "COMPLETED",
-  CANCELED = "CANCELED",
-  EXPIRED = "EXPIRED",
+import { IMessage } from "../Message";
+
+export enum ChatStatus {
+  PROCESSING = "processing",
+  WAITING_USER_INPUT = "waiting-user-input",
 }
+
+export enum RequestStatus {
+  COLLECTING_INFORMATION = "collecting-information",
+  PROFESSIONAL_OFFERS_CREATED = "professional_offers_created",
+}
+
 export interface IRequest {
   _id: string;
-  status: RequestStatus;
-  description: string;
+  user: {
+    _id: string;
+    name: string;
+    lastname: string;
+    email: string;
+  };
+  chatStatus: ChatStatus;
+  currentStatus: RequestStatus;
+  messages?: IMessage[];
 }
 
 export class Request implements IRequest {
   _id: string;
-  status: RequestStatus;
-  description: string;
+  user: {
+    _id: string;
+    name: string;
+    lastname: string;
+    email: string;
+  };
+  chatStatus: ChatStatus;
+  currentStatus: RequestStatus;
+  messages?: IMessage[];
 
   constructor(iRequest: IRequest) {
     this._id = iRequest._id;
-    this.status = iRequest.status;
-    this.description = iRequest.description;
+    this.user = iRequest.user;
+    this.chatStatus = iRequest.chatStatus;
+    this.currentStatus = iRequest.currentStatus;
+    this.messages = iRequest.messages;
   }
 
-  get isWaitingForExternalAction(): boolean {
-    switch (this.status) {
-      case RequestStatus.AWAIT_AI_MESSAGE:
-      case RequestStatus.SEARCHING_FOR_PROFESSIONAL:
-      case RequestStatus.AWAIT_PROFESSIONAL_ACCEPTANCE:
-        return true;
-      default:
-        return false;
-    }
+  toInterface(): IRequest {
+    return {
+      _id: this._id,
+      user: this.user,
+      chatStatus: this.chatStatus,
+      currentStatus: this.currentStatus,
+      messages: this.messages,
+    };
   }
 }

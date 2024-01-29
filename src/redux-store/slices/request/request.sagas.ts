@@ -58,7 +58,7 @@ function* pollRequestTask() {
         yield put(actions.stopPollingRequest());
       }
 
-      yield call(delay, 4000);
+      yield delay(4000);
     }
   }
 }

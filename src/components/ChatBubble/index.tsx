@@ -3,26 +3,28 @@ import { useChatBubble } from "./index.hooks";
 import { View, Text } from "react-native-ui-lib";
 import { styles } from "./styles";
 import SweepCircleSvg from "../SweepCircleSvg";
+import { IMessage } from "../../models/Message";
 
 type ChatBubbleProps = {
   outline?: boolean;
-  sender: "user" | "gpt";
-  text: string;
+  message: IMessage;
 };
 
-export const ChatBubble = memo(({ sender, text, outline }: ChatBubbleProps) => {
-  const {} = useChatBubble(sender);
+export const ChatBubble = memo(({ message, outline }: ChatBubbleProps) => {
+  const {} = useChatBubble();
 
   return (
     <View
       style={[
         styles.chatBubbleContainer,
-        sender === "gpt" ? styles.gptChatBubble : styles.userChatBubble,
+        message.role === "assistant"
+          ? styles.gptChatBubble
+          : styles.userChatBubble,
         outline ? styles.outlinedGptChatBubble : undefined,
       ]}
     >
       <View style={{ width: 30, height: 30 }}>
-        {sender === "gpt" ? (
+        {message.role === "assistant" ? (
           <SweepCircleSvg />
         ) : (
           <View
@@ -36,7 +38,7 @@ export const ChatBubble = memo(({ sender, text, outline }: ChatBubbleProps) => {
         )}
       </View>
       <Text flex style={[styles.chatBubbleText]}>
-        {text}
+        {message.text}
       </Text>
     </View>
   );

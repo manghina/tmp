@@ -1,11 +1,10 @@
 import { memo } from "react";
 import {
-  View,
-  Text,
   Colors,
+  Text,
   TextField,
-  Button,
   TouchableOpacity,
+  View,
 } from "react-native-ui-lib";
 import { useRequestChatScreen } from "./index.hooks";
 import {
@@ -14,15 +13,24 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { colorTokensDark } from "../../theme/colors/tokens";
+import { colorTokensDark } from "@app/theme/colors/tokens";
 import moment from "moment";
-import { ChatBubble } from "../../components/ChatBubble";
-import SendMessageSvg from "../../components/SendMessageSvg";
+import { ChatBubble } from "@app/components/ChatBubble";
+import SendMessageSvg from "@app/components/SendMessageSvg";
+import { ChatStatus } from "@app/models/Request";
+import { TypingIndicator } from "../../components/TypingIndicator";
 
 type RequestChatProps = {};
 export const RequestChatScreen = memo(({}: RequestChatProps) => {
-  const { messages, onUserMessageSendButtonClicked, userInput, setUserInput } =
-    useRequestChatScreen();
+  const {
+    isLoading,
+    scrollViewRef,
+    currentRequest,
+    messages,
+    onUserMessageSendButtonClicked,
+    userInput,
+    setUserInput,
+  } = useRequestChatScreen();
 
   const renderTimingInfo = () => (
     <View
@@ -64,7 +72,7 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
         justifyContent: "space-between",
       }}
     >
-      <ScrollView>
+      <ScrollView ref={scrollViewRef}>
         <View
           flex
           style={{
@@ -75,79 +83,101 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
           }}
         >
           {renderTimingInfo()}
-          <View style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {messages.map((message, index) => (
-              <ChatBubble
-                key={message._id}
-                sender={message.sender}
-                text={message.text}
-                outline={
-                  message.sender === "gpt" && index === messages.length - 1
-                }
-              />
-            ))}
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+              paddingBottom: 8,
+            }}
+          >
+            {!isLoading && (
+              <>
+                {messages.map((message, index) => (
+                  <ChatBubble
+                    key={index}
+                    message={message}
+                    outline={
+                      message.role === "assistant" &&
+                      index === messages.length - 1
+                    }
+                  />
+                ))}
+                {currentRequest?.chatStatus === ChatStatus.PROCESSING && (
+                  <TypingIndicator />
+                )}
+              </>
+            )}
+            {isLoading && (
+              <View>
+                <Text Title>Loading...</Text>
+              </View>
+            )}
           </View>
         </View>
       </ScrollView>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            padding: 8,
-            gap: 8,
-            backgroundColor: "#023440",
-          }}
+      {(currentRequest === null ||
+        currentRequest?.chatStatus === ChatStatus.WAITING_USER_INPUT) && (
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <View flex>
-            <TextField
-              value={userInput}
-              onChangeText={setUserInput}
-              multiline
-              numberOfLines={4}
-              fieldStyle={{
-                width: "100%",
-                minHeight: 20,
-                maxHeight: 80,
-              }}
-              containerStyle={{
-                width: "100%",
-                backgroundColor: "rgba(254, 254, 254, 0.10)",
-                borderRadius: 8,
-                paddingHorizontal: 8,
-                paddingVertical: 6,
-              }}
-              style={{
-                color: "#FFF",
-                fontSize: 16,
-              }}
-            />
-          </View>
-          <TouchableOpacity
-            disabled={!userInput}
-            onPress={onUserMessageSendButtonClicked}
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              padding: 8,
+              gap: 8,
+              backgroundColor: "#023440",
+            }}
           >
-            <View
-              style={{
-                width: 32,
-                height: 32,
-                paddingTop: 6,
-                paddingRight: 6,
-                paddingBottom: 4,
-                paddingLeft: 4,
-                borderRadius: 8,
-                backgroundColor: userInput ? "#3C77E8" : "#6784BD",
-              }}
-            >
-              <SendMessageSvg color={userInput ? "#FFF" : "#ABB0BC"} />
+            <View flex>
+              <TextField
+                value={userInput}
+                onChangeText={setUserInput}
+                multiline
+                numberOfLines={4}
+                fieldStyle={{
+                  width: "100%",
+                  minHeight: 20,
+                  maxHeight: 80,
+                }}
+                containerStyle={{
+                  width: "100%",
+                  backgroundColor: "rgba(254, 254, 254, 0.10)",
+                  borderRadius: 8,
+                  paddingHorizontal: 8,
+                  paddingVertical: 6,
+                }}
+                style={{
+                  color: "#FFF",
+                  fontSize: 16,
+                }}
+              />
             </View>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+            <TouchableOpacity
+              disabled={!userInput}
+              onPress={onUserMessageSendButtonClicked}
+            >
+              <View
+                style={{
+                  width: 32,
+                  height: 32,
+                  paddingTop: 6,
+                  paddingRight: 6,
+                  paddingBottom: 4,
+                  paddingLeft: 4,
+                  borderRadius: 8,
+                  backgroundColor: userInput ? "#3C77E8" : "#6784BD",
+                }}
+              >
+                <SendMessageSvg color={userInput ? "#FFF" : "#ABB0BC"} />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      )}
     </SafeAreaView>
   );
 });

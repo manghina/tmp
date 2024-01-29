@@ -6,12 +6,15 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
+import { IRequest } from "@app/models/Request";
 
 export interface PostUsersMeRequestsMessagesByRequestIdParams {
   requestId: string;
   userMessage: string;
 }
-export interface PostUsersMeRequestsMessagesByRequestIdResponseData {}
+export interface PostUsersMeRequestsMessagesByRequestIdResponseData {
+  request: IRequest;
+}
 export default apiActionBuilder<
   PostUsersMeRequestsMessagesByRequestIdParams,
   ApiSuccessAction<

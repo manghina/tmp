@@ -11,3 +11,6 @@ export const getCurrentRequest = createSelector(
   (state: RootState) => state?.request?.currentRequest ?? null,
   (currentRequest) => currentRequest && new Request(currentRequest),
 );
+
+export const getIsPolling = (state: RootState) =>
+  state?.request?.isPolling ?? false;
