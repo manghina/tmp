@@ -6,7 +6,7 @@ type SweepSvgProps = {
   color?: string;
 };
 const SweepSvg = ({ color }: SweepSvgProps) => (
-  <Svg width={184} height={198}>
+  <Svg width="100%" height="100%" viewBox="0 0 184 198">
     <G>
       <Path
         fill={color ?? "#F2F2F2"}

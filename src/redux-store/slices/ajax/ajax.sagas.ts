@@ -21,7 +21,7 @@ function* ajaxTask(
   const { type, payload } = requestAction;
   const { params, options, prepareParams } = payload;
   const { path, method, body, query } = params;
-  const api = type.replace("/request", "");
+  const api = type.replace(/\/request$/, "");
 
   yield put(
     actions.setApiLoading({

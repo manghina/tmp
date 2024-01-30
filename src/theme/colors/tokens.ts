@@ -1,6 +1,6 @@
 import { Colors } from "./palette";
 
-const colorTokensLight = {
+export const colorTokensLight = {
   colorText: Colors.Neutral[1000],
   colorTextSubtle: Colors.Neutral[700],
   colorTextSubtlest: Colors.Neutral[600],
@@ -216,7 +216,7 @@ const colorTokensLight = {
   elevationShadowRaised: "0px 8px 12px rgba(9, 30, 66, 0.15)",
 };
 
-const colorTokensDark = {
+export const colorTokensDark = {
   colorText: Colors.DarkNeutral[1100],
   colorTextSubtle: Colors.DarkNeutral[800],
   colorTextSubtlest: Colors.DarkNeutral[700],
