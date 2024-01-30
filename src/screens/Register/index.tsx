@@ -60,7 +60,7 @@ export const RegisterScreen = () => {
             }}
           ></View>
           <View flex paddingH-20 paddingT-20>
-            <FormTextField name="email" label="Email" />
+            <FormTextField keyboardType={"email-address"} name="email" label="Email" />
             <FormTextField name="password" label="Password" type="password" />
             <FormTextField
               name="confirmPassword"
@@ -77,7 +77,7 @@ export const RegisterScreen = () => {
               style={{ width: "100%" }}
               onPress={triggerSubmit}
               disabledBackgroundColor={Colors.disabledBlue}
-              disabled={submitDisabled}
+              disabled={!secondStepFilled || submitDisabled}
             />
             <Text
               center

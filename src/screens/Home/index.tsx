@@ -83,7 +83,7 @@ export const HomeScreen = () => {
           <Text
             link
             style={{ fontStyle: "italic" }}
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.replace("LoginOptions")}
           >
             Accedi
           </Text>

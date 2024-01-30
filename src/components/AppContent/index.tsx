@@ -18,6 +18,8 @@ import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
 import { UserHomeScreen } from "@app/screens/UserHome";
 import { UserHeader } from "@app/components/users/UserHeader";
+import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
+import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "../../screens/RequestChat";
 import { SafeAreaView } from "react-native";
 
@@ -78,6 +80,22 @@ export const AppContent: FC = memo(({}) => {
               },
               animation: "slide_from_bottom",
               headerLeft: () => <ArrowDown />,
+            }}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPasswordScreen}
+            options={{
+              title: "",
+              headerLeft: () => <ArrowDown />,
+              animation: "slide_from_bottom",
+            }}
+          />
+          <Stack.Screen
+            name="PasswordResetSuccess"
+            component={PasswordResetSuccessScreen}
+            options={{
+              headerShown: false,
             }}
           />
           <Stack.Screen

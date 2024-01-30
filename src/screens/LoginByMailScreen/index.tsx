@@ -3,6 +3,8 @@ import { View, Button, Colors, Text } from "react-native-ui-lib";
 import { useLoginByMailScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
+import { useNavigation } from "@react-navigation/native";
+import {actions} from "../../redux-store";
 
 export const LoginByMailScreen = memo(() => {
   const {
@@ -11,7 +13,9 @@ export const LoginByMailScreen = memo(() => {
     submitDisabled,
     allFieldsFilled,
     completionPercentage,
+    dispatch,
   } = useLoginByMailScreen();
+  const navigation = useNavigation<any>();
 
   return (
     <View>
@@ -24,7 +28,7 @@ export const LoginByMailScreen = memo(() => {
       />
       <View paddingH-20 paddingT-20>
         <FormProvider {...formData}>
-          <FormTextField name="email" label="Indirizzo email" />
+          <FormTextField keyboardType={"email-address"} name="email" label="Indirizzo email" />
           <FormTextField name="password" label="Password" type="password" />
           <Text center grayText={!allFieldsFilled} marginT-24>
             Ci sei quasi...
@@ -40,12 +44,19 @@ export const LoginByMailScreen = memo(() => {
             style={{ flexDirection: "row", gap: 10, alignItems: "center" }}
             marginT-20
           >
-            <Text>Password dimenticata?</Text>
-            <Button link>
-              <Text color="#3C77E8" style={{ fontStyle: "italic" }}>
+            <Text default14 marginT-24>
+              Password dimenticata?{" "}
+              <Text
+                link
+                style={{ fontStyle: "italic" }}
+                onPress={() => {
+                  dispatch(actions.setForgotPasswordStepperCounter(1));
+                  navigation.navigate("ForgotPassword");
+                }}
+              >
                 Clicca qui
               </Text>
-            </Button>
+            </Text>
           </View>
         </FormProvider>
       </View>

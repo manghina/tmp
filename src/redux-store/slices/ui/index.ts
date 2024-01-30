@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as selectors from "@app/redux-store/slices/ui/ui.selectors";
 import {
   DialogTypes,
-  SetDialogOpenAction,
+  SetDialogOpenAction, SetForgotPasswordStepperCounterAction,
   UiState,
 } from "@app/redux-store/slices/ui/ui.interfaces";
 import * as extraActions from "@app/redux-store/extra-actions";
@@ -10,6 +10,7 @@ import * as sagas from "@app/redux-store/slices/ui/ui.sagas";
 
 const initialState: UiState = {
   isDialogOpen: {},
+  forgotPasswordStepperCounter: 1,
 };
 
 export const uiStore = createSlice({
@@ -21,6 +22,9 @@ export const uiStore = createSlice({
         ...(state.isDialogOpen ?? initialState.isDialogOpen),
         [action.payload.dialogType]: action.payload.open,
       };
+    },
+    setForgotPasswordStepperCounter: (state, action: SetForgotPasswordStepperCounterAction) => {
+      state.forgotPasswordStepperCounter = action.payload;
     },
   },
   extraReducers: (builder) => {

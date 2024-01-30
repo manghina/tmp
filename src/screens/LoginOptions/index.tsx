@@ -3,10 +3,12 @@ import { SafeAreaView } from "react-native";
 import { useLoginOptionsScreen } from "./index.hooks";
 import { FormTextField } from "../../components/_form/FormTextField";
 import { FormProvider } from "react-hook-form";
+import { useNavigation } from "@react-navigation/native";
 
 const headerBackgroundGraphictPercentageOverflow = 20;
 
 export const LoginOptionsScreen = () => {
+  const navigation = useNavigation<any>();
   const { formData, submitDisabled, triggerSubmit } = useLoginOptionsScreen();
 
   return (
@@ -30,6 +32,7 @@ export const LoginOptionsScreen = () => {
         <FormProvider {...formData}>
           <Text fieldLabel>Indirizzo email</Text>
           <FormTextField
+            keyboardType={"email-address"}
             name="email"
             placeholder="email"
             fieldStyle={{ backgroundColor: "#FFF", borderRadius: 12 }}
@@ -40,6 +43,16 @@ export const LoginOptionsScreen = () => {
             disabled={submitDisabled}
             label="Prosegui"
           />
+          <Text default14 marginT-24>
+            Non hai un profilo?{" "}
+            <Text
+              link
+              style={{ fontStyle: "italic" }}
+              onPress={() => navigation.replace("Home")}
+            >
+              Registrati
+            </Text>
+          </Text>
         </FormProvider>
       </View>
     </SafeAreaView>

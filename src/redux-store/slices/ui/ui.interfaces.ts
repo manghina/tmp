@@ -6,6 +6,7 @@ export interface UiState {
   isDialogOpen: {
     [key in DialogTypes]: boolean;
   };
+  forgotPasswordStepperCounter: number;
 }
 
 export interface SetDialogOpenAction extends Action {
@@ -14,3 +15,9 @@ export interface SetDialogOpenAction extends Action {
     open: boolean;
   };
 }
+
+export interface SetForgotPasswordStepperCounterAction extends Action {
+    payload: number;
+}
+
+

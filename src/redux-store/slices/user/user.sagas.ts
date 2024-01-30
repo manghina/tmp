@@ -126,3 +126,15 @@ export function* autoLoginSaga() {
     },
   );
 }
+
+export function* postLoginSaga() {
+  yield takeEvery(actions.postAccountsSessions.success, function* () {
+    yield put(actions.getUsersMe.request({}));
+  });
+}
+
+export function* postResetPasswordSaga() {
+  yield takeEvery(actions.patchPasswords.success, function* () {
+    NavigationService.replace("PasswordResetSuccess");
+  });
+}

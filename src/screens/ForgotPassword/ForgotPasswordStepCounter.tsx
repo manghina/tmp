@@ -1,19 +1,19 @@
 import React from "react";
 import { Text, View } from "react-native-ui-lib";
 
-interface RegisterStepCounterProps {
+interface ForgotPasswordStepCounterProps {
   stepperCounter: number;
 }
 
-export const RegisterStepCounter: React.FC<RegisterStepCounterProps> = ({
-  stepperCounter,
-}) => {
+export const ForgotPasswordStepCounter: React.FC<
+  ForgotPasswordStepCounterProps
+> = ({ stepperCounter }) => {
   return (
     <View row style={{ alignItems: "flex-end" }}>
       {(() => {
         return (
           <>
-            {[1,2].map(step => {
+            {[1,2,3].map(step => {
               const isActive = step === stepperCounter;
 
               return (
