@@ -1,11 +1,8 @@
 import { FC, memo } from "react";
-import {
-  NavigationContainer,
-  NavigationContainerRef,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Colors } from "react-native-ui-lib";
+import { Colors, View } from "react-native-ui-lib";
 
 import { useAppContent } from "./index.hooks";
 
@@ -23,6 +20,8 @@ import { UserHomeScreen } from "@app/screens/UserHome";
 import { UserHeader } from "@app/components/users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
+import { RequestChatScreen } from "../../screens/RequestChat";
+import { SafeAreaView } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -120,6 +119,26 @@ export const AppContent: FC = memo(({}) => {
             component={UserHomeScreen}
             options={{
               header: () => <UserHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/chat"
+            component={RequestChatScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: ({}) => (
+                <SafeAreaView>
+                  <View
+                    style={{
+                      paddingHorizontal: 20,
+                    }}
+                  >
+                    <ArrowDown />
+                  </View>
+                </SafeAreaView>
+              ),
             }}
           />
         </Stack.Navigator>

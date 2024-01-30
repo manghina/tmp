@@ -11,7 +11,7 @@ export const ArrowDown = () => {
         navigation.pop();
       }}
     >
-      <ArrowDownSVG />
+      <ArrowDownSVG col />
     </TouchableOpacity>
   );
 };

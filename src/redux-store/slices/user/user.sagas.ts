@@ -10,7 +10,6 @@ import { GetUsersMeParams } from "@app/redux-store/extra-actions/apis/get-users-
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
-    // @ts-ignore
     const cookie: RootState["user"]["cookie"] = yield select(getCookie);
 
     if (cookie) {

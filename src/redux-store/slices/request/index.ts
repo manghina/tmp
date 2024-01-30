@@ -1,30 +1,61 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestsState } from "./request.interfaces";
 import * as selectors from "./request.selectors";
 import * as sagas from "./request.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
-
-import { RequestStatus } from "@app/models/Request";
+import { IRequest } from "@app/models/Request";
 
 const initialState: RequestsState = {
-  list: Object.values(RequestStatus)
-    .filter(() => true) // Set to false in order to see the other version of the home
-    .map((status, index) => ({
-      _id: index.toString(),
-      status,
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
-    })),
+  list: [],
+  currentRequest: null,
+  isPolling: false,
 };
 
 export const requestStore = createSlice({
   name: "request",
   initialState,
-  reducers: {},
+  reducers: {
+    messageSubmitted: (state, action: PayloadAction<string>) => {},
+    startPollingRequest: (state) => {
+      state.isPolling = true;
+    },
+    stopPollingRequest: (state) => {
+      state.isPolling = false;
+    },
+    setCurrentRequest: (state, action: PayloadAction<IRequest | null>) => {
+      state.currentRequest = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(extraActions.appStartup, (state) => {
-      state.list = initialState.list;
-    });
+    builder.addCase(
+      extraActions.getUsersMeRequests.success,
+      (state, action) => {
+        state.list = action.payload.data.requests;
+      },
+    );
+    builder.addCase(
+      extraActions.getUsersMeRequestsByRequestId.success,
+      (state, action) => {
+        state.currentRequest = action.payload.data.request;
+      },
+    );
+    builder.addCase(
+      extraActions.postUsersMeRequests.success,
+      (state, action) => {
+        const { request } = action.payload.data;
+
+        state.list = [request, ...state.list];
+        state.currentRequest = request;
+      },
+    );
+    builder.addCase(
+      extraActions.postUsersMeRequestsMessagesByRequestId.success,
+      (state, action) => {
+        const { request } = action.payload.data;
+
+        state.currentRequest = request;
+      },
+    );
   },
 });
 
