@@ -1,5 +1,6 @@
 import React, { FC, memo } from "react";
 import { View, Text, Colors, Image } from "react-native-ui-lib";
+import { DoctorAvailabilityChooser } from "../DoctorAvailabilityChooser";
 
 type DoctorCardProps = {
   profilePicture: string;
@@ -29,7 +30,7 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
     return (
       <View
         width={315}
-        padding-20
+        padding-10
         backgroundColor={Colors.whiteBackground}
         style={{ borderRadius: 14.4 }}
       >
@@ -60,42 +61,38 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
         >
           <Text style={{ fontStyle: "italic" }}>{information}</Text>
           <Text link marginT-8>
-            Ulteriori informazioni
+            Ulteriori dettagli
           </Text>
         </View>
-        <Text marginT-10>Seleziona disponibilità</Text>
-        <View row={false}>
-          {availability.map((item, index) => (
-            <View
-              row
-              key={index}
-              width={"100%"}
-              backgroundColor={Colors.cardGray}
-              style={{ borderRadius: 10.8 }}
-              marginR-10
-              center
-            >
-              <Text>{item.dateTime.toDateString()}</Text>
-              <Text>+{item.bonusCost}€</Text>
-            </View>
-          ))}
-        </View>
+        <Text marginT-10 marginB-10>
+          Seleziona disponibilità
+        </Text>
+        <DoctorAvailabilityChooser availabilityList={availability} />
         <Text marginT-10>Richiesta del professionista</Text>
         <View
           row
           width={"100%"}
-          padding-20
+          padding-10
           marginV-10
           backgroundColor={Colors.cardGray}
-          style={{ borderRadius: 10.8 }}
+          style={{
+            borderRadius: 10.8,
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
           <Text>Onorario visita</Text>
           <View
             padding-10
             backgroundColor={"#E5E6E6"}
-            style={{ borderRadius: 50 }}
+            style={{ borderRadius: 7 }}
           >
-            <Text style={{ fontWeight: "bold" }}>{visitCost}€</Text>
+            <Text style={{ fontFamily: "HelveticaNeue-CondensedBlack" }}>
+              {visitCost.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "EUR",
+              })}
+            </Text>
           </View>
         </View>
       </View>
