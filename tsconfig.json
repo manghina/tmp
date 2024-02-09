@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "strict": true,
+        "isolatedModules": true,
+        "target": "ESNext",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "paths": {
+            "@b/*": ["./resources/backoffice/*"],
+            "@/*": ["./resources/js/*"],
+            "ziggy-js": ["./vendor/tightenco/ziggy"]
+        }
+    },
+    "include": [
+        "resources/js/**/*.ts",
+        "resources/js/**/*.tsx",
+        "resources/js/**/*.d.ts",
+        "resources/backoffice/**/*.ts",
+        "resources/backoffice/**/*.tsx",
+        "resources/backoffice/**/*.d.ts"
+    ],
+    "exclude": ["resources/libs/**/*.ts", "resources/libs/**/*.tsx", "resources/libs/**/*.d.ts"]
+}

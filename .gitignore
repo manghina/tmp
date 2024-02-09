@@ -1,0 +1,35 @@
+# Laravel specific
+/.env
+/vendor/
+/node_modules/
+
+# Laravel storage
+/storage/*.key
+/storage/logs/*.log
+/storage/app/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/framework/cache/data/*
+/storage/framework/sessions/data/*
+/storage/framework/testing/data/*
+/storage/framework/views/data/*
+
+# React specific
+/build/
+/.idea/
+/.vscode/
+/public/build/
+
+# General
+/.DS_Store
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+/node_modules
+/dist
+/cache
+/log
+
