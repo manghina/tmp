@@ -102,7 +102,7 @@ export const useUserRequestCard = (request: Request) => {
         navigation.navigate("requests/chat");
         return;
       case RequestStatus.PROFESSIONAL_OFFERS_CREATED:
-        navigation.navigate("requests/professional-offers");
+        navigation.navigate("requests/confirm-payment");
         return;
       default:
         break;
