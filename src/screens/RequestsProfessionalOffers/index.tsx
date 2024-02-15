@@ -3,6 +3,8 @@ import { useRequestProfessionalOffersScreen } from "./index.hooks";
 import { View, Text, TouchableOpacity } from "react-native-ui-lib";
 import { ProfessionalSearchCarousel } from "@app/components/users/ProfessionalResearchCarousel";
 import { SafeAreaView } from "react-native";
+import { dimensionsTokens } from "@app/theme/spacings/tokens";
+import { headerHeight } from "@app/theme/spacings/dimensions";
 
 type RequestsProfessionalOffersScreenProps = {};
 
@@ -14,10 +16,12 @@ export const RequestsProfessionalOffersScreen = memo(
       <SafeAreaView>
         <View
           style={{
-            paddingTop: 50,
+            paddingVertical: headerHeight + dimensionsTokens.paddingXs,
+            flexDirection: "column",
+            gap: dimensionsTokens.paddingMd,
           }}
         >
-          <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
+          <View style={{ paddingHorizontal: dimensionsTokens.paddingSm }}>
             <Text Title>Prenotazione</Text>
             <Text>
               Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
@@ -27,11 +31,10 @@ export const RequestsProfessionalOffersScreen = memo(
           <ProfessionalSearchCarousel />
           <View
             style={{
-              paddingHorizontal: 20,
-              marginTop: 16,
               display: "flex",
               flexDirection: "column",
-              gap: 20,
+              gap: dimensionsTokens.paddingXs,
+              paddingHorizontal: dimensionsTokens.paddingSm,
             }}
           >
             <Text
@@ -52,7 +55,12 @@ export const RequestsProfessionalOffersScreen = memo(
             </Text>
             <Text>Riceverai una notifica al termine della ricerca.</Text>
           </View>
-          <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
+          <View
+            style={{
+              paddingHorizontal: dimensionsTokens.paddingSm,
+              paddingVertical: dimensionsTokens.paddingXs,
+            }}
+          >
             <TouchableOpacity onPress={onBackButtonPress}>
               <Text
                 style={{
