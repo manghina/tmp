@@ -22,6 +22,7 @@ import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "../../screens/RequestChat";
 import { SafeAreaView } from "react-native";
+import { RequestsProfessionalOffersScreen } from "../../screens/RequestsProfessionalOffers";
 
 const Stack = createNativeStackNavigator();
 
@@ -124,6 +125,26 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name="requests/chat"
             component={RequestChatScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: ({}) => (
+                <SafeAreaView>
+                  <View
+                    style={{
+                      paddingHorizontal: 20,
+                    }}
+                  >
+                    <ArrowDown />
+                  </View>
+                </SafeAreaView>
+              ),
+            }}
+          />
+          <Stack.Screen
+            name="requests/professional-offers"
+            component={RequestsProfessionalOffersScreen}
             options={{
               animation: "slide_from_bottom",
               headerTintColor: "transparent",

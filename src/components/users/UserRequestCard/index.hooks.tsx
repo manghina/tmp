@@ -97,11 +97,15 @@ export const useUserRequestCard = (request: Request) => {
       }),
     );
 
-    if (
-      request.currentStatus === RequestStatus.COLLECTING_INFORMATION ||
-      true
-    ) {
-      navigation.navigate("requests/chat");
+    switch (request.currentStatus) {
+      case RequestStatus.COLLECTING_INFORMATION:
+        navigation.navigate("requests/chat");
+        return;
+      case RequestStatus.PROFESSIONAL_OFFERS_CREATED:
+        navigation.navigate("requests/professional-offers");
+        return;
+      default:
+        break;
     }
   }, [dispatch, navigation, request]);
 
