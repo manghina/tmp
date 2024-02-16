@@ -46,7 +46,7 @@ export const RequestConfirmPaymentScreen = memo(() => {
             <View style={styles.detailsCard}>
               <View style={styles.detailsContainer}>
                 {detailsContent.map((detail) => (
-                  <View style={styles.detailRow}>
+                  <View key={detail.value} style={styles.detailRow}>
                     <Text style={styles.detailLabel}>{detail.title}</Text>
                     <Text style={styles.detailValue}>{detail.value}</Text>
                   </View>
