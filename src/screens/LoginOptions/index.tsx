@@ -42,8 +42,14 @@ export const LoginOptionsScreen = () => {
           }
           availability={[
             { dateTime: new Date(), bonusCost: 10 },
-            { dateTime: new Date(), bonusCost: 20 },
-            { dateTime: new Date(), bonusCost: 30 },
+            {
+              dateTime: new Date(new Date().setDate(new Date().getDate() + 1)),
+              bonusCost: 20,
+            },
+            {
+              dateTime: new Date(new Date().setDate(new Date().getDate() + 2)),
+              bonusCost: 30,
+            },
           ]}
           visitCost={20}
         />

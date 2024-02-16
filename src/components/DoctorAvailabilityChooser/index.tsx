@@ -1,11 +1,7 @@
 import React, { memo } from "react";
-import {
-  Colors,
-  RadioButton,
-  RadioGroup,
-  Text,
-  View,
-} from "react-native-ui-lib";
+import { useForm } from "react-hook-form";
+import { Colors, RadioButton, Text, View, Button } from "react-native-ui-lib";
+import { TouchableWithoutFeedback } from "react-native";
 
 type DoctorAvailabilityChooserProps = {
   availabilityList: Array<availability>;
@@ -18,6 +14,9 @@ type availability = {
 
 export const DoctorAvailabilityChooser = memo(
   ({ availabilityList }: DoctorAvailabilityChooserProps) => {
+    const { register, handleSubmit, setValue, watch } = useForm();
+    const selectedAvailabilityIndex = watch("selectedAvailability");
+
     const formatDay = (date: Date) => {
       const days = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
       return days[date.getDay()];
@@ -34,18 +33,25 @@ export const DoctorAvailabilityChooser = memo(
 
     const formatDate = (dateTime: Date) => {
       const day = formatDay(dateTime);
-      const options = { day: "2-digit", month: "2-digit", year: "numeric" };
       return `${day} ${dateTime.toLocaleDateString("it-IT")}`;
+    };
+
+    const handleSelect = (index: number) => {
+      setValue("selectedAvailability", index);
     };
 
     return (
       <View row={false}>
-        <RadioGroup>
-          {availabilityList.map((item, index) => {
-            return (
+        {availabilityList.map((item, index) => {
+          return (
+            <TouchableWithoutFeedback
+              key={index}
+              onPress={() => {
+                setValue("selectedAvailability", index);
+              }}
+            >
               <View
                 row
-                key={index}
                 width={"100%"}
                 backgroundColor={Colors.cardGray}
                 padding-15
@@ -86,14 +92,26 @@ export const DoctorAvailabilityChooser = memo(
                   </Text>
                 </View>
                 <RadioButton
-                  value={index}
+                  onPress={() => handleSelect(index)}
                   label={""}
+                  selected={selectedAvailabilityIndex == index}
                   color={Colors.defaultColor}
                 />
               </View>
-            );
-          })}
-        </RadioGroup>
+            </TouchableWithoutFeedback>
+          );
+        })}
+
+        <Button
+          label="Log for debug"
+          onPress={() =>
+            console.log(
+              "Selected Item:",
+              availabilityList[selectedAvailabilityIndex],
+            )
+          }
+          disabled={selectedAvailabilityIndex === undefined}
+        />
       </View>
     );
   },
