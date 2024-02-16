@@ -499,7 +499,7 @@ export const textVariants = StyleSheet.create({
     fontStyle: "italic",
   },
   // Weight black
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   h1CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -508,7 +508,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.H1,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   h2CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -517,7 +517,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.H2,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   h3CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -526,7 +526,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.H3,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   h4CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -535,7 +535,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.H4,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   h5CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -544,7 +544,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.H5,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   h6CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -553,7 +553,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.H6,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   p1CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -562,7 +562,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.P1,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   p2CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -571,7 +571,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.P2,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   p3CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -580,7 +580,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.P3,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   p4CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
@@ -589,7 +589,7 @@ export const textVariants = StyleSheet.create({
     letterSpacing: LetterSpacings.P4,
     fontStyle: "italic",
   },
-  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the black variant is shown */
+  /** @deprecated The CondensedBold && Italic FontFamily is missing, so only the Bold variant is shown */
   p5CondensedBoldItalic: {
     fontFamily: "HelveticaNeue-CondensedBold",
     fontWeight: FontWeights.BOLD,
