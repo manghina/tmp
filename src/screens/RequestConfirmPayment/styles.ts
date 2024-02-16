@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   },
   sectionContainer: {
     flexDirection: "column",
-    gap: Dimensions.small.spacing_025,
+    gap: Dimensions.small.spacing_100,
   },
   sectionName: { ...textVariants.p2MediumNormal },
   detailsCard: {
