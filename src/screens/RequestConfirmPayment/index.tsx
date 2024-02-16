@@ -5,6 +5,8 @@ import { SafeAreaView } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions, headerHeight } from "@app/theme/spacings/dimensions";
 import { colorTokensLight } from "../../theme/colors/tokens";
+import { FontSizes } from "../../theme/typographies/properties";
+import { textVariants } from "../../theme/typographies/variants";
 
 const detailsContent = [
   {
@@ -49,8 +51,10 @@ export const RequestConfirmPaymentScreen = memo(() => {
             gap: Dimensions.small.spacing_025,
           }}
         >
-          <Text Title>Conferma visita</Text>
-          <Text>
+          <Text style={{ ...textVariants.h3CondensedBlackNormal }}>
+            Conferma visita
+          </Text>
+          <Text style={{ ...textVariants.p1MediumNormal }}>
             Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
             metus.
           </Text>
@@ -67,16 +71,16 @@ export const RequestConfirmPaymentScreen = memo(() => {
               gap: Dimensions.small.spacing_025,
             }}
           >
-            <Text>Dettagli</Text>
+            <Text style={{ ...textVariants.p2MediumNormal }}>Dettagli</Text>
             <View
               style={{
                 padding: dimensionsTokens.paddingXs,
                 gap: dimensionsTokens.paddingXs,
                 borderRadius: 8,
-                backgroundColor: "rgba(9, 30, 66, 0.06)",
+                backgroundColor: "rgba(9, 30, 66, 0.08)",
               }}
             >
-              <View>
+              <View style={{ gap: Dimensions.small.spacing_025 }}>
                 {detailsContent.map((detail) => (
                   <View
                     style={{
@@ -84,8 +88,12 @@ export const RequestConfirmPaymentScreen = memo(() => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <Text>{detail.title}</Text>
-                    <Text>{detail.value}</Text>
+                    <Text style={{ ...textVariants.p1MediumNormal }}>
+                      {detail.title}
+                    </Text>
+                    <Text style={{ ...textVariants.p1CondensedBoldNormal }}>
+                      {detail.value}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -99,8 +107,16 @@ export const RequestConfirmPaymentScreen = memo(() => {
                   justifyContent: "space-between",
                 }}
               >
-                <Text>TOTALE A GARANZIA</Text>
-                <Text>€ 16,00</Text>
+                <Text
+                  style={{
+                    ...textVariants.h6CondensedBlackNormal,
+                  }}
+                >
+                  TOTALE A GARANZIA
+                </Text>
+                <Text style={{ ...textVariants.h6CondensedBlackNormal }}>
+                  € 16,00
+                </Text>
               </View>
             </View>
           </View>
@@ -110,7 +126,9 @@ export const RequestConfirmPaymentScreen = memo(() => {
               gap: Dimensions.small.spacing_025,
             }}
           >
-            <Text>Metodo di pagamento</Text>
+            <Text style={{ ...textVariants.p2MediumNormal }}>
+              Metodo di pagamento
+            </Text>
             <View
               style={{
                 borderRadius: 8,
@@ -165,10 +183,25 @@ export const RequestConfirmPaymentScreen = memo(() => {
               gap: Dimensions.small.spacing_025,
             }}
           >
-            <Text style={{ alignSelf: "center" }}>
+            <Text
+              style={{ alignSelf: "center", ...textVariants.p2MediumNormal }}
+            >
               Finalizza iter di prenotazione
             </Text>
-            <Button label="Procedi al pagamento" />
+            <Button
+              style={{
+                paddingVertical: dimensionsTokens.paddingXs,
+              }}
+            >
+              <Text
+                style={{
+                  ...textVariants.p2MediumNormal,
+                  color: "#FFF",
+                }}
+              >
+                Procedi al pagamento
+              </Text>
+            </Button>
           </View>
         </View>
       </View>
