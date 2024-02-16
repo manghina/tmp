@@ -1,12 +1,8 @@
 import { memo } from "react";
 import { Button, Text, View } from "react-native-ui-lib";
 import { useRequestConfirmPaymentScreen } from "./index.hooks";
-import { SafeAreaView } from "react-native";
-import { dimensionsTokens } from "@app/theme/spacings/tokens";
-import { Dimensions, headerHeight } from "@app/theme/spacings/dimensions";
-import { colorTokensLight } from "../../theme/colors/tokens";
-import { FontSizes } from "../../theme/typographies/properties";
-import { textVariants } from "../../theme/typographies/variants";
+import { SafeAreaView, ScrollView } from "react-native";
+import { styles } from "./styles";
 
 const detailsContent = [
   {
@@ -36,175 +32,58 @@ export const RequestConfirmPaymentScreen = memo(() => {
 
   return (
     <SafeAreaView>
-      <View
-        style={{
-          paddingTop: headerHeight + dimensionsTokens.paddingXs,
-          paddingBottom: dimensionsTokens.paddingXs,
-          paddingHorizontal: dimensionsTokens.paddingMd,
-          flexDirection: "column",
-          gap: dimensionsTokens.paddingMd,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "column",
-            gap: Dimensions.small.spacing_025,
-          }}
-        >
-          <Text style={{ ...textVariants.h3CondensedBlackNormal }}>
-            Conferma visita
-          </Text>
-          <Text style={{ ...textVariants.p1MediumNormal }}>
+      <ScrollView style={styles.pageContainer}>
+        <View style={styles.pageTitleContainer}>
+          <Text style={styles.pageTitle}>Conferma visita</Text>
+          <Text style={styles.pageDescription}>
             Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
             metus.
           </Text>
         </View>
-        <View
-          style={{
-            flexDirection: "column",
-            gap: dimensionsTokens.paddingXs,
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "column",
-              gap: Dimensions.small.spacing_025,
-            }}
-          >
-            <Text style={{ ...textVariants.p2MediumNormal }}>Dettagli</Text>
-            <View
-              style={{
-                padding: dimensionsTokens.paddingXs,
-                gap: dimensionsTokens.paddingXs,
-                borderRadius: 8,
-                backgroundColor: "rgba(9, 30, 66, 0.08)",
-              }}
-            >
-              <View style={{ gap: Dimensions.small.spacing_025 }}>
+        <View style={styles.pageContent}>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionName}>Dettagli</Text>
+            <View style={styles.detailsCard}>
+              <View style={styles.detailsContainer}>
                 {detailsContent.map((detail) => (
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={{ ...textVariants.p1MediumNormal }}>
-                      {detail.title}
-                    </Text>
-                    <Text style={{ ...textVariants.p1CondensedBoldNormal }}>
-                      {detail.value}
-                    </Text>
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>{detail.title}</Text>
+                    <Text style={styles.detailValue}>{detail.value}</Text>
                   </View>
                 ))}
               </View>
-              <View
-                style={{ borderBottomWidth: 0.5, borderBottomColor: "#44546F" }}
-              />
+              <View style={styles.dividerDark} />
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text
-                  style={{
-                    ...textVariants.h6CondensedBlackNormal,
-                  }}
-                >
-                  TOTALE A GARANZIA
-                </Text>
-                <Text style={{ ...textVariants.h6CondensedBlackNormal }}>
-                  € 16,00
-                </Text>
+              <View style={styles.detailRow}>
+                <Text style={styles.sumRecap}>TOTALE A GARANZIA</Text>
+                <Text style={styles.sumRecap}>€ 16,00</Text>
               </View>
             </View>
           </View>
-          <View
-            style={{
-              flexDirection: "column",
-              gap: Dimensions.small.spacing_025,
-            }}
-          >
-            <Text style={{ ...textVariants.p2MediumNormal }}>
-              Metodo di pagamento
-            </Text>
-            <View
-              style={{
-                borderRadius: 8,
-                borderWidth: 1,
-                borderColor: "rgba(9, 30, 66, 0.06)",
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: dimensionsTokens.paddingXs,
-                }}
-              >
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionName}>Metodo di pagamento</Text>
+            <View style={styles.paymentMethodsContainer}>
+              <View style={styles.paymentMethodRow}>
                 <Text>Visa **** 1234</Text>
               </View>
-              <View
-                style={{
-                  borderBottomWidth: 0.5,
-                  borderBottomColor: "rgba(9, 30, 66, 0.06)",
-                }}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: dimensionsTokens.paddingXs,
-                }}
-              >
+              <View style={styles.dividerLight} />
+              <View style={styles.paymentMethodRow}>
                 <Text>Apple Pay</Text>
               </View>
-              <View
-                style={{
-                  borderBottomWidth: 0.5,
-                  borderBottomColor: "rgba(9, 30, 66, 0.06)",
-                }}
-              />
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: dimensionsTokens.paddingXs,
-                }}
-              >
+              <View style={styles.dividerLight} />
+              <View style={styles.paymentMethodRow}>
                 <Text>Paypal</Text>
               </View>
             </View>
           </View>
-          <View
-            style={{
-              flexDirection: "column",
-              gap: Dimensions.small.spacing_025,
-            }}
-          >
-            <Text
-              style={{ alignSelf: "center", ...textVariants.p2MediumNormal }}
-            >
-              Finalizza iter di prenotazione
-            </Text>
-            <Button
-              style={{
-                paddingVertical: dimensionsTokens.paddingXs,
-              }}
-            >
-              <Text
-                style={{
-                  ...textVariants.p2MediumNormal,
-                  color: "#FFF",
-                }}
-              >
-                Procedi al pagamento
-              </Text>
+          <View style={styles.ctaContainer}>
+            <Text style={styles.ctaLabel}>Finalizza iter di prenotazione</Text>
+            <Button style={styles.ctaButton}>
+              <Text style={styles.ctaButtonText}>Procedi al pagamento</Text>
             </Button>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 });
