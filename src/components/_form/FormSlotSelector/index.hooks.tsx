@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Colors } from "react-native-ui-lib";
 
 export const useFormSlotSelector = () => {
   const { setValue, watch } = useForm();
@@ -7,6 +8,12 @@ export const useFormSlotSelector = () => {
   const formatDay = (date: Date) => {
     const days = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
     return days[date.getDay()];
+  };
+
+  const getColor = (index: number) => {
+    return index === selectedAvailabilityIndex
+      ? Colors.cardGray
+      : Colors.defaultColor;
   };
 
   const isToday = (dateTime: Date) => {
@@ -29,6 +36,7 @@ export const useFormSlotSelector = () => {
 
   return {
     selectedAvailabilityIndex,
+    getColor,
     isToday,
     formatDate,
     handleSelect,

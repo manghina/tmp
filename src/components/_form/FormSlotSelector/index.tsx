@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Colors, RadioButton, Text, View, Button } from "react-native-ui-lib";
+import { Colors, RadioButton, Text, View } from "react-native-ui-lib";
 import { TouchableWithoutFeedback } from "react-native";
 import { useFormSlotSelector } from "./index.hooks";
 
@@ -14,8 +14,13 @@ type FormSlotSelectorProps = {
 
 export const FormSlotSelector = memo(
   ({ availabilityList }: FormSlotSelectorProps) => {
-    const { selectedAvailabilityIndex, isToday, formatDate, handleSelect } =
-      useFormSlotSelector();
+    const {
+      selectedAvailabilityIndex,
+      getColor,
+      isToday,
+      formatDate,
+      handleSelect,
+    } = useFormSlotSelector();
 
     return (
       <View row={false}>
@@ -28,9 +33,15 @@ export const FormSlotSelector = memo(
               <View
                 row
                 width={"100%"}
-                backgroundColor={Colors.cardGray}
+                backgroundColor={
+                  index === selectedAvailabilityIndex
+                    ? Colors.defaultColor
+                    : Colors.cardGray
+                }
                 padding-15
                 style={{
+                  borderWidth: 1,
+                  borderColor: Colors.defaultColor,
                   borderBottomRightRadius:
                     index === availabilityList.length - 1 ? 10.8 : 0,
                   borderBottomLeftRadius:
@@ -41,13 +52,18 @@ export const FormSlotSelector = memo(
                 }}
               >
                 <View row={false}>
-                  <Text regular14Text>
+                  <Text regular14Text color={getColor(index)}>
                     {formatDate(item.dateTime)}{" "}
                     {isToday(item.dateTime) && (
-                      <Text style={{ fontStyle: "italic" }}>(Oggi)</Text>
+                      <Text
+                        color={getColor(index)}
+                        style={{ fontStyle: "italic" }}
+                      >
+                        (Oggi)
+                      </Text>
                     )}
                   </Text>
-                  <Text regular14Text>
+                  <Text regular14Text color={getColor(index)}>
                     {item.dateTime.toLocaleTimeString("it-IT", {
                       hour: "2-digit",
                       minute: "2-digit",
@@ -70,23 +86,12 @@ export const FormSlotSelector = memo(
                   onPress={() => handleSelect(index)}
                   label={""}
                   selected={selectedAvailabilityIndex == index}
-                  color={Colors.defaultColor}
+                  color={getColor(index)}
                 />
               </View>
             </TouchableWithoutFeedback>
           );
         })}
-
-        <Button
-          label="Log for debug"
-          onPress={() =>
-            console.log(
-              "Selected Item:",
-              availabilityList[selectedAvailabilityIndex],
-            )
-          }
-          disabled={selectedAvailabilityIndex === undefined}
-        />
       </View>
     );
   },
