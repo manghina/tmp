@@ -1,44 +1,21 @@
 import React, { memo } from "react";
-import { useForm } from "react-hook-form";
 import { Colors, RadioButton, Text, View, Button } from "react-native-ui-lib";
 import { TouchableWithoutFeedback } from "react-native";
-
-type DoctorAvailabilityChooserProps = {
-  availabilityList: Array<availability>;
-};
+import { useDoctorAvailabilityChooser } from "./index.hooks";
 
 type availability = {
   dateTime: Date;
   bonusCost: number;
 };
 
+type DoctorAvailabilityChooserProps = {
+  availabilityList: Array<availability>;
+};
+
 export const DoctorAvailabilityChooser = memo(
   ({ availabilityList }: DoctorAvailabilityChooserProps) => {
-    const { register, handleSubmit, setValue, watch } = useForm();
-    const selectedAvailabilityIndex = watch("selectedAvailability");
-
-    const formatDay = (date: Date) => {
-      const days = ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"];
-      return days[date.getDay()];
-    };
-
-    const isToday = (dateTime: Date) => {
-      const today = new Date();
-      return (
-        dateTime.getDate() === today.getDate() &&
-        dateTime.getMonth() === today.getMonth() &&
-        dateTime.getFullYear() === today.getFullYear()
-      );
-    };
-
-    const formatDate = (dateTime: Date) => {
-      const day = formatDay(dateTime);
-      return `${day} ${dateTime.toLocaleDateString("it-IT")}`;
-    };
-
-    const handleSelect = (index: number) => {
-      setValue("selectedAvailability", index);
-    };
+    const { selectedAvailabilityIndex, isToday, formatDate, handleSelect } =
+      useDoctorAvailabilityChooser(availabilityList);
 
     return (
       <View row={false}>
@@ -46,9 +23,7 @@ export const DoctorAvailabilityChooser = memo(
           return (
             <TouchableWithoutFeedback
               key={index}
-              onPress={() => {
-                setValue("selectedAvailability", index);
-              }}
+              onPress={() => handleSelect(index)}
             >
               <View
                 row
