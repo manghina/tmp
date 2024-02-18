@@ -1,21 +1,21 @@
 import React, { memo } from "react";
 import { Colors, RadioButton, Text, View, Button } from "react-native-ui-lib";
 import { TouchableWithoutFeedback } from "react-native";
-import { useDoctorAvailabilityChooser } from "./index.hooks";
+import { useFormSlotSelector } from "./index.hooks";
 
 type availability = {
   dateTime: Date;
   bonusCost: number;
 };
 
-type DoctorAvailabilityChooserProps = {
+type FormSlotSelectorProps = {
   availabilityList: Array<availability>;
 };
 
-export const DoctorAvailabilityChooser = memo(
-  ({ availabilityList }: DoctorAvailabilityChooserProps) => {
+export const FormSlotSelector = memo(
+  ({ availabilityList }: FormSlotSelectorProps) => {
     const { selectedAvailabilityIndex, isToday, formatDate, handleSelect } =
-      useDoctorAvailabilityChooser(availabilityList);
+      useFormSlotSelector();
 
     return (
       <View row={false}>

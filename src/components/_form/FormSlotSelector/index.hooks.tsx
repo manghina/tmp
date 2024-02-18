@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-export const useDoctorAvailabilityChooser = () => {
+export const useFormSlotSelector = () => {
   const { setValue, watch } = useForm();
   const selectedAvailabilityIndex = watch("selectedAvailability");
 

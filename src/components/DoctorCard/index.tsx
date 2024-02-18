@@ -1,6 +1,6 @@
 import React, { FC, memo } from "react";
 import { View, Text, Colors, Image } from "react-native-ui-lib";
-import { DoctorAvailabilityChooser } from "../DoctorAvailabilityChooser";
+import { FormSlotSelector } from "../_form/FormSlotSelector";
 
 type DoctorCardProps = {
   profilePicture: string;
@@ -67,7 +67,7 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
         <Text marginT-10 marginB-10>
           Seleziona disponibilità
         </Text>
-        <DoctorAvailabilityChooser availabilityList={availability} />
+        <FormSlotSelector availabilityList={availability} />
         <Text marginT-10>Richiesta del professionista</Text>
         <View
           row
