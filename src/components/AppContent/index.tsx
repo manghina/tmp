@@ -22,6 +22,9 @@ import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "../../screens/RequestChat";
 import { SafeAreaView } from "react-native";
+import { RequestsProfessionalOffersScreen } from "../../screens/RequestsProfessionalOffers";
+import { HeaderGoBack } from "../HeaderGoBack";
+import { RequestConfirmPaymentScreen } from "../../screens/RequestConfirmPayment";
 
 const Stack = createNativeStackNavigator();
 
@@ -128,17 +131,27 @@ export const AppContent: FC = memo(({}) => {
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
               headerTransparent: true,
-              header: ({}) => (
-                <SafeAreaView>
-                  <View
-                    style={{
-                      paddingHorizontal: 20,
-                    }}
-                  >
-                    <ArrowDown />
-                  </View>
-                </SafeAreaView>
-              ),
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/professional-offers"
+            component={RequestsProfessionalOffersScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/confirm-payment"
+            component={RequestConfirmPaymentScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
             }}
           />
         </Stack.Navigator>

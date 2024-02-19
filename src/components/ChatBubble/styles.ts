@@ -9,6 +9,12 @@ export const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     width: "100%",
+    flex: 1,
+    transform: [
+      {
+        matrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+      },
+    ],
   },
   userChatBubble: {
     backgroundColor: "#233640",
