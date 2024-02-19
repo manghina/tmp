@@ -1,6 +1,7 @@
 import React, { FC, memo } from "react";
 import { View, Text, Colors, Image } from "react-native-ui-lib";
 import { FormSlotSelector } from "../_form/FormSlotSelector";
+import { styles } from "./styles";
 
 type DoctorCardProps = {
   profilePicture: string;
@@ -45,34 +46,34 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
             }}
           />
           <View>
-            <Text style={{ fontWeight: "bold" }}>Dott. {name}</Text>
-            <Text link style={{ fontStyle: "italic" }}>
+            <Text style={styles.professionalName}>Dott. {name}</Text>
+            <Text link style={styles.speciality}>
               Specialità: {specialty}
             </Text>
-            <Text link> a {distance} da te</Text>
+            <Text link style={styles.distance}> a {distance} da te</Text>
           </View>
         </View>
-        <Text marginV-10>Informativa</Text>
+        <Text marginV-10 style={styles.sectionTitle}>Informativa</Text>
         <View
           width={"100%"}
           padding-20
           backgroundColor={Colors.cardGray}
           style={{ borderRadius: 10.8 }}
         >
-          <Text style={{ fontStyle: "italic" }}>{information}</Text>
-          <Text link marginT-8>
+          <Text style={styles.informativeContent}>{information}</Text>
+          <Text link marginT-8 style={styles.moreInformations}>
             Ulteriori dettagli
           </Text>
         </View>
-        <Text marginT-10 marginB-10>
+        <Text marginT-10 marginB-10 style={styles.sectionTitle}>
           Seleziona disponibilità
         </Text>
         <FormSlotSelector availabilityList={availability} />
-        <Text marginT-10>Richiesta del professionista</Text>
+        <Text marginT-10 style={styles.sectionTitle}>Richiesta del professionista</Text>
         <View
           row
           width={"100%"}
-          padding-10
+          padding-14
           marginV-10
           backgroundColor={Colors.cardGray}
           style={{
@@ -81,19 +82,7 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
             alignItems: "center",
           }}
         >
-          <Text>Onorario visita</Text>
-          <View
-            padding-10
-            backgroundColor={"#E5E6E6"}
-            style={{ borderRadius: 7 }}
-          >
-            <Text style={{ fontFamily: "HelveticaNeue-CondensedBlack" }}>
-              {visitCost.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "EUR",
-              })}
-            </Text>
-          </View>
+          <Text style={styles.discount}>Subito un acconto del 20% dell’onorario a titolo di conferma. Saldo a fine seduta.</Text>
         </View>
       </View>
     );
