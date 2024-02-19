@@ -1,11 +1,13 @@
 import React, { memo } from "react";
-import { Colors, RadioButton, Text, View } from "react-native-ui-lib";
+import { Colors, Text, View } from "react-native-ui-lib";
 import { TouchableWithoutFeedback } from "react-native";
 import { useFormSlotSelector } from "./index.hooks";
+import FlashSVG from "@assets/icons/flash.svg";
+import { styles } from "./styles";
 
 type availability = {
   dateTime: Date;
-  bonusCost: number;
+  cost: number;
 };
 
 type FormSlotSelectorProps = {
@@ -52,42 +54,35 @@ export const FormSlotSelector = memo(
                 }}
               >
                 <View row={false}>
-                  <Text regular14Text color={getColor(index)}>
+                  <Text color={getColor(index)} style={styles.date}>
                     {formatDate(item.dateTime)}{" "}
                     {isToday(item.dateTime) && (
                       <Text
                         color={getColor(index)}
                         style={{ fontStyle: "italic" }}
                       >
-                        (Oggi)
+                        (oggi)
                       </Text>
                     )}
                   </Text>
-                  <Text regular14Text color={getColor(index)}>
+                  <Text color={getColor(index)} style={styles.time}>
                     {item.dateTime.toLocaleTimeString("it-IT", {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
                   </Text>
                 </View>
-                <View
-                  padding-10
-                  backgroundColor={"#9747FF33"}
-                  style={{ borderRadius: 90 }}
-                >
-                  <Text
-                    style={{ fontFamily: "HelveticaNeue-Bold" }}
-                    color="#9747FF"
-                  >
-                    +{item.bonusCost}%
-                  </Text>
-                </View>
-                <RadioButton
-                  onPress={() => handleSelect(index)}
-                  label={""}
-                  selected={selectedAvailabilityIndex == index}
-                  color={getColor(index)}
-                />
+                {isToday(item.dateTime) && (
+                  <View style={{ justifyContent: "center"}}>
+                    <FlashSVG/>
+                  </View>
+                )}
+                <Text style={[styles.cost, { verticalAlign: "middle", color: getColor(index) }]}>
+                  {item.cost.toLocaleString("it-IT", {
+                    style: "currency",
+                    currency: "EUR",
+                  })}
+                </Text>
               </View>
             </TouchableWithoutFeedback>
           );

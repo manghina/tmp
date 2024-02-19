@@ -10,12 +10,11 @@ type DoctorCardProps = {
   distance: string;
   information: string;
   availability: Array<availability>;
-  visitCost: number;
 };
 
 type availability = {
   dateTime: Date;
-  bonusCost: number;
+  cost: number;
 };
 
 export const DoctorCard: FC<DoctorCardProps> = memo(
@@ -24,7 +23,6 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
     name,
     specialty,
     availability,
-    visitCost,
     information,
     distance,
   }: DoctorCardProps) => {

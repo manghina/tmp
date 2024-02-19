@@ -27,7 +27,9 @@ export const useFormSlotSelector = () => {
 
   const formatDate = (dateTime: Date) => {
     const day = formatDay(dateTime);
-    return `${day} ${dateTime.toLocaleDateString("it-IT")}`;
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: '2-digit' };
+    const formattedDate = dateTime.toLocaleDateString('it-IT', options).replace(/\//g, '.');
+    return `${day} ${formattedDate}`;
   };
 
   const handleSelect = (index: number) => {
