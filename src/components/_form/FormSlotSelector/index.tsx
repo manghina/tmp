@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Colors, Text, View } from "react-native-ui-lib";
+import {Colors, RadioButton, Text, View} from "react-native-ui-lib";
 import { TouchableWithoutFeedback } from "react-native";
 import { useFormSlotSelector } from "./index.hooks";
 import FlashSVG from "@assets/icons/flash.svg";
@@ -18,7 +18,6 @@ export const FormSlotSelector = memo(
   ({ availabilityList }: FormSlotSelectorProps) => {
     const {
       selectedAvailabilityIndex,
-      getColor,
       isToday,
       formatDate,
       handleSelect,
@@ -35,37 +34,39 @@ export const FormSlotSelector = memo(
               <View
                 row
                 width={"100%"}
+                marginB-5={index !== availabilityList.length-1 ? true : undefined}
                 backgroundColor={
                   index === selectedAvailabilityIndex
-                    ? Colors.defaultColor
-                    : Colors.cardGray
+                    ? "#E9F2FF"
+                    : Colors.white
                 }
                 padding-15
                 style={{
-                  borderWidth: 1,
-                  borderColor: Colors.defaultColor,
-                  borderBottomRightRadius:
-                    index === availabilityList.length - 1 ? 10.8 : 0,
-                  borderBottomLeftRadius:
-                    index === availabilityList.length - 1 ? 10.8 : 0,
-                  borderTopLeftRadius: index === 0 ? 10.8 : 0,
-                  borderTopRightRadius: index === 0 ? 10.8 : 0,
+                  borderWidth: 1.5,
+                  borderColor: index === selectedAvailabilityIndex ? "#0C66E4" : "#091E4225",
+                  borderRadius: 8,
                   justifyContent: "space-between",
                 }}
               >
-                <View row={false}>
-                  <Text color={getColor(index)} style={styles.date}>
+                <RadioButton
+                  onPress={() => handleSelect(index)}
+                  label={""}
+                  selected={selectedAvailabilityIndex == index}
+                  color={index === selectedAvailabilityIndex ? "#0C66E4" : "#091E4225"}
+                />
+                <View row={false} flex left marginL-10>
+                  <Text color={Colors.defaultColor} style={styles.date}>
                     {formatDate(item.dateTime)}{" "}
                     {isToday(item.dateTime) && (
                       <Text
-                        color={getColor(index)}
+                        color={Colors.defaultColor}
                         style={{ fontStyle: "italic" }}
                       >
                         (oggi)
                       </Text>
                     )}
                   </Text>
-                  <Text color={getColor(index)} style={styles.time}>
+                  <Text color={Colors.defaultColor} style={styles.time}>
                     {item.dateTime.toLocaleTimeString("it-IT", {
                       hour: "2-digit",
                       minute: "2-digit",
@@ -77,7 +78,7 @@ export const FormSlotSelector = memo(
                     <FlashSVG/>
                   </View>
                 )}
-                <Text style={[styles.cost, { verticalAlign: "middle", color: getColor(index) }]}>
+                <Text style={[styles.cost, { verticalAlign: "middle", color: Colors.defaultColor }]}>
                   {item.cost.toLocaleString("it-IT", {
                     style: "currency",
                     currency: "EUR",

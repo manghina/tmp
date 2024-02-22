@@ -3,25 +3,21 @@ import { textVariants } from "@app/theme/typographies/variants";
 
 export const styles = StyleSheet.create({
   professionalName: {
-    ...textVariants.p2BoldNormal,
+    ...textVariants.p1BoldNormal,
   },
   speciality: {
-    ...textVariants.p3BoldItalic,
-  },
-  distance: {
-    ...textVariants.p3BoldNormal,
-  },
-  sectionTitle: {
-    ...textVariants.p3MediumNormal,
-  },
-  informativeContent: {
-    ...textVariants.p3BoldItalic,
+    ...textVariants.p2BoldItalic,
   },
   moreInformations: {
     ...textVariants.p3BoldNormal,
   },
-  discount: {
-    ...textVariants.p3MediumNormal,
+  distance: {
+    ...textVariants.p2BoldNormal,
   },
-
+  sectionTitle: {
+    ...textVariants.p2MediumNormal,
+  },
+  informativeContent: {
+    ...textVariants.p2BoldItalic,
+  },
 });

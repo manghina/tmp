@@ -4,6 +4,7 @@ import { FormSlotSelector } from "../_form/FormSlotSelector";
 import { styles } from "./styles";
 
 type DoctorCardProps = {
+  focused: boolean;
   profilePicture: string;
   name: string;
   specialty: string;
@@ -19,6 +20,7 @@ type availability = {
 
 export const DoctorCard: FC<DoctorCardProps> = memo(
   ({
+    focused,
     profilePicture,
     name,
     specialty,
@@ -31,7 +33,8 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
         width={315}
         padding-10
         backgroundColor={Colors.whiteBackground}
-        style={{ borderRadius: 14.4 }}
+        style={{ borderWidth: 2, borderRadius: 16, borderColor: focused ? "#388BFF" : "#091E4225", shadowColor: "#000", shadowOpacity: focused? 0.12 : 0,
+          elevation: focused? 5 : 0}}
       >
         <View row>
           <Image
@@ -64,24 +67,9 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
           </Text>
         </View>
         <Text marginT-10 marginB-10 style={styles.sectionTitle}>
-          Seleziona disponibilità
+          Disponibilità e onorario
         </Text>
         <FormSlotSelector availabilityList={availability} />
-        <Text marginT-10 style={styles.sectionTitle}>Richiesta del professionista</Text>
-        <View
-          row
-          width={"100%"}
-          padding-14
-          marginV-10
-          backgroundColor={Colors.cardGray}
-          style={{
-            borderRadius: 10.8,
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={styles.discount}>Subito un acconto del 20% dell’onorario a titolo di conferma. Saldo a fine seduta.</Text>
-        </View>
       </View>
     );
   },

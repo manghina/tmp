@@ -10,11 +10,11 @@ export const useFormSlotSelector = () => {
     return days[date.getDay()];
   };
 
-  const getColor = (index: number) => {
+  /*const getTextColor = (index: number) => {
     return index === selectedAvailabilityIndex
       ? Colors.cardGray
       : Colors.defaultColor;
-  };
+  };*/
 
   const isToday = (dateTime: Date) => {
     const today = new Date();
@@ -38,7 +38,6 @@ export const useFormSlotSelector = () => {
 
   return {
     selectedAvailabilityIndex,
-    getColor,
     isToday,
     formatDate,
     handleSelect,
