@@ -54,7 +54,7 @@ export const FormSlotSelector = memo(
                   selected={selectedAvailabilityIndex == index}
                   color={index === selectedAvailabilityIndex ? "#0C66E4" : "#091E4225"}
                 />
-                <View row={false} flex left marginL-10>
+                <View row={false} flex left marginL-8>
                   <Text color={Colors.defaultColor} style={styles.date}>
                     {formatDate(item.dateTime)}{" "}
                     {isToday(item.dateTime) && (

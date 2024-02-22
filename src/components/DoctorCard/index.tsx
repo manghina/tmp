@@ -30,7 +30,7 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
   }: DoctorCardProps) => {
     return (
       <View
-        width={315}
+        width={325}
         padding-10
         backgroundColor={Colors.whiteBackground}
         style={{ borderWidth: 2, borderRadius: 16, borderColor: focused ? "#388BFF" : "#091E4225", shadowColor: "#000", shadowOpacity: focused? 0.12 : 0,
