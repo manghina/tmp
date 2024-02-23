@@ -11,7 +11,7 @@ import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "@app/screens/Home";
 import { LoginOptionsScreen } from "@app/screens/LoginOptions";
 import { RegisterScreen } from "@app/screens/Register";
-import { ArrowDown } from "@app/screens/Register/ArrowDown";
+import { ArrowDown } from "@app/components/ArrowDown";
 import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
 
 import { CustomToast } from "@app/components/CustomToast";
@@ -23,6 +23,8 @@ import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "../../screens/RequestChat";
 import { SafeAreaView } from "react-native";
 import { RequestsProfessionalOffersScreen } from "../../screens/RequestsProfessionalOffers";
+import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
+import { CountryChooserScreen } from "../../screens/CountryChooser";
 
 const Stack = createNativeStackNavigator();
 
@@ -110,6 +112,32 @@ export const AppContent: FC = memo(({}) => {
                 fontSize: 32,
                 color: Colors.blackText,
               },
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <ArrowDown />,
+            }}
+          />
+          <Stack.Screen
+            name="ProfessionalRegister"
+            component={ProfessionalRegisterScreen}
+            options={{
+              title: "Registrati",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                fontFamily: "HelveticaNeue-CondensedBlack",
+                fontSize: 32,
+                color: Colors.blackText,
+              },
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <ArrowDown />,
+            }}
+          />
+          <Stack.Screen
+            name="CountryChooser"
+            component={CountryChooserScreen}
+            options={{
+              headerTitle: "",
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               headerLeft: () => <ArrowDown />,
