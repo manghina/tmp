@@ -3,7 +3,7 @@ import { View, Text, Colors, Image } from "react-native-ui-lib";
 import { FormSlotSelector } from "../_form/FormSlotSelector";
 import { styles } from "./styles";
 
-type DoctorCardProps = {
+type ProfessionalCardProps = {
   focused: boolean;
   profilePicture: string;
   name: string;
@@ -18,7 +18,7 @@ type availability = {
   cost: number;
 };
 
-export const DoctorCard: FC<DoctorCardProps> = memo(
+export const ProfessionalCard: FC<ProfessionalCardProps> = memo(
   ({
     focused,
     profilePicture,
@@ -27,14 +27,13 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
     availability,
     information,
     distance,
-  }: DoctorCardProps) => {
+  }: ProfessionalCardProps) => {
     return (
       <View
-        width={325}
-        padding-10
-        backgroundColor={Colors.whiteBackground}
-        style={{ borderWidth: 2, borderRadius: 16, borderColor: focused ? "#388BFF" : "#091E4225", shadowColor: "#000", shadowOpacity: focused? 0.12 : 0,
-          elevation: focused? 5 : 0}}
+        style={[
+          styles.card,
+          focused ? styles.cardFocused : null,
+        ]}
       >
         <View row>
           <Image
@@ -75,4 +74,4 @@ export const DoctorCard: FC<DoctorCardProps> = memo(
   },
 );
 
-DoctorCard.displayName = "DoctorCard";
+ProfessionalCard.displayName = "ProfessionalCard";

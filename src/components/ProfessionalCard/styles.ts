@@ -2,6 +2,22 @@ import { StyleSheet } from "react-native";
 import { textVariants } from "@app/theme/typographies/variants";
 
 export const styles = StyleSheet.create({
+  card: {
+    width: 325,
+    padding: 10,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 2,
+    borderRadius: 16,
+    borderColor: "#091E4225",
+    shadowColor: "#000",
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+  cardFocused: {
+    borderColor: "#388BFF",
+    shadowOpacity: 0.12,
+    elevation: 5,
+  },
   professionalName: {
     ...textVariants.p1BoldNormal,
   },
