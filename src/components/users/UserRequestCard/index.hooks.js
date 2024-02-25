@@ -76,9 +76,15 @@ var useUserRequestCard = function (request) {
         dispatch(redux_store_1.actions.getUsersMeRequestsByRequestId.request({
             requestId: request._id,
         }));
-        if (request.currentStatus === Request_1.RequestStatus.COLLECTING_INFORMATION ||
-            true) {
-            navigation.navigate("requests/chat");
+        switch (request.currentStatus) {
+            case Request_1.RequestStatus.COLLECTING_INFORMATION:
+                navigation.navigate("requests/chat");
+                return;
+            case Request_1.RequestStatus.PROFESSIONAL_OFFERS_CREATED:
+                navigation.navigate("requests/confirm-payment");
+                return;
+            default:
+                break;
         }
     }, [dispatch, navigation, request]);
     (0, react_1.useEffect)(function () {

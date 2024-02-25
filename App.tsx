@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import store, { persistor } from "./src/redux-store";
 import { enableDebugging } from "./src/utils/debug";
 import { PersistGate } from "redux-persist/integration/react";
+import { StripeProvider } from "@stripe/stripe-react-native";
+import { stripePublishableKey } from "./src/config";
 
 Assets.loadAssetsGroup("icons", {
   visibility: require("./assets/icons/visibility.png"),
@@ -20,10 +22,12 @@ export default function App() {
   initTheme();
 
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistor} loading={<LoaderScreen />}>
-        <AppContent />
-      </PersistGate>
-    </Provider>
+    <StripeProvider publishableKey={stripePublishableKey}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={<LoaderScreen />}>
+          <AppContent />
+        </PersistGate>
+      </Provider>
+    </StripeProvider>
   );
 }

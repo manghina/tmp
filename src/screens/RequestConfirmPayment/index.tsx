@@ -28,7 +28,7 @@ const detailsContent = [
 ];
 
 export const RequestConfirmPaymentScreen = memo(() => {
-  const {} = useRequestConfirmPaymentScreen();
+  const { didTapCheckoutButton } = useRequestConfirmPaymentScreen();
 
   return (
     <SafeAreaView>
@@ -75,6 +75,10 @@ export const RequestConfirmPaymentScreen = memo(() => {
                 <Text>Paypal</Text>
               </View>
             </View>
+            <Button
+              label={"Aggiungi metodo di pagamento"}
+              onPress={didTapCheckoutButton}
+            />
           </View>
           <View style={styles.ctaContainer}>
             <Text style={styles.ctaLabel}>Finalizza iter di prenotazione</Text>
