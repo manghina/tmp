@@ -7,6 +7,7 @@ export const Dimensions = {
     spacing_012: baseSpacing * 0.125,
     spacing_019: baseSpacing * 0.1875,
     spacing_025: baseSpacing * 0.25,
+    spacing_0375: baseSpacing * 0.375,
     spacing_050: baseSpacing * 0.5,
     spacing_075: baseSpacing * 0.75,
     spacing_100: baseSpacing,

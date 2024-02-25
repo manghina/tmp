@@ -6,6 +6,8 @@ export const initTheme = () => {
     defaultColor: "#002A38",
     grayText: "#ABB0BC",
     whiteText: "#F6F6F6",
+    whiteBackground: "#FEFEFE",
+    cardGray: "#F2F2F2",
     buttonGray: "#E5E6E6",
     loadingBlue: "#427BEA",
     buttonBlue: "#3C77E8",
