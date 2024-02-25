@@ -1,5 +1,11 @@
 import { useCountryChooser } from "./index.hooks";
-import { Colors, RadioButton, Text, View } from "react-native-ui-lib";
+import {
+  Colors,
+  RadioButton,
+  Text,
+  TextField,
+  View,
+} from "react-native-ui-lib";
 import { FlatList, TouchableWithoutFeedback } from "react-native";
 import { styles } from "./styles";
 
@@ -60,15 +66,38 @@ export const CountryChooserScreen = () => {
   );
 
   return (
-    <View>
-      <Text style={styles.date}>Seleziona prefisso</Text>
-      <FlatList
-        removeClippedSubviews
-        data={countryData}
-        initialNumToRender={15}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.code}
+    <View paddingH-20 paddingV-10>
+      <Text style={styles.title}>Seleziona prefisso</Text>
+      <Text style={styles.info} marginB-20>
+        Seleziona il prefisso del tuo paese
+      </Text>
+      <Text style={styles.sectionTitle}>Trova nazione</Text>
+      <TextField
+        marginT-8
+        grey10
+        style={{
+          paddingTop: 16,
+          paddingLeft: 16,
+          paddingRight: 16,
+          paddingBottom: 16,
+          borderWidth: 1.5,
+          borderRadius: 12,
+          borderColor: "black",
+        }}
       />
+      <Text style={styles.sectionTitle} marginT-10>
+        Lista nazioni
+      </Text>
+      <View marginT-10>
+        <FlatList
+          removeClippedSubviews
+          data={countryData}
+          initialNumToRender={15}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => item.code}
+        />
+      </View>
     </View>
   );
 };
