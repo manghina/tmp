@@ -11,8 +11,8 @@ import React from "react";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
-import { Dimensions } from "../../theme/spacings/dimensions";
-import { FormNewScreenFilterableSelect } from "../../components/_form/FormNewScreenFilterableSelect";
+import { Dimensions } from "@app/theme/spacings/dimensions";
+import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -97,14 +97,26 @@ export const ProfessionalRegisterScreen = () => {
               <FormNewScreenFilterableSelect
                 name="province"
                 label="Ordine dei medici della provincia di"
-                searchTextLabel="Trova provincia"
                 options={provincesOptions}
+                pageProps={{
+                  pageTitle: "Seleziona sede",
+                  pageDescription:
+                    "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+                  searchTextLabel: "Trova provincia",
+                  listTitle: "Lista città",
+                }}
               />
               <FormNewScreenFilterableSelect
                 name="specialization"
                 label="Specializzazione"
-                searchTextLabel="Trova specializzazione"
                 options={professionsOptions}
+                pageProps={{
+                  pageTitle: "Seleziona tipologia",
+                  pageDescription:
+                    "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+                  searchTextLabel: "Trova specializzazione",
+                  listTitle: "Lista professioni",
+                }}
               />
               <FormTextField name="officeLocation" label="Sede dello studio" />
               <Text center grayText={!step2Filled} marginT-24>

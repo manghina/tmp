@@ -5,21 +5,25 @@ import { useNavigation } from "@react-navigation/native";
 export const useFormNewScreenFilterableSelect = ({
   name,
   options,
-  searchTextLabel,
-  renderItem,
+  pageProps,
 }: {
   name: string;
   options: { label: string; value: string }[];
-  searchTextLabel?: string;
-  renderItem?: (
-    item: { label: string; value: string },
-    index: number,
-  ) => JSX.Element;
+  pageProps: {
+    pageTitle: string;
+    pageDescription?: string;
+    searchTextLabel?: string;
+    listTitle?: string;
+    renderItem?: (
+      item: { label: string; value: string },
+      index: number,
+    ) => JSX.Element;
+  };
 }) => {
   const navigation = useNavigation<any>();
   const { value, setValue } = useFormField<string>({ name });
 
-  const onBackFromChooseScreen = useCallback(
+  const onBackFromChoosingScreen = useCallback(
     (value?: string) => {
       if (value) {
         setValue(value);
@@ -30,20 +34,12 @@ export const useFormNewScreenFilterableSelect = ({
 
   const onFieldClicked = useCallback(() => {
     navigation.navigate("form-filterable-select", {
-      onGoBack: onBackFromChooseScreen,
+      onGoBack: onBackFromChoosingScreen,
       options,
-      searchTextLabel,
       value,
-      renderItem,
+      pageProps,
     });
-  }, [
-    navigation,
-    onBackFromChooseScreen,
-    options,
-    renderItem,
-    searchTextLabel,
-    value,
-  ]);
+  }, [navigation, onBackFromChoosingScreen, options, pageProps, value]);
 
   return { onFieldClicked };
 };

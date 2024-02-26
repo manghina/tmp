@@ -18,8 +18,11 @@ export const FilterableSelectScreen = memo(
       selectedOption,
       filteredOptions,
       onTextFieldChange,
+      pageTitle,
+      pageDescription,
       searchText,
       searchTextLabel,
+      listTitle,
       onOptionSelected,
       renderItem,
     } = useFilterableSelectScreen();
@@ -60,10 +63,12 @@ export const FilterableSelectScreen = memo(
 
     return (
       <View paddingH-20 paddingV-10 style={{ flex: 1 }}>
-        <Text style={styles.title}>Seleziona tipologia</Text>
-        <Text style={styles.info} marginB-20>
-          Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
-        </Text>
+        <Text style={styles.title}>{pageTitle}</Text>
+        {pageDescription && (
+          <Text style={styles.info} marginB-20>
+            {pageDescription}
+          </Text>
+        )}
         <TextField
           marginT-8
           grey10
@@ -80,9 +85,11 @@ export const FilterableSelectScreen = memo(
           value={searchText}
           onChange={onTextFieldChange}
         />
-        <Text style={styles.sectionTitle} marginT-10>
-          Lista nazioni
-        </Text>
+        {listTitle && (
+          <Text style={styles.sectionTitle} marginT-10>
+            {listTitle}
+          </Text>
+        )}
         <View marginT-10 style={{ flex: 1, paddingBottom: 40 }}>
           <FlatList
             removeClippedSubviews

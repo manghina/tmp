@@ -7,26 +7,24 @@ type FormNewScreenFilterableSelectProps = {
   name: string;
   options: { label: string; value: string }[];
   label?: string;
-  searchTextLabel?: string;
-  renderItem?: (
-    item: { label: string; value: string },
-    index: number,
-  ) => JSX.Element;
+  pageProps: {
+    pageTitle: string;
+    pageDescription?: string;
+    searchTextLabel?: string;
+    listTitle?: string;
+    renderItem?: (
+      item: { label: string; value: string },
+      index: number,
+    ) => JSX.Element;
+  };
 };
 
 export const FormNewScreenFilterableSelect = memo(
-  ({
-    name,
-    label,
-    searchTextLabel,
-    options,
-    renderItem,
-  }: FormNewScreenFilterableSelectProps) => {
+  ({ name, label, options, pageProps }: FormNewScreenFilterableSelectProps) => {
     const { onFieldClicked } = useFormNewScreenFilterableSelect({
       name,
       options,
-      searchTextLabel,
-      renderItem,
+      pageProps,
     });
 
     return (

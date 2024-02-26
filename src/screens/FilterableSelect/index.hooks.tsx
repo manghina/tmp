@@ -6,18 +6,23 @@ type FilterableSelectScreenRouteParams = {
   value: string;
   onGoBack?: (value: string) => void;
   options: { label: string; value: string }[];
-  searchTextLabel?: string;
-  renderItem?: (
-    item: { label: string; value: string },
-    index: number,
-  ) => JSX.Element;
+  pageProps: {
+    pageTitle: string;
+    pageDescription?: string;
+    searchTextLabel?: string;
+    listTitle?: string;
+    renderItem?: (
+      item: { label: string; value: string },
+      index: number,
+    ) => JSX.Element;
+  };
 };
 
 export const useFilterableSelectScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { options, renderItem, value, onGoBack, searchTextLabel } =
+  const { options, value, onGoBack, pageProps } =
     useMemo<FilterableSelectScreenRouteParams>(
       () =>
         (route.params as FilterableSelectScreenRouteParams) ?? {
@@ -26,6 +31,17 @@ export const useFilterableSelectScreen = () => {
           onGoBack: () => {},
         },
       [route.params],
+    );
+
+  const { pageTitle, pageDescription, searchTextLabel, listTitle, renderItem } =
+    useMemo(
+      () =>
+        pageProps ?? {
+          pageTitle: "Seleziona",
+          searchTextLabel: "Cerca",
+          listTitle: "Lista",
+        },
+      [pageProps],
     );
 
   const [searchText, setSearchText] = useState<string>("");
@@ -66,8 +82,11 @@ export const useFilterableSelectScreen = () => {
     selectedOption,
     filteredOptions,
     onTextFieldChange,
+    pageTitle,
+    pageDescription,
     searchText,
     searchTextLabel,
+    listTitle,
     onOptionSelected,
     renderItem,
   };
