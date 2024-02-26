@@ -23,7 +23,7 @@ export type FormTextFieldProps = {
   name: string;
   label?: string;
   type?: "text" | "password";
-} & Omit<TextFieldProps, "style">;
+} & TextFieldProps;
 
 export const FormTextField = memo(
   ({ name, label, type = "text", ...props }: FormTextFieldProps) => {
@@ -42,9 +42,7 @@ export const FormTextField = memo(
         validationMessage={error ?? undefined}
         autoCapitalize="none"
         autoCorrect={false}
-        style={{
-          ...TextInputStyle,
-        }}
+        style={[TextInputStyle, props.style]}
         trailingAccessory={
           type === "password" && (
             <Button
