@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as selectors from "@app/redux-store/slices/ui/ui.selectors";
 import {
   DialogTypes,
-  SetDialogOpenAction, SetForgotPasswordStepperCounterAction,
+  SetDialogOpenAction,
+  SetForgotPasswordStepperCounterAction,
   UiState,
 } from "@app/redux-store/slices/ui/ui.interfaces";
 import * as extraActions from "@app/redux-store/extra-actions";
@@ -11,6 +12,7 @@ import * as sagas from "@app/redux-store/slices/ui/ui.sagas";
 const initialState: UiState = {
   isDialogOpen: {},
   forgotPasswordStepperCounter: 1,
+  professionalRegisterStepperCounter: 1,
 };
 
 export const uiStore = createSlice({
@@ -23,8 +25,17 @@ export const uiStore = createSlice({
         [action.payload.dialogType]: action.payload.open,
       };
     },
-    setForgotPasswordStepperCounter: (state, action: SetForgotPasswordStepperCounterAction) => {
+    setForgotPasswordStepperCounter: (
+      state,
+      action: SetForgotPasswordStepperCounterAction,
+    ) => {
       state.forgotPasswordStepperCounter = action.payload;
+    },
+    setProfessionalRegisterStepperCounter: (
+      state,
+      action: PayloadAction<number>,
+    ) => {
+      state.professionalRegisterStepperCounter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -32,6 +43,10 @@ export const uiStore = createSlice({
       state.isDialogOpen = {
         ...initialState.isDialogOpen,
       };
+      state.forgotPasswordStepperCounter =
+        initialState.forgotPasswordStepperCounter;
+      state.professionalRegisterStepperCounter =
+        initialState.professionalRegisterStepperCounter;
     });
   },
 });

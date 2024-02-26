@@ -7,6 +7,7 @@ export interface UiState {
     [key in DialogTypes]: boolean;
   };
   forgotPasswordStepperCounter: number;
+  professionalRegisterStepperCounter: number;
 }
 
 export interface SetDialogOpenAction extends Action {
@@ -17,7 +18,5 @@ export interface SetDialogOpenAction extends Action {
 }
 
 export interface SetForgotPasswordStepperCounterAction extends Action {
-    payload: number;
+  payload: number;
 }
-
-

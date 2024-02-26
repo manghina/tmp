@@ -26,15 +26,18 @@ const schema = yup.object().shape({
 export const useProfessionalregister = () => {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch();
-  const [stepperCounter, setStepperCounter] = useState(1);
+
+  const stepperIndex = useSelector(
+    selectors.getProfessionalRegisterStepperCounter,
+  );
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <ProfessionalRegisterStepCounter stepperCounter={stepperCounter} />
+        <ProfessionalRegisterStepCounter stepperCounter={stepperIndex} />
       ),
     });
-  }, [navigation, stepperCounter]);
+  }, [navigation, stepperIndex]);
 
   const formData = useForm<ProfessionalRegisterFormData>({
     resolver: yupResolver(schema),
@@ -117,12 +120,13 @@ export const useProfessionalregister = () => {
   );*/
 
   const onNextStepButtonPressed = useCallback(
-    () => dispatch(actions.setForgotPasswordStepperCounter(stepperCounter + 1)),
-    [dispatch, stepperCounter],
+    () =>
+      dispatch(actions.setProfessionalRegisterStepperCounter(stepperIndex + 1)),
+    [dispatch, stepperIndex],
   );
   const onPreviousStepButtonPressed = useCallback(
-    () => dispatch(actions.setForgotPasswordStepperCounter(1)),
-    [dispatch, stepperCounter],
+    () => dispatch(actions.setProfessionalRegisterStepperCounter(1)),
+    [dispatch, stepperIndex],
   );
 
   const goToCountryChooser = useCallback(() => {
@@ -137,7 +141,7 @@ export const useProfessionalregister = () => {
     //step2Filled,
     //step3Filled,
     firstStepCompletionPercentage,
-    stepperCounter,
+    stepperIndex,
     //clearFields,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,

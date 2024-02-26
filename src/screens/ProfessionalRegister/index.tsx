@@ -15,7 +15,7 @@ import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 export const ProfessionalRegisterScreen = () => {
   const {
     formData,
-    stepperCounter,
+    stepperIndex,
     goToCountryChooser,
     firstStepCompletionPercentage,
     onNextStepButtonPressed,
@@ -25,7 +25,7 @@ export const ProfessionalRegisterScreen = () => {
 
   return (
     <FormProvider {...formData}>
-      {stepperCounter == 1 ? (
+      {stepperIndex === 1 ? (
         <View key="step1" height="100%">
           <View
             backgroundColor={Colors.buttonBlue}
@@ -68,7 +68,9 @@ export const ProfessionalRegisterScreen = () => {
           </View>
         </View>
       ) : (
-        <>Step2</> /*
+        <>
+          <Text>Step2</Text>
+        </> /*
         <View key="step2" height="100%">
           <View
             backgroundColor={Colors.buttonBlue}

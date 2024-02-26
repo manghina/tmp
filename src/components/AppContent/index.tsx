@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Colors, View } from "react-native-ui-lib";
+import { Colors } from "react-native-ui-lib";
 
 import { useAppContent } from "./index.hooks";
 
@@ -20,13 +20,13 @@ import { UserHomeScreen } from "@app/screens/UserHome";
 import { UserHeader } from "@app/components/users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
-import { RequestChatScreen } from "../../screens/RequestChat";
-import { SafeAreaView } from "react-native";
-import { RequestsProfessionalOffersScreen } from "../../screens/RequestsProfessionalOffers";
+import { RequestChatScreen } from "@app/screens/RequestChat";
+import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessionalOffers";
 import { HeaderGoBack } from "../HeaderGoBack";
-import { RequestConfirmPaymentScreen } from "../../screens/RequestConfirmPayment";
+import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
-import { CountryChooserScreen } from "../../screens/CountryChooser";
+import { CountryChooserScreen } from "@app/screens/CountryChooser";
+import { ChooseSpecializationScreen } from "@app/screens/ChooseProfessionalSpecialization";
 
 const Stack = createNativeStackNavigator();
 
@@ -138,6 +138,16 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name="CountryChooser"
             component={CountryChooserScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <ArrowDown />,
+            }}
+          />
+          <Stack.Screen
+            name="register-professional/choose-specialization"
+            component={ChooseSpecializationScreen}
             options={{
               headerTitle: "",
               animationTypeForReplace: "push",
