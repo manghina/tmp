@@ -13,6 +13,11 @@ interface ProfessionalRegisterFormData {
   birthDate: Date;
   phonePrefix: string;
   phoneNumber: string;
+  professionalPaperPhoto: any;
+  professionalRegistrationNumber: string;
+  province: string;
+  specialization: string;
+  officeLocation: string;
 }
 
 const schema = yup.object().shape({
@@ -21,11 +26,18 @@ const schema = yup.object().shape({
   birthDate: yup.date().required("Inserisci la tua data di nascita"),
   phonePrefix: yup.string().required("Scegli il prefisso telefonico"),
   phoneNumber: yup.string().required("Inserisci il tuo numero di telefono"),
+  professionalPaperPhoto: yup.mixed().required("Inserisci la tua foto"),
+  professionalRegistrationNumber: yup
+    .string()
+    .required("Inserisci il tuo numero di registrazione"),
+  province: yup.string().required("Inserisci la tua provincia"),
+  specialization: yup.string().required("Inserisci la tua specializzazione"),
+  officeLocation: yup.string().required("Inserisci la tua sede"),
 });
 
-export const useProfessionalregister = () => {
-  const navigation = useNavigation<any>();
+export const useProfessionalRegister = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation<any>();
 
   const stepperIndex = useSelector(
     selectors.getProfessionalRegisterStepperCounter,
@@ -54,6 +66,7 @@ export const useProfessionalregister = () => {
     control,
     handleSubmit,
     trigger,
+    setValue,
     formState: { isDirty, isValid, isSubmitted },
   } = formData;
 
@@ -62,6 +75,23 @@ export const useProfessionalregister = () => {
   const [firstName, lastName, birthDate, phonePrefix, phoneNumber] = useWatch({
     control,
     name: ["firstName", "lastName", "birthDate", "phonePrefix", "phoneNumber"],
+  });
+
+  const [
+    professionalPaperPhoto,
+    professionalRegistrationNumber,
+    province,
+    specialization,
+    officeLocation,
+  ] = useWatch({
+    control,
+    name: [
+      "professionalPaperPhoto",
+      "professionalRegistrationNumber",
+      "province",
+      "specialization",
+      "officeLocation",
+    ],
   });
 
   const step1Filled = useMemo(
@@ -73,10 +103,23 @@ export const useProfessionalregister = () => {
       Boolean(phoneNumber),
     [firstName, lastName, birthDate, phonePrefix, phoneNumber],
   );
-  /*const step2Filled = useMemo(
-    () => Boolean(recoveryPasswordToken),
-    [recoveryPasswordToken],
-  );*/
+
+  const step2Filled = useMemo(
+    () =>
+      Boolean(professionalPaperPhoto) &&
+      Boolean(professionalRegistrationNumber) &&
+      Boolean(province) &&
+      Boolean(specialization) &&
+      Boolean(officeLocation),
+    [
+      professionalPaperPhoto,
+      professionalRegistrationNumber,
+      province,
+      specialization,
+      officeLocation,
+    ],
+  );
+
   /*const step3Filled = useMemo(
     () => Boolean(newPassword) && Boolean(confirmNewPassword),
     [newPassword, confirmNewPassword],
@@ -107,6 +150,24 @@ export const useProfessionalregister = () => {
     [firstName, lastName, birthDate, phonePrefix, phoneNumber],
   );
 
+  const secondStepCompletionPercentage = useMemo(() => {
+    const fields = [
+      professionalPaperPhoto,
+      professionalRegistrationNumber,
+      province,
+      specialization,
+      officeLocation,
+    ];
+
+    return (fields.filter(Boolean).length / fields.length) * 100;
+  }, [
+    professionalPaperPhoto,
+    professionalRegistrationNumber,
+    province,
+    specialization,
+    officeLocation,
+  ]);
+
   /*const triggerProfessionalRegisterSubmit = useMemo(
     () =>
       handleSubmit((data) => {
@@ -118,6 +179,22 @@ export const useProfessionalregister = () => {
       }),
     [dispatch, handleSubmit],
   );*/
+
+  const onBackFromChooseSpecialization = useCallback(
+    (specialization?: string) => {
+      if (specialization) {
+        setValue("specialization", specialization);
+      }
+    },
+    [setValue],
+  );
+
+  const onSpecializationFieldClicked = useCallback(() => {
+    navigation.navigate("choose-specialization", {
+      onGoBack: onBackFromChooseSpecialization,
+      value: specialization,
+    });
+  }, [navigation, onBackFromChooseSpecialization, specialization]);
 
   const onNextStepButtonPressed = useCallback(
     () =>
@@ -135,16 +212,14 @@ export const useProfessionalregister = () => {
 
   return {
     formData,
-    //triggerProfessionalRegisterSubmit,
-    goToCountryChooser,
-    step1Filled,
-    //step2Filled,
-    //step3Filled,
-    firstStepCompletionPercentage,
     stepperIndex,
-    //clearFields,
+    goToCountryChooser,
+    onSpecializationFieldClicked,
+    firstStepCompletionPercentage,
+    secondStepCompletionPercentage,
+    step1Filled,
+    step2Filled,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
-    trigger,
   };
 };

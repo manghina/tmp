@@ -5,7 +5,7 @@ import {
   Colors,
   TouchableOpacity,
 } from "react-native-ui-lib";
-import { useProfessionalregister } from "./index.hooks";
+import { useProfessionalRegister } from "./index.hooks";
 import React from "react";
 
 import { FormProvider } from "react-hook-form";
@@ -17,11 +17,14 @@ export const ProfessionalRegisterScreen = () => {
     formData,
     stepperIndex,
     goToCountryChooser,
+    onSpecializationFieldClicked,
     firstStepCompletionPercentage,
+    secondStepCompletionPercentage,
+    step1Filled,
+    step2Filled,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
-    step1Filled,
-  } = useProfessionalregister();
+  } = useProfessionalRegister();
 
   return (
     <FormProvider {...formData}>
@@ -68,9 +71,6 @@ export const ProfessionalRegisterScreen = () => {
           </View>
         </View>
       ) : (
-        <>
-          <Text>Step2</Text>
-        </> /*
         <View key="step2" height="100%">
           <View
             backgroundColor={Colors.buttonBlue}
@@ -78,27 +78,18 @@ export const ProfessionalRegisterScreen = () => {
               width: `${secondStepCompletionPercentage}%`,
               height: 4,
             }}
-          ></View>
+          />
           <View flex paddingH-20 paddingT-20>
-            <FormTextField keyboardType={"email-address"} name="email" label="Email" />
-            <FormTextField name="password" label="Password" type="password" />
-            <FormTextField
-              name="confirmPassword"
-              label="Conferma password"
-              type="password"
-            />
-            <Text center grayText={!secondStepFilled} marginT-24>
-              Iscrizione completata!
+            <TouchableOpacity onPress={onSpecializationFieldClicked}>
+              <FormTextField
+                name="specialization"
+                label="Specializzazione"
+                onFocus={onSpecializationFieldClicked}
+              />
+            </TouchableOpacity>
+            <Text center grayText={!step2Filled} marginT-24>
+              Ci sei quasi...
             </Text>
-            <Button
-              BlueButton
-              label="Registrati"
-              marginT-8
-              style={{ width: "100%" }}
-              onPress={triggerSubmit}
-              disabledBackgroundColor={Colors.disabledBlue}
-              disabled={!secondStepFilled || submitDisabled}
-            />
             <Text
               center
               underline
@@ -110,7 +101,6 @@ export const ProfessionalRegisterScreen = () => {
             </Text>
           </View>
         </View>
-      */
       )}
     </FormProvider>
   );

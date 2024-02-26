@@ -26,7 +26,7 @@ import { HeaderGoBack } from "../HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { CountryChooserScreen } from "@app/screens/CountryChooser";
-import { ChooseSpecializationScreen } from "@app/screens/ChooseProfessionalSpecialization";
+import { ChooseSpecializationScreen } from "src/screens/ChooseSpecialization";
 
 const Stack = createNativeStackNavigator();
 
@@ -146,7 +146,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="register-professional/choose-specialization"
+            name="choose-specialization"
             component={ChooseSpecializationScreen}
             options={{
               headerTitle: "",
