@@ -7,6 +7,312 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "../../redux-store";
 import { ProfessionalRegisterStepCounter } from "./ProfessionalRegisterStepCounter";
 
+const provincesOptions = [
+  {
+    label: "Agrigento",
+    value: "AG",
+  },
+  {
+    label: "Alessandria",
+    value: "AL",
+  },
+  {
+    label: "Ancona",
+    value: "AN",
+  },
+  {
+    label: "Aosta",
+    value: "AO",
+  },
+  {
+    label: "Arezzo",
+    value: "AR",
+  },
+  {
+    label: "Ascoli Piceno",
+    value: "AP",
+  },
+  {
+    label: "Asti",
+    value: "AT",
+  },
+  {
+    label: "Avellino",
+    value: "AV",
+  },
+  {
+    label: "Bari",
+    value: "BA",
+  },
+  {
+    label: "Barletta-Andria-Trani",
+    value: "BT",
+  },
+  {
+    label: "Belluno",
+    value: "BL",
+  },
+  {
+    label: "Benevento",
+    value: "BN",
+  },
+  {
+    label: "Bergamo",
+    value: "BG",
+  },
+  {
+    label: "Biella",
+    value: "BI",
+  },
+  {
+    label: "Bologna",
+    value: "BO",
+  },
+  {
+    label: "Bolzano",
+    value: "BZ",
+  },
+  {
+    label: "Brescia",
+    value: "BS",
+  },
+  {
+    label: "Brindisi",
+    value: "BR",
+  },
+  {
+    label: "Cagliari",
+    value: "CA",
+  },
+  {
+    label: "Caltanissetta",
+    value: "CL",
+  },
+  {
+    label: "Campobasso",
+    value: "CB",
+  },
+  {
+    label: "Carbonia-Iglesias",
+    value: "CI",
+  },
+  {
+    label: "Caserta",
+    value: "CE",
+  },
+  {
+    label: "Catania",
+    value: "CT",
+  },
+  {
+    label: "Catanzaro",
+    value: "CZ",
+  },
+  {
+    label: "Chieti",
+    value: "CH",
+  },
+  {
+    label: "Como",
+    value: "CO",
+  },
+  {
+    label: "Cosenza",
+    value: "CS",
+  },
+  {
+    label: "Cremona",
+    value: "CR",
+  },
+  {
+    label: "Crotone",
+    value: "KR",
+  },
+  {
+    label: "Cuneo",
+    value: "CN",
+  },
+  {
+    label: "Enna",
+    value: "EN",
+  },
+  {
+    label: "Fermo",
+    value: "FM",
+  },
+  {
+    label: "Ferrara",
+    value: "FE",
+  },
+  {
+    label: "Firenze",
+    value: "FI",
+  },
+  {
+    label: "Foggia",
+    value: "FG",
+  },
+  {
+    label: "Forlì-Cesena",
+    value: "FC",
+  },
+  {
+    label: "Frosinone",
+    value: "FR",
+  },
+  {
+    label: "Genova",
+    value: "GE",
+  },
+  {
+    label: "Gorizia",
+    value: "GO",
+  },
+  {
+    label: "Grosseto",
+    value: "GR",
+  },
+  {
+    label: "Imperia",
+    value: "IM",
+  },
+  {
+    label: "Isernia",
+    value: "IS",
+  },
+  {
+    label: "La Spezia",
+    value: "SP",
+  },
+  {
+    label: "L'Aquila",
+    value: "AQ",
+  },
+  {
+    label: "Latina",
+    value: "LT",
+  },
+  {
+    label: "Lecce",
+    value: "LE",
+  },
+  {
+    label: "Lecco",
+    value: "LC",
+  },
+  {
+    label: "Livorno",
+    value: "LI",
+  },
+  {
+    label: "Lodi",
+    value: "LO",
+  },
+  {
+    label: "Lucca",
+    value: "LU",
+  },
+  {
+    label: "Macerata",
+    value: "MC",
+  },
+  {
+    label: "Mantova",
+    value: "MN",
+  },
+  {
+    label: "Massa-Carrara",
+    value: "MS",
+  },
+  {
+    label: "Matera",
+    value: "MT",
+  },
+];
+
+const professionsOptions = [
+  {
+    label: "Medico",
+    value: "Medico",
+  },
+  {
+    label: "Infermiere",
+    value: "Infermiere",
+  },
+  {
+    label: "Chirurgo",
+    value: "Chirurgo",
+  },
+  {
+    label: "Dentista",
+    value: "Dentista",
+  },
+  {
+    label: "Farmacista",
+    value: "Farmacista",
+  },
+  {
+    label: "Ostetrica",
+    value: "Ostetrica",
+  },
+  {
+    label: "Fisioterapista",
+    value: "Fisioterapista",
+  },
+  {
+    label: "Psicologo",
+    value: "Psicologo",
+  },
+  {
+    label: "Dietista",
+    value: "Dietista",
+  },
+  {
+    label: "Radiologo",
+    value: "Radiologo",
+  },
+  {
+    label: "Biologo",
+    value: "Biologo",
+  },
+  {
+    label: "Nutrizionista",
+    value: "Nutrizionista",
+  },
+  {
+    label: "Optometrista",
+    value: "Optometrista",
+  },
+  {
+    label: "Logopedista",
+    value: "Logopedista",
+  },
+  {
+    label: "Podologo",
+    value: "Podologo",
+  },
+  {
+    label: "Terapista occupazionale",
+    value: "Terapista occupazionale",
+  },
+  {
+    label: "Ortopedico",
+    value: "Ortopedico",
+  },
+  {
+    label: "Anestesista",
+    value: "Anestesista",
+  },
+  {
+    label: "Cardiologo",
+    value: "Cardiologo",
+  },
+  {
+    label: "Neurologo",
+    value: "Neurologo",
+  },
+];
+
 interface ProfessionalRegisterFormData {
   firstName: string;
   lastName: string;
@@ -66,7 +372,6 @@ export const useProfessionalRegister = () => {
     control,
     handleSubmit,
     trigger,
-    setValue,
     formState: { isDirty, isValid, isSubmitted },
   } = formData;
 
@@ -180,22 +485,6 @@ export const useProfessionalRegister = () => {
     [dispatch, handleSubmit],
   );*/
 
-  const onBackFromChooseSpecialization = useCallback(
-    (specialization?: string) => {
-      if (specialization) {
-        setValue("specialization", specialization);
-      }
-    },
-    [setValue],
-  );
-
-  const onSpecializationFieldClicked = useCallback(() => {
-    navigation.navigate("choose-specialization", {
-      onGoBack: onBackFromChooseSpecialization,
-      value: specialization,
-    });
-  }, [navigation, onBackFromChooseSpecialization, specialization]);
-
   const onNextStepButtonPressed = useCallback(
     () =>
       dispatch(actions.setProfessionalRegisterStepperCounter(stepperIndex + 1)),
@@ -212,9 +501,10 @@ export const useProfessionalRegister = () => {
 
   return {
     formData,
+    provincesOptions,
+    professionsOptions,
     stepperIndex,
     goToCountryChooser,
-    onSpecializationFieldClicked,
     firstStepCompletionPercentage,
     secondStepCompletionPercentage,
     step1Filled,

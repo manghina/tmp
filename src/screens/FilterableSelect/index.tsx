@@ -1,4 +1,4 @@
-import { useChooseSpecializationScreen } from "./index.hooks";
+import { useFilterableSelectScreen } from "./index.hooks";
 import {
   Colors,
   RadioButton,
@@ -10,73 +10,64 @@ import { FlatList, TouchableWithoutFeedback } from "react-native";
 import { styles } from "./styles";
 import { memo } from "react";
 
-type ChooseSpecializationScreenProps = {};
+type FilterableSelectScreenProps = {};
 
-export const ChooseSpecializationScreen = memo(
-  ({}: ChooseSpecializationScreenProps) => {
+export const FilterableSelectScreen = memo(
+  ({}: FilterableSelectScreenProps) => {
     const {
-      filteredProfessions,
-      isThisSelected,
-      getColor,
+      selectedOption,
+      filteredOptions,
       onTextFieldChange,
       searchText,
-      onProfessionSelected,
-    } = useChooseSpecializationScreen();
+      searchTextLabel,
+      onOptionSelected,
+      renderItem,
+    } = useFilterableSelectScreen();
 
-    const renderItem = ({
+    const _renderItem = ({
       item,
       index,
     }: {
-      item: { profession: string; id: string };
+      item: { label: string; value: string };
       index: number;
-    }) => (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          onProfessionSelected(item.profession);
-        }}
-      >
+    }) => {
+      const isSelected = item.value === selectedOption;
+      const color = isSelected ? Colors.buttonGray : Colors.defaultColor;
+
+      return (
         <View
           row
-          width={"100%"}
-          backgroundColor={
-            isThisSelected(item.profession)
-              ? Colors.defaultColor
-              : Colors.buttonGray
-          }
+          width="100%"
+          backgroundColor={isSelected ? Colors.defaultColor : Colors.buttonGray}
           padding-15
           style={{
             borderWidth: 1,
             borderColor: Colors.defaultColor,
             borderBottomRightRadius:
-              index === filteredProfessions.length - 1 ? 10.8 : 0,
+              index === filteredOptions.length - 1 ? 10.8 : 0,
             borderBottomLeftRadius:
-              index === filteredProfessions.length - 1 ? 10.8 : 0,
+              index === filteredOptions.length - 1 ? 10.8 : 0,
             borderTopLeftRadius: index === 0 ? 10.8 : 0,
             borderTopRightRadius: index === 0 ? 10.8 : 0,
             justifyContent: "space-between",
           }}
         >
-          <Text color={getColor(item.profession)}>{item.profession}</Text>
-          <RadioButton
-            onPress={() => {}}
-            label={""}
-            selected={isThisSelected(item.profession)}
-            color={getColor(item.profession)}
-          />
+          <Text color={color}>{item.label}</Text>
+          <RadioButton selected={isSelected} color={color} />
         </View>
-      </TouchableWithoutFeedback>
-    );
+      );
+    };
 
     return (
-      <View paddingH-20 paddingV-10>
+      <View paddingH-20 paddingV-10 style={{ flex: 1 }}>
         <Text style={styles.title}>Seleziona tipologia</Text>
         <Text style={styles.info} marginB-20>
           Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
         </Text>
-        <Text style={styles.sectionTitle}>Trova specializzazione</Text>
         <TextField
           marginT-8
           grey10
+          label={searchTextLabel}
           style={{
             paddingTop: 16,
             paddingLeft: 16,
@@ -92,12 +83,22 @@ export const ChooseSpecializationScreen = memo(
         <Text style={styles.sectionTitle} marginT-10>
           Lista nazioni
         </Text>
-        <View marginT-10>
+        <View marginT-10 style={{ flex: 1, paddingBottom: 40 }}>
           <FlatList
             removeClippedSubviews
-            data={filteredProfessions}
+            data={filteredOptions}
             initialNumToRender={15}
-            renderItem={renderItem}
+            renderItem={({ item, index }) => {
+              return (
+                <TouchableWithoutFeedback
+                  onPress={() => {
+                    onOptionSelected(item);
+                  }}
+                >
+                  {renderItem?.(item, index) ?? _renderItem({ item, index })}
+                </TouchableWithoutFeedback>
+              );
+            }}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -106,4 +107,4 @@ export const ChooseSpecializationScreen = memo(
   },
 );
 
-ChooseSpecializationScreen.displayName = "ChooseSpecializationScreen";
+FilterableSelectScreen.displayName = "FilterableSelectScreen";

@@ -11,13 +11,16 @@ import React from "react";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
+import { Dimensions } from "../../theme/spacings/dimensions";
+import { FormNewScreenFilterableSelect } from "../../components/_form/FormNewScreenFilterableSelect";
 
 export const ProfessionalRegisterScreen = () => {
   const {
     formData,
+    provincesOptions,
+    professionsOptions,
     stepperIndex,
     goToCountryChooser,
-    onSpecializationFieldClicked,
     firstStepCompletionPercentage,
     secondStepCompletionPercentage,
     step1Filled,
@@ -79,17 +82,35 @@ export const ProfessionalRegisterScreen = () => {
               height: 4,
             }}
           />
-          <View flex paddingH-20 paddingT-20>
-            <TouchableOpacity onPress={onSpecializationFieldClicked}>
+          <View flex paddingH-20 paddingT-10>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: Dimensions.small.spacing_050,
+              }}
+            >
               <FormTextField
+                name="professionalRegistrationNumber"
+                label="Numero iscrizione albo"
+              />
+              <FormNewScreenFilterableSelect
+                name="province"
+                label="Ordine dei medici della provincia di"
+                searchTextLabel="Trova provincia"
+                options={provincesOptions}
+              />
+              <FormNewScreenFilterableSelect
                 name="specialization"
                 label="Specializzazione"
-                onFocus={onSpecializationFieldClicked}
+                searchTextLabel="Trova specializzazione"
+                options={professionsOptions}
               />
-            </TouchableOpacity>
-            <Text center grayText={!step2Filled} marginT-24>
-              Ci sei quasi...
-            </Text>
+              <FormTextField name="officeLocation" label="Sede dello studio" />
+              <Text center grayText={!step2Filled} marginT-24>
+                Ci sei quasi...
+              </Text>
+            </View>
             <Text
               center
               underline

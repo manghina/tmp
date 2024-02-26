@@ -26,7 +26,7 @@ import { HeaderGoBack } from "../HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { CountryChooserScreen } from "@app/screens/CountryChooser";
-import { ChooseSpecializationScreen } from "src/screens/ChooseSpecialization";
+import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +44,16 @@ export const AppContent: FC = memo(({}) => {
         }}
       >
         <Stack.Navigator initialRouteName="Tutorial">
+          <Stack.Screen
+            name="form-filterable-select"
+            component={FilterableSelectScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <ArrowDown />,
+            }}
+          />
           <Stack.Screen
             name="Loader"
             component={LoaderScreen}
@@ -138,16 +148,6 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name="CountryChooser"
             component={CountryChooserScreen}
-            options={{
-              headerTitle: "",
-              animationTypeForReplace: "push",
-              animation: "slide_from_bottom",
-              headerLeft: () => <ArrowDown />,
-            }}
-          />
-          <Stack.Screen
-            name="choose-specialization"
-            component={ChooseSpecializationScreen}
             options={{
               headerTitle: "",
               animationTypeForReplace: "push",
