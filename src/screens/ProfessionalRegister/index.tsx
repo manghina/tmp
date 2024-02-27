@@ -13,6 +13,7 @@ import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
+import { FormImagePicker } from "../../components/_form/FormImagePicker";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -90,6 +91,10 @@ export const ProfessionalRegisterScreen = () => {
                 gap: Dimensions.small.spacing_050,
               }}
             >
+              <FormImagePicker
+                name="professionalPaperPhoto"
+                label="Carica foto libretto"
+              />
               <FormTextField
                 name="professionalRegistrationNumber"
                 label="Numero iscrizione albo"
