@@ -13,7 +13,7 @@ import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
-import { FormImagePicker } from "../../components/_form/FormImagePicker";
+import { FormImagePicker } from "@app/components/_form/FormImagePicker";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -28,6 +28,7 @@ export const ProfessionalRegisterScreen = () => {
     step2Filled,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
+    canGoToNextStep,
   } = useProfessionalRegister();
 
   return (
@@ -74,7 +75,7 @@ export const ProfessionalRegisterScreen = () => {
             />
           </View>
         </View>
-      ) : (
+      ) : stepperIndex === 2 ? (
         <View key="step2" height="100%">
           <View
             backgroundColor={Colors.buttonBlue}
@@ -137,8 +138,23 @@ export const ProfessionalRegisterScreen = () => {
             >
               Torna indietro
             </Text>
+            <Button
+              BlueButton
+              label="Prosegui"
+              marginT-8
+              style={{ width: "100%" }}
+              onPress={onNextStepButtonPressed}
+              disabledBackgroundColor={Colors.disabledBlue}
+              disabled={!canGoToNextStep}
+            />
           </View>
         </View>
+      ) : stepperIndex === 3 ? (
+        <View>
+          <Text>Step 3</Text>
+        </View>
+      ) : (
+        <View />
       )}
     </FormProvider>
   );

@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
-import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
+import React, { useCallback, useLayoutEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "../../redux-store";
 import { ProfessionalRegisterStepCounter } from "./ProfessionalRegisterStepCounter";
@@ -445,6 +445,17 @@ export const useProfessionalRegister = () => {
     [email, newPassword, confirmNewPassword],
   );*/
 
+  const canGoToNextStep = useMemo(() => {
+    switch (stepperIndex) {
+      case 1:
+        return step1Filled;
+      case 2:
+        return step2Filled;
+      default:
+        return false;
+    }
+  }, [stepperIndex, step1Filled, step2Filled]);
+
   const firstStepCompletionPercentage = useMemo(
     () =>
       ([firstName, lastName, birthDate, phonePrefix, phoneNumber].filter(
@@ -504,6 +515,7 @@ export const useProfessionalRegister = () => {
     provincesOptions,
     professionsOptions,
     stepperIndex,
+    canGoToNextStep,
     goToCountryChooser,
     firstStepCompletionPercentage,
     secondStepCompletionPercentage,
