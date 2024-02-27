@@ -54,9 +54,10 @@ export const useFormImagePicker = (name: string) => {
       if (imagePickerResponse.assets) {
         const asset = imagePickerResponse.assets[0];
         setValue(asset.uri);
+        setChooseMediaSourceDialogOpen(false);
       }
     },
-    [dispatch, setValue],
+    [dispatch, setValue, setChooseMediaSourceDialogOpen],
   );
 
   const onChooseFromCameraClicked = useCallback(async () => {

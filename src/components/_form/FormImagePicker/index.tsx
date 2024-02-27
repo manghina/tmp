@@ -12,7 +12,7 @@ import { colorTokensLight } from "@app/theme/colors/tokens";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { textVariants } from "@app/theme/typographies/variants";
 import PictureIcon from "@app/components/SvgIcons/PictureIcon";
-import CameraIcon from "../../SvgIcons/CameraIcon";
+import CameraIcon from "@app/components/SvgIcons/CameraIcon";
 
 type FormImagePickerProps = {
   name: string;
