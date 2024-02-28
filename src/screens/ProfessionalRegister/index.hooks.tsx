@@ -342,13 +342,41 @@ const schema = yup.object().shape({
   province: yup.string().required("Inserisci la tua provincia"),
   specialization: yup.string().required("Inserisci la tua specializzazione"),
   officeLocation: yup.string().required("Inserisci la tua sede"),
-  email: yup.string().required("Inserisci il tuo indirizzo email"),
-  password: yup.string().required("Inserisci la tua password"),
+  email: yup
+    .string()
+    .email("Inserisci una mail valida")
+    .required("Inserisci il tuo indirizzo email"),
+  password: yup
+    .string()
+    .min(8, "La password deve contenere almeno 8 caratteri")
+    .matches(
+      /[A-Z]/,
+      "La password deve contenere almeno un carattere maiuscolo",
+    )
+    .matches(/[0-9]/, "La password deve contenere almeno un numero")
+    .matches(/[-!|]/, "La password deve contenere almeno uno tra -!|")
+    .required(),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password")], "Le password non corrispondono")
     .required(),
 });
+
+const firstStepFieldKeys = [
+  "firstName",
+  "lastName",
+  "birthDate",
+  "phonePrefix",
+  "phoneNumber",
+] as const;
+const secondStepFieldKeys = [
+  "professionalPaperPhoto",
+  "professionalRegistrationNumber",
+  "province",
+  "specialization",
+  "officeLocation",
+] as const;
+const thirdStepFieldKeys = ["email", "password", "confirmPassword"] as const;
 
 export const useProfessionalRegister = () => {
   const dispatch = useDispatch();
@@ -372,7 +400,7 @@ export const useProfessionalRegister = () => {
       firstName: "",
       lastName: "",
       birthDate: undefined,
-      phonePrefix: "",
+      phonePrefix: "+39",
       phoneNumber: "",
       professionalPaperPhoto: undefined,
       professionalRegistrationNumber: "",
@@ -389,12 +417,12 @@ export const useProfessionalRegister = () => {
     control,
     handleSubmit,
     trigger,
-    formState: { isDirty, isValid, isSubmitted },
+    formState: { isDirty, isValid, isSubmitted, errors },
   } = formData;
 
   const [firstName, lastName, birthDate, phonePrefix, phoneNumber] = useWatch({
     control,
-    name: ["firstName", "lastName", "birthDate", "phonePrefix", "phoneNumber"],
+    name: firstStepFieldKeys,
   });
 
   const [
@@ -405,18 +433,12 @@ export const useProfessionalRegister = () => {
     officeLocation,
   ] = useWatch({
     control,
-    name: [
-      "professionalPaperPhoto",
-      "professionalRegistrationNumber",
-      "province",
-      "specialization",
-      "officeLocation",
-    ],
+    name: secondStepFieldKeys,
   });
 
   const [email, password, confirmPassword] = useWatch({
     control,
-    name: ["email", "password", "confirmPassword"],
+    name: thirdStepFieldKeys,
   });
 
   const step1Filled = useMemo(
@@ -459,21 +481,6 @@ export const useProfessionalRegister = () => {
       !step3Filled,
     [isDirty, isSubmitted, isValid, step1Filled, step2Filled, step3Filled],
   );
-
-  /*const clearFields = useCallback(() => {
-    formData.setValue("recoveryPasswordToken", "");
-    formData.setValue("newPassword", "");
-    formData.setValue("confirmNewPassword", "");
-  }, [formData]);*/
-
-  /*const allFieldsFilled = useMemo(
-    () =>
-      Boolean(email) &&
-      Boolean(recoveryPasswordToken) &&
-      Boolean(newPassword) &&
-      Boolean(confirmNewPassword),
-    [email, newPassword, confirmNewPassword],
-  );*/
 
   const canGoToNextStep = useMemo(() => {
     switch (stepperIndex) {
@@ -518,6 +525,7 @@ export const useProfessionalRegister = () => {
 
   const thirdStepCompletionPercentage = useMemo(() => {
     const fields = [email, password, confirmPassword];
+
     return (fields.filter(Boolean).length / fields.length) * 100;
   }, [email, password, confirmPassword]);
 
@@ -529,19 +537,48 @@ export const useProfessionalRegister = () => {
     [dispatch, handleSubmit],
   );
 
-  const onNextStepButtonPressed = useCallback(
-    () =>
-      dispatch(actions.setProfessionalRegisterStepperCounter(stepperIndex + 1)),
-    [dispatch, stepperIndex],
-  );
-  const onPreviousStepButtonPressed = useCallback(
-    () => dispatch(actions.setProfessionalRegisterStepperCounter(1)),
-    [dispatch, stepperIndex],
-  );
+  const onNextStepButtonPressed = useCallback(async () => {
+    let stepValid = false;
+
+    switch (stepperIndex) {
+      case 1:
+        // Trigger fields from step 1
+        stepValid = await trigger(firstStepFieldKeys);
+        break;
+      case 2:
+        // Trigger fields from step 2
+        stepValid = await trigger(secondStepFieldKeys);
+        break;
+      case 3:
+        // Trigger fields from step 3
+        stepValid = await trigger(thirdStepFieldKeys);
+        break;
+      default:
+        break;
+    }
+
+    if (stepValid) {
+      dispatch(
+        actions.setProfessionalRegisterStepperCounter(
+          Math.min(stepperIndex + 1, 3),
+        ),
+      );
+    }
+  }, [dispatch, stepperIndex, trigger]);
+
+  const onPreviousStepButtonPressed = useCallback(() => {
+    dispatch(
+      actions.setProfessionalRegisterStepperCounter(
+        Math.max(stepperIndex - 1, 1),
+      ),
+    );
+  }, [dispatch, stepperIndex]);
 
   const goToCountryChooser = useCallback(() => {
     navigation.navigate("CountryChooser");
   }, [navigation]);
+
+  console.log({ errors });
 
   return {
     formData,

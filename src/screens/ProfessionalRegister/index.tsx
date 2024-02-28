@@ -188,7 +188,7 @@ export const ProfessionalRegisterScreen = () => {
               style={{ width: "100%" }}
               onPress={triggerProfessionalRegisterSubmit}
               disabledBackgroundColor={Colors.disabledBlue}
-              disabled={submitDisabled}
+              disabled={submitDisabled && false}
             />
             <Text
               center
