@@ -11,9 +11,7 @@ import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "@app/screens/Home";
 import { LoginOptionsScreen } from "@app/screens/LoginOptions";
 import { UserRegisterScreen } from "src/screens/UserRegister";
-import { ArrowDown } from "@app/components/ArrowDown";
 import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
-
 import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
 import { UserHomeScreen } from "@app/screens/UserHome";
@@ -22,7 +20,7 @@ import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessionalOffers";
-import { HeaderGoBack } from "../HeaderGoBack";
+import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { CountryChooserScreen } from "@app/screens/CountryChooser";
@@ -51,7 +49,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitle: "",
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              headerLeft: () => <ArrowDown />,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
@@ -94,7 +92,7 @@ export const AppContent: FC = memo(({}) => {
                 color: Colors.blackText,
               },
               animation: "slide_from_bottom",
-              headerLeft: () => <ArrowDown />,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
@@ -102,7 +100,7 @@ export const AppContent: FC = memo(({}) => {
             component={ForgotPasswordScreen}
             options={{
               title: "",
-              headerLeft: () => <ArrowDown />,
+              header: () => <HeaderGoBack />,
               animation: "slide_from_bottom",
             }}
           />
@@ -126,7 +124,7 @@ export const AppContent: FC = memo(({}) => {
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              headerLeft: () => <ArrowDown />,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
@@ -142,7 +140,7 @@ export const AppContent: FC = memo(({}) => {
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              headerLeft: () => <ArrowDown />,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
@@ -152,7 +150,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitle: "",
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              headerLeft: () => <ArrowDown />,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
