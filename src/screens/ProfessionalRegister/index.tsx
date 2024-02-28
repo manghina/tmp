@@ -14,6 +14,8 @@ import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
+import { dimensionsTokens } from "../../theme/spacings/tokens";
+import { textVariants } from "../../theme/typographies/variants";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -46,26 +48,42 @@ export const ProfessionalRegisterScreen = () => {
               height: 4,
             }}
           />
-          <View flex paddingH-20 paddingT-20>
+          <View
+            flex
+            paddingH-20
+            paddingT-20
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: dimensionsTokens.paddingXs,
+            }}
+          >
             <FormTextField name="firstName" label="Nome" />
             <FormTextField name="lastName" label="Cognome" />
             <FormDateTimePicker name="birthDate" label="Data di nascita" />
-            <Text marginT-8>Numero di cellulare</Text>
-            <View row style={{ width: "100%" }}>
-              <View style={{ width: "30%" }}>
-                <TouchableOpacity onPress={() => goToCountryChooser()}>
+            <View>
+              <Text style={{ ...textVariants.p2MediumNormal }}>
+                Numero di cellulare
+              </Text>
+              <View row style={{ width: "100%" }}>
+                <View style={{ width: "30%" }}>
+                  <TouchableOpacity onPress={() => goToCountryChooser()}>
+                    <FormTextField
+                      editable={false}
+                      value={"🌐 +"}
+                      name="phonePrefix"
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={{ width: "70%" }}>
                   <FormTextField
-                    editable={false}
-                    value={"🌐 +"}
-                    name="phonePrefix"
+                    keyboardType={"phone-pad"}
+                    name="phoneNumber"
                   />
-                </TouchableOpacity>
-              </View>
-              <View style={{ width: "70%" }}>
-                <FormTextField keyboardType={"phone-pad"} name="phoneNumber" />
+                </View>
               </View>
             </View>
-            <Text center grayText={!step1Filled} marginT-24>
+            <Text center grayText={!step1Filled}>
               Ci sei quasi...
             </Text>
             <Button
@@ -154,7 +172,15 @@ export const ProfessionalRegisterScreen = () => {
           </View>
         </View>
       ) : stepperIndex === 3 ? (
-        <View key="step3" height="100%">
+        <View
+          key="step3"
+          height="100%"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: dimensionsTokens.paddingSm,
+          }}
+        >
           <View
             backgroundColor={Colors.buttonBlue}
             style={{

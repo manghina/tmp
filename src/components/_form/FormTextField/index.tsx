@@ -7,17 +7,11 @@ import {
   Text,
   TextField,
   TextFieldProps,
+  View,
 } from "react-native-ui-lib";
-
-const TextInputStyle: TextFieldProps["style"] = {
-  paddingTop: 16,
-  paddingLeft: 16,
-  paddingRight: 16,
-  paddingBottom: 16,
-  borderWidth: 1.5,
-  borderRadius: 12,
-  borderColor: "black",
-};
+import { styles } from "./styles";
+import VisibilityIcon from "@app/components/SvgIcons/VisibilityIcon";
+import VisibilityOffIcon from "@app/components/SvgIcons/VisibilityOffIcon";
 
 export type FormTextFieldProps = {
   name: string;
@@ -27,46 +21,58 @@ export type FormTextFieldProps = {
 
 export const FormTextField = memo(
   ({ name, label, type = "text", ...props }: FormTextFieldProps) => {
-    const { value, handleChange, error, hideText, onVisibilityIconTapped } =
-      useFormTextField(name, type);
+    const {
+      isFocused,
+      hideText,
+      value,
+      handleChange,
+      error,
+      onFocus,
+      onBlur,
+      onVisibilityIconTapped,
+    } = useFormTextField(name, type);
 
     return (
-      <TextField
-        marginT-8
-        grey10
-        value={value}
-        label={label}
-        onChangeText={handleChange}
-        secureTextEntry={hideText}
-        enableErrors={!!error}
-        validationMessage={error ?? undefined}
-        autoCapitalize="none"
-        autoCorrect={false}
-        style={[TextInputStyle, props.style]}
-        trailingAccessory={
-          type === "password" && (
-            <Button
-              round
-              onPress={onVisibilityIconTapped}
-              iconSource={
-                hideText ? Assets.icons.visibility : Assets.icons.visibilityOff
-              }
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 50,
-                marginLeft: 5,
-              }}
-              color={Colors.white}
-              iconProps={{
-                width: 30,
-                height: 30,
-              }}
-            />
-          )
-        }
-        {...(props as any)}
-      />
+      <View style={styles.fieldContainer}>
+        {label && <Text style={styles.label}>{label}</Text>}
+        <View>
+          <TextField
+            value={value}
+            onChangeText={handleChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            secureTextEntry={hideText}
+            autoCapitalize="none"
+            autoCorrect={false}
+            containerStyle={[
+              styles.field,
+              props.style,
+              isFocused ? styles.focused : undefined,
+              Boolean(error) ? styles.error : undefined,
+            ]}
+            style={styles.input}
+            trailingAccessory={
+              type === "password" && (
+                <Button
+                  round
+                  onPress={onVisibilityIconTapped}
+                  style={[
+                    styles.showHidePasswordButton,
+                    isFocused ? { opacity: 1 } : undefined,
+                  ]}
+                  color={Colors.white}
+                >
+                  <View style={styles.showHidePasswordIcon}>
+                    {hideText ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </View>
+                </Button>
+              )
+            }
+            {...(props as any)}
+          />
+          {Boolean(error) && <Text style={styles.errorText}>{error}</Text>}
+        </View>
+      </View>
     );
   },
 );

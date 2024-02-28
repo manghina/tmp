@@ -1,3 +1,20 @@
+export const withOpacity = (hexColor: string, opacity: number): string => {
+  if (!/^#[0-9A-F]{6}$/i.test(hexColor)) {
+    throw new Error("Color should be a hex string");
+  }
+
+  if (opacity > 1 || opacity < 0) {
+    throw new Error("Opacity should be a number between 0 and 1");
+  }
+
+  return (
+    hexColor +
+    Math.round(opacity * 255)
+      .toString(16)
+      .toUpperCase()
+  );
+};
+
 export const Colors = {
   Red: {
     100: "#FFCECB",

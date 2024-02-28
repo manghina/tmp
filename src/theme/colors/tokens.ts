@@ -87,6 +87,7 @@ export const colorTokensLight = {
   colorBorderAccentPurple: Colors.Purple[600],
   colorBorderAccentMagenta: Colors.Magenta[600],
   colorBorderAccentGray: Colors.Neutral[600],
+  colorBorderAccentGrayBolder: Colors.Neutral[1100],
   colorBackgroundAccentRedSubtlest: Colors.Red[100],
   colorBackgroundAccentRedSubtler: Colors.Red[200],
   colorBackgroundAccentRedSubtle: Colors.Red[400],
