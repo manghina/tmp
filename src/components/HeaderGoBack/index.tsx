@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { View } from "react-native-ui-lib";
-import { ArrowDown } from "@app/screens/Register/ArrowDown";
+import { ArrowDown } from "@app/screens/UserRegister/ArrowDown";
 import { SafeAreaView } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { headerHeight } from "@app/theme/spacings/dimensions";

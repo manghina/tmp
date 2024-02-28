@@ -4,8 +4,8 @@ import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useCallback, useLayoutEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions, selectors } from "../../redux-store";
-import { ProfessionalRegisterStepCounter } from "./ProfessionalRegisterStepCounter";
+import { actions, selectors } from "@app/redux-store";
+import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 
 const provincesOptions = [
   {
@@ -386,21 +386,13 @@ export const useProfessionalRegister = () => {
     selectors.getProfessionalRegisterStepperCounter,
   );
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <ProfessionalRegisterStepCounter stepperCounter={stepperIndex} />
-      ),
-    });
-  }, [navigation, stepperIndex]);
-
   const formData = useForm<ProfessionalRegisterFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       firstName: "",
       lastName: "",
       birthDate: undefined,
-      phonePrefix: "+39",
+      phonePrefix: "",
       phoneNumber: "",
       professionalPaperPhoto: undefined,
       professionalRegistrationNumber: "",
@@ -472,6 +464,19 @@ export const useProfessionalRegister = () => {
     [email, password, confirmPassword],
   );
 
+  const currentStepFilled = useMemo(() => {
+    switch (stepperIndex) {
+      case 1:
+        return step1Filled;
+      case 2:
+        return step2Filled;
+      case 3:
+        return step3Filled;
+      default:
+        return false;
+    }
+  }, [stepperIndex, step1Filled, step2Filled, step3Filled]);
+
   const submitDisabled = useMemo(
     () =>
       !isDirty ||
@@ -529,6 +534,24 @@ export const useProfessionalRegister = () => {
     return (fields.filter(Boolean).length / fields.length) * 100;
   }, [email, password, confirmPassword]);
 
+  const currentStepCompletionPercentage = useMemo(() => {
+    switch (stepperIndex) {
+      case 1:
+        return firstStepCompletionPercentage;
+      case 2:
+        return secondStepCompletionPercentage;
+      case 3:
+        return thirdStepCompletionPercentage;
+      default:
+        return 0;
+    }
+  }, [
+    stepperIndex,
+    firstStepCompletionPercentage,
+    secondStepCompletionPercentage,
+    thirdStepCompletionPercentage,
+  ]);
+
   const triggerProfessionalRegisterSubmit = useMemo(
     () =>
       handleSubmit((data) => {
@@ -578,7 +601,13 @@ export const useProfessionalRegister = () => {
     navigation.navigate("CountryChooser");
   }, [navigation]);
 
-  console.log({ errors });
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderStepperCounter currentStep={stepperIndex} totalSteps={3} />
+      ),
+    });
+  }, [navigation, stepperIndex]);
 
   return {
     formData,
@@ -588,12 +617,8 @@ export const useProfessionalRegister = () => {
     stepperIndex,
     canGoToNextStep,
     goToCountryChooser,
-    firstStepCompletionPercentage,
-    secondStepCompletionPercentage,
-    thirdStepCompletionPercentage,
-    step1Filled,
-    step2Filled,
-    step3Filled,
+    currentStepCompletionPercentage,
+    currentStepFilled,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     triggerProfessionalRegisterSubmit,

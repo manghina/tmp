@@ -10,7 +10,7 @@ import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "@app/screens/Home";
 import { LoginOptionsScreen } from "@app/screens/LoginOptions";
-import { RegisterScreen } from "@app/screens/Register";
+import { UserRegisterScreen } from "src/screens/UserRegister";
 import { ArrowDown } from "@app/components/ArrowDown";
 import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
 
@@ -115,7 +115,7 @@ export const AppContent: FC = memo(({}) => {
           />
           <Stack.Screen
             name="Register"
-            component={RegisterScreen}
+            component={UserRegisterScreen}
             options={{
               title: "Registrati",
               headerTitleAlign: "center",

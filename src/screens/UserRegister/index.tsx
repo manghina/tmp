@@ -1,12 +1,14 @@
 import { View, Text, Button, Colors } from "react-native-ui-lib";
-import { useRegisterScreen } from "./index.hooks";
-import React from "react";
+import { useUserRegisterScreen } from "./index.hooks";
+import React, { memo } from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 
-export const RegisterScreen = () => {
+type UserRegisterScreenProps = {};
+
+export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
   const {
     formData,
     stepperCounter,
@@ -19,7 +21,7 @@ export const RegisterScreen = () => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
-  } = useRegisterScreen();
+  } = useUserRegisterScreen();
 
   return (
     <FormProvider {...formData}>
@@ -60,7 +62,11 @@ export const RegisterScreen = () => {
             }}
           ></View>
           <View flex paddingH-20 paddingT-20>
-            <FormTextField keyboardType={"email-address"} name="email" label="Email" />
+            <FormTextField
+              keyboardType={"email-address"}
+              name="email"
+              label="Email"
+            />
             <FormTextField name="password" label="Password" type="password" />
             <FormTextField
               name="confirmPassword"
@@ -93,4 +99,6 @@ export const RegisterScreen = () => {
       )}
     </FormProvider>
   );
-};
+});
+
+UserRegisterScreen.displayName = "UserRegisterScreen";

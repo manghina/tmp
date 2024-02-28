@@ -11,11 +11,10 @@ import React from "react";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
-import { Dimensions } from "@app/theme/spacings/dimensions";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
-import { dimensionsTokens } from "../../theme/spacings/tokens";
-import { textVariants } from "../../theme/typographies/variants";
+import { textVariants } from "@app/theme/typographies/variants";
+import { styles } from "./styles";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -26,210 +25,140 @@ export const ProfessionalRegisterScreen = () => {
     stepperIndex,
     canGoToNextStep,
     goToCountryChooser,
-    firstStepCompletionPercentage,
-    secondStepCompletionPercentage,
-    thirdStepCompletionPercentage,
-    step1Filled,
-    step2Filled,
-    step3Filled,
+    currentStepCompletionPercentage,
+    currentStepFilled,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     triggerProfessionalRegisterSubmit,
   } = useProfessionalRegister();
 
+  const renderStep1 = () => (
+    <View style={styles.fieldsColumn}>
+      <FormTextField name="firstName" label="Nome" />
+      <FormTextField name="lastName" label="Cognome" />
+      <FormDateTimePicker name="birthDate" label="Data di nascita" />
+      <View>
+        <Text style={{ ...textVariants.p2MediumNormal }}>
+          Numero di cellulare
+        </Text>
+        <View row style={{ width: "100%" }}>
+          <View style={{ width: "30%" }}>
+            <TouchableOpacity onPress={() => goToCountryChooser()}>
+              <FormTextField
+                editable={false}
+                value={"🌐 +"}
+                name="phonePrefix"
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={{ width: "70%" }}>
+            <FormTextField keyboardType={"phone-pad"} name="phoneNumber" />
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+  const renderStep2 = () => (
+    <View style={styles.fieldsColumn}>
+      <FormImagePicker
+        name="professionalPaperPhoto"
+        label="Carica foto libretto"
+      />
+      <FormTextField
+        name="professionalRegistrationNumber"
+        label="Numero iscrizione albo"
+      />
+      <FormNewScreenFilterableSelect
+        name="province"
+        label="Ordine dei medici della provincia di"
+        options={provincesOptions}
+        pageProps={{
+          pageTitle: "Seleziona sede",
+          pageDescription:
+            "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+          searchTextLabel: "Trova provincia",
+          listTitle: "Lista città",
+        }}
+      />
+      <FormNewScreenFilterableSelect
+        name="specialization"
+        label="Specializzazione"
+        options={professionsOptions}
+        pageProps={{
+          pageTitle: "Seleziona tipologia",
+          pageDescription:
+            "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+          searchTextLabel: "Trova specializzazione",
+          listTitle: "Lista professioni",
+        }}
+      />
+      <FormTextField name="officeLocation" label="Sede dello studio" />
+    </View>
+  );
+  const renderStep3 = () => (
+    <View style={styles.fieldsColumn}>
+      <FormTextField name="email" label="Indirizzo email" />
+      <FormTextField name="password" type="password" label="Password" />
+      <FormTextField
+        name="confirmPassword"
+        type="password"
+        label="Conferma password"
+      />
+    </View>
+  );
+
+  const renderStepControls = () => {
+    const isFirstStep = stepperIndex === 1;
+    const isLastStep = stepperIndex === 3;
+
+    return (
+      <>
+        <View style={styles.stepperControlsContainer}>
+          <Text center grayText={!currentStepFilled}>
+            {isLastStep ? "Iscrizione completata!" : "Ci sei quasi..."}
+          </Text>
+          <Button
+            style={styles.callToAction}
+            label={isLastStep ? "Accedi" : "Prosegui"}
+            onPress={
+              isLastStep
+                ? triggerProfessionalRegisterSubmit
+                : onNextStepButtonPressed
+            }
+            disabledBackgroundColor={Colors.disabledBlue}
+            disabled={isLastStep ? submitDisabled : !canGoToNextStep}
+          />
+        </View>
+        {!isFirstStep && (
+          <Text center underline onPress={onPreviousStepButtonPressed}>
+            Torna indietro
+          </Text>
+        )}
+      </>
+    );
+  };
+
   return (
     <FormProvider {...formData}>
-      {stepperIndex === 1 ? (
-        <View key="step1" height="100%">
-          <View
-            backgroundColor={Colors.buttonBlue}
-            style={{
-              width: `${firstStepCompletionPercentage}%`,
-              height: 4,
-            }}
-          />
-          <View
-            flex
-            paddingH-20
-            paddingT-20
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: dimensionsTokens.paddingXs,
-            }}
-          >
-            <FormTextField name="firstName" label="Nome" />
-            <FormTextField name="lastName" label="Cognome" />
-            <FormDateTimePicker name="birthDate" label="Data di nascita" />
-            <View>
-              <Text style={{ ...textVariants.p2MediumNormal }}>
-                Numero di cellulare
-              </Text>
-              <View row style={{ width: "100%" }}>
-                <View style={{ width: "30%" }}>
-                  <TouchableOpacity onPress={() => goToCountryChooser()}>
-                    <FormTextField
-                      editable={false}
-                      value={"🌐 +"}
-                      name="phonePrefix"
-                    />
-                  </TouchableOpacity>
-                </View>
-                <View style={{ width: "70%" }}>
-                  <FormTextField
-                    keyboardType={"phone-pad"}
-                    name="phoneNumber"
-                  />
-                </View>
-              </View>
-            </View>
-            <Text center grayText={!step1Filled}>
-              Ci sei quasi...
-            </Text>
-            <Button
-              BlueButton
-              label="Prosegui"
-              marginT-8
-              style={{ width: "100%" }}
-              onPress={onNextStepButtonPressed}
-              disabledBackgroundColor={Colors.disabledBlue}
-              //disabled={!canGoToNextStep}
-            />
-          </View>
-        </View>
-      ) : stepperIndex === 2 ? (
-        <View key="step2" height="100%">
-          <View
-            backgroundColor={Colors.buttonBlue}
-            style={{
-              width: `${secondStepCompletionPercentage}%`,
-              height: 4,
-            }}
-          />
-          <View flex paddingH-20 paddingT-10>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: Dimensions.small.spacing_050,
-              }}
-            >
-              <FormImagePicker
-                name="professionalPaperPhoto"
-                label="Carica foto libretto"
-              />
-              <FormTextField
-                name="professionalRegistrationNumber"
-                label="Numero iscrizione albo"
-              />
-              <FormNewScreenFilterableSelect
-                name="province"
-                label="Ordine dei medici della provincia di"
-                options={provincesOptions}
-                pageProps={{
-                  pageTitle: "Seleziona sede",
-                  pageDescription:
-                    "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
-                  searchTextLabel: "Trova provincia",
-                  listTitle: "Lista città",
-                }}
-              />
-              <FormNewScreenFilterableSelect
-                name="specialization"
-                label="Specializzazione"
-                options={professionsOptions}
-                pageProps={{
-                  pageTitle: "Seleziona tipologia",
-                  pageDescription:
-                    "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
-                  searchTextLabel: "Trova specializzazione",
-                  listTitle: "Lista professioni",
-                }}
-              />
-              <FormTextField name="officeLocation" label="Sede dello studio" />
-              <Text center grayText={!step2Filled} marginT-24>
-                Ci sei quasi...
-              </Text>
-            </View>
-            <Text
-              center
-              underline
-              default14Text
-              marginT-16
-              onPress={onPreviousStepButtonPressed}
-            >
-              Torna indietro
-            </Text>
-            <Button
-              BlueButton
-              label="Prosegui"
-              marginT-8
-              style={{ width: "100%" }}
-              onPress={onNextStepButtonPressed}
-              disabledBackgroundColor={Colors.disabledBlue}
-              disabled={!canGoToNextStep}
-            />
-          </View>
-        </View>
-      ) : stepperIndex === 3 ? (
-        <View
-          key="step3"
-          height="100%"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: dimensionsTokens.paddingSm,
-          }}
-        >
-          <View
-            backgroundColor={Colors.buttonBlue}
-            style={{
-              width: `${thirdStepCompletionPercentage}%`,
-              height: 4,
-            }}
-          />
-          <View flex paddingH-20 paddingT-10>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: Dimensions.small.spacing_050,
-              }}
-            >
-              <FormTextField name="email" label="Indirizzo email" />
-              <FormTextField name="password" type="password" label="Password" />
-              <FormTextField
-                name="confirmPassword"
-                type="password"
-                label="Conferma password"
-              />
-              <Text center grayText={!step3Filled} marginT-24>
-                Iscrizione completata!
-              </Text>
-            </View>
-            <Button
-              BlueButton
-              label="Iscriviti"
-              marginT-8
-              style={{ width: "100%" }}
-              onPress={triggerProfessionalRegisterSubmit}
-              disabledBackgroundColor={Colors.disabledBlue}
-              disabled={submitDisabled && false}
-            />
-            <Text
-              center
-              underline
-              default14Text
-              marginT-16
-              onPress={onPreviousStepButtonPressed}
-            >
-              Torna indietro
-            </Text>
-          </View>
-        </View>
-      ) : (
-        <View />
-      )}
+      <View
+        backgroundColor={Colors.buttonBlue}
+        style={{
+          width: `${currentStepCompletionPercentage}%`,
+          height: 4,
+        }}
+      />
+      <View style={styles.stepContent}>
+        {stepperIndex === 1 ? (
+          renderStep1()
+        ) : stepperIndex === 2 ? (
+          renderStep2()
+        ) : stepperIndex === 3 ? (
+          renderStep3()
+        ) : (
+          <View />
+        )}
+        {renderStepControls()}
+      </View>
     </FormProvider>
   );
 };
