@@ -324,6 +324,9 @@ interface ProfessionalRegisterFormData {
   province: string;
   specialization: string;
   officeLocation: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 const schema = yup.object().shape({
@@ -339,6 +342,12 @@ const schema = yup.object().shape({
   province: yup.string().required("Inserisci la tua provincia"),
   specialization: yup.string().required("Inserisci la tua specializzazione"),
   officeLocation: yup.string().required("Inserisci la tua sede"),
+  email: yup.string().required("Inserisci il tuo indirizzo email"),
+  password: yup.string().required("Inserisci la tua password"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Le password non corrispondono")
+    .required(),
 });
 
 export const useProfessionalRegister = () => {
@@ -365,6 +374,14 @@ export const useProfessionalRegister = () => {
       birthDate: undefined,
       phonePrefix: "",
       phoneNumber: "",
+      professionalPaperPhoto: undefined,
+      professionalRegistrationNumber: "",
+      province: "",
+      specialization: "",
+      officeLocation: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
@@ -374,8 +391,6 @@ export const useProfessionalRegister = () => {
     trigger,
     formState: { isDirty, isValid, isSubmitted },
   } = formData;
-
-  const submitDisabled = !isDirty || (isSubmitted && !isValid);
 
   const [firstName, lastName, birthDate, phonePrefix, phoneNumber] = useWatch({
     control,
@@ -397,6 +412,11 @@ export const useProfessionalRegister = () => {
       "specialization",
       "officeLocation",
     ],
+  });
+
+  const [email, password, confirmPassword] = useWatch({
+    control,
+    name: ["email", "password", "confirmPassword"],
   });
 
   const step1Filled = useMemo(
@@ -425,10 +445,20 @@ export const useProfessionalRegister = () => {
     ],
   );
 
-  /*const step3Filled = useMemo(
-    () => Boolean(newPassword) && Boolean(confirmNewPassword),
-    [newPassword, confirmNewPassword],
-  );*/
+  const step3Filled = useMemo(
+    () => Boolean(email) && Boolean(password) && Boolean(confirmPassword),
+    [email, password, confirmPassword],
+  );
+
+  const submitDisabled = useMemo(
+    () =>
+      !isDirty ||
+      (isSubmitted && !isValid) ||
+      !step1Filled ||
+      !step2Filled ||
+      !step3Filled,
+    [isDirty, isSubmitted, isValid, step1Filled, step2Filled, step3Filled],
+  );
 
   /*const clearFields = useCallback(() => {
     formData.setValue("recoveryPasswordToken", "");
@@ -451,10 +481,12 @@ export const useProfessionalRegister = () => {
         return step1Filled;
       case 2:
         return step2Filled;
+      case 3:
+        return step3Filled;
       default:
         return false;
     }
-  }, [stepperIndex, step1Filled, step2Filled]);
+  }, [stepperIndex, step1Filled, step2Filled, step3Filled]);
 
   const firstStepCompletionPercentage = useMemo(
     () =>
@@ -484,17 +516,18 @@ export const useProfessionalRegister = () => {
     officeLocation,
   ]);
 
-  /*const triggerProfessionalRegisterSubmit = useMemo(
+  const thirdStepCompletionPercentage = useMemo(() => {
+    const fields = [email, password, confirmPassword];
+    return (fields.filter(Boolean).length / fields.length) * 100;
+  }, [email, password, confirmPassword]);
+
+  const triggerProfessionalRegisterSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(
-          actions.postProfessionals.request({
-            //all fields
-          }),
-        );
+        console.log(data);
       }),
     [dispatch, handleSubmit],
-  );*/
+  );
 
   const onNextStepButtonPressed = useCallback(
     () =>
@@ -512,6 +545,7 @@ export const useProfessionalRegister = () => {
 
   return {
     formData,
+    submitDisabled,
     provincesOptions,
     professionsOptions,
     stepperIndex,
@@ -519,9 +553,12 @@ export const useProfessionalRegister = () => {
     goToCountryChooser,
     firstStepCompletionPercentage,
     secondStepCompletionPercentage,
+    thirdStepCompletionPercentage,
     step1Filled,
     step2Filled,
+    step3Filled,
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
+    triggerProfessionalRegisterSubmit,
   };
 };
