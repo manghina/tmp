@@ -11,13 +11,7 @@ const SweepCircleSvg = ({
   backgroundColor,
   ...props
 }: SweepCircleSvgProps) => (
-  <Svg
-    width={"100%"}
-    height={"100%"}
-    fill="none"
-    viewBox="0 0 32 32"
-    {...props}
-  >
+  <Svg width="100%" height="100%" fill="none" viewBox="0 0 32 32" {...props}>
     <Circle cx={16} cy={16} r={16} fill={backgroundColor ?? "#3C77E8"} />
     <Path
       fill={color ?? "#FEFEFE"}
