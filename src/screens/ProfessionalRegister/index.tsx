@@ -126,7 +126,7 @@ export const ProfessionalRegisterScreen = () => {
                 : onNextStepButtonPressed
             }
             disabledBackgroundColor={Colors.disabledBlue}
-            disabled={isLastStep ? submitDisabled : !canGoToNextStep}
+            disabled={isLastStep ? submitDisabled : !canGoToNextStep && false}
           />
         </View>
         {!isFirstStep && (
