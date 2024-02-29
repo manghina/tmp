@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  Colors,
-  TouchableOpacity,
-} from "react-native-ui-lib";
+import { View, Text, Button, Colors } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
 import React from "react";
 
@@ -20,11 +14,11 @@ export const ProfessionalRegisterScreen = () => {
   const {
     formData,
     submitDisabled,
+    phonePrefixOptions,
     provincesOptions,
     professionsOptions,
     stepperIndex,
     canGoToNextStep,
-    goToCountryChooser,
     currentStepCompletionPercentage,
     currentStepFilled,
     onNextStepButtonPressed,
@@ -43,13 +37,18 @@ export const ProfessionalRegisterScreen = () => {
         </Text>
         <View row style={{ width: "100%" }}>
           <View style={{ width: "30%" }}>
-            <TouchableOpacity onPress={() => goToCountryChooser()}>
-              <FormTextField
-                editable={false}
-                value={"🌐 +"}
-                name="phonePrefix"
-              />
-            </TouchableOpacity>
+            <FormNewScreenFilterableSelect
+              name="phonePrefix"
+              label=""
+              options={phonePrefixOptions}
+              pageProps={{
+                pageTitle: "Seleziona prefisso",
+                pageDescription:
+                  "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+                searchTextLabel: "Trova nazione",
+                listTitle: "Lista nazioni",
+              }}
+            />
           </View>
           <View style={{ width: "70%" }}>
             <FormTextField keyboardType={"phone-pad"} name="phoneNumber" />
