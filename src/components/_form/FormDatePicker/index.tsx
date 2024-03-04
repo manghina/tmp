@@ -1,16 +1,8 @@
 import React, { memo } from "react";
 import { useFormDatePicker } from "./index.hooks";
-import { DateTimePicker, TextFieldProps } from "react-native-ui-lib";
-
-const TextInputStyle: TextFieldProps["style"] = {
-  paddingTop: 16,
-  paddingLeft: 16,
-  paddingRight: 16,
-  paddingBottom: 16,
-  borderWidth: 1.5,
-  borderRadius: 12,
-  borderColor: "black",
-};
+import { DateTimePicker } from "react-native-ui-lib";
+import moment from "moment";
+import { BaseTextField } from "@app/components/_baseInputs/BaseTextField";
 
 export type FormDatePickerProps = {
   name: string;
@@ -23,17 +15,17 @@ export const FormDateTimePicker = memo(
 
     return (
       <DateTimePicker
-        marginT-8
-        grey10
         value={value}
-        label={label}
         onChange={handleChange}
-        style={{
-          ...TextInputStyle,
-        }}
-        enableErrors={!!error}
-        validationMessage={error ?? undefined}
         mode="date"
+        renderInput={(props) => (
+          <BaseTextField
+            value={value ? moment(value).format("DD/MM/YYYY") : ""}
+            label={label}
+            enableErrors={!!error}
+            validationMessage={error ?? undefined}
+          />
+        )}
       />
     );
   },

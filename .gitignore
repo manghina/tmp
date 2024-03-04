@@ -38,3 +38,5 @@ yarn-error.*
 .idea/
 ios/
 android/
+
+src/**/*.js

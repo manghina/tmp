@@ -11,8 +11,8 @@ import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 import { actions } from "../../redux-store";
 import { useDispatch } from "react-redux";
-import { RegisterStepCounter } from "./RegisterStepCounter";
 import moment from "moment";
+import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 
 interface SignUpFormData {
   firstName: string;
@@ -44,7 +44,7 @@ const schema = yup.object().shape({
   birthDate: yup.date().required("Inserisci la tua data di nascita"),
 });
 
-export const useRegisterScreen = () => {
+export const useUserRegisterScreen = () => {
   const dispatch = useDispatch();
 
   const [stepperCounter, setStepperCounter] = useState(1);
@@ -146,7 +146,7 @@ export const useRegisterScreen = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <RegisterStepCounter stepperCounter={stepperCounter} />
+        <HeaderStepperCounter currentStep={stepperCounter} totalSteps={2} />
       ),
     });
   }, [navigation, stepperCounter]);

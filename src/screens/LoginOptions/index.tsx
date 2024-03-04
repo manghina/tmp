@@ -4,6 +4,7 @@ import { useLoginOptionsScreen } from "./index.hooks";
 import { FormTextField } from "../../components/_form/FormTextField";
 import { FormProvider } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
+import { DoctorCard } from "../../components/DoctorCard";
 
 const headerBackgroundGraphictPercentageOverflow = 20;
 
