@@ -28,7 +28,7 @@ export const ProfessionalRegisterScreen = () => {
 
   const renderStep1 = () => (
     <View style={styles.fieldsColumn}>
-      <FormTextField key="firstName" name="firstName" label="Nome" />
+      <FormTextField key="name" name="name" label="Nome" />
       <FormTextField key="lastName" name="lastName" label="Cognome" />
       <FormDateTimePicker
         key="birthDate"
