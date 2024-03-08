@@ -262,12 +262,6 @@ export const useProfessionalRegister = () => {
   const triggerProfessionalRegisterSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        /* dispatch(
-          actions.postAccounts.request({
-            email: data.email,
-            password: data.password,
-          }),
-        ); */
         dispatch(
           actions.professionalRegistrationFormSubmitted({
             email: data.email,
@@ -281,28 +275,6 @@ export const useProfessionalRegister = () => {
             alboId: data.professionalRegistrationNumber,
           }),
         );
-        /* console.log({
-          email: data.email,
-          password: data.password,
-          name: data.name,
-          lastname: data.lastName,
-          birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
-          phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
-          specializations: [data.specialization],
-          city: data.officeLocation,
-          alboId: data.professionalRegistrationNumber,
-        }); */
-        /* dispatch(
-          actions.postProfessionals.request({
-            name: data.name,
-            lastname: data.lastName,
-            birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
-            phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
-            specializations: [data.specialization],
-            city: data.officeLocation,
-            alboId: data.professionalRegistrationNumber,
-          }),
-        ); */
       }),
     [dispatch, handleSubmit],
   );
