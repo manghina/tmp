@@ -1,4 +1,4 @@
-import { Specialization } from "../../../../models/Specialist";
+import { Specialization } from "../../../../models/common/DoctorCommon";
 import {
   apiActionBuilder,
   apiRequestPayloadBuilder,

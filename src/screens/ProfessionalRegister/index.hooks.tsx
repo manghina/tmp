@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
-import { Specialization } from "../../models/Specialist";
+import { Specialization } from "../../models/common/DoctorCommon";
 //import { Specialization } from "@app/models/common/DoctorCommon"; possiamo recuperare questo modello?
 
 interface ProfessionalRegisterFormData {
