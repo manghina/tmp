@@ -25,6 +25,7 @@ import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment"
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { CountryChooserScreen } from "@app/screens/CountryChooser";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
+import { ProfessionalHomeScreen } from "../../screens/ProfessionalHome";
 
 const Stack = createNativeStackNavigator();
 
@@ -141,6 +142,13 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="ProfessionalHome"
+            component={ProfessionalHomeScreen}
+            options={{
+              headerShown: false,
             }}
           />
           <Stack.Screen
