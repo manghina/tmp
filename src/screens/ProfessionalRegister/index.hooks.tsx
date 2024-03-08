@@ -13,6 +13,7 @@ import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
 import { Specialization } from "../../models/Specialist";
+//import { Specialization } from "@app/models/common/DoctorCommon"; possiamo recuperare questo modello?
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -55,7 +56,10 @@ const schema = yup.object().shape({
       "La password deve contenere almeno un carattere maiuscolo",
     )
     .matches(/[0-9]/, "La password deve contenere almeno un numero")
-    .matches(/[-!|]/, "La password deve contenere almeno uno tra -!|")
+    .matches(
+      /[-!|]/,
+      "La password deve contenere almeno uno tra -!|",
+    ) /* qui aggiungerei anche il "." */
     .required(),
   confirmPassword: yup
     .string()
@@ -87,11 +91,16 @@ export const useProfessionalRegister = () => {
     selectors.getProfessionalRegisterStepperCounter,
   );
 
+  // to show labels without underscores
   const professionsOptions = useMemo(() => {
-    return Object.entries(Specialization).map(([key, value]) => ({
-      value: value,
-      label: value,
-    }));
+    return Object.entries(Specialization).map(([key, value]) => {
+      const capLetter = value.charAt(0).toUpperCase();
+      const restString = value.slice(1).split("_").join(" ");
+      
+      const label = capLetter + restString;
+
+      return { value: value, label: label };
+    });
   }, []);
 
   const formData = useForm<ProfessionalRegisterFormData>({
