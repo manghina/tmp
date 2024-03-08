@@ -13,7 +13,6 @@ import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
 import { Specialization } from "../../models/common/DoctorCommon";
-//import { Specialization } from "@app/models/common/DoctorCommon"; possiamo recuperare questo modello?
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -42,7 +41,16 @@ const schema = yup.object().shape({
     .string()
     .required("Inserisci il tuo numero di registrazione"),
   province: yup.string().required("Inserisci la tua provincia"),
-  specialization: yup.string().required("Inserisci la tua specializzazione"),
+  specialization: yup
+    .string()
+    .required("Inserisci la tua specializzazione")
+    // to get the right profession value
+    .transform((value) => {
+      const capLetter = value.charAt(0).toLowerCase();
+      const restString = value.slice(1).split(" ").join("_");
+
+      return capLetter + restString;
+    }),
   officeLocation: yup.string().required("Inserisci la tua sede"),
   email: yup
     .string()
@@ -59,7 +67,7 @@ const schema = yup.object().shape({
     .matches(
       /[-!|]/,
       "La password deve contenere almeno uno tra -!|",
-    ) /* qui aggiungerei anche il "." */
+    ) /* @antoniogiordano qui aggiungerei anche il "." */
     .required(),
   confirmPassword: yup
     .string()
@@ -96,10 +104,10 @@ export const useProfessionalRegister = () => {
     return Object.entries(Specialization).map(([key, value]) => {
       const capLetter = value.charAt(0).toUpperCase();
       const restString = value.slice(1).split("_").join(" ");
-      
+
       const label = capLetter + restString;
 
-      return { value: value, label: label };
+      return { value: label, label: label };
     });
   }, []);
 

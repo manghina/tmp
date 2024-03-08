@@ -1,4 +1,4 @@
-/* questo è da rimuovere quindi ? */
+/* @antoniogiordano questo si può togliere quindi ? */
 
 import {
   apiActionBuilder,
