@@ -1,7 +1,7 @@
 import {
   phonePrefixOptions,
   provincesOptions,
-  professionsOptions,
+  //professionsOptions,
 } from "./constantData";
 import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
+import { Specialization } from "../../models/Specialist";
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -82,9 +83,16 @@ export const useProfessionalRegister = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const stepperIndex = useSelector(
+  const stepperIndex: number = useSelector(
     selectors.getProfessionalRegisterStepperCounter,
   );
+
+  const professionsOptions = useMemo(() => {
+    return Object.entries(Specialization).map(([key, value]) => ({
+      value: value,
+      label: value,
+    }));
+  }, []);
 
   const formData = useForm<ProfessionalRegisterFormData>({
     resolver: yupResolver(schema),
@@ -254,9 +262,14 @@ export const useProfessionalRegister = () => {
   const triggerProfessionalRegisterSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        console.log(data);
+        /* dispatch(
+          actions.postAccounts.request({
+            email: data.email,
+            password: data.password,
+          }),
+        ); */
         dispatch(
-          actions.postAdminProfessionals.request({
+          actions.professionalRegistrationFormSubmitted({
             email: data.email,
             password: data.password,
             name: data.name,
@@ -268,6 +281,28 @@ export const useProfessionalRegister = () => {
             alboId: data.professionalRegistrationNumber,
           }),
         );
+        /* console.log({
+          email: data.email,
+          password: data.password,
+          name: data.name,
+          lastname: data.lastName,
+          birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
+          phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
+          specializations: [data.specialization],
+          city: data.officeLocation,
+          alboId: data.professionalRegistrationNumber,
+        }); */
+        /* dispatch(
+          actions.postProfessionals.request({
+            name: data.name,
+            lastname: data.lastName,
+            birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
+            phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
+            specializations: [data.specialization],
+            city: data.officeLocation,
+            alboId: data.professionalRegistrationNumber,
+          }),
+        ); */
       }),
     [dispatch, handleSubmit],
   );

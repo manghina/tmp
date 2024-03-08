@@ -9,3 +9,4 @@ export { default as postUsers } from "./post-users";
 export { default as postUsersMeRequests } from "./post-users-me-requests";
 export { default as postUsersMeRequestsMessagesByRequestId } from "./post-users-me-requests-messages-by-request-id";
 export { default as postAdminProfessionals } from "./post-admin-professionals";
+export { default as postProfessionals } from "./post-professionals";
