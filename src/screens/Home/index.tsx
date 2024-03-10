@@ -1,4 +1,4 @@
-import {View, Text, Button, Image, Modal, Colors} from "react-native-ui-lib";
+import { View, Text, Button, Image, Modal, Colors } from "react-native-ui-lib";
 import { useNavigation } from "@react-navigation/native";
 import SignupSVG from "@assets/icons/signup-button.svg";
 import GoogleSVG from "@assets/icons/google.svg";
@@ -55,10 +55,28 @@ export const HomeScreen = () => {
             </View>
           </Button>
           <Button
-              style={{  paddingVertical: 16, borderWidth: 0, backgroundColor: Colors.orange10 }}
-              onPress={() => { navigation.navigate("ProfessionalRegister") }}
+            style={{
+              paddingVertical: 16,
+              borderWidth: 0,
+              backgroundColor: Colors.orange10,
+            }}
+            onPress={() => {
+              navigation.navigate("ProfessionalRegister");
+            }}
           >
-            <Text style={{ color: "#FFF" }}>Doctors register</Text>
+            <Text style={{ color: "#FFF" }}>Professional register</Text>
+          </Button>
+          <Button
+            style={{
+              paddingVertical: 16,
+              borderWidth: 0,
+              backgroundColor: Colors.orange10,
+            }}
+            onPress={() => {
+              navigation.navigate("ProfessionalHome");
+            }}
+          >
+            <Text style={{ color: "#FFF" }}>Professional home</Text>
           </Button>
           <Text marginT-16 regular14>
             in alternativa
