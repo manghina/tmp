@@ -3,6 +3,8 @@ import { useProfessionalHomeScreen } from "./index.hooks";
 import { styles } from "./styles";
 import { Image, SafeAreaView, ScrollView } from "react-native";
 import SweepLogoSvg from "../../components/SweepLogoSvg";
+import CalendarCheckIcon from "../../components/SvgIcons/CalendarCheckIcon";
+import WalletIcon from "../../components/SvgIcons/WalletIcon";
 
 export const ProfessionalHomeScreen = () => {
   const { selectedHistoryBox, setSelectedHistoryBox } =
@@ -16,7 +18,7 @@ export const ProfessionalHomeScreen = () => {
           width={40}
           height={40}
           source={{
-            uri: "https://www.freeiconspng.com/download/65",
+            uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
           }}
         />
       </View>
@@ -34,7 +36,7 @@ export const ProfessionalHomeScreen = () => {
               <Text style={styles.dashboard}>Dashboard</Text>
             </View>
             <View>
-              <View style={styles.pageDashboardContent}>
+              <View style={styles.pageDashboardHeaderRight}>
                 <TouchableOpacity onPress={() => setSelectedHistoryBox("30G")}>
                   <View
                     key={"30G"}
@@ -96,6 +98,30 @@ export const ProfessionalHomeScreen = () => {
                   </View>
                 </TouchableOpacity>
               </View>
+            </View>
+          </View>
+          <View style={styles.dashboardContentContainer}>
+            <View style={styles.dashboardBox}>
+              <Image
+                style={styles.dashboardBoxBackgroundImage}
+                source={require("@assets/img/calendar.png")}
+              ></Image>
+              <CalendarCheckIcon color={"#1D7AFC"}></CalendarCheckIcon>
+              <Text style={styles.dashboardBoxTitle}>Prenotazioni</Text>
+              <Text style={styles.dashboardBoxValue}>23</Text>
+              <Text style={styles.dashboardBoxNote}>0 richieste attive</Text>
+            </View>
+            <View style={styles.dashboardBox}>
+              <Image
+                style={styles.dashboardBoxBackgroundImage}
+                source={require("@assets/img/wallet.png")}
+              ></Image>
+              <WalletIcon color={"#1D7AFC"}></WalletIcon>
+              <Text style={styles.dashboardBoxTitle}>Incassato</Text>
+              <Text style={styles.dashboardBoxValue}>€ 10.240</Text>
+              <Text style={styles.dashboardBoxNote}>
+                € 2.438 negli ultimi 7 gg
+              </Text>
             </View>
           </View>
         </View>

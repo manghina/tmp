@@ -5,6 +5,7 @@ import { Dimensions, headerHeight } from "@app/theme/spacings/dimensions";
 
 export const styles = StyleSheet.create({
   pageHeader: {
+    backgroundColor: "#FEFEFE",
     height: headerHeight,
     paddingHorizontal: dimensionsTokens.paddingSm,
     flexDirection: "row",
@@ -12,6 +13,7 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   pageContainer: {
+    backgroundColor: "#FEFEFE",
     paddingTop: dimensionsTokens.paddingXs,
     paddingBottom: dimensionsTokens.paddingXs,
     paddingHorizontal: dimensionsTokens.paddingSm,
@@ -24,13 +26,44 @@ export const styles = StyleSheet.create({
     marginBottom: dimensionsTokens.paddingMd,
   },
   pageDashboardHeader: {
-    alignItems: "flex-end",
     flexDirection: "row",
     justifyContent: "space-between",
     gap: Dimensions.small.spacing_100,
   },
-  pageDashboardContent: {
+  pageDashboardHeaderRight: {
     flexDirection: "row",
+  },
+  dashboardContentContainer: {
+    flexDirection: "row",
+    gap: Dimensions.small.spacing_100,
+  },
+  dashboardBox: {
+    flexBasis: "50%",
+    flexDirection: "column",
+    padding: dimensionsTokens.paddingXs,
+    borderRadius: 8,
+    backgroundColor: "#F7F8F9",
+  },
+  dashboardBoxBackgroundImage: {
+    position: "absolute",
+    zIndex: -1,
+    right: 0,
+    bottom: 0,
+    width: "100%",
+    height: "100%",
+  },
+  dashboardBoxTitle: {
+    marginBottom: dimensionsTokens.paddingXs,
+    ...textVariants.p1MediumNormal,
+    color: "#0055CC",
+  },
+  dashboardBoxValue: {
+    ...textVariants.h5CondensedBoldItalic,
+    color: "#172B4D",
+  },
+  dashboardBoxNote: {
+    ...textVariants.p3MediumNormal,
+    color: "#626F86",
   },
   historyBox: {
     width: 56,
