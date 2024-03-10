@@ -23,6 +23,38 @@ export const styles = StyleSheet.create({
     gap: Dimensions.small.spacing_025,
     marginBottom: dimensionsTokens.paddingMd,
   },
+  pageDashboardHeader: {
+    alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: Dimensions.small.spacing_100,
+  },
+  pageDashboardContent: {
+    flexDirection: "row",
+  },
+  historyBox: {
+    width: 56,
+    height: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  selectedHistoryBox: {
+    width: 56,
+    height: 24,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 8,
+    borderWidth: 1.5,
+    borderColor: "#0C66E4",
+  },
+  historyBoxText: {
+    ...textVariants.p2MediumNormal,
+    color: "#626F86",
+  },
+  selectedHistoryBoxText: {
+    ...textVariants.p2BoldNormal,
+    color: "#0C66E4",
+  },
   pageTitle: {
     ...textVariants.h3CondensedBlackNormal,
   },
@@ -50,7 +82,7 @@ export const styles = StyleSheet.create({
   },
   detailLabel: { ...textVariants.p1MediumNormal },
   detailValue: { ...textVariants.p1CondensedBoldNormal },
-  sumRecap: {
+  dashboard: {
     ...textVariants.h6CondensedBlackNormal,
   },
   paymentMethodsContainer: {

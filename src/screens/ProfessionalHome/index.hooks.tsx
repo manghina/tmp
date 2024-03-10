@@ -1,3 +1,7 @@
+import { useState } from "react";
+
 export const useProfessionalHomeScreen = () => {
-  return {};
+  const [selectedHistoryBox, setSelectedHistoryBox] = useState("30G");
+
+  return { selectedHistoryBox, setSelectedHistoryBox };
 };
