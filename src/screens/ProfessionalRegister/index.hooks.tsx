@@ -1,5 +1,6 @@
 import {
   phonePrefixOptions,
+  professionsOptions,
   provincesOptions,
   //professionsOptions,
 } from "./constantData";
@@ -12,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
-import { Specialization } from "../../models/common/DoctorCommon";
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -41,16 +41,7 @@ const schema = yup.object().shape({
     .string()
     .required("Inserisci il tuo numero di registrazione"),
   province: yup.string().required("Inserisci la tua provincia"),
-  specialization: yup
-    .string()
-    .required("Inserisci la tua specializzazione")
-    // to get the right profession value
-    .transform((value) => {
-      const capLetter = value.charAt(0).toLowerCase();
-      const restString = value.slice(1).split(" ").join("_");
-
-      return capLetter + restString;
-    }),
+  specialization: yup.string().required("Inserisci la tua specializzazione"),
   officeLocation: yup.string().required("Inserisci la tua sede"),
   email: yup
     .string()
@@ -98,18 +89,6 @@ export const useProfessionalRegister = () => {
   const stepperIndex: number = useSelector(
     selectors.getProfessionalRegisterStepperCounter,
   );
-
-  // to show labels without underscores
-  const professionsOptions = useMemo(() => {
-    return Object.entries(Specialization).map(([key, value]) => {
-      const capLetter = value.charAt(0).toUpperCase();
-      const restString = value.slice(1).split("_").join(" ");
-
-      const label = capLetter + restString;
-
-      return { value: label, label: label };
-    });
-  }, []);
 
   const formData = useForm<ProfessionalRegisterFormData>({
     resolver: yupResolver(schema),
