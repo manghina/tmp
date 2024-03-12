@@ -5,6 +5,9 @@ import { Image, SafeAreaView, ScrollView } from "react-native";
 import SweepLogoSvg from "../../components/SweepLogoSvg";
 import CalendarCheckIcon from "../../components/SvgIcons/CalendarCheckIcon";
 import WalletIcon from "../../components/SvgIcons/WalletIcon";
+import EllipseIcon from "../../components/SvgIcons/EllipseIcon";
+import ArrowUpIcon from "../../components/SvgIcons/ArrowUpIcon";
+import ChatIcon from "../../components/SvgIcons/ChatIcon";
 
 export const ProfessionalHomeScreen = () => {
   const { selectedHistoryBox, setSelectedHistoryBox } =
@@ -33,7 +36,7 @@ export const ProfessionalHomeScreen = () => {
           </View>
           <View style={styles.pageDashboardHeader}>
             <View>
-              <Text style={styles.dashboard}>Dashboard</Text>
+              <Text style={styles.sectionTitle}>Dashboard</Text>
             </View>
             <View>
               <View style={styles.pageDashboardHeaderRight}>
@@ -124,6 +127,46 @@ export const ProfessionalHomeScreen = () => {
               </Text>
             </View>
           </View>
+          <View style={styles.bookingsHeader}>
+            <View style={styles.bookingsHeaderLeft}>
+              <Text style={styles.sectionTitle}>Prenotazioni in corso</Text>
+              <EllipseIcon color={"#1D7AFC"} />
+              <EllipseIcon color={"#E56910"} />
+            </View>
+            <ArrowUpIcon color={"#44546F"} />
+          </View>
+          <View style={styles.bookingList}>
+            <View style={styles.bookingListItem}>
+              <View>
+                <ChatIcon color={"#1D7AFC"} />
+              </View>
+              <View>
+                <View style={styles.bookingListItemHeader}>
+                  <Text style={styles.bookingListItemTitle}>
+                    Titolo della query
+                  </Text>
+                  <Text style={styles.bookingListItemTimeLeftText}>
+                    - 12:00
+                  </Text>
+                </View>
+                <Text style={styles.bookingListItemContentText}>
+                  12/12/2021
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.bookingsHeader}>
+            <View style={styles.bookingsHeaderLeft}>
+              <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
+            </View>
+            <ArrowUpIcon color={"#44546F"} />
+          </View>
+          <Text style={styles.helpSection}>
+            Bisogno di supporto?{" "}
+            <Text style={styles.link} onPress={() => console.log("Tutorial")}>
+              Guarda i tutorial
+            </Text>
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>

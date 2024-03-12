@@ -149,6 +149,9 @@ export const AppContent: FC = memo(({}) => {
             component={ProfessionalHomeScreen}
             options={{
               headerShown: false,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
