@@ -21,6 +21,21 @@ export const userStore = createSlice({
         birthDate: string;
       }>,
     ) => {},
+    professionalRegistrationFormSubmitted: (
+      state,
+      action: PayloadAction<{
+        name: string;
+        lastName: string;
+        birthDate: Date;
+        phones: string[];
+        specializations: string[];
+        city: string;
+        alboId: string;
+        email: string;
+        password: string;
+        //professionalPaperPhoto: any;
+      }>,
+    ) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(

@@ -1,8 +1,5 @@
-import {View, Text, Button, Image, Modal, Colors} from "react-native-ui-lib";
+import { View, Text, Button, Image, Modal, Colors } from "react-native-ui-lib";
 import { useNavigation } from "@react-navigation/native";
-import SignupSVG from "@assets/icons/signup-button.svg";
-import GoogleSVG from "@assets/icons/google.svg";
-import AppleSVG from "@assets/icons/apple.svg";
 import WebView from "react-native-webview";
 import HomeBgImage from "@assets/img/home-screen-welcome.png";
 import { useState } from "react";
@@ -50,20 +47,29 @@ export const HomeScreen = () => {
             style={{ width: "100%" }}
             onPress={() => navigation.navigate("Register")}
           >
-            <View>
-              <SignupSVG />
-            </View>
+            {/* <SignupSVG /> */}
           </Button>
           <Button
-              style={{  paddingVertical: 16, borderWidth: 0, backgroundColor: Colors.orange10 }}
-              onPress={() => { navigation.navigate("ProfessionalRegister") }}
+            marginT-20
+            style={{
+              paddingVertical: 16,
+              borderWidth: 0,
+              backgroundColor: Colors.orange10,
+              width: "100%",
+            }}
+            onPress={() => {
+              navigation.navigate("ProfessionalRegister");
+            }}
           >
-            <Text style={{ color: "#FFF" }}>Doctors register</Text>
+            <Text style={{ color: "#FFF" }}>Registrazione Dottore</Text>
           </Button>
+          {/*
           <Text marginT-16 regular14>
             in alternativa
           </Text>
+             */}
         </View>
+        {/*
         <Button
           GrayButton
           iconSource={GoogleSVG}
@@ -84,6 +90,7 @@ export const HomeScreen = () => {
           style={{ width: "100%", height: 52 }}
           onPress={() => {}}
         />
+           */}
         <Text default14 marginT-24>
           Hai già un profilo?{" "}
           <Text

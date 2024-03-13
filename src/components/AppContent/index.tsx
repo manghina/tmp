@@ -23,7 +23,6 @@ import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessio
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
-import { CountryChooserScreen } from "@app/screens/CountryChooser";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 
 const Stack = createNativeStackNavigator();
@@ -138,16 +137,6 @@ export const AppContent: FC = memo(({}) => {
                 fontSize: 32,
                 color: Colors.blackText,
               },
-              animationTypeForReplace: "push",
-              animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
-            }}
-          />
-          <Stack.Screen
-            name="CountryChooser"
-            component={CountryChooserScreen}
-            options={{
-              headerTitle: "",
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
