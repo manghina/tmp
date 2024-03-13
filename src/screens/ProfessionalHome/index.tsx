@@ -6,15 +6,15 @@ import SweepLogoSvg from "../../components/SweepLogoSvg";
 import CalendarCheckIcon from "../../components/SvgIcons/CalendarCheckIcon";
 import WalletIcon from "../../components/SvgIcons/WalletIcon";
 import EllipseIcon from "../../components/SvgIcons/EllipseIcon";
-import ArrowUpIcon from "../../components/SvgIcons/ArrowUpIcon";
-import ChatIcon from "../../components/SvgIcons/ChatIcon";
+import { BookingItem } from "../../components/BookingItem";
+import ExpandListIcon from "../../components/SvgIcons/ExpandListIcon";
 
 export const ProfessionalHomeScreen = () => {
   const { selectedHistoryBox, setSelectedHistoryBox } =
     useProfessionalHomeScreen();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.page}>
       <View style={styles.pageHeader}>
         <SweepLogoSvg width={110} height={32} color={"#000"}></SweepLogoSvg>
         <Image
@@ -130,36 +130,26 @@ export const ProfessionalHomeScreen = () => {
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Prenotazioni in corso</Text>
-              <EllipseIcon color={"#1D7AFC"} />
               <EllipseIcon color={"#E56910"} />
+              <EllipseIcon color={"#1D7AFC"} />
             </View>
-            <ArrowUpIcon color={"#44546F"} />
+            <ExpandListIcon color={"#44546F"} />
           </View>
           <View style={styles.bookingList}>
-            <View style={styles.bookingListItem}>
-              <View>
-                <ChatIcon color={"#1D7AFC"} />
-              </View>
-              <View style={styles.bookingListItemContent}>
-                <View style={styles.bookingListItemHeader}>
-                  <Text style={styles.bookingListItemTitle}>
-                    Titolo della query
-                  </Text>
-                  <Text style={styles.bookingListItemTimeLeftText}>
-                    - 12:00
-                  </Text>
-                </View>
-                <Text style={styles.bookingListItemContentText}>
-                  12/12/2021
-                </Text>
-              </View>
-            </View>
+            <BookingItem
+              bookingType={"scheduled"}
+              title={"Titolo query"}
+              bookingText={
+                "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+              }
+              notes={"- 12:00 min"}
+            />
           </View>
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
             </View>
-            <ArrowUpIcon color={"#44546F"} />
+            <ExpandListIcon color={"#44546F"} />
           </View>
           <Text style={styles.helpSection}>
             Bisogno di supporto?{" "}

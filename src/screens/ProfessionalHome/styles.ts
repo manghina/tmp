@@ -4,6 +4,10 @@ import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions, headerHeight } from "@app/theme/spacings/dimensions";
 
 export const styles = StyleSheet.create({
+  page: {
+    height: "100%",
+    backgroundColor: "white",
+  },
   pageHeader: {
     backgroundColor: "#FEFEFE",
     height: headerHeight,
@@ -98,35 +102,7 @@ export const styles = StyleSheet.create({
   },
   bookingList: {
     flexDirection: "column",
-    gap: dimensionsTokens.paddingXs,
-  },
-  bookingListItem: {
-    backgroundColor: "#e9f2ff",
-    borderRadius: 8,
-    flexDirection: "row",
-    gap: dimensionsTokens.paddingXs,
-    padding: dimensionsTokens.paddingXs,
-  },
-  bookingListItemContent: {
-    flex: 1,
-  },
-  bookingListItemHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  bookingListItemTimeLeftText: {
-    color: "#A54800",
-    ...textVariants.p2MediumNormal,
-  },
-  bookingListItemTitle: {
-    color: "#0C66E4",
-    ...textVariants.p1BoldNormal,
-  },
-  bookingListItemContentText: {
-    color: "#172B4D",
-    marginTop: 6,
-    ...textVariants.p2MediumItalic,
+    gap: Dimensions.small.spacing_100,
   },
   helpSection: {
     marginTop: dimensionsTokens.paddingMd,
