@@ -5,11 +5,16 @@ export const useProfessionalHomeScreen = () => {
   const [selectedHistoryBox, setSelectedHistoryBox] = useState("30G");
   const [isBookingListExpanded, setIsBookingListExpanded] = useState(true);
   const [iconRotation] = useState(new Animated.Value(0));
-  const [listHeight] = useState(new Animated.Value(250));
+  const [listHeight] = useState(new Animated.Value(1));
 
   const rotateIcon = iconRotation.interpolate({
     inputRange: [0, 1],
     outputRange: ["0deg", "180deg"],
+  });
+
+  const listExpand = listHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0%", "100%"],
   });
 
   const toggleBookingList = () => {
@@ -21,8 +26,8 @@ export const useProfessionalHomeScreen = () => {
         useNativeDriver: false,
       }),
       Animated.timing(listHeight, {
-        toValue: isBookingListExpanded ? 0 : 250,
-        duration: 500,
+        toValue: !isBookingListExpanded ? 1 : 0,
+        duration: 300,
         useNativeDriver: false,
       }),
     ]).start();
@@ -34,6 +39,7 @@ export const useProfessionalHomeScreen = () => {
     isBookingListExpanded,
     rotateIcon,
     listHeight,
+    listExpand,
     toggleBookingList,
   };
 };
