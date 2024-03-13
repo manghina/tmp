@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { Button, Text, View } from "react-native-ui-lib";
+import { Text, View } from "react-native-ui-lib";
 import { useRequestConfirmPaymentScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./styles";
-import { CheckoutButton } from "../../components/CheckoutButton";
+import { CheckoutButton } from "@app/components/CheckoutButton";
 
 const detailsContent = [
   {
