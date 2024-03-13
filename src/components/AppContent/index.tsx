@@ -72,6 +72,9 @@ export const AppContent: FC = memo(({}) => {
             component={HomeScreen}
             options={{
               headerShown: false,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "#97B5Ed",
             }}
           />
           <Stack.Screen
@@ -79,6 +82,9 @@ export const AppContent: FC = memo(({}) => {
             component={LoginOptionsScreen}
             options={{
               headerShown: false,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "#D8E0F2",
             }}
           />
           <Stack.Screen
@@ -94,6 +100,9 @@ export const AppContent: FC = memo(({}) => {
               },
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -103,6 +112,9 @@ export const AppContent: FC = memo(({}) => {
               title: "",
               header: () => <HeaderGoBack />,
               animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -126,6 +138,9 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -142,6 +157,9 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -162,6 +180,9 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
