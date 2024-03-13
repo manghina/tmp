@@ -61,7 +61,7 @@ export const HomeScreen = () => {
               navigation.navigate("ProfessionalRegister");
             }}
           >
-            <Text style={{ color: "#FFF" }}>Registrati come medico</Text>
+            <Text style={{ color: "#FFF" }}>Registrazione Dottore</Text>
           </Button>
           {/*
           <Text marginT-16 regular14>

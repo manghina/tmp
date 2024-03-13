@@ -1,3 +1,9 @@
+import {
+  phonePrefixOptions,
+  professionsOptions,
+  provincesOptions,
+  //professionsOptions,
+} from "./constantData";
 import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,315 +12,10 @@ import React, { useCallback, useLayoutEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
-
-const provincesOptions = [
-  {
-    label: "Agrigento",
-    value: "AG",
-  },
-  {
-    label: "Alessandria",
-    value: "AL",
-  },
-  {
-    label: "Ancona",
-    value: "AN",
-  },
-  {
-    label: "Aosta",
-    value: "AO",
-  },
-  {
-    label: "Arezzo",
-    value: "AR",
-  },
-  {
-    label: "Ascoli Piceno",
-    value: "AP",
-  },
-  {
-    label: "Asti",
-    value: "AT",
-  },
-  {
-    label: "Avellino",
-    value: "AV",
-  },
-  {
-    label: "Bari",
-    value: "BA",
-  },
-  {
-    label: "Barletta-Andria-Trani",
-    value: "BT",
-  },
-  {
-    label: "Belluno",
-    value: "BL",
-  },
-  {
-    label: "Benevento",
-    value: "BN",
-  },
-  {
-    label: "Bergamo",
-    value: "BG",
-  },
-  {
-    label: "Biella",
-    value: "BI",
-  },
-  {
-    label: "Bologna",
-    value: "BO",
-  },
-  {
-    label: "Bolzano",
-    value: "BZ",
-  },
-  {
-    label: "Brescia",
-    value: "BS",
-  },
-  {
-    label: "Brindisi",
-    value: "BR",
-  },
-  {
-    label: "Cagliari",
-    value: "CA",
-  },
-  {
-    label: "Caltanissetta",
-    value: "CL",
-  },
-  {
-    label: "Campobasso",
-    value: "CB",
-  },
-  {
-    label: "Carbonia-Iglesias",
-    value: "CI",
-  },
-  {
-    label: "Caserta",
-    value: "CE",
-  },
-  {
-    label: "Catania",
-    value: "CT",
-  },
-  {
-    label: "Catanzaro",
-    value: "CZ",
-  },
-  {
-    label: "Chieti",
-    value: "CH",
-  },
-  {
-    label: "Como",
-    value: "CO",
-  },
-  {
-    label: "Cosenza",
-    value: "CS",
-  },
-  {
-    label: "Cremona",
-    value: "CR",
-  },
-  {
-    label: "Crotone",
-    value: "KR",
-  },
-  {
-    label: "Cuneo",
-    value: "CN",
-  },
-  {
-    label: "Enna",
-    value: "EN",
-  },
-  {
-    label: "Fermo",
-    value: "FM",
-  },
-  {
-    label: "Ferrara",
-    value: "FE",
-  },
-  {
-    label: "Firenze",
-    value: "FI",
-  },
-  {
-    label: "Foggia",
-    value: "FG",
-  },
-  {
-    label: "Forlì-Cesena",
-    value: "FC",
-  },
-  {
-    label: "Frosinone",
-    value: "FR",
-  },
-  {
-    label: "Genova",
-    value: "GE",
-  },
-  {
-    label: "Gorizia",
-    value: "GO",
-  },
-  {
-    label: "Grosseto",
-    value: "GR",
-  },
-  {
-    label: "Imperia",
-    value: "IM",
-  },
-  {
-    label: "Isernia",
-    value: "IS",
-  },
-  {
-    label: "La Spezia",
-    value: "SP",
-  },
-  {
-    label: "L'Aquila",
-    value: "AQ",
-  },
-  {
-    label: "Latina",
-    value: "LT",
-  },
-  {
-    label: "Lecce",
-    value: "LE",
-  },
-  {
-    label: "Lecco",
-    value: "LC",
-  },
-  {
-    label: "Livorno",
-    value: "LI",
-  },
-  {
-    label: "Lodi",
-    value: "LO",
-  },
-  {
-    label: "Lucca",
-    value: "LU",
-  },
-  {
-    label: "Macerata",
-    value: "MC",
-  },
-  {
-    label: "Mantova",
-    value: "MN",
-  },
-  {
-    label: "Massa-Carrara",
-    value: "MS",
-  },
-  {
-    label: "Matera",
-    value: "MT",
-  },
-];
-
-const professionsOptions = [
-  {
-    label: "Medico",
-    value: "Medico",
-  },
-  {
-    label: "Infermiere",
-    value: "Infermiere",
-  },
-  {
-    label: "Chirurgo",
-    value: "Chirurgo",
-  },
-  {
-    label: "Dentista",
-    value: "Dentista",
-  },
-  {
-    label: "Farmacista",
-    value: "Farmacista",
-  },
-  {
-    label: "Ostetrica",
-    value: "Ostetrica",
-  },
-  {
-    label: "Fisioterapista",
-    value: "Fisioterapista",
-  },
-  {
-    label: "Psicologo",
-    value: "Psicologo",
-  },
-  {
-    label: "Dietista",
-    value: "Dietista",
-  },
-  {
-    label: "Radiologo",
-    value: "Radiologo",
-  },
-  {
-    label: "Biologo",
-    value: "Biologo",
-  },
-  {
-    label: "Nutrizionista",
-    value: "Nutrizionista",
-  },
-  {
-    label: "Optometrista",
-    value: "Optometrista",
-  },
-  {
-    label: "Logopedista",
-    value: "Logopedista",
-  },
-  {
-    label: "Podologo",
-    value: "Podologo",
-  },
-  {
-    label: "Terapista occupazionale",
-    value: "Terapista occupazionale",
-  },
-  {
-    label: "Ortopedico",
-    value: "Ortopedico",
-  },
-  {
-    label: "Anestesista",
-    value: "Anestesista",
-  },
-  {
-    label: "Cardiologo",
-    value: "Cardiologo",
-  },
-  {
-    label: "Neurologo",
-    value: "Neurologo",
-  },
-];
+import moment from "moment/moment";
 
 interface ProfessionalRegisterFormData {
-  firstName: string;
+  name: string;
   lastName: string;
   birthDate: Date;
   phonePrefix: string;
@@ -330,7 +31,7 @@ interface ProfessionalRegisterFormData {
 }
 
 const schema = yup.object().shape({
-  firstName: yup.string().required("Inserisci il tuo nome"),
+  name: yup.string().required("Inserisci il tuo nome"),
   lastName: yup.string().required("Inserisci il tuo cognome"),
   birthDate: yup.date().required("Inserisci la tua data di nascita"),
   phonePrefix: yup.string().required("Scegli il prefisso telefonico"),
@@ -354,7 +55,10 @@ const schema = yup.object().shape({
       "La password deve contenere almeno un carattere maiuscolo",
     )
     .matches(/[0-9]/, "La password deve contenere almeno un numero")
-    .matches(/[-!|]/, "La password deve contenere almeno uno tra -!|")
+    .matches(
+      /[-!|]/,
+      "La password deve contenere almeno uno tra -!|",
+    ) /* @antoniogiordano qui aggiungerei anche il "." */
     .required(),
   confirmPassword: yup
     .string()
@@ -363,7 +67,7 @@ const schema = yup.object().shape({
 });
 
 const firstStepFieldKeys = [
-  "firstName",
+  "name",
   "lastName",
   "birthDate",
   "phonePrefix",
@@ -382,14 +86,14 @@ export const useProfessionalRegister = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const stepperIndex = useSelector(
+  const stepperIndex: number = useSelector(
     selectors.getProfessionalRegisterStepperCounter,
   );
 
   const formData = useForm<ProfessionalRegisterFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      firstName: "",
+      name: "",
       lastName: "",
       birthDate: undefined,
       phonePrefix: "",
@@ -412,7 +116,7 @@ export const useProfessionalRegister = () => {
     formState: { isDirty, isValid, isSubmitted, errors },
   } = formData;
 
-  const [firstName, lastName, birthDate, phonePrefix, phoneNumber] = useWatch({
+  const [name, lastName, birthDate, phonePrefix, phoneNumber] = useWatch({
     control,
     name: firstStepFieldKeys,
   });
@@ -435,12 +139,12 @@ export const useProfessionalRegister = () => {
 
   const step1Filled = useMemo(
     () =>
-      Boolean(firstName) &&
+      Boolean(name) &&
       Boolean(lastName) &&
       Boolean(birthDate) &&
       Boolean(phonePrefix) &&
       Boolean(phoneNumber),
-    [firstName, lastName, birthDate, phonePrefix, phoneNumber],
+    [name, lastName, birthDate, phonePrefix, phoneNumber],
   );
 
   const step2Filled = useMemo(
@@ -502,12 +206,11 @@ export const useProfessionalRegister = () => {
 
   const firstStepCompletionPercentage = useMemo(
     () =>
-      ([firstName, lastName, birthDate, phonePrefix, phoneNumber].filter(
-        Boolean,
-      ).length /
+      ([name, lastName, birthDate, phonePrefix, phoneNumber].filter(Boolean)
+        .length /
         5) *
       100,
-    [firstName, lastName, birthDate, phonePrefix, phoneNumber],
+    [name, lastName, birthDate, phonePrefix, phoneNumber],
   );
 
   const secondStepCompletionPercentage = useMemo(() => {
@@ -555,7 +258,19 @@ export const useProfessionalRegister = () => {
   const triggerProfessionalRegisterSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        console.log(data);
+        dispatch(
+          actions.professionalRegistrationFormSubmitted({
+            email: data.email,
+            password: data.password,
+            name: data.name,
+            lastname: data.lastName,
+            birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
+            phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
+            specializations: [data.specialization],
+            city: data.officeLocation,
+            alboId: data.professionalRegistrationNumber,
+          }),
+        );
       }),
     [dispatch, handleSubmit],
   );
@@ -597,10 +312,6 @@ export const useProfessionalRegister = () => {
     );
   }, [dispatch, stepperIndex]);
 
-  const goToCountryChooser = useCallback(() => {
-    navigation.navigate("CountryChooser");
-  }, [navigation]);
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -612,11 +323,11 @@ export const useProfessionalRegister = () => {
   return {
     formData,
     submitDisabled,
+    phonePrefixOptions,
     provincesOptions,
     professionsOptions,
     stepperIndex,
     canGoToNextStep,
-    goToCountryChooser,
     currentStepCompletionPercentage,
     currentStepFilled,
     onNextStepButtonPressed,
