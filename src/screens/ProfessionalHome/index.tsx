@@ -140,7 +140,7 @@ export const ProfessionalHomeScreen = () => {
               <View>
                 <ChatIcon color={"#1D7AFC"} />
               </View>
-              <View>
+              <View style={styles.bookingListItemContent}>
                 <View style={styles.bookingListItemHeader}>
                   <Text style={styles.bookingListItemTitle}>
                     Titolo della query

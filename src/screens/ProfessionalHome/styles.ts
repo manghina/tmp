@@ -107,6 +107,9 @@ export const styles = StyleSheet.create({
     gap: dimensionsTokens.paddingXs,
     padding: dimensionsTokens.paddingXs,
   },
+  bookingListItemContent: {
+    flex: 1,
+  },
   bookingListItemHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
