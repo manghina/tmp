@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
     paddingTop: dimensionsTokens.paddingXs,
     paddingBottom: dimensionsTokens.paddingXs,
     paddingHorizontal: dimensionsTokens.paddingSm,
-    gap: dimensionsTokens.paddingMd,
     height: "100%",
   },
   pageTitleContainer: {
@@ -38,6 +37,7 @@ export const styles = StyleSheet.create({
   pageDashboardHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: Dimensions.small.spacing_100,
     gap: Dimensions.small.spacing_100,
   },
   pageDashboardHeaderRight: {
@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
   },
   dashboardContentContainer: {
     flexDirection: "row",
+    marginBottom: dimensionsTokens.paddingMd,
     gap: Dimensions.small.spacing_100,
   },
   dashboardBox: {
@@ -94,15 +95,17 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginBottom: Dimensions.small.spacing_100,
   },
   bookingsHeaderLeft: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    gap: Dimensions.small.spacing_100,
   },
   bookingList: {
     flexDirection: "column",
     gap: Dimensions.small.spacing_100,
+    marginBottom: dimensionsTokens.paddingMd,
   },
   helpSection: {
     marginTop: dimensionsTokens.paddingMd,

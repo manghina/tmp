@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import { styles } from "./styles";
 import { Text, View } from "react-native-ui-lib";
-import ChatIcon from "../SvgIcons/ChatIcon";
+import { useBookingItem } from "./index.hooks";
 
 type BookingItemProps = {
   bookingType: "scheduled" | "past" | "expiring" | "expired" | "review";
@@ -12,19 +12,26 @@ type BookingItemProps = {
 
 export const BookingItem: FC<BookingItemProps> = memo(
   ({ bookingType, title, bookingText, notes }: BookingItemProps) => {
+    const {
+      getItemStyle,
+      getItemIcon,
+      getItemTitleStyle,
+      getItemBookingTextStyle,
+    } = useBookingItem();
+
     return (
-      <View style={styles.bookingListItem}>
-        <View>
-          <ChatIcon color={"#1D7AFC"} />
-        </View>
+      <View style={getItemStyle(bookingType)}>
+        <View>{getItemIcon(bookingType)}</View>
         <View style={styles.bookingListItemContent}>
           <View style={styles.bookingListItemHeader}>
-            <Text style={styles.bookingListItemTitle}>{title}</Text>
+            <Text style={getItemTitleStyle(bookingType)}>{title}</Text>
             {notes && (
-              <Text style={styles.bookingListItemTimeLeftText}>{notes}</Text>
+              <Text style={styles.bookingListItemNotesText}>{notes}</Text>
             )}
           </View>
-          <Text style={styles.bookingListItemContentText}>{bookingText}</Text>
+          <Text style={getItemBookingTextStyle(bookingType)}>
+            {bookingText}
+          </Text>
         </View>
       </View>
     );

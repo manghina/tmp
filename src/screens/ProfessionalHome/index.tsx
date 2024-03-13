@@ -15,17 +15,18 @@ export const ProfessionalHomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.page}>
-      <View style={styles.pageHeader}>
-        <SweepLogoSvg width={110} height={32} color={"#000"}></SweepLogoSvg>
-        <Image
-          width={40}
-          height={40}
-          source={{
-            uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
-          }}
-        />
-      </View>
       <ScrollView>
+        <View style={styles.pageHeader}>
+          <SweepLogoSvg width={110} height={32} color={"#000"}></SweepLogoSvg>
+          <Image
+            width={40}
+            height={40}
+            source={{
+              uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
+            }}
+          />
+        </View>
+
         <View style={styles.pageContainer}>
           <View style={styles.pageTitleContainer}>
             <Text style={styles.pageTitle}>Bentornato Dott. Surname,</Text>
@@ -137,12 +138,33 @@ export const ProfessionalHomeScreen = () => {
           </View>
           <View style={styles.bookingList}>
             <BookingItem
-              bookingType={"scheduled"}
-              title={"Titolo query"}
+              bookingType={"expiring"}
+              title={"In scadenza"}
               bookingText={
-                "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
               }
               notes={"- 12:00 min"}
+            />
+            <BookingItem
+              bookingType={"review"}
+              title={"Lascia una recensione"}
+              bookingText={
+                "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+              }
+            />
+            <BookingItem
+              bookingType={"scheduled"}
+              title={"Titolo della query"}
+              bookingText={
+                "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+              }
+            />
+            <BookingItem
+              bookingType={"expired"}
+              title={"Titolo della query"}
+              bookingText={
+                "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+              }
             />
           </View>
           <View style={styles.bookingsHeader}>
@@ -150,6 +172,15 @@ export const ProfessionalHomeScreen = () => {
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
             </View>
             <ExpandListIcon color={"#44546F"} />
+          </View>
+          <View style={styles.bookingList}>
+            <BookingItem
+              bookingType={"past"}
+              title={"Titolo della query"}
+              bookingText={
+                "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+              }
+            />
           </View>
           <Text style={styles.helpSection}>
             Bisogno di supporto?{" "}
