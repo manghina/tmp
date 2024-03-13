@@ -15,6 +15,7 @@ export const ProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     isBookingListExpanded,
     rotateIcon,
+    listHeight,
     toggleBookingList,
   } = useProfessionalHomeScreen();
 
@@ -151,7 +152,7 @@ export const ProfessionalHomeScreen = () => {
           </View>
           <Animated.View
             style={{
-              height: isBookingListExpanded ? "auto" : 0,
+              height: listHeight,
               overflow: "hidden",
             }}
           >
