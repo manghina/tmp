@@ -1,7 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { useProfessionalHomeScreen } from "./index.hooks";
 import { styles } from "./styles";
-import { Image, SafeAreaView, ScrollView } from "react-native";
+import { Animated, Image, SafeAreaView, ScrollView } from "react-native";
 import SweepLogoSvg from "../../components/SweepLogoSvg";
 import CalendarCheckIcon from "../../components/SvgIcons/CalendarCheckIcon";
 import WalletIcon from "../../components/SvgIcons/WalletIcon";
@@ -10,8 +10,13 @@ import { BookingItem } from "../../components/BookingItem";
 import ExpandListIcon from "../../components/SvgIcons/ExpandListIcon";
 
 export const ProfessionalHomeScreen = () => {
-  const { selectedHistoryBox, setSelectedHistoryBox } =
-    useProfessionalHomeScreen();
+  const {
+    selectedHistoryBox,
+    setSelectedHistoryBox,
+    isBookingListExpanded,
+    rotateIcon,
+    toggleBookingList,
+  } = useProfessionalHomeScreen();
 
   return (
     <SafeAreaView style={styles.page}>
@@ -134,39 +139,54 @@ export const ProfessionalHomeScreen = () => {
               <EllipseIcon color={"#E56910"} />
               <EllipseIcon color={"#1D7AFC"} />
             </View>
-            <ExpandListIcon color={"#44546F"} />
+            <TouchableOpacity onPress={toggleBookingList}>
+              <Animated.View
+                style={{
+                  transform: [{ rotate: rotateIcon }],
+                }}
+              >
+                <ExpandListIcon color={"#44546F"} />
+              </Animated.View>
+            </TouchableOpacity>
           </View>
-          <View style={styles.bookingList}>
-            <BookingItem
-              bookingType={"expiring"}
-              title={"In scadenza"}
-              bookingText={
-                "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-              }
-              notes={"- 12:00 min"}
-            />
-            <BookingItem
-              bookingType={"review"}
-              title={"Lascia una recensione"}
-              bookingText={
-                "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-              }
-            />
-            <BookingItem
-              bookingType={"scheduled"}
-              title={"Titolo della query"}
-              bookingText={
-                "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-              }
-            />
-            <BookingItem
-              bookingType={"expired"}
-              title={"Titolo della query"}
-              bookingText={
-                "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-              }
-            />
-          </View>
+          <Animated.View
+            style={{
+              height: isBookingListExpanded ? "auto" : 0,
+              overflow: "hidden",
+            }}
+          >
+            <View style={styles.bookingList}>
+              <BookingItem
+                bookingType={"expiring"}
+                title={"In scadenza"}
+                bookingText={
+                  "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                }
+                notes={"- 12:00 min"}
+              />
+              <BookingItem
+                bookingType={"review"}
+                title={"Lascia una recensione"}
+                bookingText={
+                  "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                }
+              />
+              <BookingItem
+                bookingType={"scheduled"}
+                title={"Titolo della query"}
+                bookingText={
+                  "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                }
+              />
+              <BookingItem
+                bookingType={"expired"}
+                title={"Titolo della query"}
+                bookingText={
+                  "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                }
+              />
+            </View>
+          </Animated.View>
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
