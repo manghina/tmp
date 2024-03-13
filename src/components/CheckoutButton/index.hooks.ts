@@ -23,7 +23,7 @@ export const useCheckoutButton = (
     [professionalOfferId, slotId],
   );
 
-  const fetchPaymentSheetParams = async () => {
+  const fetchPaymentSheetParams = useCallback(async () => {
     const response = await fetch(`${apiBaseUrl()}/payment-intents`, {
       method: "POST",
       headers: {
@@ -43,7 +43,7 @@ export const useCheckoutButton = (
       ephemeralKey,
       customer,
     };
-  };
+  }, [apiBaseUrl, cookie, professionalOfferId, slotId]);
 
   const initializePaymentSheet = useCallback(async () => {
     try {
