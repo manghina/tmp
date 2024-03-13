@@ -21,6 +21,7 @@
     "@react-native-community/datetimepicker": "7.6.1",
     "@react-navigation/native-stack": "^6.9.17",
     "@reduxjs/toolkit": "^2.0.1",
+    "@stripe/stripe-react-native": "^0.37.0",
     "axios": "^1.6.5",
     "expo": "^50.0.8",
     "expo-font": "~11.10.3",

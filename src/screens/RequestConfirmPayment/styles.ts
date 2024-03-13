@@ -64,16 +64,4 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: "#44546F",
   },
-  ctaContainer: {
-    flexDirection: "column",
-    gap: Dimensions.small.spacing_025,
-  },
-  ctaLabel: { alignSelf: "center", ...textVariants.p2MediumNormal },
-  ctaButton: {
-    paddingVertical: dimensionsTokens.paddingXs,
-  },
-  ctaButtonText: {
-    ...textVariants.p2MediumNormal,
-    color: "#FFF",
-  },
 });
