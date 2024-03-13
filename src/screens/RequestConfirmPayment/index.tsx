@@ -3,6 +3,7 @@ import { Button, Text, View } from "react-native-ui-lib";
 import { useRequestConfirmPaymentScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./styles";
+import { CheckoutButton } from "../../components/CheckoutButton";
 
 const detailsContent = [
   {
@@ -28,7 +29,7 @@ const detailsContent = [
 ];
 
 export const RequestConfirmPaymentScreen = memo(() => {
-  const { didTapCheckoutButton } = useRequestConfirmPaymentScreen();
+  const {} = useRequestConfirmPaymentScreen();
 
   return (
     <SafeAreaView>
@@ -60,32 +61,11 @@ export const RequestConfirmPaymentScreen = memo(() => {
               </View>
             </View>
           </View>
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionName}>Metodo di pagamento</Text>
-            <View style={styles.paymentMethodsContainer}>
-              <View style={styles.paymentMethodRow}>
-                <Text>Visa **** 1234</Text>
-              </View>
-              <View style={styles.dividerLight} />
-              <View style={styles.paymentMethodRow}>
-                <Text>Apple Pay</Text>
-              </View>
-              <View style={styles.dividerLight} />
-              <View style={styles.paymentMethodRow}>
-                <Text>Paypal</Text>
-              </View>
-            </View>
-            <Button
-              label={"Aggiungi metodo di pagamento"}
-              onPress={didTapCheckoutButton}
-            />
-          </View>
-          <View style={styles.ctaContainer}>
-            <Text style={styles.ctaLabel}>Finalizza iter di prenotazione</Text>
-            <Button style={styles.ctaButton}>
-              <Text style={styles.ctaButtonText}>Procedi al pagamento</Text>
-            </Button>
-          </View>
+          {/* @TODO: Replace with actual dynamic values */}
+          <CheckoutButton
+            professionalOfferId={"65e736cb55872f86077fe6ad"}
+            slotId={"65e736cb55872f86077fe6dd"}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
