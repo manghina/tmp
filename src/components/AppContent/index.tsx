@@ -24,6 +24,7 @@ import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
+import { ProfessionalHomeScreen } from "../../screens/ProfessionalHome";
 
 const Stack = createNativeStackNavigator();
 
@@ -70,6 +71,9 @@ export const AppContent: FC = memo(({}) => {
             component={HomeScreen}
             options={{
               headerShown: false,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "#97B5Ed",
             }}
           />
           <Stack.Screen
@@ -77,6 +81,9 @@ export const AppContent: FC = memo(({}) => {
             component={LoginOptionsScreen}
             options={{
               headerShown: false,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "#D8E0F2",
             }}
           />
           <Stack.Screen
@@ -92,6 +99,9 @@ export const AppContent: FC = memo(({}) => {
               },
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -101,6 +111,9 @@ export const AppContent: FC = memo(({}) => {
               title: "",
               header: () => <HeaderGoBack />,
               animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -124,6 +137,9 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
           <Stack.Screen
@@ -140,8 +156,22 @@ export const AppContent: FC = memo(({}) => {
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
             }}
           />
+          <Stack.Screen
+            name="ProfessionalHome"
+            component={ProfessionalHomeScreen}
+            options={{
+              headerShown: false,
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+            }}
+          />
+
           <Stack.Screen
             name="UserHome"
             component={UserHomeScreen}

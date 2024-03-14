@@ -65,6 +65,20 @@ export const HomeScreen = () => {
           >
             <Text>Iscriviti come medico</Text>
           </Button>
+          <Button
+            marginT-20
+            style={{
+              paddingVertical: 16,
+              borderWidth: 0,
+              backgroundColor: colorTokens.colorBackgroundNeutral,
+              width: "100%",
+            }}
+            onPress={() => {
+              navigation.navigate("ProfessionalHome");
+            }}
+          >
+            <Text>Home medico</Text>
+          </Button>
         </View>
         {/*
         <Button
