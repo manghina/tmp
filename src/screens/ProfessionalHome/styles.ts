@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
     color: "#0055CC",
   },
   dashboardBoxValue: {
-    ...textVariants.h5CondensedBoldItalic,
+    ...textVariants.h5BoldItalic,
     color: "#172B4D",
   },
   dashboardBoxNote: {
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
   selectedHistoryBox: {
     width: 56,
     height: 24,
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
     borderRadius: 8,
     borderWidth: 1.5,
