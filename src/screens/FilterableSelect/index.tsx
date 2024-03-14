@@ -1,14 +1,10 @@
 import { useFilterableSelectScreen } from "./index.hooks";
-import {
-  Colors,
-  RadioButton,
-  Text,
-  TextField,
-  View,
-} from "react-native-ui-lib";
+import { Colors, RadioButton, Text, View } from "react-native-ui-lib";
 import { FlatList, TouchableWithoutFeedback } from "react-native";
 import { styles } from "./styles";
-import { memo } from "react";
+import React, { memo } from "react";
+import SearchIcon from "../../components/SvgIcons/SearchIcon";
+import { BaseTextField } from "../../components/_baseInputs/BaseTextField";
 
 type FilterableSelectScreenProps = {};
 
@@ -69,18 +65,28 @@ export const FilterableSelectScreen = memo(
             {pageDescription}
           </Text>
         )}
-        <TextField
+        <BaseTextField
           marginT-8
           grey10
+          leadingAccessory={
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 50,
+                marginHorizontal: 5,
+                backgroundColor: "transparent",
+              }}
+            >
+              {<SearchIcon color={Colors.defaultColor} />}
+            </View>
+          }
           label={searchTextLabel}
           style={{
-            paddingTop: 16,
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingBottom: 16,
-            borderWidth: 1.5,
-            borderRadius: 12,
-            borderColor: "black",
+            paddingTop: 8,
+            paddingLeft: 8,
+            paddingRight: 8,
+            paddingBottom: 8,
           }}
           value={searchText}
           onChange={onTextFieldChange}

@@ -33,7 +33,12 @@ export const FormNewScreenFilterableSelect = memo(
 
     return (
       <TouchableOpacity onPress={onFieldClicked}>
-        <FormTextField name={name} label={label} onFocus={onFieldClicked} />
+        <FormTextField
+          name={name}
+          label={label}
+          editable={false}
+          onFocus={onFieldClicked}
+        />
       </TouchableOpacity>
     );
   },

@@ -1,8 +1,9 @@
 import { memo } from "react";
-import { Button, Text, View } from "react-native-ui-lib";
+import { Text, View } from "react-native-ui-lib";
 import { useRequestConfirmPaymentScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./styles";
+import { CheckoutButton } from "@app/components/CheckoutButton";
 
 const detailsContent = [
   {
@@ -60,28 +61,11 @@ export const RequestConfirmPaymentScreen = memo(() => {
               </View>
             </View>
           </View>
-          <View style={styles.sectionContainer}>
-            <Text style={styles.sectionName}>Metodo di pagamento</Text>
-            <View style={styles.paymentMethodsContainer}>
-              <View style={styles.paymentMethodRow}>
-                <Text>Visa **** 1234</Text>
-              </View>
-              <View style={styles.dividerLight} />
-              <View style={styles.paymentMethodRow}>
-                <Text>Apple Pay</Text>
-              </View>
-              <View style={styles.dividerLight} />
-              <View style={styles.paymentMethodRow}>
-                <Text>Paypal</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.ctaContainer}>
-            <Text style={styles.ctaLabel}>Finalizza iter di prenotazione</Text>
-            <Button style={styles.ctaButton}>
-              <Text style={styles.ctaButtonText}>Procedi al pagamento</Text>
-            </Button>
-          </View>
+          {/* @TODO: Replace with actual dynamic values */}
+          <CheckoutButton
+            professionalOfferId={"65e736cb55872f86077fe6ad"}
+            slotId={"65e736cb55872f86077fe6dd"}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

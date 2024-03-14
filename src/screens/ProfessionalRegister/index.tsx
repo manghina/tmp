@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  Button,
-  Colors,
-  TouchableOpacity,
-} from "react-native-ui-lib";
+import { View, Text, Button, Colors } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
 import React from "react";
 
@@ -20,11 +14,11 @@ export const ProfessionalRegisterScreen = () => {
   const {
     formData,
     submitDisabled,
+    phonePrefixOptions,
     provincesOptions,
     professionsOptions,
     stepperIndex,
     canGoToNextStep,
-    goToCountryChooser,
     currentStepCompletionPercentage,
     currentStepFilled,
     onNextStepButtonPressed,
@@ -34,25 +28,39 @@ export const ProfessionalRegisterScreen = () => {
 
   const renderStep1 = () => (
     <View style={styles.fieldsColumn}>
-      <FormTextField name="firstName" label="Nome" />
-      <FormTextField name="lastName" label="Cognome" />
-      <FormDateTimePicker name="birthDate" label="Data di nascita" />
+      <FormTextField key="name" name="name" label="Nome" />
+      <FormTextField key="lastName" name="lastName" label="Cognome" />
+      <FormDateTimePicker
+        key="birthDate"
+        name="birthDate"
+        label="Data di nascita"
+      />
       <View>
         <Text style={{ ...textVariants.p2MediumNormal }}>
           Numero di cellulare
         </Text>
         <View row style={{ width: "100%" }}>
           <View style={{ width: "30%" }}>
-            <TouchableOpacity onPress={() => goToCountryChooser()}>
-              <FormTextField
-                editable={false}
-                value={"🌐 +"}
-                name="phonePrefix"
-              />
-            </TouchableOpacity>
+            <FormNewScreenFilterableSelect
+              key="phonePrefix"
+              name="phonePrefix"
+              label=""
+              options={phonePrefixOptions}
+              pageProps={{
+                pageTitle: "Seleziona prefisso",
+                pageDescription:
+                  "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+                searchTextLabel: "Trova nazione",
+                listTitle: "Lista nazioni",
+              }}
+            />
           </View>
           <View style={{ width: "70%" }}>
-            <FormTextField keyboardType={"phone-pad"} name="phoneNumber" />
+            <FormTextField
+              key="phoneNumber"
+              name="phoneNumber"
+              keyboardType={"phone-pad"}
+            />
           </View>
         </View>
       </View>
@@ -61,14 +69,17 @@ export const ProfessionalRegisterScreen = () => {
   const renderStep2 = () => (
     <View style={styles.fieldsColumn}>
       <FormImagePicker
+        key="professionalPaperPhoto"
         name="professionalPaperPhoto"
         label="Carica foto libretto"
       />
       <FormTextField
+        key="professionalRegistrationNumber"
         name="professionalRegistrationNumber"
         label="Numero iscrizione albo"
       />
       <FormNewScreenFilterableSelect
+        key="province"
         name="province"
         label="Ordine dei medici della provincia di"
         options={provincesOptions}
@@ -81,6 +92,7 @@ export const ProfessionalRegisterScreen = () => {
         }}
       />
       <FormNewScreenFilterableSelect
+        key="specialization"
         name="specialization"
         label="Specializzazione"
         options={professionsOptions}
@@ -92,14 +104,24 @@ export const ProfessionalRegisterScreen = () => {
           listTitle: "Lista professioni",
         }}
       />
-      <FormTextField name="officeLocation" label="Sede dello studio" />
+      <FormTextField
+        key="officeLocation"
+        name="officeLocation"
+        label="Sede dello studio"
+      />
     </View>
   );
   const renderStep3 = () => (
     <View style={styles.fieldsColumn}>
-      <FormTextField name="email" label="Indirizzo email" />
-      <FormTextField name="password" type="password" label="Password" />
+      <FormTextField key="email" name="email" label="Indirizzo email" />
       <FormTextField
+        key="password"
+        name="password"
+        type="password"
+        label="Password"
+      />
+      <FormTextField
+        key="confirmPassword"
         name="confirmPassword"
         type="password"
         label="Conferma password"
@@ -119,7 +141,7 @@ export const ProfessionalRegisterScreen = () => {
           </Text>
           <Button
             style={styles.callToAction}
-            label={isLastStep ? "Accedi" : "Prosegui"}
+            label={isLastStep ? "Registrati" : "Prosegui"}
             onPress={
               isLastStep
                 ? triggerProfessionalRegisterSubmit

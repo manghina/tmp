@@ -23,7 +23,6 @@ import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessio
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
-import { CountryChooserScreen } from "@app/screens/CountryChooser";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ProfessionalHomeScreen } from "../../screens/ProfessionalHome";
 
@@ -172,19 +171,7 @@ export const AppContent: FC = memo(({}) => {
               statusBarColor: "white",
             }}
           />
-          <Stack.Screen
-            name="CountryChooser"
-            component={CountryChooserScreen}
-            options={{
-              headerTitle: "",
-              animationTypeForReplace: "push",
-              animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
-              statusBarAnimation: "slide",
-              statusBarStyle: "dark",
-              statusBarColor: "white",
-            }}
-          />
+
           <Stack.Screen
             name="UserHome"
             component={UserHomeScreen}
