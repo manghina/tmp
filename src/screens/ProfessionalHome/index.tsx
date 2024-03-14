@@ -13,9 +13,12 @@ export const ProfessionalHomeScreen = () => {
   const {
     selectedHistoryBox,
     setSelectedHistoryBox,
-    rotateIcon,
-    listExpand,
+    bookingRotateIcon,
+    historyRotateIcon,
+    bookingListExpand,
+    historyListExpand,
     toggleBookingList,
+    toggleHistoryList,
   } = useProfessionalHomeScreen();
 
   return (
@@ -142,7 +145,7 @@ export const ProfessionalHomeScreen = () => {
             <TouchableOpacity onPress={toggleBookingList}>
               <Animated.View
                 style={{
-                  transform: [{ rotate: rotateIcon }],
+                  transform: [{ rotate: bookingRotateIcon }],
                 }}
               >
                 <ExpandListIcon color={"#44546F"} />
@@ -151,11 +154,11 @@ export const ProfessionalHomeScreen = () => {
           </View>
           <Animated.View
             style={{
-              height: listExpand,
+              height: bookingListExpand,
               overflow: "hidden",
             }}
           >
-            <View style={styles.bookingList}>
+            <ScrollView style={styles.bookingList}>
               <BookingItem
                 bookingType={"expiring"}
                 title={"In scadenza"}
@@ -185,23 +188,60 @@ export const ProfessionalHomeScreen = () => {
                   "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
                 }
               />
-            </View>
+            </ScrollView>
           </Animated.View>
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
             </View>
-            <ExpandListIcon color={"#44546F"} />
+            <TouchableOpacity onPress={toggleHistoryList}>
+              <Animated.View
+                  style={{
+                    transform: [{ rotate: historyRotateIcon }],
+                  }}
+              >
+                <ExpandListIcon color={"#44546F"} />
+              </Animated.View>
+            </TouchableOpacity>
           </View>
-          <View style={styles.bookingList}>
-            <BookingItem
-              bookingType={"past"}
-              title={"Titolo della query"}
-              bookingText={
-                "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-              }
-            />
-          </View>
+          <Animated.View
+              style={{
+                height: historyListExpand,
+                overflow: "hidden",
+              }}
+          >
+            <ScrollView style={styles.bookingList}>
+              <BookingItem
+                  bookingType={"expiring"}
+                  title={"In scadenza"}
+                  bookingText={
+                    "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                  }
+                  notes={"- 12:00 min"}
+              />
+              <BookingItem
+                  bookingType={"review"}
+                  title={"Lascia una recensione"}
+                  bookingText={
+                    "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                  }
+              />
+              <BookingItem
+                  bookingType={"scheduled"}
+                  title={"Titolo della query"}
+                  bookingText={
+                    "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                  }
+              />
+              <BookingItem
+                  bookingType={"expired"}
+                  title={"Titolo della query"}
+                  bookingText={
+                    "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                  }
+              />
+            </ScrollView>
+          </Animated.View>
           <Text style={styles.helpSection}>
             Bisogno di supporto?{" "}
             <Text style={styles.link} onPress={() => console.log("Tutorial")}>

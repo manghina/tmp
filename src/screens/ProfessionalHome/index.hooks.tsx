@@ -4,29 +4,57 @@ import { Animated } from "react-native";
 export const useProfessionalHomeScreen = () => {
   const [selectedHistoryBox, setSelectedHistoryBox] = useState("30G");
   const [isBookingListExpanded, setIsBookingListExpanded] = useState(true);
-  const [iconRotation] = useState(new Animated.Value(0));
-  const [listHeight] = useState(new Animated.Value(1));
+  const [isHistoryListExpanded, setIsHistoryListExpanded] = useState(true);
+  const [bookingListIconRotation] = useState(new Animated.Value(0));
+  const [historyListIconRotation] = useState(new Animated.Value(0));
+  const [bookingListHeight] = useState(new Animated.Value(1));
+  const [historyListHeight] = useState(new Animated.Value(1));
 
-  const rotateIcon = iconRotation.interpolate({
+  const bookingRotateIcon = bookingListIconRotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "180deg"],
+  });
+  const historyRotateIcon = historyListIconRotation.interpolate({
     inputRange: [0, 1],
     outputRange: ["0deg", "180deg"],
   });
 
-  const listExpand = listHeight.interpolate({
+  const bookingListExpand = bookingListHeight.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0%", "100%"],
+    outputRange: [0, 450],
+  });
+
+  const historyListExpand = historyListHeight.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 450],
   });
 
   const toggleBookingList = () => {
     setIsBookingListExpanded(!isBookingListExpanded);
     Animated.parallel([
-      Animated.timing(iconRotation, {
+      Animated.timing(bookingListIconRotation, {
         toValue: isBookingListExpanded ? 1 : 0,
         duration: 300,
         useNativeDriver: false,
       }),
-      Animated.timing(listHeight, {
+      Animated.timing(bookingListHeight, {
         toValue: !isBookingListExpanded ? 1 : 0,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+    ]).start();
+  };
+
+  const toggleHistoryList = () => {
+    setIsHistoryListExpanded(!isHistoryListExpanded);
+    Animated.parallel([
+      Animated.timing(historyListIconRotation, {
+        toValue: isHistoryListExpanded ? 1 : 0,
+        duration: 300,
+        useNativeDriver: false,
+      }),
+      Animated.timing(historyListHeight, {
+        toValue: !isHistoryListExpanded ? 1 : 0,
         duration: 300,
         useNativeDriver: false,
       }),
@@ -36,10 +64,11 @@ export const useProfessionalHomeScreen = () => {
   return {
     selectedHistoryBox,
     setSelectedHistoryBox,
-    isBookingListExpanded,
-    rotateIcon,
-    listHeight,
-    listExpand,
+    bookingRotateIcon,
+    historyRotateIcon,
+    bookingListExpand,
+    historyListExpand,
     toggleBookingList,
+    toggleHistoryList,
   };
 };
