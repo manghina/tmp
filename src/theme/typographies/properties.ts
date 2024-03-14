@@ -39,9 +39,3 @@ export const LetterSpacings = {
   P4: 0.2,
   P5: 0.32,
 } as const;
-
-export enum FontWeights {
-  MEDIUM = "500",
-  BOLD = "700",
-  BLACK = "900",
-}
