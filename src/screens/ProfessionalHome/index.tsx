@@ -158,7 +158,8 @@ export const ProfessionalHomeScreen = () => {
               overflow: "hidden",
             }}
           >
-            <ScrollView style={styles.bookingList}>
+            <ScrollView >
+              <View style={styles.bookingList}>
               <BookingItem
                 bookingType={"expiring"}
                 title={"In scadenza"}
@@ -188,6 +189,7 @@ export const ProfessionalHomeScreen = () => {
                   "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
                 }
               />
+              </View>
             </ScrollView>
           </Animated.View>
           <View style={styles.bookingsHeader}>
@@ -210,36 +212,16 @@ export const ProfessionalHomeScreen = () => {
                 overflow: "hidden",
               }}
           >
-            <ScrollView style={styles.bookingList}>
+            <ScrollView>
+              <View style={styles.bookingList}>
               <BookingItem
-                  bookingType={"expiring"}
-                  title={"In scadenza"}
-                  bookingText={
-                    "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                  }
-                  notes={"- 12:00 min"}
-              />
-              <BookingItem
-                  bookingType={"review"}
-                  title={"Lascia una recensione"}
-                  bookingText={
-                    "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                  }
-              />
-              <BookingItem
-                  bookingType={"scheduled"}
+                  bookingType={"past"}
                   title={"Titolo della query"}
                   bookingText={
-                    "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
                   }
               />
-              <BookingItem
-                  bookingType={"expired"}
-                  title={"Titolo della query"}
-                  bookingText={
-                    "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                  }
-              />
+              </View>
             </ScrollView>
           </Animated.View>
           <Text style={styles.helpSection}>
