@@ -435,3 +435,5 @@ export const colorTokensDark = {
   elevationShadowOverlay: "0px 8px 12px rgba(0, 0, 0, 0.36)",
   elevationShadowRaised: "0px 8px 12px rgba(0, 0, 0, 0.36)",
 };
+
+export const colorTokens = colorTokensLight;

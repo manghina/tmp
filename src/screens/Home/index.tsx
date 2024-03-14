@@ -4,6 +4,7 @@ import WebView from "react-native-webview";
 import HomeBgImage from "@assets/img/home-screen-welcome.png";
 import { useState } from "react";
 import { SafeAreaView } from "react-native";
+import { colorTokens } from "../../theme/colors/tokens";
 
 export const HomeScreen = () => {
   const navigation = useNavigation<any>();
@@ -41,33 +42,29 @@ export const HomeScreen = () => {
         <View center>
           <Button
             BlueButton
-            label="Crea un nuovo profilo"
+            label="Crea profilo paziente"
             marginT-20
             paddingH-32
             style={{ width: "100%" }}
             onPress={() => navigation.navigate("Register")}
-          >
-            {/* <SignupSVG /> */}
-          </Button>
+          />
+          <Text marginT-16 regular14>
+            in alternativa
+          </Text>
           <Button
             marginT-20
             style={{
               paddingVertical: 16,
               borderWidth: 0,
-              backgroundColor: Colors.orange10,
+              backgroundColor: colorTokens.colorBackgroundNeutral,
               width: "100%",
             }}
             onPress={() => {
               navigation.navigate("ProfessionalRegister");
             }}
           >
-            <Text style={{ color: "#FFF" }}>Registrazione Dottore</Text>
+            <Text>Iscriviti come medico</Text>
           </Button>
-          {/*
-          <Text marginT-16 regular14>
-            in alternativa
-          </Text>
-             */}
         </View>
         {/*
         <Button
