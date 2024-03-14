@@ -33,39 +33,10 @@
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/HelveticaNeue-Black.otf",
-            "./assets/fonts/HelveticaNeue-BlackItalic.otf",
-            "./assets/fonts/HelveticaNeue-Bold.otf",
-            "./assets/fonts/HelveticaNeue-BoldItalic.otf",
-            "./assets/fonts/HelveticaNeue-Heavy.otf",
-            "./assets/fonts/HelveticaNeue-HeavyItalic.otf",
-            "./assets/fonts/HelveticaNeue-Light.otf",
-            "./assets/fonts/HelveticaNeue-LightItalic.otf",
-            "./assets/fonts/HelveticaNeue-Medium.otf",
-            "./assets/fonts/HelveticaNeue-MediumItalic.otf",
-            "./assets/fonts/HelveticaNeue-Roman.otf",
-            "./assets/fonts/HelveticaNeue-Thin.otf",
-            "./assets/fonts/HelveticaNeue-ThinItalic.otf",
-            "./assets/fonts/HelveticaNeue-UltraLight.otf",
-            "./assets/fonts/HelveticaNeue-UltraLightItalic.otf",
-            "./assets/fonts/HelveticaNeue-Condensed.ttf",
+            "./assets/fonts/HelveticaNeue.ttf",
+            "./assets/fonts/HelveticaNeue-Bold.ttf",
             "./assets/fonts/HelveticaNeue-CondensedBlack.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedBlackOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedBold.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedBoldOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedExtraBlack.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedExtraBlackOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedHeavy.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedHeavyOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedLight.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedLightOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedMedium.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedMediumOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedThin.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedThinOblique.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedUltraLight.ttf",
-            "./assets/fonts/HelveticaNeue-CondensedUltraLightOblique.ttf"
+            "./assets/fonts/HelveticaNeue-CondensedBold.ttf"
           ]
         }
       ]
