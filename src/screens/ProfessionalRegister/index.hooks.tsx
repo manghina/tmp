@@ -263,7 +263,7 @@ export const useProfessionalRegister = () => {
             email: data.email,
             password: data.password,
             name: data.name,
-            lastname: data.lastName,
+            lastName: data.lastName,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
             phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
             specializations: [data.specialization],

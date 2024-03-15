@@ -26,7 +26,7 @@ export const userStore = createSlice({
       action: PayloadAction<{
         name: string;
         lastName: string;
-        birthDate: Date;
+        birthDate: string;
         phones: string[];
         specializations: string[];
         city: string;
