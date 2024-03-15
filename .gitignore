@@ -36,7 +36,8 @@ yarn-error.*
 
 # jetbrains
 .idea/
-ios/
+ios/build
+ios/Pods
 android/
 
 src/**/*.js
