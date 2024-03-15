@@ -30,7 +30,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
     <ScrollView style={styles.pageContainer}>
       <FormProvider {...formData}>
         {stepperCounter == 1 ? (
-          <View key="step1" height="100%">
+          <View key="step1" style={styles.step}>
             <AnimatedProgressBar
               value={firstStepCompletionPercentage}
               duration={250}
@@ -58,7 +58,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
             </View>
           </View>
         ) : (
-          <View key="step2" height="100%">
+          <View key="step2" style={styles.step}>
             <AnimatedProgressBar
               value={secondStepCompletionPercentage}
               duration={250}

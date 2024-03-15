@@ -17,7 +17,7 @@ export const useUserHomeScreen = () => {
 
   useEffect(() => {
     if (!me) {
-      navigation.replace("Login");
+      navigation.replace("login");
     }
   }, [me, navigation]);
 

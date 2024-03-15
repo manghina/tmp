@@ -19,71 +19,12 @@ export function* userInitSaga() {
 }
 
 export function* professionalDataSaga() {
-  yield takeEvery(actions.professionalRegistrationFormSubmitted, function* (action) {
-    const {
-      email,
-      password,
-      name,
-      lastname,
-      birthDate,
-      phones,
-      specializations,
-      city,
-      alboId,
-    } = action.payload;
-
-    yield put(
-      actions.postAccounts.request({
+  yield takeEvery(
+    actions.professionalRegistrationFormSubmitted,
+    function* (action) {
+      const {
         email,
         password,
-      }),
-    );
-
-    // @ts-ignore
-    const postAccountResultAction = yield take([
-      actions.postAccounts.success,
-      actions.postAccounts.fail,
-    ]);
-
-    if (postAccountResultAction.type === actions.postAccounts.fail.type) {
-      const { status } =
-        postAccountResultAction.payload as ApiFailData<PostAccountsParams>;
-
-      // Conflict status
-      if (status === 409) {
-        // Account already exists, redirect to log in options
-        NavigationService.replace("LoginOptions");
-      }
-
-      return;
-    }
-
-    // Login to retrieve cookie
-    yield put(
-      actions.postAccountsSessions.request({
-        email,
-        password,
-      }),
-    );
-
-    // @ts-ignore
-    const postAccountsSessionsResultAction = yield take([
-      actions.postAccountsSessions.success,
-      actions.postAccountsSessions.fail,
-    ]);
-
-    if (
-      postAccountsSessionsResultAction.type ===
-      actions.postAccountsSessions.fail.type
-    ) {
-      // Maybe do nothing here?
-      const {} =
-        postAccountsSessionsResultAction.payload as ApiFailData<PostAccountsSessionsParams>;
-      return;
-    }
-
-    yield put(
-      actions.postProfessionals.request({
         name,
         lastname,
         birthDate,
@@ -91,24 +32,86 @@ export function* professionalDataSaga() {
         specializations,
         city,
         alboId,
-      }),
-    );
+      } = action.payload;
 
-    // @ts-ignore
-    const postUsersResultAction = yield take([
-      actions.postUsers.success,
-      actions.postUsers.fail,
-    ]);
+      yield put(
+        actions.postAccounts.request({
+          email,
+          password,
+        }),
+      );
 
-    if (postUsersResultAction.type === actions.postUsers.fail.type) {
-      // Maybe do nothing here?
-      const { status } =
-        postUsersResultAction.payload as ApiFailData<PostUsersParams>;
-      return;
-    }
+      // @ts-ignore
+      const postAccountResultAction = yield take([
+        actions.postAccounts.success,
+        actions.postAccounts.fail,
+      ]);
 
-    //yield put(actions.getUsersMe.request({}));
-  });
+      if (postAccountResultAction.type === actions.postAccounts.fail.type) {
+        const { status } =
+          postAccountResultAction.payload as ApiFailData<PostAccountsParams>;
+
+        // Conflict status
+        if (status === 409) {
+          // Account already exists, redirect to log in options
+          NavigationService.replace("login");
+        }
+
+        return;
+      }
+
+      // Login to retrieve cookie
+      yield put(
+        actions.postAccountsSessions.request({
+          email,
+          password,
+        }),
+      );
+
+      // @ts-ignore
+      const postAccountsSessionsResultAction = yield take([
+        actions.postAccountsSessions.success,
+        actions.postAccountsSessions.fail,
+      ]);
+
+      if (
+        postAccountsSessionsResultAction.type ===
+        actions.postAccountsSessions.fail.type
+      ) {
+        // Maybe do nothing here?
+        const {} =
+          postAccountsSessionsResultAction.payload as ApiFailData<PostAccountsSessionsParams>;
+        return;
+      }
+
+      yield put(
+        actions.postProfessionals.request({
+          name,
+          lastname,
+          birthDate,
+          phones,
+          specializations,
+          city,
+          alboId,
+        }),
+      );
+
+      // @ts-ignore
+      const postUsersResultAction = yield take([
+        actions.postUsers.success,
+        actions.postUsers.fail,
+      ]);
+
+      if (postUsersResultAction.type === actions.postUsers.fail.type) {
+        // Maybe do nothing here?
+        const { status } =
+          postUsersResultAction.payload as ApiFailData<PostUsersParams>;
+        return;
+      }
+
+      //yield put(actions.getUsersMe.request({}));
+    },
+  );
 }
 
 export function* userDataSaga() {
@@ -135,7 +138,7 @@ export function* userDataSaga() {
       // Conflict status
       if (status === 409) {
         // Account already exists, redirect to log in options
-        NavigationService.replace("LoginOptions");
+        NavigationService.replace("login");
       }
 
       return;
@@ -197,16 +200,16 @@ export function* autoLoginSaga() {
     [actions.getUsersMe.success, actions.getUsersMe.fail],
     function* (action) {
       if (action.type === actions.getUsersMe.success.type) {
-        NavigationService.replace("UserHome");
+        NavigationService.replace("user-home");
       } else {
         const { status } = action.payload as ApiFailData<GetUsersMeParams>;
 
         switch (status) {
           case 401:
-            NavigationService.replace("LoginOptions");
+            NavigationService.replace("login");
             break;
           case 403:
-            NavigationService.replace("LoginOptions");
+            NavigationService.replace("login");
             break;
           case 404:
             // Here we need to create a page only for account creation without email and password
@@ -228,6 +231,6 @@ export function* postLoginSaga() {
 
 export function* postResetPasswordSaga() {
   yield takeEvery(actions.patchPasswords.success, function* () {
-    NavigationService.replace("PasswordResetSuccess");
+    NavigationService.replace("password-reset-success");
   });
 }

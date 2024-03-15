@@ -48,7 +48,7 @@ export const userStore = createSlice({
       state.me = action.payload.data.user;
     });
     builder.addCase(extraActions.appStartup, (state, action) => {
-      // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
+      state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
     });
   },
 });

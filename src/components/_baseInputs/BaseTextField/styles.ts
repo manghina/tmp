@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { textVariants } from "@app/theme/typographies/variants";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
-import { colorTokensLight } from "@app/theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 import { withOpacity } from "@app/theme/colors/palette";
 
 export const styles = StyleSheet.create({
@@ -11,12 +11,10 @@ export const styles = StyleSheet.create({
     gap: Dimensions.small.spacing_100,
   },
   field: {
-    borderColor: withOpacity(
-      colorTokensLight.colorBorderAccentGrayBolder,
-      0.15,
-    ),
+    borderColor: withOpacity(colorTokens.colorBorderAccentGrayBolder, 0.15),
     borderWidth: 1.5,
     borderRadius: 12,
+    backgroundColor: colorTokens.colorBackgroundInput,
   },
   input: {
     paddingTop: dimensionsTokens.paddingXs,
@@ -38,7 +36,7 @@ export const styles = StyleSheet.create({
     height: 25,
   },
   focused: {
-    borderColor: colorTokensLight.colorBorderAccentBlue,
+    borderColor: colorTokens.colorBorderAccentBlue,
   },
   error: {
     borderColor: "red",

@@ -4,7 +4,7 @@ import WebView from "react-native-webview";
 import HomeBgImage from "@assets/img/home-screen-welcome.png";
 import { useState } from "react";
 import { SafeAreaView } from "react-native";
-import { colorTokens } from "../../theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const HomeScreen = () => {
   const navigation = useNavigation<any>();
@@ -46,7 +46,7 @@ export const HomeScreen = () => {
             marginT-20
             paddingH-32
             style={{ width: "100%" }}
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("register")}
           />
           <Text marginT-16 regular14>
             in alternativa
@@ -60,7 +60,7 @@ export const HomeScreen = () => {
               width: "100%",
             }}
             onPress={() => {
-              navigation.navigate("ProfessionalRegister");
+              navigation.navigate("professional-register");
             }}
           >
             <Text>Iscriviti come medico</Text>
@@ -74,7 +74,7 @@ export const HomeScreen = () => {
               width: "100%",
             }}
             onPress={() => {
-              navigation.navigate("ProfessionalHome");
+              navigation.navigate("professional-home");
             }}
           >
             <Text>Home medico</Text>
@@ -107,7 +107,7 @@ export const HomeScreen = () => {
           <Text
             link
             style={{ fontStyle: "italic" }}
-            onPress={() => navigation.replace("LoginOptions")}
+            onPress={() => navigation.replace("login")}
           >
             Accedi
           </Text>

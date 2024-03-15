@@ -5,6 +5,9 @@ import { textVariants } from "../../theme/typographies/variants";
 
 export const styles = StyleSheet.create({
   pageContainer: { backgroundColor: "#FFF" },
+  step: {
+    height: "100%",
+  },
   formColumn: {
     display: "flex",
     flexDirection: "column",
