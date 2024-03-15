@@ -1,4 +1,4 @@
-import { Button, Text, Incubator, View, Colors } from "react-native-ui-lib";
+import { Button, Text, View } from "react-native-ui-lib";
 import { useTutorialScreen } from "./index.hooks";
 import {
   Animated,
@@ -6,8 +6,6 @@ import {
   SafeAreaView,
   StyleSheet,
 } from "react-native";
-import { useSelector } from "react-redux";
-import { selectors } from "../../redux-store";
 
 const styles = StyleSheet.create({
   defaultAnimatedBarStyles: {

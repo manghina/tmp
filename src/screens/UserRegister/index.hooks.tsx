@@ -102,12 +102,12 @@ export const useUserRegisterScreen = () => {
   );
 
   const firstStepCompletionPercentage = useMemo(
-    () => ([firstName, lastName, birthDate].filter(Boolean).length / 3) * 100,
+    () => [firstName, lastName, birthDate].filter(Boolean).length / 3,
     [firstName, lastName, birthDate],
   );
 
   const secondStepCompletionPercentage = useMemo(
-    () => ([email, password, confirmPassword].filter(Boolean).length / 3) * 100,
+    () => [email, password, confirmPassword].filter(Boolean).length / 3,
     [email, password, confirmPassword],
   );
 

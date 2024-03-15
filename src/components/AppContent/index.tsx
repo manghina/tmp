@@ -25,6 +25,7 @@ import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment"
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ProfessionalHomeScreen } from "../../screens/ProfessionalHome";
+import { BackButton } from "../BackButton";
 
 const Stack = createNativeStackNavigator();
 
@@ -136,7 +137,7 @@ export const AppContent: FC = memo(({}) => {
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
