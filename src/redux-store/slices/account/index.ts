@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserState } from "./user.interfaces";
-import * as selectors from "./user.selectors";
-import * as sagas from "./user.sagas";
+import { AccountState } from "./account.interfaces";
+import * as selectors from "./account.selectors";
+import * as sagas from "./account.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
+import { Specialization } from "../../../models/common/DoctorCommon";
 
-export const userStore = createSlice({
-  name: "user",
+export const accountStore = createSlice({
+  name: "account",
   initialState: {
-    me: {},
+    account: null,
+    userMe: null,
+    professionalMe: null,
     cookie: null,
-  } as UserState,
+  } as AccountState,
   reducers: {
-    registrationFormSubmitted: (
+    userRegistrationFormSubmitted: (
       state,
       action: PayloadAction<{
         email: string;
@@ -28,7 +31,7 @@ export const userStore = createSlice({
         lastName: string;
         birthDate: string;
         phones: string[];
-        specializations: string[];
+        specializations: Specialization[];
         city: string;
         alboId: string;
         email: string;
@@ -44,9 +47,18 @@ export const userStore = createSlice({
         state.cookie = action.payload.data.cookie;
       },
     );
-    builder.addCase(extraActions.getUsersMe.success, (state, action) => {
-      state.me = action.payload.data.user;
+    builder.addCase(extraActions.getAccountsMe.success, (state, action) => {
+      state.account = action.payload.data.account;
     });
+    builder.addCase(extraActions.getUsersMe.success, (state, action) => {
+      state.userMe = action.payload.data.user;
+    });
+    builder.addCase(
+      extraActions.getProfessionalsMe.success,
+      (state, action) => {
+        state.professionalMe = action.payload.data.professional;
+      },
+    );
     builder.addCase(extraActions.appStartup, (state, action) => {
       // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
     });

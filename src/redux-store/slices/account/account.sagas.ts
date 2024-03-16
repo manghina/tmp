@@ -1,19 +1,44 @@
 import { put, select, take, takeEvery } from "redux-saga/effects";
-import { actions, RootState } from "@app/redux-store";
-import { getCookie } from "./user.selectors";
+import { actions, RootState, selectors } from "@app/redux-store";
+import { getCookie } from "./account.selectors";
 import NavigationService from "@app/models/NavigationService";
-import { ApiFailData } from "../../extra-actions/apis/api-builder";
+import { ApiFailData } from "@app/redux-store/extra-actions/apis/api-builder";
 import { PostAccountsParams } from "@app/redux-store/extra-actions/apis/post-accounts";
 import { PostAccountsSessionsParams } from "@app/redux-store/extra-actions/apis/post-accounts-sessions";
 import { PostUsersParams } from "@app/redux-store/extra-actions/apis/post-users";
 import { GetUsersMeParams } from "@app/redux-store/extra-actions/apis/get-users-me";
+import { IAccount } from "@app/models/Account";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
-    const cookie: RootState["user"]["cookie"] = yield select(getCookie);
+    const cookie: RootState["account"]["cookie"] = yield select(getCookie);
 
     if (cookie) {
-      yield put(actions.getUsersMe.request({}));
+      yield put(actions.getAccountsMe.request({}));
+
+      const action:
+        | typeof actions.getAccountsMe.success
+        | typeof actions.getAccountsMe.fail = yield take([
+        actions.getAccountsMe.success,
+        actions.getAccountsMe.fail,
+      ]);
+
+      if (action.type === actions.getAccountsMe.success.type) {
+        const account: IAccount = yield select(selectors.getAccount);
+
+        switch (account.type) {
+          case "user":
+            yield put(actions.getUsersMe.request({}));
+            break;
+          case "professional":
+            yield put(actions.getProfessionalsMe.request({}));
+            break;
+          default:
+            break;
+        }
+      } else {
+        NavigationService.replace("login");
+      }
     }
   });
 }
@@ -26,7 +51,7 @@ export function* professionalDataSaga() {
         email,
         password,
         name,
-        lastname,
+        lastName,
         birthDate,
         phones,
         specializations,
@@ -87,7 +112,7 @@ export function* professionalDataSaga() {
       yield put(
         actions.postProfessionals.request({
           name,
-          lastname,
+          lastName,
           birthDate,
           phones,
           specializations,
@@ -115,7 +140,7 @@ export function* professionalDataSaga() {
 }
 
 export function* userDataSaga() {
-  yield takeEvery(actions.registrationFormSubmitted, function* (action) {
+  yield takeEvery(actions.userRegistrationFormSubmitted, function* (action) {
     const { email, password } = action.payload;
 
     yield put(
@@ -197,27 +222,38 @@ export function* userDataSaga() {
 
 export function* autoLoginSaga() {
   yield takeEvery(
-    [actions.getUsersMe.success, actions.getUsersMe.fail],
+    [
+      actions.getUsersMe.success,
+      actions.getProfessionalsMe.success,
+      actions.getUsersMe.fail,
+      actions.getProfessionalsMe.fail,
+    ],
     function* (action) {
-      if (action.type === actions.getUsersMe.success.type) {
-        NavigationService.replace("user-home");
-      } else {
-        const { status } = action.payload as ApiFailData<GetUsersMeParams>;
+      switch (action.type) {
+        case actions.getUsersMe.success.type:
+          NavigationService.replace("user-home");
+          break;
+        case actions.getProfessionalsMe.success.type:
+          NavigationService.replace("professional-home");
+          break;
+        default:
+          const { status } = action.payload as ApiFailData<GetUsersMeParams>;
 
-        switch (status) {
-          case 401:
-            NavigationService.replace("login");
-            break;
-          case 403:
-            NavigationService.replace("login");
-            break;
-          case 404:
-            // Here we need to create a page only for account creation without email and password
+          switch (status) {
+            case 401:
+              NavigationService.replace("login");
+              break;
+            case 403:
+              NavigationService.replace("login");
+              break;
+            case 404:
+              // Here we need to create a page only for account creation without email and password
 
-            break;
-          default:
-            break;
-        }
+              break;
+            default:
+              break;
+          }
+          break;
       }
     },
   );

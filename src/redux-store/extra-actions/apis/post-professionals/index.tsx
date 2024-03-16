@@ -10,7 +10,7 @@ import {
 
 export interface PostProfessionalsParams {
   name: string;
-  lastname: string;
+  lastName: string;
   birthDate: string;
   phones: string[];
   specializations: Specialization[];
