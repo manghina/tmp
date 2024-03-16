@@ -25,6 +25,7 @@ import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
+import { textVariants } from "@app/theme/typographies/variants";
 
 const Stack = createNativeStackNavigator();
 
@@ -112,8 +113,7 @@ export const AppContent: FC = memo(({}) => {
               title: "Registrati",
               headerTitleAlign: "center",
               headerTitleStyle: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
+                ...textVariants.h3CondensedBlackNormal,
                 color: Colors.blackText,
               },
               animationTypeForReplace: "push",
@@ -131,13 +131,12 @@ export const AppContent: FC = memo(({}) => {
               title: "Registrati",
               headerTitleAlign: "center",
               headerTitleStyle: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
+                ...textVariants.h3CondensedBlackNormal,
                 color: Colors.blackText,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",

@@ -7,9 +7,9 @@ import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
-import { textVariants } from "@app/theme/typographies/variants";
 import { styles } from "./styles";
-import { AnimatedProgressBar } from "../../components/AnimatedProgressBar";
+import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
+import { ScrollView } from "react-native";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -162,23 +162,25 @@ export const ProfessionalRegisterScreen = () => {
   };
 
   return (
-    <FormProvider {...formData}>
-      <AnimatedProgressBar
-        value={currentStepCompletionPercentage}
-        duration={250}
-      />
-      <View style={styles.stepContent}>
-        {stepperIndex === 1 ? (
-          renderStep1()
-        ) : stepperIndex === 2 ? (
-          renderStep2()
-        ) : stepperIndex === 3 ? (
-          renderStep3()
-        ) : (
-          <View />
-        )}
-        {renderStepControls()}
-      </View>
-    </FormProvider>
+    <View style={styles.pageContainer}>
+      <FormProvider {...formData}>
+        <AnimatedProgressBar
+          value={currentStepCompletionPercentage}
+          duration={250}
+        />
+        <ScrollView style={styles.stepContent}>
+          {stepperIndex === 1 ? (
+            renderStep1()
+          ) : stepperIndex === 2 ? (
+            renderStep2()
+          ) : stepperIndex === 3 ? (
+            renderStep3()
+          ) : (
+            <View />
+          )}
+          {renderStepControls()}
+        </ScrollView>
+      </FormProvider>
+    </View>
   );
 };

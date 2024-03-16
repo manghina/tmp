@@ -2,8 +2,13 @@ import { StyleSheet } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { textVariants } from "../../theme/typographies/variants";
+import { colorTokens } from "../../theme/colors/tokens";
 
 export const styles = StyleSheet.create({
+  pageContainer: {
+    height: "100%",
+    backgroundColor: colorTokens.elevationSurface,
+  },
   stepContent: {
     display: "flex",
     flexDirection: "column",
