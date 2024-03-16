@@ -3,6 +3,7 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { Colors } from "@app/theme/colors/palette";
 
 export const styles = StyleSheet.create({
   page: {
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
   },
   blueRoundedDecoration: {
     position: "absolute",
-    backgroundColor: "#D7DFF1",
+    backgroundColor: Colors.Unlisted.LoginBackground,
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
     height: "38%",

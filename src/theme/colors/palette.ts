@@ -183,4 +183,7 @@ export const Colors = {
     900: "#182322",
     1000: "#101717",
   },
+  Unlisted: {
+    LoginBackground: withOpacity("#4377e8", 0.15),
+  },
 };

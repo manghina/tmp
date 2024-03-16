@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
     height: 40,
     borderRadius: 50,
     marginHorizontal: 5,
-    backgroundColor: "transparent",
     borderWidth: 0,
     opacity: 0.5,
   },
@@ -39,8 +38,8 @@ export const styles = StyleSheet.create({
     borderColor: colorTokens.colorBorderAccentBlue,
   },
   error: {
-    borderColor: "red",
+    borderColor: "#FF0000",
   },
   label: { ...textVariants.p2MediumNormal },
-  errorText: { ...textVariants.p2MediumNormal, color: "red" },
+  errorText: { ...textVariants.p2MediumNormal, color: "#FF0000" },
 });

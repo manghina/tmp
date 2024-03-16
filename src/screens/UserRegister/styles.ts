@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";
-import { textVariants } from "../../theme/typographies/variants";
+import { textVariants } from "@app/theme/typographies/variants";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
-  pageContainer: { backgroundColor: "#FFF" },
+  pageContainer: { backgroundColor: colorTokens.elevationSurface },
   step: {
     height: "100%",
   },
