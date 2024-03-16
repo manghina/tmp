@@ -8,6 +8,7 @@ import { PostAccountsSessionsParams } from "@app/redux-store/extra-actions/apis/
 import { PostUsersParams } from "@app/redux-store/extra-actions/apis/post-users";
 import { GetUsersMeParams } from "@app/redux-store/extra-actions/apis/get-users-me";
 import { IAccount } from "@app/models/Account";
+import { GetProfessionalsMeParams } from "../../extra-actions/apis/get-professionals-me";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -37,6 +38,7 @@ export function* userInitSaga() {
             break;
         }
       } else {
+        yield put(actions.resetAccount());
         NavigationService.replace("login");
       }
     }
@@ -60,13 +62,17 @@ export function* autoLoginSaga() {
           NavigationService.replace("professional-home");
           break;
         default:
-          const { status } = action.payload as ApiFailData<GetUsersMeParams>;
+          const { status } = action.payload as ApiFailData<
+            GetUsersMeParams | GetProfessionalsMeParams
+          >;
 
           switch (status) {
             case 401:
+              yield put(actions.resetAccount());
               NavigationService.replace("login");
               break;
             case 403:
+              yield put(actions.resetAccount());
               NavigationService.replace("login");
               break;
             case 404:
@@ -74,6 +80,7 @@ export function* autoLoginSaga() {
 
               break;
             default:
+              yield put(actions.resetAccount());
               break;
           }
           break;
@@ -103,6 +110,7 @@ function* createAccountAndLogin(email: string, password: string) {
     // Conflict status
     if (status === 409) {
       // Account already exists, redirect to log in options
+      yield put(actions.resetAccount());
       NavigationService.replace("login");
     }
 
@@ -127,7 +135,7 @@ function* createAccountAndLogin(email: string, password: string) {
     postAccountsSessionsResultAction.type ===
     actions.postAccountsSessions.fail.type
   ) {
-    // Maybe do nothing here?
+    yield put(actions.resetAccount());
     const {} =
       postAccountsSessionsResultAction.payload as ApiFailData<PostAccountsSessionsParams>;
     return null;
@@ -149,6 +157,7 @@ export function* userRegistrationSaga() {
     );
 
     if (!account) {
+      yield put(actions.resetAccount());
       return;
     }
 
@@ -192,6 +201,7 @@ export function* professionalRegistrationSaga() {
       );
 
       if (!account) {
+        yield put(actions.resetAccount());
         return;
       }
 
@@ -228,6 +238,7 @@ export function* professionalRegistrationSaga() {
         actions.postProfessionals.fail.type
       ) {
         // Maybe do nothing here?
+        yield put(actions.resetAccount());
         const { status } =
           postProfessionalsResultAction.payload as ApiFailData<PostUsersParams>;
         return;

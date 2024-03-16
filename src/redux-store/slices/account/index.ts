@@ -39,6 +39,12 @@ export const accountStore = createSlice({
         //professionalPaperPhoto: any;
       }>,
     ) => {},
+    resetAccount: (state) => {
+      state.account = null;
+      state.userMe = null;
+      state.professionalMe = null;
+      state.cookie = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
