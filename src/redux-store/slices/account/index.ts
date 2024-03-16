@@ -3,7 +3,7 @@ import { AccountState } from "./account.interfaces";
 import * as selectors from "./account.selectors";
 import * as sagas from "./account.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
-import { Specialization } from "../../../models/common/DoctorCommon";
+import { Specialization } from "@app/models/common/DoctorCommon";
 
 export const accountStore = createSlice({
   name: "account",

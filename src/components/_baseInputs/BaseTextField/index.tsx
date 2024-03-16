@@ -9,6 +9,7 @@ export const BaseTextField = memo(
     label,
     enableErrors,
     validationMessage,
+    style,
     ...props
   }: TextFieldProps) => {
     const { isFocused, onFocus, onBlur } = useBaseTextField();
@@ -24,7 +25,7 @@ export const BaseTextField = memo(
             autoCorrect={false}
             containerStyle={[
               styles.field,
-              props.style,
+              style,
               isFocused ? styles.focused : undefined,
               enableErrors ? styles.error : undefined,
             ]}
