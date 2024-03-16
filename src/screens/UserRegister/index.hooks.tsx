@@ -9,7 +9,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
-import { actions } from "../../redux-store";
+import { actions } from "@app/redux-store";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
@@ -124,7 +124,7 @@ export const useUserRegisterScreen = () => {
     () =>
       handleSubmit((data) => {
         dispatch(
-          actions.registrationFormSubmitted({
+          actions.userRegistrationFormSubmitted({
             ...data,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
           }),

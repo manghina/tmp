@@ -1,4 +1,4 @@
-import { put, select, take, takeEvery } from "redux-saga/effects";
+import { put, select, take, takeEvery, call } from "redux-saga/effects";
 import { actions, RootState, selectors } from "@app/redux-store";
 import { getCookie } from "./account.selectors";
 import NavigationService from "@app/models/NavigationService";
@@ -43,183 +43,6 @@ export function* userInitSaga() {
   });
 }
 
-export function* professionalDataSaga() {
-  yield takeEvery(
-    actions.professionalRegistrationFormSubmitted,
-    function* (action) {
-      const {
-        email,
-        password,
-        name,
-        lastName,
-        birthDate,
-        phones,
-        specializations,
-        city,
-        alboId,
-      } = action.payload;
-
-      yield put(
-        actions.postAccounts.request({
-          email,
-          password,
-        }),
-      );
-
-      // @ts-ignore
-      const postAccountResultAction = yield take([
-        actions.postAccounts.success,
-        actions.postAccounts.fail,
-      ]);
-
-      if (postAccountResultAction.type === actions.postAccounts.fail.type) {
-        const { status } =
-          postAccountResultAction.payload as ApiFailData<PostAccountsParams>;
-
-        // Conflict status
-        if (status === 409) {
-          // Account already exists, redirect to log in options
-          NavigationService.replace("login");
-        }
-
-        return;
-      }
-
-      // Login to retrieve cookie
-      yield put(
-        actions.postAccountsSessions.request({
-          email,
-          password,
-        }),
-      );
-
-      // @ts-ignore
-      const postAccountsSessionsResultAction = yield take([
-        actions.postAccountsSessions.success,
-        actions.postAccountsSessions.fail,
-      ]);
-
-      if (
-        postAccountsSessionsResultAction.type ===
-        actions.postAccountsSessions.fail.type
-      ) {
-        // Maybe do nothing here?
-        const {} =
-          postAccountsSessionsResultAction.payload as ApiFailData<PostAccountsSessionsParams>;
-        return;
-      }
-
-      yield put(
-        actions.postProfessionals.request({
-          name,
-          lastName,
-          birthDate,
-          phones,
-          specializations,
-          city,
-          alboId,
-        }),
-      );
-
-      // @ts-ignore
-      const postUsersResultAction = yield take([
-        actions.postUsers.success,
-        actions.postUsers.fail,
-      ]);
-
-      if (postUsersResultAction.type === actions.postUsers.fail.type) {
-        // Maybe do nothing here?
-        const { status } =
-          postUsersResultAction.payload as ApiFailData<PostUsersParams>;
-        return;
-      }
-
-      //yield put(actions.getUsersMe.request({}));
-    },
-  );
-}
-
-export function* userDataSaga() {
-  yield takeEvery(actions.userRegistrationFormSubmitted, function* (action) {
-    const { email, password } = action.payload;
-
-    yield put(
-      actions.postAccounts.request({
-        email,
-        password,
-      }),
-    );
-
-    // @ts-ignore
-    const postAccountResultAction = yield take([
-      actions.postAccounts.success,
-      actions.postAccounts.fail,
-    ]);
-
-    if (postAccountResultAction.type === actions.postAccounts.fail.type) {
-      const { status } =
-        postAccountResultAction.payload as ApiFailData<PostAccountsParams>;
-
-      // Conflict status
-      if (status === 409) {
-        // Account already exists, redirect to log in options
-        NavigationService.replace("login");
-      }
-
-      return;
-    }
-
-    // Login to retrieve cookie
-    yield put(
-      actions.postAccountsSessions.request({
-        email,
-        password,
-      }),
-    );
-
-    // @ts-ignore
-    const postAccountsSessionsResultAction = yield take([
-      actions.postAccountsSessions.success,
-      actions.postAccountsSessions.fail,
-    ]);
-
-    if (
-      postAccountsSessionsResultAction.type ===
-      actions.postAccountsSessions.fail.type
-    ) {
-      // Maybe do nothing here?
-      const {} =
-        postAccountsSessionsResultAction.payload as ApiFailData<PostAccountsSessionsParams>;
-      return;
-    }
-
-    const { firstName, lastName, birthDate } = action.payload;
-
-    yield put(
-      actions.postUsers.request({
-        name: firstName,
-        lastname: lastName,
-        birthDate,
-      }),
-    );
-
-    // @ts-ignore
-    const postUsersResultAction = yield take([
-      actions.postUsers.success,
-      actions.postUsers.fail,
-    ]);
-
-    if (postUsersResultAction.type === actions.postUsers.fail.type) {
-      // Maybe do nothing here?
-      const { status } =
-        postUsersResultAction.payload as ApiFailData<PostUsersParams>;
-      return;
-    }
-
-    yield put(actions.getUsersMe.request({}));
-  });
-}
-
 export function* autoLoginSaga() {
   yield takeEvery(
     [
@@ -255,6 +78,162 @@ export function* autoLoginSaga() {
           }
           break;
       }
+    },
+  );
+}
+
+function* createAccountAndLogin(email: string, password: string) {
+  yield put(
+    actions.postAccounts.request({
+      email,
+      password,
+    }),
+  );
+
+  // @ts-ignore
+  const postAccountResultAction = yield take([
+    actions.postAccounts.success,
+    actions.postAccounts.fail,
+  ]);
+
+  if (postAccountResultAction.type === actions.postAccounts.fail.type) {
+    const { status } =
+      postAccountResultAction.payload as ApiFailData<PostAccountsParams>;
+
+    // Conflict status
+    if (status === 409) {
+      // Account already exists, redirect to log in options
+      NavigationService.replace("login");
+    }
+
+    return;
+  }
+
+  // Login to retrieve cookie
+  yield put(
+    actions.postAccountsSessions.request({
+      email,
+      password,
+    }),
+  );
+
+  // @ts-ignore
+  const postAccountsSessionsResultAction = yield take([
+    actions.postAccountsSessions.success,
+    actions.postAccountsSessions.fail,
+  ]);
+
+  if (
+    postAccountsSessionsResultAction.type ===
+    actions.postAccountsSessions.fail.type
+  ) {
+    // Maybe do nothing here?
+    const {} =
+      postAccountsSessionsResultAction.payload as ApiFailData<PostAccountsSessionsParams>;
+    return null;
+  }
+
+  const account: IAccount = yield select(selectors.getAccount);
+
+  return account;
+}
+
+export function* userRegistrationSaga() {
+  yield takeEvery(actions.userRegistrationFormSubmitted, function* (action) {
+    const { email, password } = action.payload;
+
+    const account: IAccount | null = yield call(
+      createAccountAndLogin,
+      email,
+      password,
+    );
+
+    if (!account) {
+      return;
+    }
+
+    const { firstName, lastName, birthDate } = action.payload;
+
+    yield put(
+      actions.postUsers.request({
+        name: firstName,
+        lastname: lastName,
+        birthDate,
+      }),
+    );
+
+    // @ts-ignore
+    const postUsersResultAction = yield take([
+      actions.postUsers.success,
+      actions.postUsers.fail,
+    ]);
+
+    if (postUsersResultAction.type === actions.postUsers.fail.type) {
+      // Maybe do nothing here?
+      const { status } =
+        postUsersResultAction.payload as ApiFailData<PostUsersParams>;
+      return;
+    }
+
+    yield put(actions.getUsersMe.request({}));
+  });
+}
+
+export function* professionalRegistrationSaga() {
+  yield takeEvery(
+    actions.professionalRegistrationFormSubmitted,
+    function* (action) {
+      const { email, password } = action.payload;
+
+      const account: IAccount | null = yield call(
+        createAccountAndLogin,
+        email,
+        password,
+      );
+
+      if (!account) {
+        return;
+      }
+
+      const {
+        name,
+        lastName,
+        birthDate,
+        phones,
+        specializations,
+        city,
+        alboId,
+      } = action.payload;
+
+      yield put(
+        actions.postProfessionals.request({
+          name,
+          lastName,
+          birthDate,
+          phones,
+          specializations,
+          city,
+          alboId,
+        }),
+      );
+
+      // @ts-ignore
+      const postProfessionalsResultAction = yield take([
+        actions.postProfessionals.success,
+        actions.postProfessionals.fail,
+      ]);
+
+      if (
+        postProfessionalsResultAction.type ===
+        actions.postProfessionals.fail.type
+      ) {
+        // Maybe do nothing here?
+        const { status } =
+          postProfessionalsResultAction.payload as ApiFailData<PostUsersParams>;
+        return;
+      }
+
+      yield put(actions.getProfessionalsMe.request({}));
     },
   );
 }

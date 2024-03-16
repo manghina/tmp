@@ -52,13 +52,25 @@ export const accountStore = createSlice({
     });
     builder.addCase(extraActions.getUsersMe.success, (state, action) => {
       state.userMe = action.payload.data.user;
+      state.professionalMe = null;
+    });
+    builder.addCase(extraActions.postUsers.success, (state, action) => {
+      state.account = action.payload.data.account;
+      state.userMe = action.payload.data.user;
+      state.professionalMe = null;
     });
     builder.addCase(
       extraActions.getProfessionalsMe.success,
       (state, action) => {
+        state.userMe = null;
         state.professionalMe = action.payload.data.professional;
       },
     );
+    builder.addCase(extraActions.postProfessionals.success, (state, action) => {
+      state.account = action.payload.data.account;
+      state.userMe = null;
+      state.professionalMe = action.payload.data.professional;
+    });
     builder.addCase(extraActions.appStartup, (state, action) => {
       // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
     });
