@@ -3,7 +3,7 @@ import { Colors } from "./palette";
 export const colorTokensLight = {
   colorText: Colors.Neutral[1000],
   colorTextSubtle: Colors.Neutral[700],
-  colorTextSubtlest: Colors.Neutral[600],
+  colorTextSubtlest: Colors.Neutral[700],
   colorTextInverse: Colors.Neutral[0],
   colorTextDisabled: Colors.Neutral[400],
   colorTextSelected: Colors.Blue[700],

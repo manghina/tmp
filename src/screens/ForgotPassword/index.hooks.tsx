@@ -3,13 +3,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {actions, selectors} from "../../redux-store";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
 import { ForgotPasswordStepCounter } from "./ForgotPasswordStepCounter";
 
 type PasswordResetFormData = {
   email: string;
-  recoveryPasswordToken: string;
+  otpCode: string;
   newPassword: string;
   confirmNewPassword: string;
 };
@@ -19,12 +19,12 @@ const schema = yup.object().shape({
     .string()
     .email("Inserisci una mail valida")
     .required("La mail è obbligatoria"),
-  recoveryPasswordToken: yup
+  otpCode: yup
     .string()
     .required("Inserisci il codice di recupero")
-    .test("validazione codice", "Il codice deve essere di 6 cifre", (value) => {
-      return /^\d{6}$/.test(value);
-    }),
+    .test("validazione codice", "Il codice deve essere di 6 cifre", (value) =>
+      /^\d{6}$/.test(value),
+    ),
   newPassword: yup
     .string()
     .min(8, "La password deve contenere almeno 8 caratteri")
@@ -37,23 +37,18 @@ const schema = yup.object().shape({
     .required(),
   confirmNewPassword: yup
     .string()
-    .oneOf([yup.ref("newPassword")], "Le password non coincidono"),
+    .oneOf([yup.ref("newPassword")], "Le password non coincidono")
+    .required(),
 });
 
 export const useForgotPasswordScreen = () => {
-  const navigation = useNavigation<any>();
   const dispatch = useDispatch();
+
+  const navigation = useNavigation<any>();
+
   const stepperCounter = useSelector(selectors.getForgotPasswordStepperCounter);
   const [recoveryPasswordTokenTimer, setRecoveryPasswordTokenTimer] =
     useState(0);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <ForgotPasswordStepCounter stepperCounter={stepperCounter} />
-      ),
-    });
-  }, [navigation, stepperCounter]);
 
   const formData = useForm<PasswordResetFormData>({
     defaultValues: {
@@ -69,31 +64,33 @@ export const useForgotPasswordScreen = () => {
     trigger,
   } = formData;
 
-  const submitDisabled = (!isDirty || (isSubmitted && !isValid));
+  const submitDisabled = !isDirty || (isSubmitted && !isValid);
 
-  const [email, recoveryPasswordToken, newPassword, confirmNewPassword] =
-    useWatch({
-      control,
-      name: [
-        "email",
-        "recoveryPasswordToken",
-        "newPassword",
-        "confirmNewPassword",
-      ],
-    });
+  const [email, otpCode, newPassword, confirmNewPassword] = useWatch({
+    control,
+    name: ["email", "otpCode", "newPassword", "confirmNewPassword"],
+  });
 
   const step1Filled = useMemo(() => Boolean(email), [email]);
-  const step2Filled = useMemo(
-    () => Boolean(recoveryPasswordToken),
-    [recoveryPasswordToken],
-  );
+  const step2Filled = useMemo(() => Boolean(otpCode), [otpCode]);
   const step3Filled = useMemo(
     () => Boolean(newPassword) && Boolean(confirmNewPassword),
     [newPassword, confirmNewPassword],
   );
 
+  const onNextStepButtonPressed = useCallback(
+    () => dispatch(actions.setForgotPasswordStepperCounter(stepperCounter + 1)),
+    [dispatch, stepperCounter],
+  );
+
+  const onPreviousStepButtonPressed = useCallback(
+    () => dispatch(actions.setForgotPasswordStepperCounter(1)),
+    [dispatch, stepperCounter],
+  );
+
   const startRecoveryPasswordTokenTimer = useCallback(() => {
     setRecoveryPasswordTokenTimer(30);
+
     const timer = setInterval(() => {
       setRecoveryPasswordTokenTimer((prevSeconds) => {
         if (prevSeconds === 0) {
@@ -104,37 +101,61 @@ export const useForgotPasswordScreen = () => {
         }
       });
     }, 1000);
-  }, []);
-
-  const clearFields = useCallback(() => {
-    formData.setValue("recoveryPasswordToken", "");
-    formData.setValue("newPassword", "");
-    formData.setValue("confirmNewPassword", "");
-  }, [formData]);
-
-  const allFieldsFilled = useMemo(
-    () =>
-      Boolean(email) &&
-      Boolean(recoveryPasswordToken) &&
-      Boolean(newPassword) &&
-      Boolean(confirmNewPassword),
-    [email, newPassword, confirmNewPassword],
-  );
-
-  const completionPercentage = useMemo(
-    () =>
-      ([email, recoveryPasswordToken, newPassword, confirmNewPassword].filter(
-        Boolean,
-      ).length /
-        4) *
-      100,
-    [email, recoveryPasswordToken, newPassword, confirmNewPassword],
-  );
+  }, [setRecoveryPasswordTokenTimer]);
 
   const triggerRecoveryPasswordTokenSubmit = useCallback(
     () => dispatch(actions.postRecoveryPasswordTokens.request({ email })),
     [dispatch, email],
   );
+
+  const clearFields = useCallback(() => {
+    formData.setValue("otpCode", "");
+    formData.setValue("newPassword", "");
+    formData.setValue("confirmNewPassword", "");
+  }, [formData]);
+
+  const onFirstStepProceedButtonPressed = useCallback(async () => {
+    const isEmailValid = await trigger("email");
+
+    if (isEmailValid) {
+      onNextStepButtonPressed();
+      startRecoveryPasswordTokenTimer();
+      triggerRecoveryPasswordTokenSubmit();
+    }
+  }, [
+    trigger,
+    onNextStepButtonPressed,
+    startRecoveryPasswordTokenTimer,
+    triggerRecoveryPasswordTokenSubmit,
+  ]);
+
+  const onSecondStepProceedButtonPressed = useCallback(async () => {
+    const isOtpValid = await trigger("otpCode");
+
+    if (isOtpValid) {
+      onNextStepButtonPressed();
+    }
+  }, [trigger, onNextStepButtonPressed]);
+
+  const onBackButtonPressed = useCallback(() => {
+    clearFields();
+    onPreviousStepButtonPressed();
+  }, [clearFields, onPreviousStepButtonPressed]);
+
+  const allFieldsFilled = useMemo(
+    () =>
+      Boolean(email) &&
+      Boolean(otpCode) &&
+      Boolean(newPassword) &&
+      Boolean(confirmNewPassword),
+    [email, newPassword, confirmNewPassword],
+  );
+
+  const completionPercentage = useMemo(() => {
+    const fields = [email, otpCode, newPassword, confirmNewPassword];
+
+    return fields.filter(Boolean).length / fields.length;
+  }, [email, otpCode, newPassword, confirmNewPassword]);
 
   const triggerPasswordChangeSubmit = useMemo(
     () =>
@@ -143,36 +164,31 @@ export const useForgotPasswordScreen = () => {
           actions.patchPasswords.request({
             email: data.email,
             newPassword: data.newPassword,
-            recoveryPasswordToken: data.recoveryPasswordToken,
+            otpCode: data.otpCode,
           }),
         );
       }),
     [dispatch, handleSubmit],
   );
 
-  const onNextStepButtonPressed = useCallback(
-    () => dispatch(actions.setForgotPasswordStepperCounter(stepperCounter + 1)),
-    [dispatch, stepperCounter],
-  );
-  const onPreviousStepButtonPressed = useCallback(
-    () => dispatch(actions.setForgotPasswordStepperCounter(1)),
-    [dispatch, stepperCounter],
-  );
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <ForgotPasswordStepCounter stepperCounter={stepperCounter} />
+      ),
+    });
+  }, [navigation, stepperCounter]);
 
   return {
     formData,
-    triggerRecoveryPasswordTokenSubmit,
     triggerPasswordChangeSubmit,
     step1Filled,
     step2Filled,
     step3Filled,
     completionPercentage,
     stepperCounter,
-    clearFields,
-    recoveryPasswordTokenTimer,
-    startRecoveryPasswordTokenTimer,
-    onNextStepButtonPressed,
-    onPreviousStepButtonPressed,
-    trigger,
+    onFirstStepProceedButtonPressed,
+    onSecondStepProceedButtonPressed,
+    onBackButtonPressed,
   };
 };

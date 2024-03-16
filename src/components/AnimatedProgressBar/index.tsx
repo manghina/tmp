@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { Animated, ViewStyle } from "react-native";
 import { useAnimatedProgressBar } from "./index.hooks";
 import { styles } from "./styles";
+import { View } from "react-native-ui-lib";
 
 type AnimatedProgressBarProps = {
   value: number;
@@ -14,19 +15,21 @@ export const AnimatedProgressBar = memo(
     const { animatedValue } = useAnimatedProgressBar(value, duration);
 
     return (
-      <Animated.View
-        style={[
-          styles.bar,
-          style,
-          {
-            transform: [
-              {
-                scaleX: animatedValue,
-              },
-            ],
-          },
-        ]}
-      />
+      <View style={styles.mainContainer}>
+        <Animated.View
+          style={[
+            styles.bar,
+            style,
+            {
+              transform: [
+                {
+                  scaleX: animatedValue,
+                },
+              ],
+            },
+          ]}
+        />
+      </View>
     );
   },
 );
