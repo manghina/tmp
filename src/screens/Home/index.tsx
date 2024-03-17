@@ -1,83 +1,51 @@
-import { View, Text, Button, Image, Modal, Colors } from "react-native-ui-lib";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, Button, Image, Modal } from "react-native-ui-lib";
 import WebView from "react-native-webview";
 import HomeBgImage from "@assets/img/home-screen-welcome.png";
-import { useState } from "react";
 import { SafeAreaView } from "react-native";
-import { colorTokens } from "@app/theme/colors/tokens";
+import { styles } from "./styles";
+import { useHomeScreen } from "./index.hooks";
+import React from "react";
 
 export const HomeScreen = () => {
-  const navigation = useNavigation<any>();
-  const [visibleWebView, setVisibleWebView] = useState(false);
+  const {
+    visibleWebView,
+    onUserRegisterButtonPressed,
+    onProfessionalRegisterButtonPressed,
+    onLoginButtonPressed,
+    onTermsAndConditionsButtonPressed,
+    onPrivacyPolicyButtonPressed,
+    onWebViewClose,
+  } = useHomeScreen();
 
   return (
-    <SafeAreaView>
-      <View paddingH-25>
-        <Text Title defaultColor>
-          Registrati
-        </Text>
-        <Text regular16>
-          Benvenuto in{" "}
-          <Text
-            defaultColor
-            style={{ fontStyle: "italic", fontWeight: "bold" }}
-          >
-            Sweep
-          </Text>
-        </Text>
-        <Image marginT-24 source={HomeBgImage} style={{ width: "100%" }} />
-        <View
-          style={{
-            backgroundColor: "#3C77E880",
-            width: 800,
-            height: 800,
-            borderRadius: 800,
-            position: "absolute",
-            top: -500,
-            left: -200,
-            zIndex: -1,
-          }}
-        />
-
-        <View center>
+    <SafeAreaView style={styles.pageContainer}>
+      <View style={styles.pageContent}>
+        <View style={styles.background} />
+        <View>
+          <Text style={styles.title}>Registrati</Text>
+          <View row>
+            <Text style={styles.subtitle}>Benvenuto in </Text>
+            <Text style={styles.appName}>Sweep</Text>
+          </View>
+        </View>
+        <Image source={HomeBgImage} style={styles.backgroundImage} />
+        <View style={styles.mainActionsContainer}>
           <Button
-            BlueButton
-            label="Crea profilo paziente"
-            marginT-20
-            paddingH-32
-            style={{ width: "100%" }}
-            onPress={() => navigation.navigate("register")}
-          />
-          <Text marginT-16 regular14>
-            in alternativa
-          </Text>
-          <Button
-            marginT-20
-            style={{
-              paddingVertical: 16,
-              borderWidth: 0,
-              backgroundColor: colorTokens.colorBackgroundNeutral,
-              width: "100%",
-            }}
-            onPress={() => {
-              navigation.navigate("professional-register");
-            }}
+            style={styles.userRegisterButton}
+            onPress={onUserRegisterButtonPressed}
           >
-            <Text>Iscriviti come medico</Text>
+            <Text style={styles.ctaText}>Crea profilo paziente</Text>
           </Button>
+          <Text style={styles.separationText}>in alternativa</Text>
           <Button
-            marginT-20
-            style={{
-              paddingVertical: 16,
-              borderWidth: 0,
-              backgroundColor: colorTokens.colorBackgroundNeutral,
-              width: "100%",
-            }}
-            onPress={() => {
-              navigation.navigate("professional-home");
-            }}
+            style={styles.professionalRegisterButton}
+            onPress={onProfessionalRegisterButtonPressed}
           >
-            <Text>Home medico</Text>
+            <Text
+              style={[styles.ctaText, styles.professionalRegisterButtonLabel]}
+            >
+              Iscriviti come medico
+            </Text>
           </Button>
         </View>
         {/*
@@ -102,44 +70,34 @@ export const HomeScreen = () => {
           onPress={() => {}}
         />
            */}
-        <Text default14 marginT-24>
-          Hai già un profilo?{" "}
+        <View style={styles.secondaryActionContainer}>
+          <Text style={styles.secondaryActionText}>Hai già un profilo?</Text>
           <Text
-            link
-            style={{ fontStyle: "italic" }}
-            onPress={() => navigation.replace("login")}
+            style={styles.secondaryActionLink}
+            onPress={onLoginButtonPressed}
           >
             Accedi
           </Text>
-        </Text>
-
-        <Text marginT-24 gray12>
-          Continuando si accettano{" "}
+        </View>
+        <View style={styles.userAgreements}>
+          <Text style={styles.infoText}>Continuando si accettano </Text>
           <Text
-            link
-            underline
-            style={{ fontStyle: "italic" }}
-            onPress={() => setVisibleWebView(true)}
+            style={styles.infoLink}
+            onPress={onTermsAndConditionsButtonPressed}
           >
             T&C
-          </Text>{" "}
-          e{" "}
-          <Text
-            link
-            underline
-            style={{ fontStyle: "italic" }}
-            onPress={() => setVisibleWebView(true)}
-          >
+          </Text>
+          <Text style={styles.infoText}> e </Text>
+          <Text style={styles.infoLink} onPress={onPrivacyPolicyButtonPressed}>
             Privacy Policy
-          </Text>{" "}
-          di Sweep AI.
-        </Text>
-
+          </Text>
+          <Text style={styles.infoText}> di Sweep AI.</Text>
+        </View>
         <Modal
           visible={visibleWebView}
-          presentationStyle={"pageSheet"}
-          animationType={"slide"}
-          onRequestClose={() => setVisibleWebView(false)}
+          presentationStyle="pageSheet"
+          animationType="slide"
+          onRequestClose={onWebViewClose}
         >
           <WebView source={{ uri: "www.sweepit.ai" }}></WebView>
         </Modal>
