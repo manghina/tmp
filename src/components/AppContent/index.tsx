@@ -107,7 +107,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="register"
+            name="user-register"
             component={UserRegisterScreen}
             options={{
               title: "Registrati",

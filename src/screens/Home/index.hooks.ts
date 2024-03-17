@@ -6,7 +6,7 @@ export const useHomeScreen = () => {
   const [visibleWebView, setVisibleWebView] = useState(false);
 
   const onUserRegisterButtonPressed = useCallback(
-    () => navigation.navigate("register"),
+    () => navigation.navigate("user-register"),
     [navigation],
   );
 
