@@ -39,7 +39,6 @@ export const FormNewScreenFilterableSelect = memo(
         <FormTextField
           name={name}
           label={label}
-          editable={false}
           onFocus={onFieldClicked}
           style={style}
         />
