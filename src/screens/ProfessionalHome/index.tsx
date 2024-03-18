@@ -15,6 +15,8 @@ export const ProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     bookingRotateIcon,
     historyRotateIcon,
+    isBookingListExpanded,
+    isHistoryListExpanded,
     toggleBookingList,
     toggleHistoryList,
   } = useProfessionalHomeScreen();
@@ -152,35 +154,39 @@ export const ProfessionalHomeScreen = () => {
           </View>
           <View>
             <View style={styles.bookingList}>
-              <BookingItem
-                bookingType={"expiring"}
-                title={"In scadenza"}
-                bookingText={
-                  "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-                notes={"- 12:00 min"}
-              />
-              <BookingItem
-                bookingType={"review"}
-                title={"Lascia una recensione"}
-                bookingText={
-                  "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
-              <BookingItem
-                bookingType={"scheduled"}
-                title={"Titolo della query"}
-                bookingText={
-                  "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
-              <BookingItem
-                bookingType={"expired"}
-                title={"Titolo della query"}
-                bookingText={
-                  "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
+              {isBookingListExpanded && (
+                <>
+                  <BookingItem
+                    bookingType={"expiring"}
+                    title={"In scadenza"}
+                    bookingText={
+                      "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                    notes={"- 12:00 min"}
+                  />
+                  <BookingItem
+                    bookingType={"review"}
+                    title={"Lascia una recensione"}
+                    bookingText={
+                      "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                  <BookingItem
+                    bookingType={"scheduled"}
+                    title={"Titolo della query"}
+                    bookingText={
+                      "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                  <BookingItem
+                    bookingType={"expired"}
+                    title={"Titolo della query"}
+                    bookingText={
+                      "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                </>
+              )}
             </View>
           </View>
           <View style={styles.bookingsHeader}>
@@ -199,13 +205,17 @@ export const ProfessionalHomeScreen = () => {
           </View>
           <View>
             <View style={styles.bookingList}>
-              <BookingItem
-                bookingType={"past"}
-                title={"Titolo della query"}
-                bookingText={
-                  "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
+              {isHistoryListExpanded && (
+                <>
+                  <BookingItem
+                    bookingType={"past"}
+                    title={"Titolo della query"}
+                    bookingText={
+                      "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                </>
+              )}
             </View>
           </View>
           <Text style={styles.helpSection}>

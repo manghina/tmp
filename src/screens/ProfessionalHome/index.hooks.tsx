@@ -44,6 +44,8 @@ export const useProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     bookingRotateIcon,
     historyRotateIcon,
+    isBookingListExpanded,
+    isHistoryListExpanded,
     toggleBookingList,
     toggleHistoryList,
   };
