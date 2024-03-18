@@ -7,8 +7,9 @@ import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
-import { textVariants } from "@app/theme/typographies/variants";
 import { styles } from "./styles";
+import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
+import { ScrollView } from "react-native";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -36,11 +37,9 @@ export const ProfessionalRegisterScreen = () => {
         label="Data di nascita"
       />
       <View>
-        <Text style={{ ...textVariants.p2MediumNormal }}>
-          Numero di cellulare
-        </Text>
-        <View row style={{ width: "100%" }}>
-          <View style={{ width: "30%" }}>
+        <Text style={styles.phoneNumberLabel}>Numero di cellulare</Text>
+        <View row style={styles.phoneInputContainer}>
+          <View style={styles.phonePrefixContainer}>
             <FormNewScreenFilterableSelect
               key="phonePrefix"
               name="phonePrefix"
@@ -53,13 +52,15 @@ export const ProfessionalRegisterScreen = () => {
                 searchTextLabel: "Trova nazione",
                 listTitle: "Lista nazioni",
               }}
+              style={styles.phonePrefix}
             />
           </View>
-          <View style={{ width: "70%" }}>
+          <View style={styles.phoneNumberContainer}>
             <FormTextField
               key="phoneNumber"
               name="phoneNumber"
-              keyboardType={"phone-pad"}
+              keyboardType="phone-pad"
+              style={styles.phoneNumber}
             />
           </View>
         </View>
@@ -161,26 +162,25 @@ export const ProfessionalRegisterScreen = () => {
   };
 
   return (
-    <FormProvider {...formData}>
-      <View
-        backgroundColor={Colors.buttonBlue}
-        style={{
-          width: `${currentStepCompletionPercentage}%`,
-          height: 4,
-        }}
-      />
-      <View style={styles.stepContent}>
-        {stepperIndex === 1 ? (
-          renderStep1()
-        ) : stepperIndex === 2 ? (
-          renderStep2()
-        ) : stepperIndex === 3 ? (
-          renderStep3()
-        ) : (
-          <View />
-        )}
-        {renderStepControls()}
-      </View>
-    </FormProvider>
+    <View style={styles.pageContainer}>
+      <FormProvider {...formData}>
+        <AnimatedProgressBar
+          value={currentStepCompletionPercentage}
+          duration={250}
+        />
+        <ScrollView style={styles.stepContent}>
+          {stepperIndex === 1 ? (
+            renderStep1()
+          ) : stepperIndex === 2 ? (
+            renderStep2()
+          ) : stepperIndex === 3 ? (
+            renderStep3()
+          ) : (
+            <View />
+          )}
+          {renderStepControls()}
+        </ScrollView>
+      </FormProvider>
+    </View>
   );
 };

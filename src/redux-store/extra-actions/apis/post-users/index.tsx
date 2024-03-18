@@ -6,13 +6,18 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
+import { IUser } from "../../../../models/User";
+import { IAccount } from "../../../../models/Account";
 
 export interface PostUsersParams {
   name: string;
   lastname: string;
   birthDate: string;
 }
-export interface PostUsersResponseData {}
+export interface PostUsersResponseData {
+  account: IAccount;
+  user: IUser;
+}
 export default apiActionBuilder<
   PostUsersParams,
   ApiSuccessAction<PostUsersResponseData, PostUsersParams>,

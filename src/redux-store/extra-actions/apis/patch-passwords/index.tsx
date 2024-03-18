@@ -10,7 +10,7 @@ import {
 export interface PatchPasswordsParams {
   email: string;
   newPassword: string;
-  recoveryPasswordToken: string;
+  otpCode: string;
 }
 export interface PatchPasswordsResponseData {
   message: string;

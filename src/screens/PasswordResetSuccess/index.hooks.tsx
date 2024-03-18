@@ -5,9 +5,9 @@ export const usePasswordResetSuccessScreen = () => {
   const goToHomeScreen = () => {
     navigation.reset({
       index: 0,
-      routes: [{ name: "Home" }],
+      routes: [{ name: "home" }],
     });
   };
-  const goToLoginScreen = () => navigation.replace("LoginOptions");
+  const goToLoginScreen = () => navigation.replace("login");
   return { navigation, goToHomeScreen, goToLoginScreen };
 };

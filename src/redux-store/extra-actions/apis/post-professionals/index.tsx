@@ -7,17 +7,22 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
+import { IAccount } from "../../../../models/Account";
+import { IProfessional } from "../../../../models/Professional";
 
 export interface PostProfessionalsParams {
   name: string;
-  lastname: string;
+  lastName: string;
   birthDate: string;
   phones: string[];
   specializations: Specialization[];
   city: string;
   alboId: string;
 }
-export interface PostProfessionalsResponseData {}
+export interface PostProfessionalsResponseData {
+  account: IAccount;
+  professional: IProfessional;
+}
 export default apiActionBuilder<
   PostProfessionalsParams,
   ApiSuccessAction<PostProfessionalsResponseData, PostProfessionalsParams>,

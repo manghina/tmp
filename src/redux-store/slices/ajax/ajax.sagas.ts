@@ -12,7 +12,7 @@ import axios, { CancelTokenSource, AxiosError } from "axios";
 import { ApiRequestAction } from "@app/redux-store/extra-actions/apis/api-builder";
 import { apiBaseUrl } from "@app/config";
 import { actions } from "@app/redux-store";
-import { getCookie } from "../user/user.selectors";
+import { getCookie } from "../account/account.selectors";
 
 function* ajaxTask(
   requestAction: ApiRequestAction<any>,

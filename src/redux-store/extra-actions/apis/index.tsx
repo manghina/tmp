@@ -1,3 +1,5 @@
+export { default as getAccountsMe } from "./get-accounts-me";
+export { default as getProfessionalsMe } from "./get-professionals-me";
 export { default as getUsersMe } from "./get-users-me";
 export { default as getUsersMeRequests } from "./get-users-me-requests";
 export { default as getUsersMeRequestsByRequestId } from "./get-users-me-requests-by-request-id";
