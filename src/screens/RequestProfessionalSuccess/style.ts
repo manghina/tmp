@@ -6,7 +6,7 @@ import * as typographiesProps from "../../theme/typographies/properties";
 export const styles = StyleSheet.create({
   viewContainer: {
     width: "100%",
-    backgroundColor: "#011820", //TODO: aggiungere token
+    backgroundColor: colorTokensLight.elevationSurfaceAlternative,
   },
   animation: { width: "100%", height: 300 },
   button: {
@@ -16,15 +16,15 @@ export const styles = StyleSheet.create({
     paddingVertical: dimensionsTokens.paddingXs,
   },
   title: {
-    color: "#fefefe", //TODO: aggiungere token
+    color: colorTokensLight.colorTextAlternativeDefault,
     letterSpacing: typographiesProps.LetterSpacings.H3,
   },
   text: {
-    color: colorTokensLight.colorTextAccentGraySubtle,
+    color: colorTokensLight.colorTextAlternativeSubtlest,
   },
   link: {
-    color: colorTokensLight.colorTextAccentGraySubtle,
+    color: colorTokensLight.colorTextAlternativeSubtlest,
     textDecorationLine: "underline",
-    paddingVertical: dimensionsTokens.paddingXs
+    paddingVertical: dimensionsTokens.paddingXs,
   },
 });

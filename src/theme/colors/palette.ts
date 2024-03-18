@@ -171,6 +171,12 @@ export const Colors = {
     400: "#BFDBF847",
     500: "#9BB4CA80",
   },
+  LightNeutralAlternative: {
+    neutral: "#011820",
+  },
+  DarkNeutralAlternative: {
+    neutral: "#011820",
+  },
   Brand: {
     100: "#D3DDDC",
     200: "#B2C3C1",

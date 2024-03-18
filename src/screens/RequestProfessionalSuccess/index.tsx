@@ -20,7 +20,7 @@ export const RequestProfessionalSuccessScreen = () => {
         <Text marginB-4 center Title style={styles.title}>
           Congratulazioni!
         </Text>
-        <Text regular16Text center style={styles.text} marginB-80>
+        <Text regular16Text center style={styles.text} marginB-88>
           Transazione avvenuta con successo. La prenotazione è stata confermata.
         </Text>
         <Button

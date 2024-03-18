@@ -39,6 +39,10 @@ export const colorTokensLight = {
   colorTextAccentGray: Colors.Neutral[800],
   colorTextAccentGrayBolder: Colors.Neutral[1100],
 
+  colorTextAlternativeDefault: Colors.Neutral[0],
+  colorTextAlternativeSubtle: Colors.Neutral[200],
+  colorTextAlternativeSubtlest: Colors.Neutral[400],
+
   // Token per i link
   colorTextLink: Colors.Blue[700],
   colorTextLinkPressed: Colors.Blue[800],
@@ -213,6 +217,8 @@ export const colorTokensLight = {
   elevationSurfaceRaisedPressed: Colors.Neutral[300],
   elevationSurfaceSunken: Colors.Neutral[100],
 
+  elevationSurfaceAlternative: Colors.LightNeutralAlternative.neutral,
+
   elevationShadowOverflow: "rgba(9, 30, 66, 0.15)",
   elevationShadowOverflowPerimeter: "rgba(9, 30, 66, 0.31)",
   elevationShadowOverflowSpread: "rgba(9, 30, 66, 0.31)",
@@ -255,6 +261,10 @@ export const colorTokensDark = {
   colorTextAccentMagentaBolder: Colors.Magenta[300],
   colorTextAccentGray: Colors.Neutral[800],
   colorTextAccentGrayBolder: Colors.Neutral[1100],
+
+  colorTextAlternativeDefault: Colors.Neutral[0],
+  colorTextAlternativeSubtle: Colors.Neutral[200],
+  colorTextAlternativeSubtlest: Colors.Neutral[400],
 
   // Token per i link
   colorTextLink: Colors.Blue[700],
@@ -428,6 +438,8 @@ export const colorTokensDark = {
   elevationSurfaceRaisedHovered: Colors.DarkNeutral[250],
   elevationSurfaceRaisedPressed: Colors.DarkNeutral[300],
   elevationSurfaceSunken: Colors.DarkNeutral[100],
+
+  elevationSurfaceAlternative: Colors.DarkNeutralAlternative.neutral,
 
   elevationShadowOverflow: "rgba(0, 0, 0, 0.36)",
   elevationShadowOverflowPerimeter: "rgba(0, 0, 0, 0.5)",
