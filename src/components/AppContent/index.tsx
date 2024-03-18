@@ -25,6 +25,7 @@ import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment"
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ProfessionalHomeScreen } from "../../screens/ProfessionalHome";
+import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
 
 const Stack = createNativeStackNavigator();
 
@@ -207,6 +208,13 @@ export const AppContent: FC = memo(({}) => {
               headerTintColor: "transparent",
               headerTransparent: true,
               header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="RequestProfessionalSuccess"
+            component={RequestProfessionalSuccessScreen}
+            options={{
+              headerShown: false,
             }}
           />
         </Stack.Navigator>

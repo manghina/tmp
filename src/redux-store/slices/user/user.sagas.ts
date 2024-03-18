@@ -231,3 +231,9 @@ export function* postResetPasswordSaga() {
     NavigationService.replace("PasswordResetSuccess");
   });
 }
+
+/* export function* postProfessionalRequestSaga() {
+  yield takeEvery(actions.postPaymentIntent.success, function* () {
+    NavigationService.replace("RequestProfessionalSucess");
+  });
+} */
