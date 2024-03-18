@@ -3,9 +3,10 @@ import { View, Text, Button } from "react-native-ui-lib";
 import { useRequestProfessionalSuccessScreen } from "./index.hooks";
 import LottieView from "lottie-react-native";
 import { styles } from "./style";
+import { Pressable } from "react-native";
 
 export const RequestProfessionalSuccessScreen = () => {
-  const { goToHomeScreen } = useRequestProfessionalSuccessScreen();
+  const { goToHomeScreen, handleSaveRequestInICal } = useRequestProfessionalSuccessScreen();
 
   return (
     <View flex style={styles.viewContainer}>
@@ -29,9 +30,11 @@ export const RequestProfessionalSuccessScreen = () => {
           onPress={goToHomeScreen}
           marginB-24
         />
-        <Text style={styles.link} regular14Text center>
-          Salva appuntamento in iCal
-        </Text>
+        <Pressable onPress={handleSaveRequestInICal}>
+          <Text style={styles.link} regular14Text center>
+            Salva appuntamento in iCal
+          </Text>
+        </Pressable>
       </View>
     </View>
   );

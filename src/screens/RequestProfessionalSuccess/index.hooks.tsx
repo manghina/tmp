@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { useCallback } from "react";
 
 export const useRequestProfessionalSuccessScreen = () => {
   const navigation = useNavigation<any>();
@@ -8,5 +9,10 @@ export const useRequestProfessionalSuccessScreen = () => {
       routes: [{ name: "Home" }],
     });
   };
-  return { goToHomeScreen };
+
+  const handleSaveRequestInICal = useCallback(() => {
+    console.log("mostra info appuntamento");
+  }, []);
+  
+  return { goToHomeScreen, handleSaveRequestInICal };
 };
