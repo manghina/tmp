@@ -67,11 +67,11 @@ export const useTutorialScreen = () => {
   }, [fill1Anim, fill2Anim, fill3Anim]);
 
   const onRegisterButtonClick = useCallback(() => {
-    navigation.replace("Home");
+    navigation.replace("home");
   }, [navigation]);
 
   const onLoginButtonClick = useCallback(() => {
-    navigation.navigate("LoginOptions");
+    navigation.navigate("login");
   }, [navigation]);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
-import { Colors, ThemeManager, Typography } from "react-native-ui-lib";
+import { Colors, ThemeManager } from "react-native-ui-lib";
+import { colorTokens } from "./colors/tokens";
 
 export const initTheme = () => {
   Colors.loadColors({
@@ -14,60 +15,8 @@ export const initTheme = () => {
     disabledBlue: "#6784BD",
   });
 
-  Typography.loadTypographies({
-    regular: {
-      fontFamily: "HelveticaNeue",
-      fontWeight: "500",
-    },
-    Title: {
-      fontFamily: "HelveticaNeue-CondensedBlack",
-      color: Colors.red,
-      fontSize: 32,
-    },
-    link: {
-      fontFamily: "HelveticaNeue",
-      color: Colors.buttonBlue,
-      fontSize: 14,
-      fontWeight: "700",
-    },
-    regular14: {
-      fontFamily: "HelveticaNeue",
-      color: Colors.defaultColor,
-      fontSize: 14,
-      fontWeight: "500",
-    },
-    regular16Text: {
-      fontFamily: "HelveticaNeue",
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    regular16: {
-      fontFamily: "HelveticaNeue",
-      color: Colors.defaultColor,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    white16: {
-      fontFamily: "HelveticaNeue",
-      color: Colors.whiteText,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    gray12: {
-      fontFamily: "HelveticaNeue",
-      color: Colors.grayText,
-      fontSize: 12,
-      fontWeight: "500",
-    },
-    gray24stepper: {
-      fontFamily: "HelveticaNeue-CondensedBlack",
-      color: Colors.grayText,
-      fontSize: 24,
-    },
-  });
-
   ThemeManager.setComponentTheme("Text", {
-    regular14: true,
+    color: colorTokens.colorText,
   });
 
   ThemeManager.setComponentTheme("TextField", {

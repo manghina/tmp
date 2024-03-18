@@ -9,7 +9,7 @@ export const useLoaderScreen = () => {
 
   useEffect(() => {
     const loadingDelay = setTimeout(() => {
-      // navigation.replace("Tutorial");
+      // navigation.replace("tutorial");
     }, 3000);
 
     Animated.loop(

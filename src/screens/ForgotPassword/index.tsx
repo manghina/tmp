@@ -1,176 +1,144 @@
 import React, { memo } from "react";
-import { View, Button, Colors, Text } from "react-native-ui-lib";
+import { View, Button, Text } from "react-native-ui-lib";
 import { useForgotPasswordScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
+import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
+import { ScrollView } from "react-native";
+import { styles } from "./styles";
 
 export const ForgotPasswordScreen = memo(() => {
   const {
     formData,
-    triggerRecoveryPasswordTokenSubmit,
     triggerPasswordChangeSubmit,
     step1Filled,
     step2Filled,
     step3Filled,
     completionPercentage,
     stepperCounter,
-    clearFields,
-    recoveryPasswordTokenTimer,
-    startRecoveryPasswordTokenTimer,
-    onNextStepButtonPressed,
-    onPreviousStepButtonPressed,
-    trigger,
+    onFirstStepProceedButtonPressed,
+    onSecondStepProceedButtonPressed,
+    onBackButtonPressed,
   } = useForgotPasswordScreen();
+
+  const renderStep1 = () => (
+    <View key="step1" style={styles.formColumn}>
+      <FormTextField
+        keyboardType="email-address"
+        name="email"
+        label="Indirizzo email usato in fase di registrazione"
+      />
+      <View style={styles.mainActionContainer}>
+        <Text
+          style={[
+            styles.mainActionLabel,
+            !step1Filled ? styles.textDisabled : undefined,
+          ]}
+        >
+          Ci sei quasi...
+        </Text>
+        <Button
+          label="Prosegui"
+          onPress={onFirstStepProceedButtonPressed}
+          disabled={!step1Filled}
+        />
+      </View>
+    </View>
+  );
+
+  const renderStep2 = () => (
+    <View key="step2" style={styles.formColumn}>
+      <FormTextField
+        keyboardType="number-pad"
+        maxLength={6}
+        name="otpCode"
+        label="Codice di verifica ricevuto via email"
+      />
+      {/*recoveryPasswordTokenTimer > 0 ? (
+        <Text center grayText marginT-24>
+          Inserisci il codice entro 00:
+          {recoveryPasswordTokenTimer.toString().padStart(2, "0")}
+        </Text>
+      ) : (
+        <Text center default14 marginT-24>
+          Non hai ricevuto il codice?{" "}
+          <Text
+            link
+            style={{ fontStyle: "italic" }}
+            onPress={() => {
+              triggerRecoveryPasswordTokenSubmit();
+              startRecoveryPasswordTokenTimer();
+            }}
+          >
+            Clicca qui
+          </Text>
+        </Text>
+      )*/}
+      <Button
+        label="Imposta nuova password"
+        onPress={onSecondStepProceedButtonPressed}
+        disabled={!step2Filled}
+      />
+      <Text style={styles.backButton} onPress={onBackButtonPressed}>
+        Torna indietro
+      </Text>
+    </View>
+  );
+
+  const renderStep3 = () => (
+    <View key="step3" style={styles.formColumn}>
+      <FormTextField
+        name="newPassword"
+        label="Crea nuova password"
+        type="password"
+      />
+      <FormTextField
+        name="confirmNewPassword"
+        label="Comferma password"
+        type="password"
+      />
+      <View style={styles.mainActionContainer}>
+        <Text
+          style={[
+            styles.mainActionLabel,
+            styles.subtlest,
+            !step3Filled ? styles.textDisabled : undefined,
+          ]}
+        >
+          Un ultimo sforzo...
+        </Text>
+        <Button
+          label="Conferma"
+          onPress={triggerPasswordChangeSubmit}
+          disabled={!step3Filled}
+        />
+      </View>
+      <Text style={styles.backButton} onPress={onBackButtonPressed}>
+        Torna indietro
+      </Text>
+    </View>
+  );
 
   return (
     <View>
-      <View
-        backgroundColor={Colors.buttonBlue}
-        style={{
-          width: `${completionPercentage}%`,
-          height: 4,
-        }}
-      />
-      <View paddingH-20 paddingT-20>
-        <Text title style={{ fontSize: 30, fontWeight: "900" }}>
-          Password dimenticata?
-        </Text>
-        <Text regular16Text>
-          Abbiamo la soluzione e siamo qui per aiutarti a impostarne una tutta
-          nuova.
-        </Text>
-        <FormProvider {...formData}>
-          {(() => {
-            switch (stepperCounter) {
-              case 1:
-                return (
-                  <View key="step1" height="100%">
-                    <FormTextField
-                      keyboardType={"email-address"}
-                      marginT-24
-                      name="email"
-                      label="Indirizzo email usato in fase di registrazione"
-                    />
-                    <Text center grayText={!step1Filled} marginT-24>
-                      Ci sei quasi...
-                    </Text>
-                    <Button
-                      marginT-8
-                      label="Prosegui"
-                      onPress={() => {
-                        trigger("email").then(
-                          (isEmailValid) =>
-                            isEmailValid &&
-                            (() => {
-                              onNextStepButtonPressed();
-                              startRecoveryPasswordTokenTimer();
-                              triggerRecoveryPasswordTokenSubmit();
-                            })(),
-                        );
-                      }}
-                      disabled={!step1Filled}
-                    />
-                  </View>
-                );
-              case 2:
-                return (
-                  <View key="step2" height="100%">
-                    <FormTextField
-                      marginT-24
-                      keyboardType={"number-pad"}
-                      maxLength={6}
-                      name="recoveryPasswordToken"
-                      label="Codice di verifica ricevuto via email"
-                    />
-                    {/*recoveryPasswordTokenTimer > 0 ? (
-                      <Text center grayText marginT-24>
-                        Inserisci il codice entro 00:
-                        {recoveryPasswordTokenTimer.toString().padStart(2, "0")}
-                      </Text>
-                    ) : (
-                      <Text center default14 marginT-24>
-                        Non hai ricevuto il codice?{" "}
-                        <Text
-                          link
-                          style={{ fontStyle: "italic" }}
-                          onPress={() => {
-                            triggerRecoveryPasswordTokenSubmit();
-                            startRecoveryPasswordTokenTimer();
-                          }}
-                        >
-                          Clicca qui
-                        </Text>
-                      </Text>
-                    )*/}
+      <AnimatedProgressBar value={completionPercentage} duration={250} />
+      <ScrollView style={styles.mainContainer}>
+        <View style={styles.pageContent}>
+          <View>
+            <Text style={styles.pageTitle}>Password dimenticata?</Text>
+            <Text style={styles.pageSubtitle}>
+              Abbiamo la soluzione e siamo qui per aiutarti a impostarne una
+              tutta nuova.
+            </Text>
+          </View>
 
-                    <Button
-                      marginT-40
-                      label="Imposta nuova password"
-                      onPress={() => {
-                        trigger("recoveryPasswordToken").then(
-                          (isRecoveryPasswordTokenValid) => {
-                            isRecoveryPasswordTokenValid &&
-                              onNextStepButtonPressed();
-                          },
-                        );
-                      }}
-                      disabled={!step2Filled}
-                    />
-                    <Text
-                      center
-                      underline
-                      default14Text
-                      marginT-16
-                      onPress={() => {
-                        clearFields();
-                        onPreviousStepButtonPressed();
-                      }}
-                    >
-                      Torna indietro
-                    </Text>
-                  </View>
-                );
-              case 3:
-                return (
-                  <View key="step3" height="100%">
-                    <FormTextField
-                      marginT-24
-                      name="newPassword"
-                      label="Crea nuova password"
-                    />
-                    <FormTextField
-                      marginT-24
-                      name="confirmNewPassword"
-                      label="Comferma password"
-                    />
-                    <Text center grayText={!step3Filled} marginT-24>
-                      Un ultimo sforzo...
-                    </Text>
-                    <Button
-                      marginT-8
-                      label="Conferma"
-                      onPress={triggerPasswordChangeSubmit}
-                      disabled={!step3Filled}
-                    />
-                    <Text
-                      center
-                      underline
-                      default14Text
-                      marginT-16
-                      onPress={() => {
-                        clearFields();
-                        onPreviousStepButtonPressed();
-                      }}
-                    >
-                      Torna indietro
-                    </Text>
-                  </View>
-                );
-            }
-            return <></>;
-          })()}
-        </FormProvider>
-      </View>
+          <FormProvider {...formData}>
+            {stepperCounter === 1 && renderStep1()}
+            {stepperCounter === 2 && renderStep2()}
+            {stepperCounter === 3 && renderStep3()}
+          </FormProvider>
+        </View>
+      </ScrollView>
     </View>
   );
 });

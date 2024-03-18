@@ -9,9 +9,8 @@ import { useAppContent } from "./index.hooks";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoaderScreen } from "@app/screens/Loader";
 import { HomeScreen } from "@app/screens/Home";
-import { LoginOptionsScreen } from "@app/screens/LoginOptions";
+import { LoginScreen } from "src/screens/Login";
 import { UserRegisterScreen } from "src/screens/UserRegister";
-import { LoginByMailScreen } from "@app/screens/LoginByMailScreen";
 import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
 import { UserHomeScreen } from "@app/screens/UserHome";
@@ -24,7 +23,9 @@ import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
-import { ProfessionalHomeScreen } from "../../screens/ProfessionalHome";
+import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
+import { BackButton } from "@app/components/BackButton";
+import { textVariants } from "@app/theme/typographies/variants";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +42,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName="Tutorial">
+        <Stack.Navigator initialRouteName="tutorial">
           <Stack.Screen
             name="form-filterable-select"
             component={FilterableSelectScreen}
@@ -53,21 +54,21 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="Loader"
+            name="loader"
             component={LoaderScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="Tutorial"
+            name="tutorial"
             component={TutorialScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="Home"
+            name="home"
             component={HomeScreen}
             options={{
               headerShown: false,
@@ -77,8 +78,8 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="LoginOptions"
-            component={LoginOptionsScreen}
+            name="login"
+            component={LoginScreen}
             options={{
               headerShown: false,
               statusBarAnimation: "slide",
@@ -87,25 +88,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="LoginWithMail"
-            component={LoginByMailScreen}
-            options={{
-              title: "Accedi",
-              headerTitleAlign: "center",
-              headerTitleStyle: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
-                color: Colors.blackText,
-              },
-              animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
-              statusBarAnimation: "slide",
-              statusBarStyle: "dark",
-              statusBarColor: "white",
-            }}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
+            name="forgot-password"
             component={ForgotPasswordScreen}
             options={{
               title: "",
@@ -117,52 +100,50 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="PasswordResetSuccess"
+            name="password-reset-success"
             component={PasswordResetSuccessScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="Register"
+            name="user-register"
             component={UserRegisterScreen}
             options={{
               title: "Registrati",
               headerTitleAlign: "center",
               headerTitleStyle: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
+                ...textVariants.h3CondensedBlackNormal,
                 color: Colors.blackText,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
             }}
           />
           <Stack.Screen
-            name="ProfessionalRegister"
+            name="professional-register"
             component={ProfessionalRegisterScreen}
             options={{
               title: "Registrati",
               headerTitleAlign: "center",
               headerTitleStyle: {
-                fontFamily: "HelveticaNeue-CondensedBlack",
-                fontSize: 32,
+                ...textVariants.h3CondensedBlackNormal,
                 color: Colors.blackText,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
             }}
           />
           <Stack.Screen
-            name="ProfessionalHome"
+            name="professional-home"
             component={ProfessionalHomeScreen}
             options={{
               headerShown: false,
@@ -173,7 +154,7 @@ export const AppContent: FC = memo(({}) => {
           />
 
           <Stack.Screen
-            name="UserHome"
+            name="user-home"
             component={UserHomeScreen}
             options={{
               header: () => <UserHeader />,

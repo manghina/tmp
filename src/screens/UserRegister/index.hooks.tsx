@@ -9,7 +9,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
-import { actions } from "../../redux-store";
+import { actions } from "@app/redux-store";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
@@ -102,12 +102,12 @@ export const useUserRegisterScreen = () => {
   );
 
   const firstStepCompletionPercentage = useMemo(
-    () => ([firstName, lastName, birthDate].filter(Boolean).length / 3) * 100,
+    () => [firstName, lastName, birthDate].filter(Boolean).length / 3,
     [firstName, lastName, birthDate],
   );
 
   const secondStepCompletionPercentage = useMemo(
-    () => ([email, password, confirmPassword].filter(Boolean).length / 3) * 100,
+    () => [email, password, confirmPassword].filter(Boolean).length / 3,
     [email, password, confirmPassword],
   );
 
@@ -124,7 +124,7 @@ export const useUserRegisterScreen = () => {
     () =>
       handleSubmit((data) => {
         dispatch(
-          actions.registrationFormSubmitted({
+          actions.userRegistrationFormSubmitted({
             ...data,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
           }),

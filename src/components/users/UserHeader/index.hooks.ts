@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { selectors } from "@app/redux-store";
 import { useMemo } from "react";
+import { User } from "@app/models/User";
 
 export const useUserHeader = () => {
-  const me = useSelector(selectors.getUserMe);
+  const me: User | null = useSelector(selectors.getMe);
 
   const initials = useMemo(
     () =>

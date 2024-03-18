@@ -5,6 +5,9 @@ import React, { memo } from "react";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
+import { styles } from "./styles";
+import { ScrollView } from "react-native";
+import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 
 type UserRegisterScreenProps = {};
 
@@ -24,80 +27,83 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
   } = useUserRegisterScreen();
 
   return (
-    <FormProvider {...formData}>
-      {stepperCounter == 1 ? (
-        <View key="step1" height="100%">
-          <View
-            backgroundColor={Colors.buttonBlue}
-            style={{
-              width: `${firstStepCompletionPercentage}%`,
-              height: 4,
-            }}
-          />
-          <View flex paddingH-20 paddingT-20>
-            <FormTextField name="firstName" label="Nome" />
-            <FormTextField name="lastName" label="Cognome" />
-            <FormDateTimePicker name="birthDate" label="Data di nascita" />
-            <Text center grayText={!firstStepFilled} marginT-24>
-              Ci sei quasi...
-            </Text>
-            <Button
-              BlueButton
-              label="Prosegui"
-              marginT-8
-              style={{ width: "100%" }}
-              onPress={onNextStepButtonPressed}
-              disabledBackgroundColor={Colors.disabledBlue}
-              disabled={!canGoToNextStep}
+    <ScrollView style={styles.pageContainer}>
+      <FormProvider {...formData}>
+        {stepperCounter == 1 ? (
+          <View key="step1" style={styles.step}>
+            <AnimatedProgressBar
+              value={firstStepCompletionPercentage}
+              duration={250}
             />
+            <View style={styles.formColumn}>
+              <FormTextField name="firstName" label="Nome" />
+              <FormTextField name="lastName" label="Cognome" />
+              <FormDateTimePicker name="birthDate" label="Data di nascita" />
+              <View style={styles.mainActionLabelContainer}>
+                <Text
+                  grayText={!firstStepFilled}
+                  style={styles.mainActionLabelText}
+                >
+                  Ci sei quasi...
+                </Text>
+              </View>
+              <Button
+                BlueButton
+                label="Prosegui"
+                style={styles.mainAction}
+                onPress={onNextStepButtonPressed}
+                disabledBackgroundColor={Colors.disabledBlue}
+                disabled={!canGoToNextStep}
+              />
+            </View>
           </View>
-        </View>
-      ) : (
-        <View key="step2" height="100%">
-          <View
-            backgroundColor={Colors.buttonBlue}
-            style={{
-              width: `${secondStepCompletionPercentage}%`,
-              height: 4,
-            }}
-          ></View>
-          <View flex paddingH-20 paddingT-20>
-            <FormTextField
-              keyboardType={"email-address"}
-              name="email"
-              label="Email"
+        ) : (
+          <View key="step2" style={styles.step}>
+            <AnimatedProgressBar
+              value={secondStepCompletionPercentage}
+              duration={250}
             />
-            <FormTextField name="password" label="Password" type="password" />
-            <FormTextField
-              name="confirmPassword"
-              label="Conferma password"
-              type="password"
-            />
-            <Text center grayText={!secondStepFilled} marginT-24>
-              Iscrizione completata!
-            </Text>
-            <Button
-              BlueButton
-              label="Registrati"
-              marginT-8
-              style={{ width: "100%" }}
-              onPress={triggerSubmit}
-              disabledBackgroundColor={Colors.disabledBlue}
-              disabled={!secondStepFilled || submitDisabled}
-            />
-            <Text
-              center
-              underline
-              default14Text
-              marginT-16
-              onPress={onPreviousStepButtonPressed}
-            >
-              Torna indietro
-            </Text>
+            <View style={styles.formColumn}>
+              <FormTextField
+                keyboardType={"email-address"}
+                name="email"
+                label="Email"
+              />
+              <FormTextField name="password" label="Password" type="password" />
+              <FormTextField
+                name="confirmPassword"
+                label="Conferma password"
+                type="password"
+              />
+              <Text
+                grayText={!secondStepFilled}
+                style={styles.mainActionLabelText}
+              >
+                Iscrizione completata!
+              </Text>
+              <Button
+                BlueButton
+                label="Registrati"
+                style={styles.mainAction}
+                onPress={triggerSubmit}
+                disabledBackgroundColor={Colors.disabledBlue}
+                disabled={!secondStepFilled || submitDisabled}
+              />
+              <Text
+                center
+                underline
+                default14Text
+                marginT-16
+                onPress={onPreviousStepButtonPressed}
+                style={styles.backTextButton}
+              >
+                Torna indietro
+              </Text>
+            </View>
           </View>
-        </View>
-      )}
-    </FormProvider>
+        )}
+      </FormProvider>
+    </ScrollView>
   );
 });
 
