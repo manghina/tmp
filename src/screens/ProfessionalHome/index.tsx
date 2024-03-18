@@ -15,8 +15,6 @@ export const ProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     bookingRotateIcon,
     historyRotateIcon,
-    bookingListExpand,
-    historyListExpand,
     toggleBookingList,
     toggleHistoryList,
   } = useProfessionalHomeScreen();
@@ -152,14 +150,8 @@ export const ProfessionalHomeScreen = () => {
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <Animated.View
-            style={{
-              height: bookingListExpand,
-              overflow: "hidden",
-            }}
-          >
-            <ScrollView >
-              <View style={styles.bookingList}>
+          <View>
+            <View style={styles.bookingList}>
               <BookingItem
                 bookingType={"expiring"}
                 title={"In scadenza"}
@@ -189,41 +181,33 @@ export const ProfessionalHomeScreen = () => {
                   "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
                 }
               />
-              </View>
-            </ScrollView>
-          </Animated.View>
+            </View>
+          </View>
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
             </View>
             <TouchableOpacity onPress={toggleHistoryList}>
               <Animated.View
-                  style={{
-                    transform: [{ rotate: historyRotateIcon }],
-                  }}
+                style={{
+                  transform: [{ rotate: historyRotateIcon }],
+                }}
               >
                 <ExpandListIcon color={"#44546F"} />
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <Animated.View
-              style={{
-                height: historyListExpand,
-                overflow: "hidden",
-              }}
-          >
-            <ScrollView>
-              <View style={styles.bookingList}>
+          <View>
+            <View style={styles.bookingList}>
               <BookingItem
-                  bookingType={"past"}
-                  title={"Titolo della query"}
-                  bookingText={
-                    "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                  }
+                bookingType={"past"}
+                title={"Titolo della query"}
+                bookingText={
+                  "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                }
               />
-              </View>
-            </ScrollView>
-          </Animated.View>
+            </View>
+          </View>
           <Text style={styles.helpSection}>
             Bisogno di supporto?{" "}
             <Text style={styles.link} onPress={() => console.log("Tutorial")}>
