@@ -10,9 +10,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
 import { actions } from "@app/redux-store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
+import { selectors } from "../../redux-store";
 
 interface SignUpFormData {
   firstName: string;
@@ -133,6 +134,19 @@ export const useUserRegisterScreen = () => {
     [dispatch, handleSubmit],
   );
 
+  const isSigningUp = useSelector(
+    selectors.getAjaxIsLoadingByApi("apis/accounts/post"),
+  );
+  const [showLoadingAnimation, setShowLoadingAnimation] =
+    useState(!!isSigningUp);
+
+  useEffect(() => {
+    if (isSigningUp) {
+      setShowLoadingAnimation(true);
+      setTimeout(() => setShowLoadingAnimation(false), 500);
+    }
+  }, [isSigningUp]);
+
   const submitDisabled = (isSubmitted && !isValid) || !isDirty;
 
   useEffect(() => {
@@ -163,5 +177,6 @@ export const useUserRegisterScreen = () => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
+    showLoadingAnimation,
   };
 };

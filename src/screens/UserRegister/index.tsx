@@ -8,6 +8,7 @@ import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
 import { styles } from "./styles";
 import { ScrollView } from "react-native";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
+import LottieView from "lottie-react-native";
 
 type UserRegisterScreenProps = {};
 
@@ -24,6 +25,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
     onPreviousStepButtonPressed,
     submitDisabled,
     triggerSubmit,
+    showLoadingAnimation,
   } = useUserRegisterScreen();
 
   return (
@@ -82,12 +84,31 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
                 Iscrizione completata!
               </Text>
               <Button
+                onPress={triggerSubmit}
+                disabled={
+                  !secondStepFilled || submitDisabled || showLoadingAnimation
+                }
+                style={styles.button}
+              >
+                {showLoadingAnimation ? (
+                  <LottieView
+                    source={require("../../../assets/animations/loading.json")}
+                    autoPlay
+                    speed={1}
+                    loop={true}
+                    style={styles.loadingAnimation}
+                  />
+                ) : (
+                  <Text style={styles.buttonText}>Registrati</Text>
+                )}
+              </Button>
+              {/* <Button
                 label="Registrati"
                 style={styles.mainAction}
                 onPress={triggerSubmit}
                 disabledBackgroundColor={Colors.disabledBlue}
                 disabled={!secondStepFilled || submitDisabled}
-              />
+              /> */}
               <Text
                 center
                 underline
