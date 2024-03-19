@@ -82,7 +82,6 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
                 Iscrizione completata!
               </Text>
               <Button
-                BlueButton
                 label="Registrati"
                 style={styles.mainAction}
                 onPress={triggerSubmit}

@@ -4,6 +4,8 @@ import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { Colors } from "@app/theme/colors/palette";
+import { FontSizes } from "../../theme/typographies/properties";
+import { colorTokensLight } from "../../theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   page: {
@@ -48,4 +50,15 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextLink,
   },
   textDisabled: { color: colorTokens.colorTextDisabled },
+  button: {
+    paddingVertical: dimensionsTokens.paddingXs,
+  },
+  buttonText: {
+    fontSize: FontSizes.P1,
+    color: colorTokensLight.colorTextInverse,
+  },
+  loadingAnimation: {
+    width: "100%",
+    height: 20, //FontSizes.H6,
+  },
 });
