@@ -1,3 +1,5 @@
+export { default as getAccountsMe } from "./get-accounts-me";
+export { default as getProfessionalsMe } from "./get-professionals-me";
 export { default as getUsersMe } from "./get-users-me";
 export { default as getUsersMeRequests } from "./get-users-me-requests";
 export { default as getUsersMeRequestsByRequestId } from "./get-users-me-requests-by-request-id";
@@ -10,3 +12,4 @@ export { default as postUsersMeRequests } from "./post-users-me-requests";
 export { default as postUsersMeRequestsMessagesByRequestId } from "./post-users-me-requests-messages-by-request-id";
 export { default as postAdminProfessionals } from "./post-admin-professionals";
 export { default as postProfessionals } from "./post-professionals";
+export { default as postPaymentIntents } from "./post-payment-intents";

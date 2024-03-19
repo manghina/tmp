@@ -125,7 +125,7 @@ export const Colors = {
     1000: "#3D2232",
   },
   Neutral: {
-    0: "#FFFFFF",
+    0: "#FEFEFE",
     100: "#F7F8F9",
     200: "#F1F2F4",
     300: "#DCDFE4",
@@ -171,6 +171,12 @@ export const Colors = {
     400: "#BFDBF847",
     500: "#9BB4CA80",
   },
+  LightNeutralAlternative: {
+    neutral: "#011820",
+  },
+  DarkNeutralAlternative: {
+    neutral: "#011820",
+  },
   Brand: {
     100: "#D3DDDC",
     200: "#B2C3C1",
@@ -182,5 +188,8 @@ export const Colors = {
     800: "#202E2D",
     900: "#182322",
     1000: "#101717",
+  },
+  Unlisted: {
+    LoginBackground: withOpacity("#4377e8", 0.15),
   },
 };

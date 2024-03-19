@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import tutorialImage1 from "@assets/img/tutorial-image-1.jpeg";
-import tutorialImage2 from "@assets/img/tutorial-image-2.jpeg";
-import tutorialImage3 from "@assets/img/tutorial-image-3.jpeg";
+import tutorialImage1 from "@assets/img/tutorial-image-1.png";
+import tutorialImage2 from "@assets/img/tutorial-image-2.png";
+import tutorialImage3 from "@assets/img/tutorial-image-3.png";
 
 const intervalBetweenImages = 5000;
 
@@ -67,11 +67,11 @@ export const useTutorialScreen = () => {
   }, [fill1Anim, fill2Anim, fill3Anim]);
 
   const onRegisterButtonClick = useCallback(() => {
-    navigation.replace("Home");
+    navigation.replace("home");
   }, [navigation]);
 
   const onLoginButtonClick = useCallback(() => {
-    navigation.navigate("LoginOptions");
+    navigation.navigate("login");
   }, [navigation]);
 
   useEffect(() => {

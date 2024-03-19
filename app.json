@@ -11,12 +11,13 @@
       "resizeMode": "contain",
       "backgroundColor": "#011820"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "ai.sweepit.sweep"
+      "bundleIdentifier": "ai.sweepit.sweep",
+      "infoPlist": {
+        "UIViewControllerBasedStatusBarAppearance": true
+      }
     },
     "android": {
       "adaptiveIcon": {

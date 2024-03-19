@@ -103,7 +103,6 @@ export const styles = StyleSheet.create({
     gap: Dimensions.small.spacing_100,
   },
   bookingList: {
-    flexDirection: "column",
     gap: Dimensions.small.spacing_100,
     marginBottom: dimensionsTokens.paddingMd,
   },

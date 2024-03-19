@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
+import { Specialization } from "../../models/common/DoctorCommon";
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -23,7 +24,7 @@ interface ProfessionalRegisterFormData {
   professionalPaperPhoto: any;
   professionalRegistrationNumber: string;
   province: string;
-  specialization: string;
+  specialization: Specialization;
   officeLocation: string;
   email: string;
   password: string;
@@ -41,7 +42,10 @@ const schema = yup.object().shape({
     .string()
     .required("Inserisci il tuo numero di registrazione"),
   province: yup.string().required("Inserisci la tua provincia"),
-  specialization: yup.string().required("Inserisci la tua specializzazione"),
+  specialization: yup
+    .string()
+    .oneOf(Object.values(Specialization))
+    .required("Inserisci la tua specializzazione"),
   officeLocation: yup.string().required("Inserisci la tua sede"),
   email: yup
     .string()
@@ -101,7 +105,6 @@ export const useProfessionalRegister = () => {
       professionalPaperPhoto: undefined,
       professionalRegistrationNumber: "",
       province: "",
-      specialization: "",
       officeLocation: "",
       email: "",
       password: "",
@@ -204,14 +207,11 @@ export const useProfessionalRegister = () => {
     }
   }, [stepperIndex, step1Filled, step2Filled, step3Filled]);
 
-  const firstStepCompletionPercentage = useMemo(
-    () =>
-      ([name, lastName, birthDate, phonePrefix, phoneNumber].filter(Boolean)
-        .length /
-        5) *
-      100,
-    [name, lastName, birthDate, phonePrefix, phoneNumber],
-  );
+  const firstStepCompletionPercentage = useMemo(() => {
+    const fields = [name, lastName, birthDate, phonePrefix, phoneNumber];
+
+    return fields.filter(Boolean).length / fields.length;
+  }, [name, lastName, birthDate, phonePrefix, phoneNumber]);
 
   const secondStepCompletionPercentage = useMemo(() => {
     const fields = [
@@ -222,7 +222,7 @@ export const useProfessionalRegister = () => {
       officeLocation,
     ];
 
-    return (fields.filter(Boolean).length / fields.length) * 100;
+    return fields.filter(Boolean).length / fields.length;
   }, [
     professionalPaperPhoto,
     professionalRegistrationNumber,
@@ -234,7 +234,7 @@ export const useProfessionalRegister = () => {
   const thirdStepCompletionPercentage = useMemo(() => {
     const fields = [email, password, confirmPassword];
 
-    return (fields.filter(Boolean).length / fields.length) * 100;
+    return fields.filter(Boolean).length / fields.length;
   }, [email, password, confirmPassword]);
 
   const currentStepCompletionPercentage = useMemo(() => {
@@ -263,7 +263,7 @@ export const useProfessionalRegister = () => {
             email: data.email,
             password: data.password,
             name: data.name,
-            lastname: data.lastName,
+            lastName: data.lastName,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
             phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
             specializations: [data.specialization],

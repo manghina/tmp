@@ -15,8 +15,8 @@ export const ProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     bookingRotateIcon,
     historyRotateIcon,
-    bookingListExpand,
-    historyListExpand,
+    isBookingListExpanded,
+    isHistoryListExpanded,
     toggleBookingList,
     toggleHistoryList,
   } = useProfessionalHomeScreen();
@@ -152,78 +152,72 @@ export const ProfessionalHomeScreen = () => {
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <Animated.View
-            style={{
-              height: bookingListExpand,
-              overflow: "hidden",
-            }}
-          >
-            <ScrollView >
-              <View style={styles.bookingList}>
-              <BookingItem
-                bookingType={"expiring"}
-                title={"In scadenza"}
-                bookingText={
-                  "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-                notes={"- 12:00 min"}
-              />
-              <BookingItem
-                bookingType={"review"}
-                title={"Lascia una recensione"}
-                bookingText={
-                  "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
-              <BookingItem
-                bookingType={"scheduled"}
-                title={"Titolo della query"}
-                bookingText={
-                  "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
-              <BookingItem
-                bookingType={"expired"}
-                title={"Titolo della query"}
-                bookingText={
-                  "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                }
-              />
-              </View>
-            </ScrollView>
-          </Animated.View>
+          <View>
+            <View style={styles.bookingList}>
+              {isBookingListExpanded && (
+                <>
+                  <BookingItem
+                    bookingType={"expiring"}
+                    title={"In scadenza"}
+                    bookingText={
+                      "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                    notes={"- 12:00 min"}
+                  />
+                  <BookingItem
+                    bookingType={"review"}
+                    title={"Lascia una recensione"}
+                    bookingText={
+                      "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                  <BookingItem
+                    bookingType={"scheduled"}
+                    title={"Titolo della query"}
+                    bookingText={
+                      "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                  <BookingItem
+                    bookingType={"expired"}
+                    title={"Titolo della query"}
+                    bookingText={
+                      "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                </>
+              )}
+            </View>
+          </View>
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
             </View>
             <TouchableOpacity onPress={toggleHistoryList}>
               <Animated.View
-                  style={{
-                    transform: [{ rotate: historyRotateIcon }],
-                  }}
+                style={{
+                  transform: [{ rotate: historyRotateIcon }],
+                }}
               >
                 <ExpandListIcon color={"#44546F"} />
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <Animated.View
-              style={{
-                height: historyListExpand,
-                overflow: "hidden",
-              }}
-          >
-            <ScrollView>
-              <View style={styles.bookingList}>
-              <BookingItem
-                  bookingType={"past"}
-                  title={"Titolo della query"}
-                  bookingText={
-                    "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                  }
-              />
-              </View>
-            </ScrollView>
-          </Animated.View>
+          <View>
+            <View style={styles.bookingList}>
+              {isHistoryListExpanded && (
+                <>
+                  <BookingItem
+                    bookingType={"past"}
+                    title={"Titolo della query"}
+                    bookingText={
+                      "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
+                    }
+                  />
+                </>
+              )}
+            </View>
+          </View>
           <Text style={styles.helpSection}>
             Bisogno di supporto?{" "}
             <Text style={styles.link} onPress={() => console.log("Tutorial")}>

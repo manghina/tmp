@@ -2,6 +2,7 @@ import React, { JSX, memo } from "react";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { TouchableOpacity } from "react-native-ui-lib";
 import { useFormNewScreenFilterableSelect } from "./index.hooks";
+import { StyleProp, TextStyle } from "react-native";
 
 type FormNewScreenFilterableSelectProps<
   T extends { label: string; value: string },
@@ -16,6 +17,7 @@ type FormNewScreenFilterableSelectProps<
     listTitle?: string;
     renderItem?: (item: T, index: number) => JSX.Element;
   };
+  style?: StyleProp<TextStyle>;
 };
 
 export const FormNewScreenFilterableSelect = memo(
@@ -24,6 +26,7 @@ export const FormNewScreenFilterableSelect = memo(
     label,
     options,
     pageProps,
+    style,
   }: FormNewScreenFilterableSelectProps<T>) => {
     const { onFieldClicked } = useFormNewScreenFilterableSelect({
       name,
@@ -36,8 +39,8 @@ export const FormNewScreenFilterableSelect = memo(
         <FormTextField
           name={name}
           label={label}
-          editable={false}
           onFocus={onFieldClicked}
+          style={style}
         />
       </TouchableOpacity>
     );
