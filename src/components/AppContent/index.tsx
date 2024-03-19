@@ -24,6 +24,7 @@ import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment"
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
+import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
