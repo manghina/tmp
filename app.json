@@ -16,14 +16,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "ai.sweepit.consumer"
+      "bundleIdentifier": "ai.sweepit.sweep"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#011820"
       },
-      "package": "ai.sweepit.consumer"
+      "package": "ai.sweepit.sweep"
     },
     "web": {
       "favicon": "./assets/favicon.png"
