@@ -26,6 +26,7 @@ import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
+import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 
 const Stack = createNativeStackNavigator();
 
