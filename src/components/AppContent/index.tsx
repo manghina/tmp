@@ -27,7 +27,6 @@ import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessio
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
-import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 
 const Stack = createNativeStackNavigator();
 
