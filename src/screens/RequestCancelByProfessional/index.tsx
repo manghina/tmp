@@ -99,7 +99,7 @@ export const RequestCancelByProfessionalScreen = memo(
           </View>
 
           <View style={styles.footer}>
-            <Text>Sei sicuro di voler procedere?</Text>
+            <Text style={styles.footerText}>Sicuro di voler procedere?</Text>
             <Button
               style={styles.button}
               onPress={handleDeleteRequest}

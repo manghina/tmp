@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
     marginBottom: dimensionsTokens.paddingXs / 3,
     fontSize: FontSizes.P1,
     paddingBottom: dimensionsTokens.paddingXs / 3,
+    fontWeight: FontWeights.MEDIUM,
   },
   textArea: {
     paddingVertical: dimensionsTokens.paddingXs,
@@ -86,14 +87,17 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
+  footerText: { fontWeight: FontWeights.MEDIUM },
   button: {
     width: "100%",
     backgroundColor: colorTokens.colorBackgroundDangerBold,
     color: colorTokens.colorTextInverse,
     paddingVertical: dimensionsTokens.paddingXs,
+    fontWeight: FontWeights.MEDIUM,
   },
   goBackLink: {
     textDecorationLine: "underline",
     color: colorTokens.colorTextDefault,
+    marginTop: dimensionsTokens.paddingMd,
   },
 });
