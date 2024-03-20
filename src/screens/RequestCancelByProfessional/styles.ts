@@ -37,12 +37,14 @@ export const styles = StyleSheet.create({
     borderStyle: "solid",
     height: 156,
     borderRadius: dimensionsTokens.paddingXs / 3,
-    textAlignVertical: "top",
-    fontStyle: "italic",
     fontSize: FontSizes.P1,
-    fontWeight: FontWeights.MEDIUM,
+    textAlignVertical: "top",
   },
-  textAreaEmpty: { color: colorTokens.colorTextDisabled },
+  textAreaEmpty: {
+    color: colorTokens.colorTextDisabled,
+    fontWeight: FontWeights.MEDIUM,
+    fontStyle: "italic",
+  },
   textAreaDirty: { color: colorTokens.colorTextDefault },
   paragraphTitle: {
     fontSize: FontSizes.H6,
@@ -50,22 +52,6 @@ export const styles = StyleSheet.create({
     lineHeight: FontSizes.H5,
     color: colorTokens.colorTextDefault,
     letterSpacing: -0.4,
-  },
-  footer: {
-    justifyContent: "center",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-  },
-  button: {
-    width: "100%",
-    backgroundColor: colorTokens.colorBackgroundDangerBold,
-    color: colorTokens.colorTextInverse,
-    paddingVertical: dimensionsTokens.paddingXs,
-  },
-  goBackLink: {
-    textDecorationLine: "underline",
-    color: colorTokens.colorTextDefault,
   },
   radioGroup: {},
   radioBtn: {
@@ -93,5 +79,21 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorIconDanger,
     borderWidth: 1,
   },
-  label: { color: colorTokens.colorTextSubtle },
+  label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
+  footer: {
+    justifyContent: "center",
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+  },
+  button: {
+    width: "100%",
+    backgroundColor: colorTokens.colorBackgroundDangerBold,
+    color: colorTokens.colorTextInverse,
+    paddingVertical: dimensionsTokens.paddingXs,
+  },
+  goBackLink: {
+    textDecorationLine: "underline",
+    color: colorTokens.colorTextDefault,
+  },
 });

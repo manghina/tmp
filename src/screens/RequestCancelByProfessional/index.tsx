@@ -80,7 +80,6 @@ export const RequestCancelByProfessionalScreen = memo(
               ]}
               placeholder={"Scrivi qui..."}
               multiline
-              numberOfLines={7}
               value={textValue}
               onChange={(ev) => {
                 setTextValue(ev.nativeEvent.text);
