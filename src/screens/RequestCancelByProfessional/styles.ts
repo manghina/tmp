@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     textAlignVertical: "top",
     fontStyle: "italic",
     fontSize: FontSizes.P1,
+    fontWeight: FontWeights.MEDIUM,
   },
   textAreaEmpty: { color: colorTokens.colorTextDisabled },
   textAreaDirty: { color: colorTokens.colorTextDefault },

@@ -18,9 +18,9 @@ export const RequestCancelByProfessionalScreen = memo(
       handleDeleteRequest,
       goBack,
       radioValues,
-      setRadioValues,
       textValue,
       setTextValue,
+      handleRadioChange,
     } = useRequestCancelByProfessional();
 
     return (
@@ -33,31 +33,36 @@ export const RequestCancelByProfessionalScreen = memo(
               metus.
             </Text>
           </View>
-
           <View style={styles.paragraphContainer}>
             <Text style={styles.paragraphTitle}>Motivazioni</Text>
             <Text style={styles.paragraph}>
               Lorem ipsum dolor sit amet consectetur. Urna urna sed dui mattis
               ac ornare adipiscing
             </Text>
-            <RadioGroup style={styles.radioGroup}>
+
+            <RadioGroup
+              style={styles.radioGroup}
+              onValueChange={(value) => handleRadioChange(value)}
+            >
               <RadioButton
                 containerStyle={[styles.radioBtn, styles.firstRadioBtn]}
                 contentOnLeft
-                label={"Opzione A"}
+                label={"Option A"}
                 labelStyle={styles.label}
-                iconStyle={styles.icon}
-                value={radioValues.option1}
+                iconStyle={radioValues.option1 ? styles.icon : undefined}
+                value={"option1"}
                 size={20}
+                selected={radioValues.option1}
               />
               <RadioButton
                 containerStyle={[styles.radioBtn, styles.lastRadioBtn]}
                 contentOnLeft
-                label={"Opzione C"}
+                label={"Option C"}
                 labelStyle={styles.label}
-                iconStyle={styles.icon}
-                value={radioValues.option2}
+                iconStyle={radioValues.option2 ? styles.icon : undefined}
+                value={"option2"}
                 size={20}
+                selected={radioValues.option2}
               />
             </RadioGroup>
           </View>

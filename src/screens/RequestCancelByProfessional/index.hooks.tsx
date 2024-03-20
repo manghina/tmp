@@ -8,7 +8,13 @@ export const useRequestCancelByProfessional = () => {
     option1: true,
     option2: false,
   });
-  useEffect(() => console.log(radioValues), [radioValues]);
+
+  const handleRadioChange = (value) => {
+    setRadioValues({
+      option1: value === "option1",
+      option2: value === "option2",
+    });
+  };
 
   const [textValue, setTextValue] = useState<string>("");
 
@@ -24,8 +30,8 @@ export const useRequestCancelByProfessional = () => {
     handleDeleteRequest,
     goBack,
     radioValues,
-    setRadioValues,
     textValue,
     setTextValue,
+    handleRadioChange,
   };
 };
