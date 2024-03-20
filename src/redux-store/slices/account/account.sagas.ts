@@ -54,8 +54,10 @@ export function* autoLoginSaga() {
       actions.getProfessionalsMe.fail,
     ],
     function* (action) {
+      console.log(action, action.type, actions.getUsersMe.success.type);
       switch (action.type) {
         case actions.getUsersMe.success.type:
+          console.log("hello")
           NavigationService.replace("user-home");
           break;
         case actions.getProfessionalsMe.success.type:

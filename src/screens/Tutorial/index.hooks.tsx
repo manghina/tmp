@@ -5,6 +5,8 @@ import tutorialImage1 from "@assets/img/tutorial-image-1.png";
 import tutorialImage2 from "@assets/img/tutorial-image-2.png";
 import tutorialImage3 from "@assets/img/tutorial-image-3.png";
 
+import { Button, Text, View } from "react-native-ui-lib";
+
 const intervalBetweenImages = 5000;
 
 const bgImages = [tutorialImage1, tutorialImage2, tutorialImage3];
@@ -109,6 +111,15 @@ export const useTutorialScreen = () => {
     fill1();
   }, [fill1, resetAnimations]);
 
+  const goto = (
+    <View>
+      <Button
+        label="ciao"
+        onPress={() => navigation.push("requests/cancel")}
+      ></Button>
+    </View>
+  );
+
   return {
     bgImage,
     subtitle,
@@ -117,5 +128,6 @@ export const useTutorialScreen = () => {
     fill3Anim,
     onRegisterButtonClick,
     onLoginButtonClick,
+    goto,
   };
 };

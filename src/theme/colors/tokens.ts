@@ -1,6 +1,8 @@
 import { Colors } from "./palette";
 
 export const colorTokensLight = {
+  colorTextDefault: Colors.Neutral[1000],
+
   colorText: Colors.Neutral[1000],
   colorTextSubtle: Colors.Neutral[700],
   colorTextSubtlest: Colors.Neutral[700],
@@ -227,6 +229,8 @@ export const colorTokensLight = {
 };
 
 export const colorTokensDark = {
+  colorTextDefault: Colors.DarkNeutral[900],
+
   colorText: Colors.DarkNeutral[1100],
   colorTextSubtle: Colors.DarkNeutral[800],
   colorTextSubtlest: Colors.DarkNeutral[700],
