@@ -10,6 +10,14 @@ export const useRequestCancelByProfessional = () => {
   }, []);
 
   const [radioValues, setRadioValues] = useState<boolean[]>([true, false]);
+  const [textValue, setTextValue] = useState<string>("");
 
-  return { handleDeleteRequest, goBack, radioValues, setRadioValues };
+  return {
+    handleDeleteRequest,
+    goBack,
+    radioValues,
+    setRadioValues,
+    textValue,
+    setTextValue,
+  };
 };

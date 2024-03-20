@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: dimensionsTokens.paddingMd,
+    backgroundColor: colorTokens.elevationSurface,
   },
   title: {
     color: colorTokensLight.colorTextDanger,
@@ -20,14 +21,13 @@ export const styles = StyleSheet.create({
     lineHeight: FontSizes.H2,
     letterSpacing: -0.64,
   },
-  paragraphContainer: {
-    /* gap: 10, */
-  },
+  paragraphContainer: {},
   paragraph: {
     color: colorTokens.colorTextDefault,
     paddingTop: dimensionsTokens.paddingXs / 3,
     marginBottom: dimensionsTokens.paddingXs / 3,
     fontSize: FontSizes.P1,
+    paddingBottom: dimensionsTokens.paddingXs / 3,
   },
   textArea: {
     paddingVertical: dimensionsTokens.paddingXs,
@@ -38,7 +38,11 @@ export const styles = StyleSheet.create({
     height: 156,
     borderRadius: dimensionsTokens.paddingXs / 3,
     textAlignVertical: "top",
+    fontStyle: "italic",
+    fontSize: FontSizes.P1,
   },
+  textAreaEmpty: { color: colorTokens.colorTextDisabled },
+  textAreaDirty: { color: colorTokens.colorTextDefault },
   paragraphTitle: {
     fontSize: FontSizes.H6,
     fontWeight: FontWeights.BLACK,
@@ -62,14 +66,7 @@ export const styles = StyleSheet.create({
     textDecorationLine: "underline",
     color: colorTokens.colorTextDefault,
   },
-  radioGroup: {
-    /* paddingVertical: dimensionsTokens.paddingXs,
-    paddingHorizontal: dimensionsTokens.paddingSm,
-    borderColor: colorTokens.colorBorder,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderRadius: dimensionsTokens.paddingXs, */
-  },
+  radioGroup: {},
   radioBtn: {
     display: "flex",
     justifyContent: "space-between",
@@ -79,6 +76,7 @@ export const styles = StyleSheet.create({
     borderColor: colorTokens.colorBorder,
     borderWidth: 1,
     borderStyle: "solid",
+    color: colorTokens.colorIconWarning,
   },
   firstRadioBtn: {
     borderTopLeftRadius: dimensionsTokens.paddingXs / 2,
@@ -92,7 +90,7 @@ export const styles = StyleSheet.create({
   icon: {
     borderColor: colorTokens.colorBorderDanger,
     backgroundColor: colorTokens.colorIconDanger,
-    borderWidth: 1000,
+    borderWidth: 1,
   },
   label: { color: colorTokens.colorTextSubtle },
 });
