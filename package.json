@@ -12,7 +12,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "postinstall": "patch-package",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "deploy": "eas build --platform ios &&  eas submit --platform ios"
   },
   "dependencies": {
     "@expo/metro-config": "~0.17.1",
