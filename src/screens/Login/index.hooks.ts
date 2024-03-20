@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { useForm, useWatch } from "react-hook-form";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { actions } from "@app/redux-store";
-import { useDispatch } from "react-redux";
+import { actions, selectors } from "../../redux-store";
+import { useDispatch, useSelector } from "react-redux";
 
 type LoginFormData = {
   email: string;
@@ -37,7 +37,20 @@ export const useLoginScreen = () => {
     formState: { isDirty, isSubmitted, isValid },
   } = formData;
 
-  const submitDisabled = !isDirty || (isSubmitted && !isValid);
+  const isLogginIn = useSelector(
+    selectors.getAjaxIsLoadingByApi("apis/accounts/sessions/post"),
+  );
+  const [showLoadingAnimation, setShowLoadingAnimation] =
+    useState(!!isLogginIn);
+
+  useEffect(() => {
+    if (isLogginIn) {
+      setShowLoadingAnimation(true);
+      setTimeout(() => setShowLoadingAnimation(false), 500);
+    }
+  }, [isLogginIn]);
+
+  const submitDisabled = !isDirty || (isSubmitted && !isValid) || !!isLogginIn;
 
   const triggerSubmit = useMemo(
     () =>
@@ -71,5 +84,6 @@ export const useLoginScreen = () => {
     onForgotPasswordButtonPressed,
     onRegisterButtonPressed,
     allFieldsFilled,
+    showLoadingAnimation,
   };
 };

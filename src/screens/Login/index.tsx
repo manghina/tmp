@@ -1,13 +1,11 @@
 import React, { memo } from "react";
 import { SafeAreaView } from "react-native";
 import { View, Text, Button } from "react-native-ui-lib";
-
 import { FormProvider } from "react-hook-form";
-
 import { useLoginScreen } from "./index.hooks";
-
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { styles } from "./styles";
+import LottieView from "lottie-react-native";
 
 const headerBackgroundGraphicsPercentageOverflow = 20;
 
@@ -21,6 +19,7 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
     onForgotPasswordButtonPressed,
     onRegisterButtonPressed,
     allFieldsFilled,
+    showLoadingAnimation,
   } = useLoginScreen();
 
   return (
@@ -59,11 +58,34 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
             >
               Sblocca ingresso applicazione
             </Text>
-            <Button
-              label="Accedi"
-              onPress={triggerSubmit}
-              disabled={submitDisabled}
-            />
+            <Button onPress={triggerSubmit} disabled={showLoadingAnimation ?? submitDisabled} style={styles.button}>
+              {showLoadingAnimation ? (
+                <LottieView
+                  source={require("../../../assets/animations/loading.json")}
+                  autoPlay
+                  speed={1}
+                  loop={true}
+                  style={styles.loadingAnimation}
+                />
+              ) : (
+                <Text style={styles.buttonText}>Accedi</Text>
+              )}
+            </Button>
+            {/* {showLoadingAnimation ? (
+              <LottieView
+                source={require("../../../assets/animations/loading.json")}
+                autoPlay
+                speed={1}
+                loop={true}
+                style={{ width: "100%", height: 40 }}
+              />
+            ) : (
+              <Button
+                label="Accedi"
+                onPress={triggerSubmit}
+                disabled={submitDisabled}
+              />
+            )} */}
           </View>
           <View style={styles.secondaryActionsWrapper}>
             <View style={styles.secondaryActionContainer}>
