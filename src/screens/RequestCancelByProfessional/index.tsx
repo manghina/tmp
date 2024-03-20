@@ -6,11 +6,8 @@ import {
   View,
   RadioButton,
   RadioGroup,
-  ListItem,
-  TextArea,
-  Dividers,
 } from "react-native-ui-lib";
-import { SafeAreaView, ScrollView, TextInput } from "react-native";
+import { ScrollView, TextInput } from "react-native";
 import { styles } from "./styles";
 
 type RequestCancelByProfessionalScreenProps = {};
@@ -50,7 +47,7 @@ export const RequestCancelByProfessionalScreen = memo(
                 label={"Opzione A"}
                 labelStyle={styles.label}
                 iconStyle={styles.icon}
-                value={radioValues[0]}
+                value={radioValues.option1}
                 size={20}
               />
               <RadioButton
@@ -58,8 +55,8 @@ export const RequestCancelByProfessionalScreen = memo(
                 contentOnLeft
                 label={"Opzione C"}
                 labelStyle={styles.label}
-                iconStyle={{ borderColor: "white" }}
-                value={radioValues[1]}
+                iconStyle={styles.icon}
+                value={radioValues.option2}
                 size={20}
               />
             </RadioGroup>
