@@ -6,11 +6,14 @@ import {
   View,
   RadioButton,
   RadioGroup,
+  TouchableOpacity,
 } from "react-native-ui-lib";
-import { ScrollView, TextInput } from "react-native";
+import { ImageSourcePropType, ScrollView, TextInput } from "react-native";
 import { styles } from "./styles";
-
+import AppRadioButton from "../../components/AppRadioButton";
 type RequestCancelByProfessionalScreenProps = {};
+
+const emptyIcon: ImageSourcePropType = require("../../components/SvgIcons/EmptyIcon");
 
 export const RequestCancelByProfessionalScreen = memo(
   ({}: RequestCancelByProfessionalScreenProps) => {
@@ -21,6 +24,7 @@ export const RequestCancelByProfessionalScreen = memo(
       textValue,
       setTextValue,
       handleRadioChange,
+      CustomRadioButton,
     } = useRequestCancelByProfessional();
 
     return (
@@ -44,26 +48,40 @@ export const RequestCancelByProfessionalScreen = memo(
               style={styles.radioGroup}
               onValueChange={(value) => handleRadioChange(value)}
             >
-              <RadioButton
-                containerStyle={[styles.radioBtn, styles.firstRadioBtn]}
+              {/* <RadioButton
+                containerStyle={[
+                  styles.radioBtn,
+                  styles.firstRadioBtn,
+                  radioValues.option1 && styles.selectedRadioBtn,
+                ]}
                 contentOnLeft
                 label={"Option A"}
                 labelStyle={styles.label}
-                iconStyle={radioValues.option1 ? styles.icon : undefined}
                 value={"option1"}
                 size={20}
                 selected={radioValues.option1}
+                iconStyle={radioValues.option1 ? styles.icon : undefined}
+                iconSource={emptyIcon}
+                iconOnRight
               />
               <RadioButton
-                containerStyle={[styles.radioBtn, styles.lastRadioBtn]}
+                containerStyle={[
+                  styles.radioBtn,
+                  styles.lastRadioBtn,
+                  radioValues.option2 && styles.selectedRadioBtn,
+                ]}
                 contentOnLeft
                 label={"Option C"}
                 labelStyle={styles.label}
-                iconStyle={radioValues.option2 ? styles.icon : undefined}
                 value={"option2"}
                 size={20}
                 selected={radioValues.option2}
-              />
+                iconStyle={radioValues.option2 ? styles.icon : undefined}
+                iconSource={emptyIcon}
+                iconOnRight
+              /> */}
+              <AppRadioButton label="Option A" style={styles.firstRadioBtn} />
+              <AppRadioButton label="Option C" style={styles.lastRadioBtn} />
             </RadioGroup>
           </View>
 

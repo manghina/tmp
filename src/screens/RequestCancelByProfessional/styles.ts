@@ -66,6 +66,11 @@ export const styles = StyleSheet.create({
     borderStyle: "solid",
     color: colorTokens.colorIconWarning,
   },
+  selectedRadioBtn: {
+    backgroundColor: colorTokens.colorIconInverse,
+    color: colorTokens.colorText,
+    fontWeight: FontWeights.BLACK,
+  },
   firstRadioBtn: {
     borderTopLeftRadius: dimensionsTokens.paddingXs / 2,
     borderTopRightRadius: dimensionsTokens.paddingXs / 2,
@@ -80,7 +85,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorIconDanger,
     borderWidth: 1,
   },
-  label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
+  //label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
   footer: {
     justifyContent: "center",
     display: "flex",
@@ -100,4 +105,6 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextDefault,
     marginTop: dimensionsTokens.paddingMd,
   },
+
+  
 });
