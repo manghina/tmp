@@ -61,7 +61,7 @@ export const ProfessionalOfferDetailScreen = () => {
         <Button
           labelStyle={{ color: colorTokens.colorTextInverse }}
           style={styles.buttonRed}
-          label="Accetta richiesta"
+          label="Riferisci al pronto soccorso"
           onPress={() => {}}
         />
       </View>

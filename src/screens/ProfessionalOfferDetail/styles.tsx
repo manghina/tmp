@@ -7,6 +7,7 @@ import { colorTokens } from "../../theme/colors/tokens";
 export const styles = StyleSheet.create({
   pageContainer: {
     height: "100%",
+    paddingTop: Dimensions.large.spacing_500,
     backgroundColor: colorTokens.elevationSurface,
     paddingHorizontal: dimensionsTokens.paddingXs,
   },
@@ -36,6 +37,7 @@ export const styles = StyleSheet.create({
   },
   ButtonsSection: {
     alignItems: "center",
+    gap: Dimensions.small.spacing_100,
   },
   buttonGray: {
     width: "100%",
