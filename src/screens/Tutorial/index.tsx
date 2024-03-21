@@ -35,7 +35,6 @@ export const TutorialScreen = () => {
       <SafeAreaView
         style={{
           height: "100%",
-          backgroundColor: "rgba(0,0,0,0.4)",
         }}
       >
         <View

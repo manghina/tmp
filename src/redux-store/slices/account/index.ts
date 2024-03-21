@@ -53,6 +53,9 @@ export const accountStore = createSlice({
         state.cookie = action.payload.data.cookie;
       },
     );
+    builder.addCase(extraActions.postAccounts.success, (state, action) => {
+      state.account = action.payload.data.account;
+    });
     builder.addCase(extraActions.getAccountsMe.success, (state, action) => {
       state.account = action.payload.data.account;
     });

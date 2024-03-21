@@ -6,12 +6,15 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
+import { IAccount } from "../../../../models/Account";
 
 export interface PostAccountsParams {
   email: string;
   password: string;
 }
-export interface PostAccountsResponseData {}
+export interface PostAccountsResponseData {
+  account: IAccount;
+}
 export default apiActionBuilder<
   PostAccountsParams,
   ApiSuccessAction<PostAccountsResponseData, PostAccountsParams>,

@@ -122,6 +122,7 @@ function* createAccountAndLogin(email: string, password: string) {
     actions.postAccountsSessions.request({
       email,
       password,
+      isSigningUp: true,
     }),
   );
 
@@ -166,7 +167,7 @@ export function* userRegistrationSaga() {
     yield put(
       actions.postUsers.request({
         name: firstName,
-        lastname: lastName,
+        lastName: lastName,
         birthDate,
       }),
     );
@@ -250,8 +251,15 @@ export function* professionalRegistrationSaga() {
 }
 
 export function* postLoginSaga() {
-  yield takeEvery(actions.postAccountsSessions.success, function* () {
-    yield put(actions.getUsersMe.request({}));
+  yield takeEvery(actions.postAccountsSessions.success, function* (action) {
+    if (!action.payload.prepareParams.isSigningUp) {
+      const account: IAccount = yield select(selectors.getAccount);
+      if (account.type === "user") {
+        yield put(actions.getUsersMe.request({}));
+      } else {
+        yield put(actions.getProfessionalsMe.request({}));
+      }
+    }
   });
 }
 
