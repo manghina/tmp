@@ -1,44 +1,19 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 import { View } from "react-native-ui-lib";
-import { colorTokens } from "../../../theme/colors/tokens";
+import { styles } from "./styles";
 
 type EmptyIconProps = {
   color?: string;
-  styles?;
+  styleProp?;
 };
 
-const EmptyIcon = ({ color, styles, ...props }: EmptyIconProps) => (
-  <View
-    style={{
-      position: "relative",
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-    <Svg
-      width={22}
-      height={22}
-      fill="none"
-      {...props}
-      style={styles }
-    >
+const EmptyIcon = ({ color, styleProp, ...props }: EmptyIconProps) => (
+  <View style={styles.container}>
+    <Svg width={22} height={22} fill="none" {...props} style={styles.outerIcon}>
       <Path fill={color ?? "#000"} d="" />
     </Svg>
-    <Svg
-      width={18}
-      height={18}
-      fill="none"
-      {...props}
-      style={{
-        // ...styles,
-        backgroundColor: "white",
-        borderRadius: 99,
-        position: "absolute",
-        borderColor: "black",
-        borderWidth: 10,
-      }}
-    >
+    <Svg width={16} height={16} fill="none" {...props} style={styles.innerIcon}>
       <Path fill={"black"} d="" />
     </Svg>
   </View>

@@ -1,15 +1,15 @@
 import { TouchableOpacity, View, Text, Button } from "react-native-ui-lib";
-import { useCustomRadioButton } from "./index.hooks";
+import { useAppRadioButton } from "./index.hooks";
 import EmptyIcon from "../SvgIcons/EmptyIcon";
 import { styles } from "./styles";
 
-type CustomRadioButtonProps = {
+type AppRadioButtonProps = {
   label: string;
   style?;
 };
 
-export const CustomRadioButton = ({ label, style }: CustomRadioButtonProps) => {
-  const { selected, handlePress } = useCustomRadioButton();
+export const AppRadioButton = ({ label, style }: AppRadioButtonProps) => {
+  const { selected, handlePress } = useAppRadioButton();
   console.log(label, selected);
   return (
     <View>
@@ -27,4 +27,4 @@ export const CustomRadioButton = ({ label, style }: CustomRadioButtonProps) => {
   );
 };
 
-export default CustomRadioButton;
+export default AppRadioButton;

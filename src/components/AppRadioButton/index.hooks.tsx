@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useCustomRadioButton = () => {
+export const useAppRadioButton = () => {
   const [selected, setSelected] = useState(false);
 
   const handlePress = () => {

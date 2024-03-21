@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   icon: {
+    padding: 5,
     borderRadius: 99,
     borderColor: "red", //colorTokens.colorBorder,
     borderStyle: "solid",
