@@ -4,12 +4,7 @@ import { dimensionsTokens } from "../../theme/spacings/tokens";
 import { FontWeights } from "../../theme/typographies/properties";
 
 export const styles = StyleSheet.create({
-  radioButtonContent: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
-
+  container: { backgroundColor: "red" },
   radioBtn: {
     display: "flex",
     flexDirection: "row",
@@ -17,37 +12,19 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: dimensionsTokens.paddingXs,
     paddingHorizontal: dimensionsTokens.paddingSm,
-    borderColor: colorTokens.colorBorder,
     borderWidth: 1,
     borderStyle: "solid",
-    color: colorTokens.colorIconWarning,
   },
   selectedRadioBtn: {
-    backgroundColor: colorTokens.colorIconInverse,
+    backgroundColor: "red",
     color: colorTokens.colorText,
     fontWeight: FontWeights.BLACK,
+    borderColor: "red",
   },
-  firstRadioBtn: {
-    borderTopLeftRadius: dimensionsTokens.paddingXs / 2,
-    borderTopRightRadius: dimensionsTokens.paddingXs / 2,
+  unselectedRadioBtn: {
+    borderColor: colorTokens.colorBorder,
+    color: colorTokens.colorIconWarning,
   },
-  lastRadioBtn: {
-    borderBottomLeftRadius: dimensionsTokens.paddingXs / 2,
-    borderBottomRightRadius: dimensionsTokens.paddingXs / 2,
-    borderTopWidth: 0,
-  },
-  icon: {
-    padding: 5,
-    borderRadius: 99,
-    borderColor: "red", //colorTokens.colorBorder,
-    borderStyle: "solid",
-    backgroundColor: "red", //colorTokens.colorBackgroundNeutralSubtle,
-    borderWidth: 1,
-  },
-  selectedIcon: {
-    borderColor: "white",
-    borderStyle: "solid",
-    backgroundColor: "white",
-    borderWidth: 1,
-  },
+
+  label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
 });

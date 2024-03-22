@@ -24,7 +24,6 @@ export const RequestCancelByProfessionalScreen = memo(
       textValue,
       setTextValue,
       handleRadioChange,
-      CustomRadioButton,
     } = useRequestCancelByProfessional();
 
     return (
@@ -80,8 +79,20 @@ export const RequestCancelByProfessionalScreen = memo(
                 iconSource={emptyIcon}
                 iconOnRight
               /> */}
-              <AppRadioButton label="Option A" style={styles.firstRadioBtn} />
-              <AppRadioButton label="Option C" style={styles.lastRadioBtn} />
+              <AppRadioButton
+                selected={radioValues.option1}
+                handlePress={() => {
+                  handleRadioChange("option1");
+                }}
+                label="Option A"
+                style={styles.firstRadioBtn}
+              />
+              <AppRadioButton
+                selected={radioValues.option2}
+                handlePress={() => handleRadioChange("option2")}
+                label="Option C"
+                style={styles.lastRadioBtn}
+              />
             </RadioGroup>
           </View>
 

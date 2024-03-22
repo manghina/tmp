@@ -18,6 +18,7 @@ export const useRequestCancelByProfessional = () => {
       option2: value === "option2",
     });
   };
+  console.log(radioValues);
 
   const [textValue, setTextValue] = useState<string>("");
 

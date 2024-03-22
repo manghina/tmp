@@ -6,22 +6,30 @@ import { styles } from "./styles";
 type AppRadioButtonProps = {
   label: string;
   style?;
+  selected: boolean;
+  handlePress: () => void;
 };
 
-export const AppRadioButton = ({ label, style }: AppRadioButtonProps) => {
-  const { selected, handlePress } = useAppRadioButton();
+export const AppRadioButton = ({
+  label,
+  style,
+  selected,
+  handlePress,
+}: AppRadioButtonProps) => {
+  const {} = useAppRadioButton();
   console.log(label, selected);
   return (
     <View>
       <TouchableOpacity
+        style={[
+          style,
+          styles.radioBtn,
+          selected ? styles.selectedRadioBtn : styles.unselectedRadioBtn,
+        ]}
         onPress={handlePress}
-        style={[styles.radioBtn, style, selected && styles.selectedRadioBtn]}
       >
-        <Text style={styles.label}>{label}</Text>
-        <EmptyIcon
-          color="red"
-          styles={[styles.icon/* , selected && style.selectedIcon */]}
-        />
+        <Text>{label}</Text>
+        <EmptyIcon selected={selected} />
       </TouchableOpacity>
     </View>
   );

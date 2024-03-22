@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  outerIcon: {},
+  //outerIcon: {},
   innerIcon: {
     backgroundColor: "black",
     borderRadius: 99,
@@ -15,4 +15,22 @@ export const styles = StyleSheet.create({
     borderColor: "black",
     marginLeft: 1,
   },
+
+  outerIcon: {
+    padding: 5,
+    borderRadius: 99,
+    borderWidth: 1,
+  },
+  selectedOuterIcon: {
+    borderColor: "white",
+    borderStyle: "solid",
+    backgroundColor: "white",
+  },
+  unselectedOuterIcon: {
+    borderColor: "red", //colorTokens.colorBorder,
+    borderStyle: "solid",
+    backgroundColor: "red", //colorTokens.colorBackgroundNeutralSubtle,
+  },
+  selectedInnerIcon: {},
+  unselectedInnerIcon: {},
 });
