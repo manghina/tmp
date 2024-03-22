@@ -49,6 +49,12 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundDangerBold,
     color: colorTokens.colorTextInverse,
   },
+  acceptedRequest: {},
+  availabilityBox: {
+    backgroundColor: colorTokens.colorBackgroundNeutral,
+    padding: Dimensions.small.spacing_100,
+    marginTop: dimensionsTokens.paddingXs,
+  },
   pageTitleText: {
     ...textVariants.h3CondensedBlackNormal,
   },
@@ -73,6 +79,18 @@ export const styles = StyleSheet.create({
   },
   requestText: {
     ...textVariants.p2MediumItalic,
+    color: colorTokens.colorText,
+  },
+  acceptedTitle: {
+    ...textVariants.h6CondensedBlackNormal,
+    color: colorTokens.colorText,
+  },
+  acceptedSubtitle: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextSubtle,
+  },
+  availabilityText: {
+    ...textVariants.p2MediumNormal,
     color: colorTokens.colorText,
   },
 });

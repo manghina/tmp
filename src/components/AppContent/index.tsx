@@ -25,6 +25,7 @@ import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
+import { ProfessionalOfferDetailScreen } from "../../screens/ProfessionalOfferDetail";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 
@@ -43,7 +44,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName="tutorial">
+        <Stack.Navigator initialRouteName="professional-offerdetail">
           <Stack.Screen
             name="form-filterable-select"
             component={FilterableSelectScreen}
@@ -153,7 +154,21 @@ export const AppContent: FC = memo(({}) => {
               statusBarColor: "white",
             }}
           />
-
+          <Stack.Screen
+            name="professional-offerdetail"
+            component={ProfessionalOfferDetailScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
+            }}
+          />
           <Stack.Screen
             name="user-home"
             component={UserHomeScreen}

@@ -6,7 +6,7 @@ import React from "react";
 import { colorTokens } from "../../theme/colors/tokens";
 
 export const ProfessionalOfferDetailScreen = () => {
-  //const {} = useProfessionalOfferDetailScreen();
+  const { accepted, setAccepted } = useProfessionalOfferDetailScreen();
 
   return (
     <SafeAreaView style={styles.pageContainer}>
@@ -44,27 +44,41 @@ export const ProfessionalOfferDetailScreen = () => {
           </View>
         </View>
       </View>
-      <View style={styles.ButtonsSection}>
-        <Text style={styles.pText}>Cosa intende fare?</Text>
-        <Button
-          labelStyle={{ color: colorTokens.colorText }}
-          style={styles.buttonGray}
-          label="Accetta richiesta"
-          onPress={() => {}}
-        />
-        <Button
-          labelStyle={{ color: colorTokens.colorText }}
-          style={styles.buttonGray}
-          label="Rifiuta la prestazione"
-          onPress={() => {}}
-        />
-        <Button
-          labelStyle={{ color: colorTokens.colorTextInverse }}
-          style={styles.buttonRed}
-          label="Riferisci al pronto soccorso"
-          onPress={() => {}}
-        />
-      </View>
+      {!accepted ? (
+        <View style={styles.ButtonsSection}>
+          <Text style={styles.pText}>Cosa intende fare?</Text>
+          <Button
+            labelStyle={{ color: colorTokens.colorText }}
+            style={styles.buttonGray}
+            label="Accetta richiesta"
+            onPress={() => {
+              setAccepted(true);
+            }}
+          />
+          <Button
+            labelStyle={{ color: colorTokens.colorText }}
+            style={styles.buttonGray}
+            label="Rifiuta la prestazione"
+            onPress={() => {}}
+          />
+          <Button
+            labelStyle={{ color: colorTokens.colorTextInverse }}
+            style={styles.buttonRed}
+            label="Riferisci al pronto soccorso"
+            onPress={() => {}}
+          />
+        </View>
+      ) : (
+        <View style={styles.acceptedRequest}>
+          <Text style={styles.acceptedTitle}>Ottimo!</Text>
+          <Text style={styles.acceptedSubtitle}>
+            Può proporre fino a 3 orari per la visita del paziente.
+          </Text>
+          <View style={styles.availabilityBox}>
+            <Text style={styles.availabilityText}>Disponibilità 1 di 3</Text>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
