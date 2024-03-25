@@ -22,7 +22,7 @@ export const RequestsProfessionalOffersScreen = memo(
           }}
         >
           <View style={{ paddingHorizontal: dimensionsTokens.paddingSm }}>
-            <Text Title>Prenotazione</Text>
+            <Text h3>Prenotazione</Text>
             <Text>
               Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
               metus.

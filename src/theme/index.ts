@@ -1,5 +1,6 @@
-import { Colors, ThemeManager } from "react-native-ui-lib";
+import { Colors, ThemeManager, Typography } from "react-native-ui-lib";
 import { colorTokens } from "./colors/tokens";
+import { textVariants } from "./typographies/variants";
 
 export const initTheme = () => {
   Colors.loadColors({
@@ -13,6 +14,15 @@ export const initTheme = () => {
     loadingBlue: "#427BEA",
     buttonBlue: "#3C77E8",
     disabledBlue: "#6784BD",
+  });
+
+  Typography.loadTypographies({
+    h1: { ...textVariants.h1CondensedBlackNormal },
+    h2: { ...textVariants.h2CondensedBlackNormal },
+    h3: { ...textVariants.h3CondensedBlackNormal },
+    h4: { ...textVariants.h4CondensedBlackNormal },
+    h5: { ...textVariants.h5CondensedBlackNormal },
+    h6: { ...textVariants.h6CondensedBlackNormal },
   });
 
   ThemeManager.setComponentTheme("Text", {

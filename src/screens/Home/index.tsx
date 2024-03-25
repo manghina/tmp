@@ -1,6 +1,6 @@
 import { View, Text, Button, Image, Modal } from "react-native-ui-lib";
 import WebView from "react-native-webview";
-import HomeBgImage from "@assets/img/home-screen-welcome.png";
+import homeBgImage from "@assets/img/doc1.png";
 import { SafeAreaView } from "react-native";
 import { styles } from "./styles";
 import { useHomeScreen } from "./index.hooks";
@@ -28,7 +28,7 @@ export const HomeScreen = () => {
             <Text style={styles.appName}>Sweep</Text>
           </View>
         </View>
-        <Image source={HomeBgImage} style={styles.backgroundImage} />
+        <Image source={homeBgImage} style={styles.backgroundImage} />
         <View style={styles.mainActionsContainer}>
           <Button
             style={styles.userRegisterButton}

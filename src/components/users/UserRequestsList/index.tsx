@@ -14,16 +14,7 @@ export const UserRequestsList = memo(({}: UserRequestsListProps) => {
         gap: 10,
       }}
     >
-      <View>
-        <Text
-          style={{
-            fontSize: 18,
-            fontWeight: "900",
-          }}
-        >
-          Prenotazioni in corso
-        </Text>
-      </View>
+      <Text h6>Prenotazioni in corso</Text>
       {requestsList.map((request) => (
         <UserRequestCard key={request._id} request={request} />
       ))}
