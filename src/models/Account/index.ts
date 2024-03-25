@@ -1,21 +1,20 @@
 export interface IAccount {
+  _id: string;
   email: string;
-  created: Date;
+  emailVerified: boolean;
   type: "professional" | "user";
 }
 
 export class Account implements IAccount {
-  email!: string;
-  created!: Date;
-  type!: "professional" | "user";
+  _id: string;
+  email: string;
+  emailVerified: boolean;
+  type: "professional" | "user";
 
   constructor(iAccount: IAccount) {
-    this.fromInterface(iAccount);
-  }
-
-  fromInterface(iAccount: IAccount) {
+    this._id = iAccount._id;
     this.email = iAccount.email;
-    this.created = iAccount.created;
+    this.emailVerified = iAccount.emailVerified;
     this.type = iAccount.type;
   }
 }

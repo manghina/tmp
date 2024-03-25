@@ -83,6 +83,9 @@ export const accountStore = createSlice({
     builder.addCase(extraActions.appStartup, (state, action) => {
       // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
     });
+    builder.addCase(extraActions.clearSession, (state, action) => {
+      state.cookie = null;
+    });
   },
 });
 

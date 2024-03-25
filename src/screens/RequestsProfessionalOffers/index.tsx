@@ -46,14 +46,12 @@ export const RequestsProfessionalOffersScreen = memo(
               Ricerca in corso
             </Text>
             <Text>
-              Ci siamo già messi all'opera. Stiamo contattando i professionisti
-              in linea con le tue richieste.
+              {`Sto analizzando in tempo reale migliaia di informazioni per trovare il professionista ideale per la tua esigenza.
+
+A breve troverai qui sotto le proposte perfette per te con relativi orari e onorari dei medici disponibili.
+
+Riceverai una notifica al termine della ricerca.`}
             </Text>
-            <Text>
-              A breve troverai qui sotto le nostre proposte con relativi orari e
-              onorari dei medici disponibili.
-            </Text>
-            <Text>Riceverai una notifica al termine della ricerca.</Text>
           </View>
           <View
             style={{

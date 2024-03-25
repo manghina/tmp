@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as selectors from "@app/redux-store/slices/ui/ui.selectors";
 import {
-  DialogTypes,
   SetDialogOpenAction,
   SetForgotPasswordStepperCounterAction,
   UiState,
@@ -43,6 +42,13 @@ export const uiStore = createSlice({
       state.isDialogOpen = {
         ...initialState.isDialogOpen,
       };
+      state.forgotPasswordStepperCounter =
+        initialState.forgotPasswordStepperCounter;
+      state.professionalRegisterStepperCounter =
+        initialState.professionalRegisterStepperCounter;
+    });
+    builder.addCase(extraActions.clearSession, (state, action) => {
+      state.isDialogOpen = initialState.isDialogOpen;
       state.forgotPasswordStepperCounter =
         initialState.forgotPasswordStepperCounter;
       state.professionalRegisterStepperCounter =

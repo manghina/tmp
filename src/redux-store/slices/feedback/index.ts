@@ -35,6 +35,11 @@ export const feedbackStore = createSlice({
       state.message = "";
       state.type = "info";
     });
+    builder.addCase(extraActions.clearSession, (state, action) => {
+      state.open = false;
+      state.message = "";
+      state.type = "info";
+    });
   },
 });
 
