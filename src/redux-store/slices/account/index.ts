@@ -81,7 +81,7 @@ export const accountStore = createSlice({
       state.professionalMe = action.payload.data.professional;
     });
     builder.addCase(extraActions.appStartup, (state, action) => {
-      state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
+      // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
     });
     builder.addCase(extraActions.clearSession, (state, action) => {
       state.cookie = null;
