@@ -22,7 +22,7 @@
         "NSPhotoLibraryUsageDescription": "This app requires access to the photo library to upload images.",
         "NSCameraUsageDescription": "This app requires access to the camera to take and upload photos."
       },
-      "buildNumber": "7"
+      "buildNumber": "8"
     },
     "android": {
       "adaptiveIcon": {

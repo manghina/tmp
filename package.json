@@ -13,7 +13,7 @@
     "web": "expo start --web",
     "postinstall": "patch-package",
     "tsc": "tsc",
-    "deploy": "eas build --platform ios &&  eas submit --platform ios"
+    "deploy": "node build.js && eas build --platform ios &&  eas submit --platform ios"
   },
   "dependencies": {
     "@expo/metro-config": "~0.17.1",
