@@ -25,7 +25,4 @@ export const Dimensions = {
     spacing_800: baseSpacing * 8,
     spacing_1000: baseSpacing * 10,
   },
-  radious: {
-    
-  }
 };
