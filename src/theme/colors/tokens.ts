@@ -228,11 +228,9 @@ export const colorTokensLight = {
 
 export const colorTokensDark = {
   colorTextDefault: Colors.DarkNeutral[900],
-
-  colorText: Colors.DarkNeutral[1100],
   colorTextSubtle: Colors.DarkNeutral[800],
   colorTextSubtlest: Colors.DarkNeutral[700],
-  colorTextInverse: Colors.DarkNeutral["-100"],
+  colorTextInverse: Colors.DarkNeutral[100],
   colorTextDisabled: Colors.DarkNeutral[400],
   colorTextSelected: Colors.Blue[400],
   colorTextBrand: Colors.Brand[400],
