@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextInverse,
   },
   professionalRegisterButtonLabel: {
-    color: colorTokens.colorText,
+    color: colorTokens.colorTextDefault,
   },
   separationText: {
     ...textVariants.p2MediumNormal,
