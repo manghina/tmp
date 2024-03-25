@@ -1,6 +1,6 @@
 import { TouchableOpacity, View, Text } from "react-native-ui-lib";
 import { useAppRadioButton } from "./index.hooks";
-import EmptyIcon from "./EmptyIcon";
+import RadioButtonCircleIcon from "./RadioButtonCircleIcon";
 import { styles } from "./styles";
 
 type AppRadioButtonProps = {
@@ -17,7 +17,7 @@ export const AppRadioButton = ({
   handlePress,
 }: AppRadioButtonProps) => {
   const {} = useAppRadioButton();
-  console.log(label, selected);
+
   return (
     <View>
       <TouchableOpacity
@@ -31,7 +31,7 @@ export const AppRadioButton = ({
         <Text style={[styles.label, selected && styles.selectedLabel]}>
           {label}
         </Text>
-        <EmptyIcon selected={selected} />
+        <RadioButtonCircleIcon selected={selected} />
       </TouchableOpacity>
     </View>
   );

@@ -1,19 +1,10 @@
 import { memo } from "react";
 import { useRequestCancelByProfessional } from "./index.hooks";
-import {
-  Button,
-  Text,
-  View,
-  RadioButton,
-  RadioGroup,
-  TouchableOpacity,
-} from "react-native-ui-lib";
-import { ImageSourcePropType, ScrollView, TextInput } from "react-native";
+import { Button, Text, View, RadioGroup } from "react-native-ui-lib";
+import { ScrollView, TextInput } from "react-native";
 import { styles } from "./styles";
 import AppRadioButton from "../../components/AppRadioButton";
 type RequestCancelByProfessionalScreenProps = {};
-
-const emptyIcon: ImageSourcePropType = require("../../components/SvgIcons/EmptyIcon");
 
 export const RequestCancelByProfessionalScreen = memo(
   ({}: RequestCancelByProfessionalScreenProps) => {
@@ -36,49 +27,14 @@ export const RequestCancelByProfessionalScreen = memo(
               metus.
             </Text>
           </View>
-          <View style={styles.paragraphContainer}>
+          <View>
             <Text style={styles.paragraphTitle}>Motivazioni</Text>
             <Text style={styles.paragraph}>
               Lorem ipsum dolor sit amet consectetur. Urna urna sed dui mattis
               ac ornare adipiscing
             </Text>
 
-            <RadioGroup
-              style={styles.radioGroup}
-              onValueChange={(value) => handleRadioChange(value)}
-            >
-              {/* <RadioButton
-                containerStyle={[
-                  styles.radioBtn,
-                  styles.firstRadioBtn,
-                  radioValues.option1 && styles.selectedRadioBtn,
-                ]}
-                contentOnLeft
-                label={"Option A"}
-                labelStyle={styles.label}
-                value={"option1"}
-                size={20}
-                selected={radioValues.option1}
-                iconStyle={radioValues.option1 ? styles.icon : undefined}
-                iconSource={emptyIcon}
-                iconOnRight
-              />
-              <RadioButton
-                containerStyle={[
-                  styles.radioBtn,
-                  styles.lastRadioBtn,
-                  radioValues.option2 && styles.selectedRadioBtn,
-                ]}
-                contentOnLeft
-                label={"Option C"}
-                labelStyle={styles.label}
-                value={"option2"}
-                size={20}
-                selected={radioValues.option2}
-                iconStyle={radioValues.option2 ? styles.icon : undefined}
-                iconSource={emptyIcon}
-                iconOnRight
-              /> */}
+            <RadioGroup onValueChange={(value) => handleRadioChange(value)}>
               <AppRadioButton
                 selected={radioValues.option1}
                 handlePress={() => {
@@ -96,7 +52,7 @@ export const RequestCancelByProfessionalScreen = memo(
             </RadioGroup>
           </View>
 
-          <View style={styles.paragraphContainer}>
+          <View>
             <Text style={styles.paragraphTitle}>Title</Text>
             <Text style={styles.paragraph}>
               Lorem ipsum dolor sit amet consectetur. Urna urna sed dui mattis
@@ -116,7 +72,7 @@ export const RequestCancelByProfessionalScreen = memo(
             />
           </View>
 
-          <View style={styles.paragraphContainer}>
+          <View>
             <Text style={styles.paragraphTitle}>Disclaimer</Text>
             <Text style={styles.paragraph}>
               Tortor nunc tristique pretium cursus imperdiet eros tristique

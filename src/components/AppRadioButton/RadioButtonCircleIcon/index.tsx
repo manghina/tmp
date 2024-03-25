@@ -2,11 +2,11 @@ import * as React from "react";
 import { View } from "react-native-ui-lib";
 import { styles } from "./styles";
 
-type EmptyIconProps = {
+type RadioButtonCircleIconProps = {
   selected?: boolean;
 };
 
-const EmptyIcon = ({ selected = false }: EmptyIconProps) => (
+const RadioButtonCircleIcon = ({ selected = false }: RadioButtonCircleIconProps) => (
   <View>
     <View
       width={20}
@@ -21,4 +21,4 @@ const EmptyIcon = ({ selected = false }: EmptyIconProps) => (
   </View>
 );
 
-export default EmptyIcon;
+export default RadioButtonCircleIcon;

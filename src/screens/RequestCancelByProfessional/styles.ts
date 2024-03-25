@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { dimensionsTokens } from "../../theme/spacings/tokens";
 import { colorTokens, colorTokensLight } from "../../theme/colors/tokens";
-import { Dimensions, headerHeight } from "../../theme/spacings/dimensions";
+import { headerHeight } from "../../theme/spacings/dimensions";
 import { FontSizes, FontWeights } from "../../theme/typographies/properties";
 
 export const styles = StyleSheet.create({
@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     lineHeight: FontSizes.H2,
     letterSpacing: -0.64,
   },
-  paragraphContainer: {},
   paragraph: {
     color: colorTokens.colorTextDefault,
     paddingTop: dimensionsTokens.paddingXs / 3,
@@ -54,23 +53,7 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextDefault,
     letterSpacing: -0.4,
   },
-  radioGroup: {},
-  radioBtn: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: dimensionsTokens.paddingXs,
-    paddingHorizontal: dimensionsTokens.paddingSm,
-    borderColor: colorTokens.colorBorder,
-    borderWidth: 1,
-    borderStyle: "solid",
-    color: colorTokens.colorIconWarning,
-  },
-  selectedRadioBtn: {
-    backgroundColor: colorTokens.colorIconInverse,
-    color: colorTokens.colorText,
-    fontWeight: FontWeights.BLACK,
-  },
+
   firstRadioBtn: {
     borderTopLeftRadius: dimensionsTokens.paddingXs / 2,
     borderTopRightRadius: dimensionsTokens.paddingXs / 2,
@@ -80,12 +63,7 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: dimensionsTokens.paddingXs / 2,
     borderTopWidth: 0,
   },
-  icon: {
-    borderColor: colorTokens.colorBorderDanger,
-    backgroundColor: colorTokens.colorIconDanger,
-    borderWidth: 1,
-  },
-  //label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
+
   footer: {
     justifyContent: "center",
     display: "flex",
@@ -93,6 +71,7 @@ export const styles = StyleSheet.create({
     gap: 10,
   },
   footerText: { fontWeight: FontWeights.MEDIUM },
+  // footer btn
   button: {
     width: "100%",
     backgroundColor: colorTokens.colorBackgroundDangerBold,
@@ -105,6 +84,4 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextDefault,
     marginTop: dimensionsTokens.paddingMd,
   },
-
-  
 });

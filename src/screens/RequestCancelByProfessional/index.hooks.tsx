@@ -1,8 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity, View } from "react-native-ui-lib";
-import { styles } from "./styles";
-import EmptyIcon from "../../components/SvgIcons/EmptyIcon";
 
 export const useRequestCancelByProfessional = () => {
   const navigation = useNavigation<any>();
@@ -18,7 +15,6 @@ export const useRequestCancelByProfessional = () => {
       option2: value === "option2",
     });
   };
-  console.log(radioValues);
 
   const [textValue, setTextValue] = useState<string>("");
 
