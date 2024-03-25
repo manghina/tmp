@@ -13,7 +13,7 @@ export interface PostAdminProfessionalsParams {
   email: string;
   password: string;
   name: string;
-  lastname: string;
+  lastName: string;
   birthDate: string;
   phones: string[];
   specializations: string[];

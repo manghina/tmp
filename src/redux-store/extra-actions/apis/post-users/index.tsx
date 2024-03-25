@@ -11,7 +11,7 @@ import { IAccount } from "../../../../models/Account";
 
 export interface PostUsersParams {
   name: string;
-  lastname: string;
+  lastName: string;
   birthDate: string;
 }
 export interface PostUsersResponseData {

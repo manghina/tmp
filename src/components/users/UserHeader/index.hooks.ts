@@ -10,7 +10,7 @@ export const useUserHeader = () => {
     () =>
       !me
         ? undefined
-        : `${me.name.charAt(0)}${me.lastname.charAt(0)}`.toUpperCase(),
+        : `${me.name.charAt(0)}${me.lastName.charAt(0)}`.toUpperCase(),
     [me],
   );
 

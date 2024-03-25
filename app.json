@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "rn-sweepit-ai",
+    "name": "Sweep",
     "slug": "rn-sweepit-ai",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -22,7 +22,7 @@
         "NSPhotoLibraryUsageDescription": "This app requires access to the photo library to upload images.",
         "NSCameraUsageDescription": "This app requires access to the camera to take and upload photos."
       },
-      "buildNumber": "2"
+      "buildNumber": "3"
     },
     "android": {
       "adaptiveIcon": {

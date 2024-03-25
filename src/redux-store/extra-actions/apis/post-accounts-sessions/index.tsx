@@ -10,6 +10,7 @@ import {
 export interface PostAccountsSessionsParams {
   email: string;
   password: string;
+  isSigningUp?: boolean;
 }
 export interface PostAccountsSessionsResponseData {
   cookie: {

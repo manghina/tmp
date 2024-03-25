@@ -15,7 +15,7 @@ export interface IRequest {
   user: {
     _id: string;
     name: string;
-    lastname: string;
+    lastName: string;
     email: string;
   };
   chatStatus: ChatStatus;
@@ -28,7 +28,7 @@ export class Request implements IRequest {
   user: {
     _id: string;
     name: string;
-    lastname: string;
+    lastName: string;
     email: string;
   };
   chatStatus: ChatStatus;
