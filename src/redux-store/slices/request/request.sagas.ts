@@ -8,7 +8,8 @@ import {
   takeEvery,
 } from "redux-saga/effects";
 import { actions, selectors } from "@app/redux-store";
-import { IRequest, Request } from "@app/models/Request";
+import { IRequest, Request, RequestStatus } from "@app/models/Request";
+import NavigationService from "../../../models/NavigationService";
 
 export function* sendMessageSaga() {
   yield takeEvery(actions.messageSubmitted, function* (messageSubmittedAction) {
@@ -67,5 +68,14 @@ export function* requestUpdatingSaga() {
   while (true) {
     yield take(actions.startPollingRequest);
     yield race([call(pollRequestTask), take(actions.stopPollingRequest)]);
+    const currentRequest: Request | null = yield select(
+      selectors.getCurrentRequest,
+    );
+    if (
+      currentRequest?.currentStatus ===
+      RequestStatus.PROFESSIONAL_OFFERS_CREATED
+    ) {
+      NavigationService.replace("requests/professional-offers");
+    }
   }
 }

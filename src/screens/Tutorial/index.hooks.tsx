@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import tutorialImage1 from "@assets/img/tutorial-image-1.png";
-import tutorialImage2 from "@assets/img/tutorial-image-2.png";
-import tutorialImage3 from "@assets/img/tutorial-image-3.png";
+import tutorialImage1 from "@assets/img/doc11.png";
+import tutorialImage2 from "@assets/img/doc9.png";
+import tutorialImage3 from "@assets/img/doc15.png";
 
 import { Button, Text, View } from "react-native-ui-lib";
 

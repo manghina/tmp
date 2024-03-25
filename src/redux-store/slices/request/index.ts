@@ -56,6 +56,11 @@ export const requestStore = createSlice({
         state.currentRequest = request;
       },
     );
+    builder.addCase(extraActions.clearSession, (state, action) => {
+      state.list = initialState.list;
+      state.currentRequest = initialState.currentRequest;
+      state.isPolling = initialState.isPolling;
+    });
   },
 });
 

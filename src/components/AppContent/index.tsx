@@ -27,6 +27,7 @@ import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessio
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
+import { UserSettingsScreen } from "@app/screens/UserSettings";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 
 const Stack = createNativeStackNavigator();
@@ -154,10 +155,16 @@ export const AppContent: FC = memo(({}) => {
               statusBarColor: "white",
             }}
           />
-
           <Stack.Screen
             name="user-home"
             component={UserHomeScreen}
+            options={{
+              header: () => <UserHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="user-settings"
+            component={UserSettingsScreen}
             options={{
               header: () => <UserHeader />,
             }}

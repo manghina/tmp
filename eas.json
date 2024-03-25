@@ -11,7 +11,10 @@
       "distribution": "internal"
     },
     "production": {
-      "node": "20.10.0"
+      "node": "20.10.0",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://www.sweepit.ai/api"
+      }
     }
   },
   "submit": {

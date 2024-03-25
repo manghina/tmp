@@ -6,6 +6,7 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
+import { IAccount } from "../../../../models/Account";
 
 export interface PostAccountsSessionsParams {
   email: string;
@@ -13,6 +14,7 @@ export interface PostAccountsSessionsParams {
   isSigningUp?: boolean;
 }
 export interface PostAccountsSessionsResponseData {
+  account: IAccount;
   cookie: {
     name: string;
     value: string;

@@ -20,6 +20,12 @@ import Animated, {
 } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
 import { useMemo } from "react";
+import docImage1 from "@assets/img/doc1.png";
+import docImage2 from "@assets/img/doc4.png";
+import docImage3 from "@assets/img/doc8.png";
+import docImage4 from "@assets/img/doc10.png";
+import docImage5 from "@assets/img/doc5.png";
+import docImage6 from "@assets/img/doc14.png";
 
 const colors = [
   "#26292E",
@@ -42,6 +48,15 @@ export const ProfessionalSearchCarousel = ({}: CarouselProps) => {
     }),
     [pageWidth],
   );
+
+  const docs = [
+    docImage1,
+    docImage2,
+    docImage3,
+    docImage4,
+    docImage5,
+    docImage6,
+  ];
 
   return (
     <View
@@ -117,7 +132,7 @@ export const ProfessionalSearchCarousel = ({}: CarouselProps) => {
             parallaxScrollingOffset: 50,
           }}
           data={colors}
-          renderItem={({ index }) => <SBItem index={index} />}
+          renderItem={({ index }) => <SBItem index={index} img={docs[index]} />}
         />
       )}
     </View>
@@ -222,14 +237,11 @@ interface Props {
 
 export const SBImageItem: React.FC<Props> = ({ style, index: _index, img }) => {
   const index = _index ?? 0;
-  const source = React.useRef<ImageURISource>({
-    uri: `https://picsum.photos/id/${index}/400/300`,
-  }).current;
 
   return (
     <View style={[styles.container, style]}>
       <ActivityIndicator size="small" />
-      <Image key={index} style={styles.image} source={img ?? source} />
+      <Image key={index} style={styles.image} source={img} />
     </View>
   );
 };

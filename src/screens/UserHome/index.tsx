@@ -32,11 +32,23 @@ export const UserHomeScreen = memo(() => {
       style={userHomeStyles.mainViewContainer}
     >
       <View style={userHomeStyles.greetingsContainer}>
-        <Text Title style={userHomeStyles.greetingsTitle}>
+        <Text h3 style={userHomeStyles.greetingsTitle}>
           Ciao {me?.name},
         </Text>
         <Text>
-          Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
+          {requestsList.length > 2
+            ? "Ecco le tue visite!"
+            : `Sweep sa che ogni problema di salute è urgente!
+            
+• Raccontagli il tuo, spiegagli tutto quello che ritieni fondamentale e quando preferiresti ricevere la visita
+
+• Sweep processerà milioni di dati per trovare i medici ideali per risolvere il tuo problema e li contatterà direttamente per sottoporgli il tuo caso
+
+• Nell'arco di un'ora, potrai scegliere tra le proposte di visita dei migliori specialisti
+
+• Comincia a stare meglio!
+
+Lancia una Richiesta facendo tap su Sweep!`}
         </Text>
         <View marginT-20>
           {requestsList.length > 0 && <UserRequestsList />}
