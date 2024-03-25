@@ -1,6 +1,6 @@
-import { TouchableOpacity, View, Text, Button } from "react-native-ui-lib";
+import { TouchableOpacity, View, Text } from "react-native-ui-lib";
 import { useAppRadioButton } from "./index.hooks";
-import EmptyIcon from "../SvgIcons/EmptyIcon";
+import EmptyIcon from "./EmptyIcon";
 import { styles } from "./styles";
 
 type AppRadioButtonProps = {
@@ -28,7 +28,9 @@ export const AppRadioButton = ({
         ]}
         onPress={handlePress}
       >
-        <Text>{label}</Text>
+        <Text style={[styles.label, selected && styles.selectedLabel]}>
+          {label}
+        </Text>
         <EmptyIcon selected={selected} />
       </TouchableOpacity>
     </View>

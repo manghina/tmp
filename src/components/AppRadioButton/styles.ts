@@ -16,10 +16,9 @@ export const styles = StyleSheet.create({
     borderStyle: "solid",
   },
   selectedRadioBtn: {
-    backgroundColor: "red",
-    color: colorTokens.colorText,
+    backgroundColor: colorTokens.colorBackgroundNeutralBold,
     fontWeight: FontWeights.BLACK,
-    borderColor: "red",
+    borderColor: colorTokens.colorBackgroundNeutralBold,
   },
   unselectedRadioBtn: {
     borderColor: colorTokens.colorBorder,
@@ -27,4 +26,8 @@ export const styles = StyleSheet.create({
   },
 
   label: { color: colorTokens.colorTextSubtle, fontWeight: FontWeights.MEDIUM },
+  selectedLabel: {
+    color: colorTokens.colorTextInverse,
+    fontWeight: FontWeights.MEDIUM,
+  },
 });
