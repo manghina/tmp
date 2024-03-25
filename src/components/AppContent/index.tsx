@@ -27,7 +27,8 @@ import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessio
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
-import { UserSettingsScreen } from "../../screens/UserSettings";
+import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 
 const Stack = createNativeStackNavigator();
 
@@ -203,6 +204,17 @@ export const AppContent: FC = memo(({}) => {
             component={RequestProfessionalSuccessScreen}
             options={{
               headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="requests/cancel"
+            component={RequestCancelByProfessionalScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
             }}
           />
         </Stack.Navigator>

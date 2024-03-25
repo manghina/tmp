@@ -28,6 +28,7 @@ export const TutorialScreen = () => {
     fill3Anim,
     onRegisterButtonClick,
     onLoginButtonClick,
+    goto,
   } = useTutorialScreen();
 
   return (

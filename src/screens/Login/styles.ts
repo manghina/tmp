@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+  import { StyleSheet } from "react-native";
 import { textVariants } from "@app/theme/typographies/variants";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";

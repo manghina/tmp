@@ -26,7 +26,7 @@ export const initTheme = () => {
   });
 
   ThemeManager.setComponentTheme("Text", {
-    color: colorTokens.colorText,
+    color: colorTokens.colorTextDefault,
   });
 
   ThemeManager.setComponentTheme("TextField", {

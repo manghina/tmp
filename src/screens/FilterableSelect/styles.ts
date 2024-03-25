@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundNeutralBold,
   },
   optionText: {
-    color: colorTokens.colorText,
+    color: colorTokens.colorTextDefault,
   },
   optionIcon: {
     color: colorTokens.colorBorder,
