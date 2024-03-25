@@ -4,6 +4,8 @@ import { View, Text, Button, Colors, Image } from "react-native-ui-lib";
 import { SafeAreaView } from "react-native";
 import React from "react";
 import { colorTokens } from "../../theme/colors/tokens";
+import { FormDateTimePicker } from "../../components/_form/FormDatePicker";
+import { FormTextField } from "../../components/_form/FormTextField";
 
 export const ProfessionalOfferDetailScreen = () => {
   const { accepted, setAccepted } = useProfessionalOfferDetailScreen();
@@ -15,13 +17,19 @@ export const ProfessionalOfferDetailScreen = () => {
         Sweep ha individuato Lei come miglior medico per questo paziente!
       </Text>
       <View style={styles.patientPageContainer}>
+
+
+        <Text style={styles.rejectionHeaderText}>Rifiuto</Text>
+        <Text style={styles.pSubtleText}>Spiegazione relativa al rifiuto della prestazione</Text>
+
+
         <Text style={styles.pSubtleText}>Paziente</Text>
         <View style={styles.patientCardContainer}>
           <View row>
             <Image
               style={styles.profilePic}
               source={{
-                uri: " ",
+                uri: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
               }}
             />
             <View>
@@ -71,11 +79,26 @@ export const ProfessionalOfferDetailScreen = () => {
       ) : (
         <View style={styles.acceptedRequest}>
           <Text style={styles.acceptedTitle}>Ottimo!</Text>
-          <Text style={styles.acceptedSubtitle}>
+          <Text style={styles.pSubtleText}>
             Può proporre fino a 3 orari per la visita del paziente.
           </Text>
           <View style={styles.availabilityBox}>
             <Text style={styles.availabilityText}>Disponibilità 1 di 3</Text>
+          </View>
+          <View style={styles.availabilityContainer}>
+            <View style={styles.availabilityColumn}>
+              <Text style={styles.pSubtleText}>Data</Text>
+
+              <Text style={styles.pSubtleText}>Onorario</Text>
+
+
+            </View>
+            <View style={styles.availabilityColumn}>
+              <Text style={styles.pSubtleText}>Ora</Text>
+
+              <Text style={styles.pSubtleText}>Orario speciale</Text>
+
+            </View>
           </View>
         </View>
       )}

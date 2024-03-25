@@ -55,6 +55,15 @@ export const styles = StyleSheet.create({
     padding: Dimensions.small.spacing_100,
     marginTop: dimensionsTokens.paddingXs,
   },
+  availabilityContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: Dimensions.medium.spacing_150,
+  },
+  availabilityColumn: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   pageTitleText: {
     ...textVariants.h3CondensedBlackNormal,
   },
@@ -85,12 +94,12 @@ export const styles = StyleSheet.create({
     ...textVariants.h6CondensedBlackNormal,
     color: colorTokens.colorText,
   },
-  acceptedSubtitle: {
-    ...textVariants.p1MediumNormal,
-    color: colorTokens.colorTextSubtle,
-  },
   availabilityText: {
     ...textVariants.p2MediumNormal,
     color: colorTokens.colorText,
+  },
+  rejectionHeaderText: {
+    ...textVariants.h3CondensedBlackNormal,
+    color: colorTokens.colorTextDanger,
   },
 });
