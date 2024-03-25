@@ -148,9 +148,6 @@ export const TutorialScreen = () => {
               {subtitle}
             </Text>
             <Text></Text>
-            
-            {goto}
-
             <View style={{ flexDirection: "row", gap: 15 }}>
               <Button
                 style={{ flex: 1, paddingVertical: 16, borderWidth: 0 }}

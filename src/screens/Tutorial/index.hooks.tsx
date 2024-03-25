@@ -111,15 +111,6 @@ export const useTutorialScreen = () => {
     fill1();
   }, [fill1, resetAnimations]);
 
-  const goto = (
-    <View>
-      <Button
-        label="ciao"
-        onPress={() => navigation.push("requests/cancel")}
-      ></Button>
-    </View>
-  );
-
   return {
     bgImage,
     subtitle,
@@ -128,6 +119,5 @@ export const useTutorialScreen = () => {
     fill3Anim,
     onRegisterButtonClick,
     onLoginButtonClick,
-    goto,
   };
 };
