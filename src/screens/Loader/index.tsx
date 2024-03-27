@@ -4,12 +4,18 @@ import { Animated } from "react-native";
 import UnionSVG from "@assets/img/union.svg";
 import LogoSVG from "@assets/img/logo.svg";
 import { useLoaderScreen } from "./index.hooks";
+import { colorTokens } from "../../theme/colors/tokens";
 
 export const LoaderScreen = () => {
   const { rotateInterpolate, progressBarWidth } = useLoaderScreen();
 
   return (
-    <View flex centerV centerH backgroundColor="#011820">
+    <View
+      flex
+      centerV
+      centerH
+      backgroundColor={colorTokens.elevationSurfaceAlternative}
+    >
       <Animated.View
         style={{
           transform: [{ rotate: rotateInterpolate }],
@@ -25,7 +31,7 @@ export const LoaderScreen = () => {
           style={{
             width: 266,
             height: 8,
-            backgroundColor: Colors.defaultColor,
+            backgroundColor: colorTokens.elevationSurfaceAlternative, //TODO:
             borderRadius: 2,
             overflow: "hidden",
           }}
@@ -38,7 +44,7 @@ export const LoaderScreen = () => {
                 outputRange: ["0%", "101%"],
               }),
               borderRadius: 2,
-              backgroundColor: Colors.loadingBlue,
+              backgroundColor: colorTokens.colorBackgroundAlternativeBrand,
             }}
           />
         </View>

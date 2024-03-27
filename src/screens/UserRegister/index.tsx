@@ -59,7 +59,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
                 label="Prosegui"
                 style={styles.mainAction}
                 onPress={onNextStepButtonPressed}
-                disabledBackgroundColor={Colors.disabledBlue}
+                disabledBackgroundColor={colorTokens.colorBackgroundDisabled}
                 disabled={!canGoToNextStep}
               />
             </View>
