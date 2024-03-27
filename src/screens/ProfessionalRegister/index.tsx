@@ -10,6 +10,7 @@ import { FormImagePicker } from "@app/components/_form/FormImagePicker";
 import { styles } from "./styles";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import { ScrollView } from "react-native";
+import { colorTokens } from "../../theme/colors/tokens";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -137,7 +138,14 @@ export const ProfessionalRegisterScreen = () => {
     return (
       <>
         <View style={styles.stepperControlsContainer}>
-          <Text center grayText={!currentStepFilled}>
+          <Text
+            center
+            color={
+              !currentStepFilled
+                ? colorTokens.colorTextAccentGray
+                : colorTokens.colorTextDefault
+            }
+          >
             {isLastStep ? "Iscrizione completata!" : "Ci sei quasi..."}
           </Text>
           <Button

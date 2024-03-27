@@ -27,8 +27,7 @@ import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessio
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
-import { UserSettingsScreen } from "@app/screens/UserSettings";
-import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
+import { colorTokens } from "../../theme/colors/tokens";
 
 const Stack = createNativeStackNavigator();
 
@@ -117,7 +116,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitleAlign: "center",
               headerTitleStyle: {
                 ...textVariants.h3CondensedBlackNormal,
-                color: Colors.blackText,
+                color: colorTokens.colorTextDefault,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
@@ -135,7 +134,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitleAlign: "center",
               headerTitleStyle: {
                 ...textVariants.h3CondensedBlackNormal,
-                color: Colors.blackText,
+                color: colorTokens.colorTextDefault,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
@@ -155,16 +154,10 @@ export const AppContent: FC = memo(({}) => {
               statusBarColor: "white",
             }}
           />
+
           <Stack.Screen
             name="user-home"
             component={UserHomeScreen}
-            options={{
-              header: () => <UserHeader />,
-            }}
-          />
-          <Stack.Screen
-            name="user-settings"
-            component={UserSettingsScreen}
             options={{
               header: () => <UserHeader />,
             }}
@@ -204,17 +197,6 @@ export const AppContent: FC = memo(({}) => {
             component={RequestProfessionalSuccessScreen}
             options={{
               headerShown: false,
-            }}
-          />
-
-          <Stack.Screen
-            name="requests/cancel"
-            component={RequestCancelByProfessionalScreen}
-            options={{
-              animation: "slide_from_bottom",
-              headerTintColor: "transparent",
-              headerTransparent: true,
-              header: () => <HeaderGoBack />,
             }}
           />
         </Stack.Navigator>

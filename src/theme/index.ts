@@ -4,9 +4,7 @@ import { textVariants } from "./typographies/variants";
 
 export const initTheme = () => {
   Colors.loadColors({
-    blackText: "#181818",
-    defaultColor: "#002A38",
-    grayText: "#ABB0BC",
+    defaultColor: "#002A38", // ???
     whiteText: "#F6F6F6",
     whiteBackground: "#FEFEFE",
     cardGray: "#F2F2F2",

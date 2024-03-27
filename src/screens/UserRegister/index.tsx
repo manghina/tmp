@@ -9,6 +9,7 @@ import { styles } from "./styles";
 import { ScrollView } from "react-native";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import LottieView from "lottie-react-native";
+import { colorTokens } from "../../theme/colors/tokens";
 
 type UserRegisterScreenProps = {};
 
@@ -43,7 +44,11 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
               <FormDateTimePicker name="birthDate" label="Data di nascita" />
               <View style={styles.mainActionLabelContainer}>
                 <Text
-                  grayText={!firstStepFilled}
+                  color={
+                    !firstStepFilled
+                      ? colorTokens.colorTextAccentGray
+                      : colorTokens.colorTextDefault
+                  }
                   style={styles.mainActionLabelText}
                 >
                   Ci sei quasi...
@@ -78,7 +83,11 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
                 type="password"
               />
               <Text
-                grayText={!secondStepFilled}
+                color={
+                  !secondStepFilled
+                    ? colorTokens.colorTextAccentGray
+                    : colorTokens.colorTextDefault
+                }
                 style={styles.mainActionLabelText}
               >
                 Iscrizione completata!
