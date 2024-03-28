@@ -2,12 +2,12 @@ import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { useProfessionalHomeScreen } from "./index.hooks";
 import { styles } from "./styles";
 import { Animated, Image, SafeAreaView, ScrollView } from "react-native";
-import SweepLogoSvg from "../../components/SweepLogoSvg";
-import CalendarCheckIcon from "../../components/SvgIcons/CalendarCheckIcon";
-import WalletIcon from "../../components/SvgIcons/WalletIcon";
-import EllipseIcon from "../../components/SvgIcons/EllipseIcon";
-import { BookingItem } from "../../components/BookingItem";
-import ExpandListIcon from "../../components/SvgIcons/ExpandListIcon";
+import SweepLogoSvg from "@app/components/SweepLogoSvg";
+import CalendarCheckIcon from "@app/components/SvgIcons/CalendarCheckIcon";
+import WalletIcon from "@app/components/SvgIcons/WalletIcon";
+import EllipseIcon from "@app/components/SvgIcons/EllipseIcon";
+import { BookingItem } from "@app/components/BookingItem";
+import ExpandListIcon from "@app/components/SvgIcons/ExpandListIcon";
 
 export const ProfessionalHomeScreen = () => {
   const {

@@ -15,6 +15,11 @@ export interface IProfessional {
   v: number;
 }
 
+export type IProfessionalSummary = Pick<
+  IProfessional,
+  "_id" | "name" | "lastName" | "email" | "specializations"
+>;
+
 export class Professional implements IProfessional {
   _id!: string;
   accountId!: string;

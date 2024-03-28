@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Animated } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
 
 export const useProfessionalHomeScreen = () => {
+  const dispatch = useDispatch();
+
   const [selectedHistoryBox, setSelectedHistoryBox] = useState("30G");
   const [isBookingListExpanded, setIsBookingListExpanded] = useState(true);
   const [isHistoryListExpanded, setIsHistoryListExpanded] = useState(true);
   const [bookingListIconRotation] = useState(new Animated.Value(0));
   const [historyListIconRotation] = useState(new Animated.Value(0));
+
+  const professionalOffers = useSelector(selectors.getProfessionalOffersList);
+
+  console.log(professionalOffers);
 
   const bookingRotateIcon = bookingListIconRotation.interpolate({
     inputRange: [0, 1],
@@ -38,6 +46,10 @@ export const useProfessionalHomeScreen = () => {
       }),
     ]).start();
   };
+
+  useEffect(() => {
+    dispatch(actions.getProfessionalsMeProfessionalOffers.request({}));
+  }, [dispatch]);
 
   return {
     selectedHistoryBox,

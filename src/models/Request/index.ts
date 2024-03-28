@@ -23,6 +23,8 @@ export interface IRequest {
   messages?: IMessage[];
 }
 
+export type IRequestSummary = Pick<IRequest, "_id" | "user">;
+
 export class Request implements IRequest {
   _id: string;
   user: {
