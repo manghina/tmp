@@ -20,6 +20,11 @@
     },
   },
   "files": ["global.d.ts"],
+  "include":[
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "global.d.ts",
+  ],
   "exclude": [
     "node_modules",
     "babel.config.js",

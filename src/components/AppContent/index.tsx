@@ -20,6 +20,7 @@ import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessionalOffers";
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
+import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
@@ -28,6 +29,7 @@ import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { UserProfileScreen } from "@app/screens/ProfileScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 
 const Stack = createNativeStackNavigator();
@@ -164,9 +166,9 @@ export const AppContent: FC = memo(({}) => {
           />
           <Stack.Screen
             name="user-settings"
-            component={UserSettingsScreen}
+            component={UserProfileScreen}
             options={{
-              header: () => <UserHeader />,
+              header: () => <HeaderProfileGoBack />,
             }}
           />
           <Stack.Screen
