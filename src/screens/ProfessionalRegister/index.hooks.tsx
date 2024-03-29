@@ -40,7 +40,8 @@ const schema = yup.object().shape({
   professionalPaperPhoto: yup.mixed().required("Inserisci la tua foto"),
   professionalRegistrationNumber: yup
     .string()
-    .required("Inserisci il tuo numero di registrazione"),
+    .matches(/^[0-9]{4,10}$/, "Inserisci un numero di registrazione valido")
+    .required(),
   province: yup.string().required("Inserisci la tua provincia"),
   specialization: yup
     .string()
