@@ -25,6 +25,8 @@ import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
+import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "../../theme/colors/tokens";
@@ -154,12 +156,28 @@ export const AppContent: FC = memo(({}) => {
               statusBarColor: "white",
             }}
           />
-
           <Stack.Screen
             name="user-home"
             component={UserHomeScreen}
             options={{
               header: () => <UserHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="user-settings"
+            component={UserSettingsScreen}
+            options={{
+              header: () => <UserHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/cancel"
+            component={RequestCancelByProfessionalScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
