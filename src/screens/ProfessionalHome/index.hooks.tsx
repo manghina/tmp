@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { Animated } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { actions, selectors } from "@app/redux-store";
+import { useDispatch } from "react-redux";
+import { actions } from "@app/redux-store";
 
 export const useProfessionalHomeScreen = () => {
   const dispatch = useDispatch();
 
   const [selectedHistoryBox, setSelectedHistoryBox] = useState("30G");
-  const [isBookingListExpanded, setIsBookingListExpanded] = useState(true);
-  const [isHistoryListExpanded, setIsHistoryListExpanded] = useState(true);
+  const [isActiveRequestsListExpanded, setIsActiveRequestsListExpanded] =
+    useState(true);
+  const [isArchivedRequestsListExpanded, setIsArchivedRequestsListExpanded] =
+    useState(true);
   const [bookingListIconRotation] = useState(new Animated.Value(0));
   const [historyListIconRotation] = useState(new Animated.Value(0));
-
-  const professionalOffers = useSelector(selectors.getProfessionalOffersList);
-
-  console.log(professionalOffers);
 
   const bookingRotateIcon = bookingListIconRotation.interpolate({
     inputRange: [0, 1],
@@ -25,22 +23,22 @@ export const useProfessionalHomeScreen = () => {
     outputRange: ["0deg", "180deg"],
   });
 
-  const toggleBookingList = () => {
-    setIsBookingListExpanded(!isBookingListExpanded);
+  const toggleActiveRequestsList = () => {
+    setIsActiveRequestsListExpanded(!isActiveRequestsListExpanded);
     Animated.parallel([
       Animated.timing(bookingListIconRotation, {
-        toValue: isBookingListExpanded ? 1 : 0,
+        toValue: isActiveRequestsListExpanded ? 1 : 0,
         duration: 300,
         useNativeDriver: false,
       }),
     ]).start();
   };
 
-  const toggleHistoryList = () => {
-    setIsHistoryListExpanded(!isHistoryListExpanded);
+  const toggleArchivedRequestsList = () => {
+    setIsArchivedRequestsListExpanded(!isArchivedRequestsListExpanded);
     Animated.parallel([
       Animated.timing(historyListIconRotation, {
-        toValue: isHistoryListExpanded ? 1 : 0,
+        toValue: isArchivedRequestsListExpanded ? 1 : 0,
         duration: 300,
         useNativeDriver: false,
       }),
@@ -48,7 +46,7 @@ export const useProfessionalHomeScreen = () => {
   };
 
   useEffect(() => {
-    dispatch(actions.getProfessionalsMeProfessionalOffers.request({}));
+    dispatch(actions.professionalOffersPageVisited());
   }, [dispatch]);
 
   return {
@@ -56,9 +54,9 @@ export const useProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     bookingRotateIcon,
     historyRotateIcon,
-    isBookingListExpanded,
-    isHistoryListExpanded,
-    toggleBookingList,
-    toggleHistoryList,
+    isActiveRequestsListExpanded,
+    isArchivedRequestsListExpanded,
+    toggleActiveRequestsList,
+    toggleArchivedRequestsList,
   };
 };

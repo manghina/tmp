@@ -1,13 +1,10 @@
 import * as React from "react";
 import {
   ActivityIndicator,
-  Easing,
   Image,
   ImageSourcePropType,
-  ImageURISource,
   StyleProp,
   StyleSheet,
-  Text,
   TransformsStyle,
   View,
   ViewProps,

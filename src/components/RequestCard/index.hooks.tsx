@@ -1,4 +1,4 @@
-import { Request, RequestStatus } from "@app/models/Request";
+import { IRequestSummary, Request, RequestStatus } from "@app/models/Request";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { styles } from "./styles";
 import { Animated } from "react-native";
@@ -9,24 +9,31 @@ import CalendarIcon from "@app/components/SvgIcons/CalendarIcon";
 import CalendarErrorIcon from "@app/components/SvgIcons/CalendarErrorIcon";
 import CalendarCheckIcon from "@app/components/SvgIcons/CalendarCheckIcon";
 import TimerIcon from "@app/components/SvgIcons/TimerIcon";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { actions } from "../../../redux-store";
+import { actions, selectors } from "@app/redux-store";
 
 const userActionColor = "#FF8F1F";
 const aiActionColor = "#3C77E8";
 const contactTerminatedColor = "#181818";
 
-export const useUserRequestCard = (request: Request) => {
+export const useRequestCard = (requestSummary: IRequestSummary) => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const wiggleAnim = useRef(new Animated.Value(0)).current; // Initial value for wiggle angle: 0
+  const requests = useSelector(selectors.getRequestsList);
+
+  const wiggleAnim = useRef(new Animated.Value(0)).current;
+
+  const request = useMemo(
+    () => requests.find((req) => req._id === requestSummary._id),
+    [requests, requestSummary],
+  );
 
   const cardContainerStyles = useMemo(() => {
     const cardStyles: any[] = [styles.cardContainer];
 
-    switch (request.currentStatus) {
+    switch (requestSummary.currentStatus) {
       case RequestStatus.COLLECTING_INFORMATION:
         cardStyles.push(styles.cardContainerUserInputAwaited);
         break;
@@ -34,7 +41,7 @@ export const useUserRequestCard = (request: Request) => {
         break;
     }
 
-    if (request.currentStatus === RequestStatus.COLLECTING_INFORMATION) {
+    if (requestSummary.currentStatus === RequestStatus.COLLECTING_INFORMATION) {
       cardStyles.push({
         transform: [
           {
@@ -48,12 +55,12 @@ export const useUserRequestCard = (request: Request) => {
     }
 
     return cardStyles;
-  }, [request]);
+  }, [requestSummary]);
 
   const cardTitleStyles = useMemo(() => {
     const titleStyles: any[] = [styles.cardTitle];
 
-    switch (request.currentStatus) {
+    switch (requestSummary.currentStatus) {
       case RequestStatus.COLLECTING_INFORMATION:
         titleStyles.push({
           color: userActionColor,
@@ -64,12 +71,12 @@ export const useUserRequestCard = (request: Request) => {
     }
 
     return titleStyles;
-  }, [request]);
+  }, [requestSummary]);
 
   const cardDescriptionStyles = useMemo(() => {
     const descriptionStyles: any[] = [styles.cardDescription];
 
-    switch (request.currentStatus) {
+    switch (requestSummary.currentStatus) {
       case RequestStatus.COLLECTING_INFORMATION:
         descriptionStyles.push(styles.cardDescriptionTextUserInputAwaited);
         break;
@@ -78,18 +85,22 @@ export const useUserRequestCard = (request: Request) => {
     }
 
     return descriptionStyles;
-  }, [request]);
+  }, [requestSummary]);
 
   const cardIcon = useMemo(() => {
-    switch (request.currentStatus) {
+    switch (requestSummary.currentStatus) {
       case RequestStatus.COLLECTING_INFORMATION:
         return <ChatIcon color={userActionColor} />;
       default:
         return <ChatIcon color={contactTerminatedColor} />;
     }
-  }, [request, cardTitleStyles]);
+  }, [requestSummary, cardTitleStyles]);
 
   const onCardPressed = useCallback(() => {
+    if (!request) {
+      return;
+    }
+
     dispatch(actions.setCurrentRequest(request.toInterface()));
     dispatch(
       actions.getUsersMeRequestsByRequestId.request({
@@ -97,7 +108,7 @@ export const useUserRequestCard = (request: Request) => {
       }),
     );
 
-    switch (request.currentStatus) {
+    switch (requestSummary.currentStatus) {
       case RequestStatus.COLLECTING_INFORMATION:
         navigation.navigate("requests/chat");
         return;

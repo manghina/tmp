@@ -1,21 +1,21 @@
 import { memo } from "react";
-import { useUserRequestCard } from "./index.hooks";
+import { useRequestCard } from "./index.hooks";
 import { Animated } from "react-native";
 import { Text, TouchableOpacity, View } from "react-native-ui-lib";
-import { Request } from "@app/models/Request";
+import { IRequestSummary } from "@app/models/Request";
 
-type UserRequestCardProps = {
-  request: Request;
+type RequestCardCardProps = {
+  requestSummary: IRequestSummary;
 };
 
-export const UserRequestCard = memo(({ request }: UserRequestCardProps) => {
+export const RequestCard = memo(({ requestSummary }: RequestCardCardProps) => {
   const {
     cardContainerStyles,
     cardTitleStyles,
     cardDescriptionStyles,
     cardIcon,
     onCardPressed,
-  } = useUserRequestCard(request);
+  } = useRequestCard(requestSummary);
 
   return (
     <TouchableOpacity onPress={onCardPressed}>
@@ -23,8 +23,10 @@ export const UserRequestCard = memo(({ request }: UserRequestCardProps) => {
         <View style={{ flexDirection: "row", gap: 15 }}>
           {cardIcon}
           <View flex style={{ gap: 10 }}>
-            <Text style={cardTitleStyles}>{request.currentStatus}</Text>
-            <Text style={cardDescriptionStyles}>{request.currentStatus}</Text>
+            <Text style={cardTitleStyles}>{requestSummary.currentStatus}</Text>
+            <Text style={cardDescriptionStyles}>
+              {requestSummary.currentStatus}
+            </Text>
           </View>
         </View>
       </Animated.View>
@@ -32,4 +34,4 @@ export const UserRequestCard = memo(({ request }: UserRequestCardProps) => {
   );
 });
 
-UserRequestCard.displayName = "UserRequestCard";
+RequestCard.displayName = "RequestCard";

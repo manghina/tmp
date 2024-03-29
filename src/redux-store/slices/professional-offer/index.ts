@@ -6,7 +6,11 @@ import * as extraActions from "@app/redux-store/extra-actions";
 import { IProfessionalOffer } from "@app/models/ProfessionalOffer";
 
 const initialState: ProfessionalOfferState = {
-  list: [],
+  activeList: [],
+  archivedList: [],
+  archivedPage: 1,
+  archivedPerPage: 10,
+  archivedTotalCount: null,
   currentProfessionalOffer: null,
 };
 
@@ -14,22 +18,37 @@ export const professionalOfferStore = createSlice({
   name: "professional-offer",
   initialState,
   reducers: {
-    setCurrentRequest: (
-      state,
-      action: PayloadAction<IProfessionalOffer | null>,
-    ) => {
-      state.currentProfessionalOffer = action.payload;
+    professionalOffersPageVisited: (state) => {
+      state.activeList = initialState.activeList;
+      state.archivedList = initialState.archivedList;
+      state.archivedPage = initialState.archivedPage;
+      state.archivedPerPage = initialState.archivedPerPage;
+      state.archivedTotalCount = initialState.archivedTotalCount;
+    },
+    increaseArchivedProfessionalOffersPage: (state) => {
+      state.archivedPage += 1;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(
       extraActions.getProfessionalsMeProfessionalOffers.success,
       (state, action) => {
-        state.list = action.payload.data.professionalOffers;
+        const { active, archived } = action.payload.prepareParams;
+        const { professionalOffers, totalCount } = action.payload.data;
+
+        if (active) {
+          state.activeList = professionalOffers;
+        }
+
+        if (archived) {
+          state.archivedTotalCount = totalCount;
+          state.archivedList = [...state.archivedList, ...professionalOffers];
+        }
       },
     );
     builder.addCase(extraActions.clearSession, (state, action) => {
-      state.list = initialState.list;
+      state.activeList = initialState.activeList;
+      state.archivedList = initialState.archivedList;
       state.currentProfessionalOffer = initialState.currentProfessionalOffer;
     });
   },
