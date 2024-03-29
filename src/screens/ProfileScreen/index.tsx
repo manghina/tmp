@@ -3,19 +3,17 @@ import { useUserProfileScreen } from "./index.hooks";
 import {
   View,
   Text,
-  Button,
   TouchableOpacity,
   Image,
+  Button,
 } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
-import SweepSvg from "@app/components/SweepSvg";
 import { userProfileStyles } from "./styles";
-import { UserRequestsList } from "@app/components/users/UserRequestsList";
 import BellIcon from "@app/components/SvgIcons/BellIcon";
 import profilePicture from "@assets/img/doc15.png";
 
 export const UserProfileScreen = memo(() => {
-  const { me, profileMenuItems } = useUserProfileScreen();
+  const { me, profileMenuItems, handleLogout } = useUserProfileScreen();
 
   const renderProfileImage = () => (
     <View style={userProfileStyles.profileInfoContainer}>
@@ -59,6 +57,7 @@ export const UserProfileScreen = memo(() => {
           </TouchableOpacity>
         ))}
       </View>
+      <Button label="Logout" onPress={handleLogout} />
     </View>
   );
 

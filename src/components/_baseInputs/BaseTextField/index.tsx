@@ -1,7 +1,18 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { useBaseTextField } from "./index.hooks";
-import { Text, TextField, TextFieldProps, View } from "react-native-ui-lib";
+import {
+  Text,
+  TextField,
+  TextFieldProps,
+  TextFieldRef,
+  View,
+} from "react-native-ui-lib";
 import { styles } from "./styles";
+import { TextInput } from "react-native";
+
+type BaseTextFieldProps = TextFieldProps & {
+  focus?: boolean;
+};
 
 export const BaseTextField = memo(
   ({
@@ -10,15 +21,22 @@ export const BaseTextField = memo(
     enableErrors,
     validationMessage,
     style,
+    focus,
     ...props
-  }: TextFieldProps) => {
-    const { isFocused, onFocus, onBlur } = useBaseTextField();
+  }: BaseTextFieldProps) => {
+    const { isFocused, onFocus, onBlur, inputRef, handleFocus } =
+      useBaseTextField();
+
+    if (focus) {
+      handleFocus();
+    }
 
     return (
       <View style={styles.fieldContainer}>
         {label && <Text style={styles.label}>{label}</Text>}
         <View>
           <TextField
+            ref={(ref: any) => (inputRef.current = ref)}
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"

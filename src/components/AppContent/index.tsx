@@ -28,8 +28,8 @@ import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessio
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
-import { UserSettingsScreen } from "@app/screens/UserSettings";
 import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 
 const Stack = createNativeStackNavigator();
@@ -169,6 +169,13 @@ export const AppContent: FC = memo(({}) => {
             component={UserProfileScreen}
             options={{
               header: () => <HeaderProfileGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="user-edit"
+            component={ProfileEditScreen}
+            options={{
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen

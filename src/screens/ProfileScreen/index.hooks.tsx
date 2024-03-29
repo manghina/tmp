@@ -1,4 +1,4 @@
-import { FC, ReactElement, memo, useCallback, useEffect, useMemo } from "react";
+import { ReactElement, useCallback, useEffect, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
@@ -30,7 +30,7 @@ export const useUserProfileScreen = () => {
           {
             label: "Modifica profilo",
             icon: <BellIcon color="#44546F" />,
-            onPress: () => console.log("Edit profile"),
+            onPress: () => navigation.navigate("user-edit"),
           },
           {
             label: "Credenziali di accesso",
@@ -73,6 +73,11 @@ export const useUserProfileScreen = () => {
     [],
   );
 
+  const handleLogout = useCallback(() => {
+    dispatch(actions.clearSession());
+    navigation.navigate("tutorial");
+  }, [dispatch, navigation]);
+
   useEffect(() => {
     if (!me) {
       navigation.replace("login");
@@ -83,5 +88,5 @@ export const useUserProfileScreen = () => {
     dispatch(actions.getUsersMeRequests.request({}));
   }, [dispatch]);
 
-  return { me, profileMenuItems };
+  return { me, profileMenuItems, handleLogout };
 };
