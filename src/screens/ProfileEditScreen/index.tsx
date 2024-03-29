@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
 import { useUserProfileEditScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { userProfileEditStyles } from "./styles";
@@ -54,9 +54,8 @@ export const ProfileEditScreen = memo(() => {
           }}
         >
           {phoneVerificationInputRefs.map((_, index) => (
-            <>
+            <Fragment key={index}>
               <BaseTextField
-                key={index}
                 id={index.toString()}
                 autoFocus={index === 0}
                 focus={index === phoneNumberVerification.values.length}
@@ -78,7 +77,7 @@ export const ProfileEditScreen = memo(() => {
                 }
               />
               {index === 2 && <Text>-</Text>}
-            </>
+            </Fragment>
           ))}
         </View>
         <View
