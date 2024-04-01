@@ -6,7 +6,7 @@ import { RequestCard } from "@app/components/RequestCard";
 type UserRequestsListProps = {};
 
 export const UserRequestsList = memo(({}: UserRequestsListProps) => {
-  const { requestsList } = useUserRequestsList();
+  const { cards } = useUserRequestsList();
 
   return (
     <View
@@ -15,8 +15,8 @@ export const UserRequestsList = memo(({}: UserRequestsListProps) => {
       }}
     >
       <Text h6>Prenotazioni in corso</Text>
-      {requestsList.map((request) => (
-        <RequestCard key={request._id} requestSummary={request.toSummary()} />
+      {cards.map((card) => (
+        <RequestCard key={card._id} {...card} />
       ))}
     </View>
   );

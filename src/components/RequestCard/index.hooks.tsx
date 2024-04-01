@@ -13,11 +13,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { actions, selectors } from "@app/redux-store";
 
+export enum CardStatus {
+  PLAIN = "PLAIN",
+  EXPIRING = "EXPIRING",
+  BOOKED = "BOOKED",
+  WAITING_FEEDBACK = "WAITING_FEEDBACK",
+}
+
 const userActionColor = "#FF8F1F";
 const aiActionColor = "#3C77E8";
 const contactTerminatedColor = "#181818";
 
-export const useRequestCard = (requestSummary: IRequestSummary) => {
+export const useRequestCard = (status: CardStatus) => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
@@ -25,23 +32,18 @@ export const useRequestCard = (requestSummary: IRequestSummary) => {
 
   const wiggleAnim = useRef(new Animated.Value(0)).current;
 
-  const request = useMemo(
-    () => requests.find((req) => req._id === requestSummary._id),
-    [requests, requestSummary],
-  );
-
   const cardContainerStyles = useMemo(() => {
     const cardStyles: any[] = [styles.cardContainer];
 
-    switch (requestSummary.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         cardStyles.push(styles.cardContainerUserInputAwaited);
         break;
       default:
         break;
     }
 
-    if (requestSummary.currentStatus === RequestStatus.COLLECTING_INFORMATION) {
+    if (status === CardStatus.EXPIRING) {
       cardStyles.push({
         transform: [
           {
@@ -55,13 +57,13 @@ export const useRequestCard = (requestSummary: IRequestSummary) => {
     }
 
     return cardStyles;
-  }, [requestSummary]);
+  }, [status]);
 
   const cardTitleStyles = useMemo(() => {
     const titleStyles: any[] = [styles.cardTitle];
 
-    switch (requestSummary.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         titleStyles.push({
           color: userActionColor,
         });
@@ -71,13 +73,13 @@ export const useRequestCard = (requestSummary: IRequestSummary) => {
     }
 
     return titleStyles;
-  }, [requestSummary]);
+  }, [status]);
 
   const cardDescriptionStyles = useMemo(() => {
     const descriptionStyles: any[] = [styles.cardDescription];
 
-    switch (requestSummary.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         descriptionStyles.push(styles.cardDescriptionTextUserInputAwaited);
         break;
       default:
@@ -85,40 +87,16 @@ export const useRequestCard = (requestSummary: IRequestSummary) => {
     }
 
     return descriptionStyles;
-  }, [requestSummary]);
+  }, [status]);
 
   const cardIcon = useMemo(() => {
-    switch (requestSummary.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         return <ChatIcon color={userActionColor} />;
       default:
         return <ChatIcon color={contactTerminatedColor} />;
     }
-  }, [requestSummary, cardTitleStyles]);
-
-  const onCardPressed = useCallback(() => {
-    if (!request) {
-      return;
-    }
-
-    dispatch(actions.setCurrentRequest(request.toInterface()));
-    dispatch(
-      actions.getUsersMeRequestsByRequestId.request({
-        requestId: request._id,
-      }),
-    );
-
-    switch (requestSummary.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
-        navigation.navigate("requests/chat");
-        return;
-      case RequestStatus.PROFESSIONAL_OFFERS_CREATED:
-        navigation.navigate("requests/professional-offers");
-        return;
-      default:
-        break;
-    }
-  }, [dispatch, navigation, request]);
+  }, [status, cardTitleStyles]);
 
   useEffect(() => {
     Animated.loop(
@@ -167,6 +145,5 @@ export const useRequestCard = (requestSummary: IRequestSummary) => {
     cardContainerStyles,
     cardTitleStyles,
     cardDescriptionStyles,
-    onCardPressed,
   };
 };

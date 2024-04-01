@@ -1,11 +1,20 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Animated } from "react-native";
-import { useDispatch } from "react-redux";
-import { actions } from "@app/redux-store";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
+import { useNavigation } from "@react-navigation/native";
 
 export const useProfessionalHomeScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation<any>();
 
+  const professionalMe = useSelector(selectors.getMe);
+  const activeProfessionalOffers = useSelector(
+    selectors.getActiveProfessionalOffersList,
+  );
+  const archivedTotalCount = useSelector(
+    selectors.getProfessionalOfferArchivedTotalCount,
+  );
   const [selectedHistoryBox, setSelectedHistoryBox] = useState("30G");
   const [isActiveRequestsListExpanded, setIsActiveRequestsListExpanded] =
     useState(true);
@@ -49,7 +58,14 @@ export const useProfessionalHomeScreen = () => {
     dispatch(actions.professionalOffersPageVisited());
   }, [dispatch]);
 
+  const onGoToProfile = useCallback(() => {
+    navigation.navigate("user-settings");
+  }, []);
+
   return {
+    professionalMe,
+    activeProfessionalOffers,
+    archivedTotalCount,
     selectedHistoryBox,
     setSelectedHistoryBox,
     bookingRotateIcon,
@@ -58,5 +74,6 @@ export const useProfessionalHomeScreen = () => {
     isArchivedRequestsListExpanded,
     toggleActiveRequestsList,
     toggleArchivedRequestsList,
+    onGoToProfile,
   };
 };

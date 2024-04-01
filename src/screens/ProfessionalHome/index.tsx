@@ -13,6 +13,9 @@ import { ProfessionalArchivedProfessionalOffersList } from "../../components/_pr
 
 export const ProfessionalHomeScreen = () => {
   const {
+    professionalMe,
+    activeProfessionalOffers,
+    archivedTotalCount,
     selectedHistoryBox,
     setSelectedHistoryBox,
     bookingRotateIcon,
@@ -21,6 +24,7 @@ export const ProfessionalHomeScreen = () => {
     isArchivedRequestsListExpanded,
     toggleActiveRequestsList,
     toggleArchivedRequestsList,
+    onGoToProfile,
   } = useProfessionalHomeScreen();
 
   return (
@@ -28,22 +32,21 @@ export const ProfessionalHomeScreen = () => {
       <ScrollView>
         <View style={styles.pageHeader}>
           <SweepLogoSvg width={110} height={32} color={"#000"}></SweepLogoSvg>
-          <Image
-            width={40}
-            height={40}
-            source={{
-              uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
-            }}
-          />
+          <TouchableOpacity onPress={onGoToProfile}>
+            <Image
+              width={40}
+              height={40}
+              source={{
+                uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
+              }}
+            />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.pageContainer}>
           <View style={styles.pageTitleContainer}>
-            <Text style={styles.pageTitle}>Bentornato Dott. Surname,</Text>
-            <Text style={styles.pageDescription}>
-              Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
-              metus.
-            </Text>
+            <Text>Bentornato/a</Text>
+            <Text h3>Dott. {professionalMe?.lastName}</Text>
           </View>
           <View style={styles.pageDashboardHeader}>
             <View>
@@ -122,8 +125,12 @@ export const ProfessionalHomeScreen = () => {
               ></Image>
               <CalendarCheckIcon color={"#1D7AFC"}></CalendarCheckIcon>
               <Text style={styles.dashboardBoxTitle}>Prenotazioni</Text>
-              <Text style={styles.dashboardBoxValue}>23</Text>
-              <Text style={styles.dashboardBoxNote}>0 richieste attive</Text>
+              <Text style={styles.dashboardBoxValue}>{archivedTotalCount}</Text>
+              <Text style={styles.dashboardBoxNote}>
+                {activeProfessionalOffers.length} richiest
+                {activeProfessionalOffers.length === 1 ? "a" : "e"} attiv
+                {activeProfessionalOffers.length === 1 ? "a" : "e"}
+              </Text>
             </View>
             <View style={styles.dashboardBox}>
               <Image
@@ -132,10 +139,8 @@ export const ProfessionalHomeScreen = () => {
               ></Image>
               <WalletIcon color={"#1D7AFC"}></WalletIcon>
               <Text style={styles.dashboardBoxTitle}>Incassato</Text>
-              <Text style={styles.dashboardBoxValue}>€ 10.240</Text>
-              <Text style={styles.dashboardBoxNote}>
-                € 2.438 negli ultimi 7 gg
-              </Text>
+              <Text style={styles.dashboardBoxValue}>€ 0</Text>
+              <Text style={styles.dashboardBoxNote}>€ 0 negli ultimi 7 gg</Text>
             </View>
           </View>
           <View style={styles.bookingsHeader}>

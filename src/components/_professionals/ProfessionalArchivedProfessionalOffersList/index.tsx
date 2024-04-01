@@ -11,20 +11,15 @@ export const ProfessionalArchivedProfessionalOffersList = memo(
     const {
       hasMore,
       isLoadingProfessionalOffers,
-      archivedProfessionalOffers,
+      cards,
       onProfessionalOfferClickedCallbacks,
       onLoadMoreArchivedOffersClicked,
     } = useProfessionalArchivedProfessionalOffersList();
 
     return (
       <View style={styles.listContainer}>
-        {archivedProfessionalOffers.map((professionalOffer, index) => (
-          <TouchableOpacity
-            key={professionalOffer._id}
-            onPress={onProfessionalOfferClickedCallbacks[index]}
-          >
-            <RequestCard requestSummary={professionalOffer.request} />
-          </TouchableOpacity>
+        {cards.map((card) => (
+          <RequestCard key={card._id} {...card} />
         ))}
         {hasMore && (
           <Button
