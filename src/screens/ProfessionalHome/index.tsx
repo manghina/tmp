@@ -2,12 +2,14 @@ import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { useProfessionalHomeScreen } from "./index.hooks";
 import { styles } from "./styles";
 import { Animated, Image, SafeAreaView, ScrollView } from "react-native";
-import SweepLogoSvg from "../../components/SweepLogoSvg";
-import CalendarCheckIcon from "../../components/SvgIcons/CalendarCheckIcon";
-import WalletIcon from "../../components/SvgIcons/WalletIcon";
-import EllipseIcon from "../../components/SvgIcons/EllipseIcon";
-import { BookingItem } from "../../components/BookingItem";
-import ExpandListIcon from "../../components/SvgIcons/ExpandListIcon";
+import SweepLogoSvg from "@app/components/SweepLogoSvg";
+import CalendarCheckIcon from "@app/components/SvgIcons/CalendarCheckIcon";
+import WalletIcon from "@app/components/SvgIcons/WalletIcon";
+import EllipseIcon from "@app/components/SvgIcons/EllipseIcon";
+import { BookingItem } from "@app/components/BookingItem";
+import ExpandListIcon from "@app/components/SvgIcons/ExpandListIcon";
+import { ProfessionalActiveProfessionalOffersList } from "../../components/_professionals/ProfessionalActiveProfessionalOffersList";
+import { ProfessionalArchivedProfessionalOffersList } from "../../components/_professionals/ProfessionalArchivedProfessionalOffersList";
 
 export const ProfessionalHomeScreen = () => {
   const {
@@ -15,10 +17,10 @@ export const ProfessionalHomeScreen = () => {
     setSelectedHistoryBox,
     bookingRotateIcon,
     historyRotateIcon,
-    isBookingListExpanded,
-    isHistoryListExpanded,
-    toggleBookingList,
-    toggleHistoryList,
+    isActiveRequestsListExpanded,
+    isArchivedRequestsListExpanded,
+    toggleActiveRequestsList,
+    toggleArchivedRequestsList,
   } = useProfessionalHomeScreen();
 
   return (
@@ -142,7 +144,7 @@ export const ProfessionalHomeScreen = () => {
               <EllipseIcon color={"#E56910"} />
               <EllipseIcon color={"#1D7AFC"} />
             </View>
-            <TouchableOpacity onPress={toggleBookingList}>
+            <TouchableOpacity onPress={toggleActiveRequestsList}>
               <Animated.View
                 style={{
                   transform: [{ rotate: bookingRotateIcon }],
@@ -152,48 +154,14 @@ export const ProfessionalHomeScreen = () => {
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <View>
-            <View style={styles.bookingList}>
-              {isBookingListExpanded && (
-                <>
-                  <BookingItem
-                    bookingType={"expiring"}
-                    title={"In scadenza"}
-                    bookingText={
-                      "Expiring\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                    }
-                    notes={"- 12:00 min"}
-                  />
-                  <BookingItem
-                    bookingType={"review"}
-                    title={"Lascia una recensione"}
-                    bookingText={
-                      "Review\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                    }
-                  />
-                  <BookingItem
-                    bookingType={"scheduled"}
-                    title={"Titolo della query"}
-                    bookingText={
-                      "Scheduled\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                    }
-                  />
-                  <BookingItem
-                    bookingType={"expired"}
-                    title={"Titolo della query"}
-                    bookingText={
-                      "Expired\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                    }
-                  />
-                </>
-              )}
-            </View>
-          </View>
+          {isActiveRequestsListExpanded && (
+            <ProfessionalActiveProfessionalOffersList />
+          )}
           <View style={styles.bookingsHeader}>
             <View style={styles.bookingsHeaderLeft}>
               <Text style={styles.sectionTitle}>Storico appuntamenti</Text>
             </View>
-            <TouchableOpacity onPress={toggleHistoryList}>
+            <TouchableOpacity onPress={toggleArchivedRequestsList}>
               <Animated.View
                 style={{
                   transform: [{ rotate: historyRotateIcon }],
@@ -203,21 +171,9 @@ export const ProfessionalHomeScreen = () => {
               </Animated.View>
             </TouchableOpacity>
           </View>
-          <View>
-            <View style={styles.bookingList}>
-              {isHistoryListExpanded && (
-                <>
-                  <BookingItem
-                    bookingType={"past"}
-                    title={"Titolo della query"}
-                    bookingText={
-                      "Past\nLorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus."
-                    }
-                  />
-                </>
-              )}
-            </View>
-          </View>
+          {isArchivedRequestsListExpanded && (
+            <ProfessionalArchivedProfessionalOffersList />
+          )}
           <Text style={styles.helpSection}>
             Bisogno di supporto?{" "}
             <Text style={styles.link} onPress={() => console.log("Tutorial")}>

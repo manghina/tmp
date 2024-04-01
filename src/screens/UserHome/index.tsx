@@ -4,7 +4,7 @@ import { View, Text, Button, TouchableOpacity } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import SweepSvg from "@app/components/SweepSvg";
 import { userHomeStyles } from "./styles";
-import { UserRequestsList } from "@app/components/users/UserRequestsList";
+import { UserRequestsList } from "@app/components/_users/UserRequestsList";
 
 const HomeGraphics = memo(() => {
   return (
