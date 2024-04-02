@@ -46,6 +46,15 @@ export const professionalOfferStore = createSlice({
         }
       },
     );
+    builder.addCase(
+      extraActions.getProfessionalsMeProfessionalOffersByProfessionalOfferId
+        .success,
+      (state, action) => {
+        const { professionalOffer } = action.payload.data;
+
+        state.currentProfessionalOffer = professionalOffer;
+      },
+    );
     builder.addCase(extraActions.clearSession, (state, action) => {
       state.activeList = initialState.activeList;
       state.archivedList = initialState.archivedList;

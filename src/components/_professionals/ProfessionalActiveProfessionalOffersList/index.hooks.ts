@@ -1,12 +1,17 @@
-import { useSelector } from "react-redux";
-import { selectors } from "@app/redux-store";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
 import { useMemo } from "react";
 import { RequestStatus } from "src/models/Request";
 import { RequestCardProps } from "src/components/RequestCard";
 import { CardStatus } from "src/components/RequestCard/index.hooks";
 import { Alert } from "react-native";
+import { getProfessionalsMeProfessionalOffersByProfessionalOfferId } from "../../../redux-store/extra-actions";
+import { useNavigation } from "@react-navigation/native";
 
 export const useProfessionalActiveProfessionalOffersList = () => {
+  const dispatch = useDispatch();
+  const navigator = useNavigation<any>();
+
   const activeProfessionalOffers = useSelector(
     selectors.getActiveProfessionalOffersList,
   );
@@ -24,7 +29,14 @@ export const useProfessionalActiveProfessionalOffersList = () => {
           description: "-",
           status: CardStatus.PLAIN,
           onPress: () => {
-            Alert.alert("TODO: Implement onPress");
+            dispatch(
+              actions.getProfessionalsMeProfessionalOffersByProfessionalOfferId.request(
+                {
+                  professionalOfferId: professionalOffer._id,
+                },
+              ),
+            );
+            navigator.navigate("professional-offers/details");
           },
         };
       }),

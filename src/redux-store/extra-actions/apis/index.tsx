@@ -1,6 +1,7 @@
 export { default as getAccountsMe } from "./get-accounts-me";
 export { default as getProfessionalsMe } from "./get-professionals-me";
-export { default as getProfessionalsMeProfessionalOffers } from "./get-professionals-me-requests-professional-offers-by-request-id";
+export { default as getProfessionalsMeProfessionalOffers } from "./get-professionals-me-professional-offers";
+export { default as getProfessionalsMeProfessionalOffersByProfessionalOfferId } from "./get-professionals-me-professional-offers-by-professional-offer-id";
 export { default as getUsersMe } from "./get-users-me";
 export { default as getUsersMeRequests } from "./get-users-me-requests";
 export { default as getUsersMeRequestsByRequestId } from "./get-users-me-requests-by-request-id";
