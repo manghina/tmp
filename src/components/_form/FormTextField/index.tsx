@@ -9,10 +9,16 @@ import { BaseTextField } from "@app/components/_baseInputs/BaseTextField";
 export type FormTextFieldProps = {
   name: string;
   type?: "text" | "password";
+  trailingAccessory?: TextFieldProps["trailingAccessory"];
 } & TextFieldProps;
 
 export const FormTextField = memo(
-  ({ name, type = "text", ...props }: FormTextFieldProps) => {
+  ({
+    name,
+    type = "text",
+    trailingAccessory,
+    ...props
+  }: FormTextFieldProps) => {
     const {
       isFocused,
       hideText,
@@ -24,13 +30,14 @@ export const FormTextField = memo(
 
     return (
       <BaseTextField
-        value={value}
+        value={`${value}`}
         onChangeText={handleChange}
         secureTextEntry={hideText}
         enableErrors={Boolean(error)}
         validationMessage={error}
         trailingAccessory={
-          type === "password" && (
+          trailingAccessory ||
+          (type === "password" && (
             <Button
               round
               onPress={onVisibilityIconTapped}
@@ -44,7 +51,7 @@ export const FormTextField = memo(
                 {hideText ? <VisibilityIcon /> : <VisibilityOffIcon />}
               </View>
             </Button>
-          )
+          ))
         }
         {...(props as any)}
       />

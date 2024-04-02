@@ -4,8 +4,6 @@ import { useMemo } from "react";
 import { RequestStatus } from "src/models/Request";
 import { RequestCardProps } from "src/components/RequestCard";
 import { CardStatus } from "src/components/RequestCard/index.hooks";
-import { Alert } from "react-native";
-import { getProfessionalsMeProfessionalOffersByProfessionalOfferId } from "../../../redux-store/extra-actions";
 import { useNavigation } from "@react-navigation/native";
 
 export const useProfessionalActiveProfessionalOffersList = () => {

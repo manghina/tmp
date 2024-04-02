@@ -1,34 +1,54 @@
 import { StyleSheet } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";
-import { textVariants } from "../../theme/typographies/variants";
-import { colorTokens } from "../../theme/colors/tokens";
+import { textVariants } from "@app/theme/typographies/variants";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
-  pageContainer: {
+  mainContainer: {
     height: "100%",
-    paddingTop: Dimensions.large.spacing_500,
     backgroundColor: colorTokens.elevationSurface,
-    paddingHorizontal: dimensionsTokens.paddingXs,
   },
-  patientPageContainer: {
-    marginTop: dimensionsTokens.paddingMd,
-    marginBottom: dimensionsTokens.paddingXs,
+  pageContainer: {
+    padding: dimensionsTokens.paddingXs,
+    gap: dimensionsTokens.paddingMd,
+  },
+  pageTitleText: {
+    ...textVariants.h3CondensedBlackNormal,
+  },
+  pageSubtitleText: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextSubtle,
+  },
+  contentWrapper: {
+    gap: dimensionsTokens.paddingXs,
+  },
+  patientContainer: {
+    gap: Dimensions.small.spacing_100,
+  },
+  actionsContainer: {
+    alignItems: "center",
+    gap: Dimensions.small.spacing_100,
+  },
+  actionLabel: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextDefault,
+  },
+  rejectActionLabel: {
+    color: colorTokens.colorTextInverse,
   },
   patientCardContainer: {
     borderRadius: 8,
     borderWidth: 1.5,
     borderColor: colorTokens.colorBorder,
     padding: dimensionsTokens.paddingXs,
+    gap: dimensionsTokens.paddingXs,
   },
   profilePic: {
     width: 48.6,
     height: 48.6,
     marginRight: 10,
     borderRadius: 50,
-  },
-  requestPageContainer: {
-    marginTop: dimensionsTokens.paddingXs,
   },
   requestContainer: {
     borderRadius: 8,
@@ -42,38 +62,20 @@ export const styles = StyleSheet.create({
   buttonGray: {
     width: "100%",
     backgroundColor: colorTokens.colorBackgroundNeutral,
-    color: colorTokens.colorText,
+    color: colorTokens.colorTextDefault,
   },
   buttonRed: {
     width: "100%",
     backgroundColor: colorTokens.colorBackgroundDangerBold,
     color: colorTokens.colorTextInverse,
   },
-  acceptedRequest: {},
-  availabilityBox: {
-    backgroundColor: colorTokens.colorBackgroundNeutral,
-    padding: Dimensions.small.spacing_100,
-    marginTop: dimensionsTokens.paddingXs,
-  },
-  availabilityContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: Dimensions.medium.spacing_150,
-  },
-  availabilityColumn: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  pageTitleText: {
-    ...textVariants.h3CondensedBlackNormal,
-  },
-  pSubtleText: {
-    ...textVariants.p1MediumNormal,
+  sectionName: {
+    ...textVariants.p2MediumNormal,
     color: colorTokens.colorTextSubtle,
   },
   pText: {
     ...textVariants.p1MediumNormal,
-    color: colorTokens.colorText,
+    color: colorTokens.colorTextDefault,
   },
   patientName: {
     ...textVariants.p1CondensedBoldNormal,
@@ -86,17 +88,12 @@ export const styles = StyleSheet.create({
     ...textVariants.p2BoldNormal,
     color: colorTokens.colorTextInformation,
   },
-  requestText: {
-    ...textVariants.p2MediumItalic,
-    color: colorTokens.colorText,
+  requestSummaryContainer: {
+    gap: Dimensions.small.spacing_100,
   },
-  acceptedTitle: {
-    ...textVariants.h6CondensedBlackNormal,
-    color: colorTokens.colorText,
-  },
-  availabilityText: {
-    ...textVariants.p2MediumNormal,
-    color: colorTokens.colorText,
+  requestSummaryText: {
+    ...textVariants.p2BoldItalic,
+    color: colorTokens.colorTextDefault,
   },
   rejectionHeaderText: {
     ...textVariants.h3CondensedBlackNormal,

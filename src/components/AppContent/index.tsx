@@ -169,7 +169,7 @@ export const AppContent: FC = memo(({}) => {
               statusBarColor: "white",
               headerTintColor: "transparent",
               headerTransparent: true,
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen

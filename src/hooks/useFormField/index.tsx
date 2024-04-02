@@ -8,7 +8,7 @@ type useFormFieldProps = {
 const useFormField = <T,>({ name }: useFormFieldProps) => {
   const {
     control,
-    formState: { errors, isSubmitted },
+    formState: { isSubmitted },
     setValue: _setValue,
     getFieldState,
   } = useFormContext();
