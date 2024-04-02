@@ -30,7 +30,7 @@ export const FormTextField = memo(
 
     return (
       <BaseTextField
-        value={`${value}`}
+        value={value !== undefined && value !== null ? `${value}` : undefined}
         onChangeText={handleChange}
         secureTextEntry={hideText}
         enableErrors={Boolean(error)}

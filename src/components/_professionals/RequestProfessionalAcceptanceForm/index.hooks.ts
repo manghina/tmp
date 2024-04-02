@@ -1,9 +1,11 @@
 import * as yup from "yup";
 import moment from "moment";
-import { useFieldArray, useForm, useWatch } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { YupShapeByInterface } from "@app/utils/yup";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
 
 enum ProfessionalOfferSlotFlag {
   OUTSIDE_WORKING_HOURS = "OUTSIDE_WORKING_HOURS",
@@ -55,7 +57,11 @@ const schema = yup
 
                 return Number.isInteger(feeInCents);
               },
-            ),
+            )
+            .transform((value) => {
+              const fee = parseFloat(`${value}`.replace(",", "."));
+              return fee * 100;
+            }),
           flags: yup
             .array()
             .of(yup.string().oneOf(Object.values(ProfessionalOfferSlotFlag)))
@@ -67,46 +73,64 @@ const schema = yup
   });
 
 export const useRequestProfessionalAcceptanceForm = () => {
+  const dispatch = useDispatch();
+
+  const currentProfessionalOffer = useSelector(
+    selectors.getCurrentProfessionalOffer,
+  );
+
   const formData = useForm<RequestProfessionalAcceptanceFormData>({
     defaultValues: {
       slots: [
-        { date: undefined, time: undefined, fee: 0, flags: [] },
-        { date: undefined, time: undefined, fee: 0, flags: [] },
-        { date: undefined, time: undefined, fee: 0, flags: [] },
+        { date: undefined, time: undefined, fee: undefined, flags: [] },
+        { date: undefined, time: undefined, fee: undefined, flags: [] },
+        { date: undefined, time: undefined, fee: undefined, flags: [] },
       ],
     },
     // @ts-ignore
     resolver: yupResolver(schema),
   });
 
-  const {
-    control,
-    handleSubmit,
-    formState: { isDirty, isSubmitted, isValid },
-  } = formData;
-
-  const submitDisabled = (isSubmitted && !isValid) || !isDirty;
+  const { control } = formData;
 
   const slots = useWatch({ control, name: "slots" });
-
-  const triggerSubmit = useMemo(
-    () =>
-      handleSubmit((data) => {
-        console.log(data);
-      }),
-    [handleSubmit],
-  );
 
   const completedSlots = useMemo(
     () => slots.filter((slot) => slot.date && slot.time && slot.fee),
     [slots],
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      // triggerSubmit().then();
-    }, 1000);
-  }, []);
+  const onConfirmButtonPressed = useCallback(() => {
+    if (!currentProfessionalOffer) {
+      return;
+    }
 
-  return { formData, slots, completedSlots, submitDisabled, triggerSubmit };
+    const payloadData = completedSlots.map((slot) => {
+      const dayString = moment(slot.date).format("DD/MM/YYYY");
+      const timeString = moment(slot.time).format("HH:mm");
+
+      const startDate = moment(
+        `${dayString} ${timeString}`,
+        "DD/MM/YYYY HH:mm",
+      );
+      const endDate = startDate.clone().add(1, "hour");
+
+      return {
+        price: slot.fee!,
+        startDate: startDate.toDate(),
+        endDate: endDate.toDate(),
+      };
+    });
+
+    dispatch(
+      actions.patchProfessionalsMeProfessionalOffersByProfessionalOfferId.request(
+        {
+          professionalOfferId: currentProfessionalOffer._id,
+          slots: payloadData,
+        },
+      ),
+    );
+  }, [dispatch, completedSlots, currentProfessionalOffer]);
+
+  return { formData, slots, completedSlots, onConfirmButtonPressed };
 };

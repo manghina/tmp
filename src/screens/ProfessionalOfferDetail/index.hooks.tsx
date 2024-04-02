@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { Alert } from "react-native";
 
@@ -11,8 +11,6 @@ export enum ProfessionalOfferDecision {
 }
 
 export const useProfessionalOfferDetailScreen = () => {
-  const dispatch = useDispatch();
-
   const [decision, setDecision] = React.useState<ProfessionalOfferDecision>(
     ProfessionalOfferDecision.NONE,
   );

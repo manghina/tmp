@@ -11,7 +11,7 @@ type RequestProfessionalAcceptanceFormProps = {};
 
 export const RequestProfessionalAcceptanceForm = memo(
   ({}: RequestProfessionalAcceptanceFormProps) => {
-    const { formData, slots, completedSlots, submitDisabled, triggerSubmit } =
+    const { formData, slots, completedSlots, onConfirmButtonPressed } =
       useRequestProfessionalAcceptanceForm();
 
     return (
@@ -74,10 +74,13 @@ export const RequestProfessionalAcceptanceForm = memo(
           ))}
           <View style={styles.actionsContainer}>
             <Text style={styles.actionsDescription}>Azioni disponibili</Text>
-            <Button disabled={completedSlots.length === 0}>
+            <Button
+              disabled={completedSlots.length === 0}
+              onPress={onConfirmButtonPressed}
+            >
               <Text style={[styles.actionLabel]}>
-                Conferma proposte{" "}
-                {completedSlots.length > 0 && `(${completedSlots.length})`}
+                Conferma proposte
+                {completedSlots.length > 0 && ` (${completedSlots.length})`}
               </Text>
             </Button>
             <Button style={styles.textButton}>

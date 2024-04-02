@@ -55,6 +55,18 @@ export const professionalOfferStore = createSlice({
         state.currentProfessionalOffer = professionalOffer;
       },
     );
+    builder.addCase(
+      extraActions.patchProfessionalsMeProfessionalOffersByProfessionalOfferId
+        .success,
+      (state, action) => {
+        const { professionalOffer } = action.payload.data;
+
+        state.currentProfessionalOffer = professionalOffer;
+        state.activeList = state.activeList.map((offer) =>
+          offer._id === professionalOffer._id ? professionalOffer : offer,
+        );
+      },
+    );
     builder.addCase(extraActions.clearSession, (state, action) => {
       state.activeList = initialState.activeList;
       state.archivedList = initialState.archivedList;
