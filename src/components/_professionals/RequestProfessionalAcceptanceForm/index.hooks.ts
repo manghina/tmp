@@ -37,13 +37,9 @@ const schema = yup
             .mixed()
             .test(
               "is-valid-fee",
-              "L'onorario deve essere un numero valido",
+              "L'onorario deve essere un importo valido",
               (value) => {
-                if (
-                  value === null ||
-                  value === undefined ||
-                  !["number", "string"].includes(typeof value)
-                ) {
+                if (!value || typeof value !== "string") {
                   return false;
                 }
 
@@ -52,16 +48,15 @@ const schema = yup
 
                 if (!matchesRegex) return false;
 
-                const fee = parseFloat(`${value}`.replace(",", "."));
-                const feeInCents = fee * 100;
+                const [integer, decimals] = value.split(/[,.]/);
 
-                return Number.isInteger(feeInCents);
+                const isPositive = Number(integer) >= 0;
+                const decimalsInvalid =
+                  Boolean(decimals) && decimals.length <= 2;
+
+                return isPositive && !decimalsInvalid;
               },
-            )
-            .transform((value) => {
-              const fee = parseFloat(`${value}`.replace(",", "."));
-              return fee * 100;
-            }),
+            ),
           flags: yup
             .array()
             .of(yup.string().oneOf(Object.values(ProfessionalOfferSlotFlag)))
@@ -91,17 +86,29 @@ export const useRequestProfessionalAcceptanceForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const { control } = formData;
+  const { control, trigger } = formData;
 
   const slots = useWatch({ control, name: "slots" });
 
   const completedSlots = useMemo(
-    () => slots.filter((slot) => slot.date && slot.time && slot.fee),
+    () =>
+      slots
+        .map((slot, index) => ({ ...slot, index }))
+        .filter((slot) => slot.date && slot.time && slot.fee),
     [slots],
   );
 
-  const onConfirmButtonPressed = useCallback(() => {
+  const onConfirmButtonPressed = useCallback(async () => {
     if (!currentProfessionalOffer) {
+      return;
+    }
+
+    const allSlotsValidPromises = completedSlots.map((slot) =>
+      trigger(`slots.${slot.index}`),
+    );
+    const allSlotsValid = await Promise.all(allSlotsValidPromises);
+
+    if (!allSlotsValid.every((isValid) => isValid)) {
       return;
     }
 
@@ -116,7 +123,7 @@ export const useRequestProfessionalAcceptanceForm = () => {
       const endDate = startDate.clone().add(1, "hour");
 
       return {
-        price: slot.fee!,
+        price: slot.fee! * 100,
         startDate: startDate.toDate(),
         endDate: endDate.toDate(),
       };

@@ -9,6 +9,9 @@ import { FormTextField } from "@app/components/_form/FormTextField";
 
 type RequestProfessionalAcceptanceFormProps = {};
 
+const formatPrice = (price: string | number): string =>
+  parseFloat(`${price}`).toFixed(2).replace(".", ",");
+
 export const RequestProfessionalAcceptanceForm = memo(
   ({}: RequestProfessionalAcceptanceFormProps) => {
     const { formData, slots, completedSlots, onConfirmButtonPressed } =
@@ -61,9 +64,14 @@ export const RequestProfessionalAcceptanceForm = memo(
                 <Text style={styles.priceRecap}>Totale al cliente:</Text>
                 {Boolean(slot.fee) ? (
                   <>
-                    <Text style={styles.priceRecap}>{slot.fee}+20% =</Text>
+                    <Text style={styles.priceRecap}>
+                      {formatPrice(`${slot.fee!}`.replace(",", "."))}+20% =
+                    </Text>
                     <Text style={styles.priceTotal}>
-                      {(slot.fee! * 1.2).toFixed(2).replace(".", ",")}€
+                      {formatPrice(
+                        parseFloat(`${slot.fee!}`.replace(",", ".")) * 1.2,
+                      )}
+                      €
                     </Text>
                   </>
                 ) : (
