@@ -8,6 +8,11 @@ import {
 } from "./index.hooks";
 import { styles } from "./styles";
 import { RequestProfessionalAcceptanceForm } from "@app/components/_professionals/RequestProfessionalAcceptanceForm";
+import { ProfessionalOfferStatus } from "@app/models/ProfessionalOffer";
+import moment from "moment";
+import { colorTokens } from "@app/theme/colors/tokens";
+import ThumbsUpIcon from "@app/components/SvgIcons/ThumbsUpIcon";
+import ClockIcon from "@app/components/SvgIcons/ClockIcon";
 
 export const ProfessionalOfferDetailScreen = () => {
   const {
@@ -28,7 +33,7 @@ export const ProfessionalOfferDetailScreen = () => {
   }
 
   const renderMainActions = () => (
-    <View style={styles.actionsContainer}>
+    <View style={[styles.section, styles.actionsContainer]}>
       <Text style={styles.pText}>Cosa intende fare?</Text>
       <Button
         labelStyle={styles.actionLabel}
@@ -51,18 +56,87 @@ export const ProfessionalOfferDetailScreen = () => {
     </View>
   );
 
+  const renderStatusContainer = () => {
+    switch (currentProfessionalOffer?.status) {
+      case ProfessionalOfferStatus.readyToBeAccepted:
+        return (
+          <View style={styles.statusMainWrapper}>
+            <Text style={styles.sectionName}>Stato prenotazione</Text>
+            <View style={styles.statusContainer}>
+              <View
+                style={[
+                  styles.statusIconContainer,
+                  styles.readyToBeAcceptedIconContainer,
+                ]}
+              >
+                <ClockIcon color={colorTokens.colorIconWarning} />
+              </View>
+              <View style={styles.statusTitleContainer}>
+                <Text style={styles.statusTitle}>In attesa di conferma</Text>
+                <Text style={styles.statusSubtitle}>
+                  La richiesta scade {moment().add(1, "day").from(moment())}
+                </Text>
+              </View>
+            </View>
+          </View>
+        );
+      case ProfessionalOfferStatus.Accepted:
+        return (
+          <View style={styles.statusMainWrapper}>
+            <Text style={styles.sectionName}>Stato prenotazione</Text>
+            <View style={styles.statusContainer}>
+              <View
+                style={[
+                  styles.acceptedIconContainer,
+                  styles.readyToBeAcceptedIconContainer,
+                ]}
+              >
+                <ThumbsUpIcon color={colorTokens.colorIconSuccess} />
+              </View>
+              <Text style={styles.statusTitle}>Confermata dal paziente</Text>
+            </View>
+          </View>
+        );
+      case ProfessionalOfferStatus.Refused:
+        return (
+          <View style={styles.statusMainWrapper}>
+            <Text style={styles.sectionName}>Stato prenotazione</Text>
+            <View style={styles.statusContainer}>
+              <View
+                style={[
+                  styles.rejectedIconContainer,
+                  styles.readyToBeAcceptedIconContainer,
+                ]}
+              >
+                <Text>ICON</Text>
+              </View>
+              <Text style={styles.statusTitle}>Rifiutata</Text>
+            </View>
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView>
         <View style={styles.pageContainer}>
-          <View>
+          <View style={[styles.section]}>
             <Text style={styles.pageTitleText}>Richiesta di visita</Text>
             <Text style={styles.pageSubtitleText}>
               Sweep ha individuato Lei come miglior medico per questo paziente!
             </Text>
           </View>
-          <View style={styles.contentWrapper}>
-            <View style={styles.patientContainer}>
+          <View style={[styles.contentWrapper]}>
+            {[
+              ProfessionalOfferStatus.readyToBeAccepted,
+              ProfessionalOfferStatus.Accepted,
+              ProfessionalOfferStatus.Refused,
+            ].includes(currentProfessionalOffer?.status!) &&
+              renderStatusContainer()}
+            <View style={[styles.section, styles.patientContainer]}>
               <Text style={styles.sectionName}>Paziente</Text>
               <View style={styles.patientCardContainer}>
                 <View row>
@@ -101,9 +175,59 @@ export const ProfessionalOfferDetailScreen = () => {
                 </View>
               </View>
             </View>
-            {decision === ProfessionalOfferDecision.NONE && renderMainActions()}
-            {decision === ProfessionalOfferDecision.ACCEPT && (
-              <RequestProfessionalAcceptanceForm />
+            {currentProfessionalOffer?.status ===
+              ProfessionalOfferStatus.Pending && (
+              <>
+                {decision === ProfessionalOfferDecision.NONE &&
+                  renderMainActions()}
+                {decision === ProfessionalOfferDecision.ACCEPT && (
+                  <RequestProfessionalAcceptanceForm />
+                )}
+              </>
+            )}
+            {currentProfessionalOffer?.status ===
+              ProfessionalOfferStatus.readyToBeAccepted && (
+              <View style={[styles.section]}>
+                <Text style={styles.sectionName}>Orari proposti</Text>
+                <View style={styles.proposedSlotsContainer}>
+                  {(currentProfessionalOffer?.slots ?? []).map(
+                    (slot, index) => {
+                      const dayString = moment(slot.startDate).format("dddd");
+
+                      return (
+                        <>
+                          {index !== 0 && <View style={styles.divider} />}
+                          <View key={slot._id} style={styles.slotContainer}>
+                            <Text style={styles.optionCounterText}>
+                              Opzione {index + 1}
+                            </Text>
+                            <View style={styles.optionDetailsContainer}>
+                              <View>
+                                <Text style={styles.pText}>
+                                  {moment(slot.startDate).format(
+                                    "DD MMMM YYYY",
+                                  )}
+                                </Text>
+                                <Text style={styles.optionDayAndTimeText}>
+                                  {dayString.charAt(0).toUpperCase()}
+                                  {dayString.substring(1)} ore{" "}
+                                  {moment(slot.startDate).format("HH:mm")}
+                                </Text>
+                              </View>
+                              <Text style={styles.optionPrice}>
+                                {(slot.price / 100)
+                                  .toFixed(2)
+                                  .replace(".", ",")}
+                                €
+                              </Text>
+                            </View>
+                          </View>
+                        </>
+                      );
+                    },
+                  )}
+                </View>
+              </View>
             )}
           </View>
         </View>

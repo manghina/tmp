@@ -23,12 +23,9 @@ export const styles = StyleSheet.create({
   contentWrapper: {
     gap: dimensionsTokens.paddingXs,
   },
-  patientContainer: {
-    gap: Dimensions.small.spacing_100,
-  },
+  patientContainer: {},
   actionsContainer: {
     alignItems: "center",
-    gap: Dimensions.small.spacing_100,
   },
   actionLabel: {
     ...textVariants.p1MediumNormal,
@@ -69,9 +66,44 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundDangerBold,
     color: colorTokens.colorTextInverse,
   },
+  section: {
+    gap: Dimensions.small.spacing_100,
+  },
   sectionName: {
     ...textVariants.p2MediumNormal,
     color: colorTokens.colorTextSubtle,
+  },
+  statusMainWrapper: {
+    gap: Dimensions.small.spacing_100,
+  },
+  statusContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Dimensions.small.spacing_100,
+  },
+  statusTitleContainer: {
+    flex: 1,
+  },
+  statusTitle: {
+    ...textVariants.p1BoldNormal,
+  },
+  statusSubtitle: {
+    ...textVariants.p2MediumItalic,
+    color: colorTokens.colorTextSubtle,
+  },
+  statusIconContainer: {
+    paddingHorizontal: dimensionsTokens.paddingXs,
+    paddingVertical: Dimensions.small.spacing_100,
+    borderRadius: 8,
+  },
+  readyToBeAcceptedIconContainer: {
+    backgroundColor: colorTokens.colorBackgroundWarning,
+  },
+  acceptedIconContainer: {
+    backgroundColor: colorTokens.colorBackgroundSuccess,
+  },
+  rejectedIconContainer: {
+    backgroundColor: colorTokens.colorBackgroundDanger,
   },
   pText: {
     ...textVariants.p1MediumNormal,
@@ -98,5 +130,41 @@ export const styles = StyleSheet.create({
   rejectionHeaderText: {
     ...textVariants.h3CondensedBlackNormal,
     color: colorTokens.colorTextDanger,
+  },
+  divider: {
+    height: 1,
+    width: "100%",
+    backgroundColor: colorTokens.colorBorder,
+  },
+  proposedSlotsContainer: {
+    padding: dimensionsTokens.paddingXs,
+    borderRadius: 8,
+    borderWidth: 1.5,
+    borderColor: colorTokens.colorBorder,
+    gap: dimensionsTokens.paddingXs,
+  },
+  slotContainer: {
+    gap: Dimensions.small.spacing_100,
+  },
+  optionCounterText: {
+    ...textVariants.p2MediumNormal,
+    color: colorTokens.colorTextSubtle,
+  },
+  optionDetailsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  optionDateText: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextDefault,
+  },
+  optionDayAndTimeText: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextSubtle,
+  },
+  optionPrice: {
+    ...textVariants.p1BoldNormal,
+    color: colorTokens.colorTextDefault,
   },
 });
