@@ -14,7 +14,7 @@ import { UserRegisterScreen } from "src/screens/UserRegister";
 import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
 import { UserHomeScreen } from "@app/screens/UserHome";
-import { UserHeader } from "@app/components/users/UserHeader";
+import { UserHeader } from "@app/components/_users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
@@ -23,11 +23,14 @@ import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
-import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
+import { RequestProfessionalSuccessScreen } from "@app/screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
-import { ProfessionalOfferDetailScreen } from "../../screens/ProfessionalOfferDetail";
+import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
+import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 const Stack = createNativeStackNavigator();
 
@@ -116,7 +119,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitleAlign: "center",
               headerTitleStyle: {
                 ...textVariants.h3CondensedBlackNormal,
-                color: Colors.blackText,
+                color: colorTokens.colorTextDefault,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
@@ -134,7 +137,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitleAlign: "center",
               headerTitleStyle: {
                 ...textVariants.h3CondensedBlackNormal,
-                color: Colors.blackText,
+                color: colorTokens.colorTextDefault,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
@@ -155,7 +158,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="professional-offerdetail"
+            name="professional-offers/details"
             component={ProfessionalOfferDetailScreen}
             options={{
               headerTitle: "",
@@ -174,6 +177,23 @@ export const AppContent: FC = memo(({}) => {
             component={UserHomeScreen}
             options={{
               header: () => <UserHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="user-settings"
+            component={UserSettingsScreen}
+            options={{
+              header: () => <UserHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/cancel"
+            component={RequestCancelByProfessionalScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen

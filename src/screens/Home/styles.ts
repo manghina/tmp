@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   appName: {
     ...textVariants.p2BoldItalic,
   },
-  backgroundImage: { width: "100%", borderRadius: 8 },
+  backgroundImage: { width: "100%", height: 300, borderRadius: 8 },
   mainActionsContainer: {
     gap: dimensionsTokens.paddingXs,
     alignItems: "center",
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextInverse,
   },
   professionalRegisterButtonLabel: {
-    color: colorTokens.colorText,
+    color: colorTokens.colorTextDefault,
   },
   separationText: {
     ...textVariants.p2MediumNormal,

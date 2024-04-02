@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useRequestProfessionalOffersScreen } from "./index.hooks";
 import { View, Text, TouchableOpacity } from "react-native-ui-lib";
-import { ProfessionalSearchCarousel } from "@app/components/users/ProfessionalResearchCarousel";
+import { ProfessionalSearchCarousel } from "@app/components/_users/ProfessionalResearchCarousel";
 import { SafeAreaView } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { headerHeight } from "@app/theme/spacings/dimensions";
@@ -22,7 +22,7 @@ export const RequestsProfessionalOffersScreen = memo(
           }}
         >
           <View style={{ paddingHorizontal: dimensionsTokens.paddingSm }}>
-            <Text Title>Prenotazione</Text>
+            <Text h3>Prenotazione</Text>
             <Text>
               Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
               metus.
@@ -46,14 +46,12 @@ export const RequestsProfessionalOffersScreen = memo(
               Ricerca in corso
             </Text>
             <Text>
-              Ci siamo già messi all'opera. Stiamo contattando i professionisti
-              in linea con le tue richieste.
+              {`Sto analizzando in tempo reale migliaia di informazioni per trovare il professionista ideale per la tua esigenza.
+
+A breve troverai qui sotto le proposte perfette per te con relativi orari e onorari dei medici disponibili.
+
+Riceverai una notifica al termine della ricerca.`}
             </Text>
-            <Text>
-              A breve troverai qui sotto le nostre proposte con relativi orari e
-              onorari dei medici disponibili.
-            </Text>
-            <Text>Riceverai una notifica al termine della ricerca.</Text>
           </View>
           <View
             style={{

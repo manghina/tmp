@@ -4,7 +4,7 @@ export interface IProfessional {
   _id: string;
   accountId: string;
   name: string;
-  lastname: string;
+  lastName: string;
   birthDate: string;
   email: string;
   phones: string[];
@@ -15,11 +15,16 @@ export interface IProfessional {
   v: number;
 }
 
+export type IProfessionalSummary = Pick<
+  IProfessional,
+  "_id" | "name" | "lastName" | "email" | "specializations"
+>;
+
 export class Professional implements IProfessional {
   _id!: string;
   accountId!: string;
   name!: string;
-  lastname!: string;
+  lastName!: string;
   birthDate!: string;
   email!: string;
   phones!: string[];
@@ -37,7 +42,7 @@ export class Professional implements IProfessional {
     this._id = professional._id;
     this.accountId = professional.accountId;
     this.name = professional.name;
-    this.lastname = professional.lastname;
+    this.lastName = professional.lastName;
     this.birthDate = professional.birthDate;
     this.email = professional.email;
     this.phones = professional.phones;

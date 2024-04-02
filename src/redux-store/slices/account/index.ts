@@ -51,8 +51,12 @@ export const accountStore = createSlice({
       extraActions.postAccountsSessions.success,
       (state, action) => {
         state.cookie = action.payload.data.cookie;
+        state.account = action.payload.data.account;
       },
     );
+    builder.addCase(extraActions.postAccounts.success, (state, action) => {
+      state.account = action.payload.data.account;
+    });
     builder.addCase(extraActions.getAccountsMe.success, (state, action) => {
       state.account = action.payload.data.account;
     });
@@ -76,6 +80,9 @@ export const accountStore = createSlice({
       state.account = action.payload.data.account;
       state.userMe = null;
       state.professionalMe = action.payload.data.professional;
+    });
+    builder.addCase(extraActions.clearSession, (state, action) => {
+      state.cookie = null;
     });
     builder.addCase(extraActions.appStartup, (state, action) => {
       // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente

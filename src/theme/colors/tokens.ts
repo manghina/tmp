@@ -1,7 +1,7 @@
 import { Colors } from "./palette";
 
 export const colorTokensLight = {
-  colorText: Colors.Neutral[1000],
+  colorTextDefault: Colors.Neutral[1000],
   colorTextSubtle: Colors.Neutral[700],
   colorTextSubtlest: Colors.Neutral[700],
   colorTextInverse: Colors.Neutral[0],
@@ -199,6 +199,8 @@ export const colorTokensLight = {
   colorBackgroundInformationBoldHovered: Colors.Blue[800],
   colorBackgroundInformationBoldPressed: Colors.Blue[900],
 
+  colorBackgroundAlternativeBrand: Colors.Blue[700],
+
   colorBlanket: Colors.Neutral[500],
   colorBlanketSelected: "#388BF4",
   colorBlanketDanger: "#EFC4B1",
@@ -227,10 +229,10 @@ export const colorTokensLight = {
 };
 
 export const colorTokensDark = {
-  colorText: Colors.DarkNeutral[1100],
+  colorTextDefault: Colors.DarkNeutral[900],
   colorTextSubtle: Colors.DarkNeutral[800],
   colorTextSubtlest: Colors.DarkNeutral[700],
-  colorTextInverse: Colors.DarkNeutral["-100"],
+  colorTextInverse: Colors.DarkNeutral[100],
   colorTextDisabled: Colors.DarkNeutral[400],
   colorTextSelected: Colors.Blue[400],
   colorTextBrand: Colors.Brand[400],
@@ -420,6 +422,8 @@ export const colorTokensDark = {
   colorBackgroundInformationBold: Colors.Blue[400],
   colorBackgroundInformationBoldHovered: Colors.Blue[300],
   colorBackgroundInformationBoldPressed: Colors.Blue[200],
+
+  colorBackgroundAlternativeBrand: Colors.Blue[700],
 
   colorBlanket: "#10121499",
   colorBlanketSelected: "#101214C1",

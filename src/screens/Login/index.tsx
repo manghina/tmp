@@ -35,9 +35,7 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
       />
       <View style={styles.pageContentWrapper}>
         <View>
-          <Text title style={styles.pageTitle}>
-            Accedi
-          </Text>
+          <Text h1>Accedi</Text>
           <Text style={styles.pageSubtitle}>Seleziona metodo preferito</Text>
         </View>
         <FormProvider {...formData}>
@@ -58,7 +56,11 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
             >
               Sblocca ingresso applicazione
             </Text>
-            <Button onPress={triggerSubmit} disabled={showLoadingAnimation ?? submitDisabled} style={styles.button}>
+            <Button
+              onPress={triggerSubmit}
+              disabled={showLoadingAnimation ?? submitDisabled}
+              style={styles.button}
+            >
               {showLoadingAnimation ? (
                 <LottieView
                   source={require("../../../assets/animations/loading.json")}

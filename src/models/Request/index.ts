@@ -1,13 +1,16 @@
 import { IMessage } from "../Message";
 
+export enum RequestStatus {
+  COLLECTING_INFORMATION = "collecting-information",
+  INFORMATION_COLLECTED = "information-collected",
+  PROFESSIONAL_OFFERS_CREATED = "professional_offers_created",
+  CLOSED = "closed",
+}
+
 export enum ChatStatus {
   PROCESSING = "processing",
   WAITING_USER_INPUT = "waiting-user-input",
-}
-
-export enum RequestStatus {
-  COLLECTING_INFORMATION = "collecting-information",
-  PROFESSIONAL_OFFERS_CREATED = "professional_offers_created",
+  COMPLETED = "completed",
 }
 
 export interface IRequest {
@@ -15,7 +18,7 @@ export interface IRequest {
   user: {
     _id: string;
     name: string;
-    lastname: string;
+    lastName: string;
     email: string;
   };
   chatStatus: ChatStatus;
@@ -23,12 +26,14 @@ export interface IRequest {
   messages?: IMessage[];
 }
 
+export type IRequestSummary = Pick<IRequest, "_id" | "user" | "currentStatus">;
+
 export class Request implements IRequest {
   _id: string;
   user: {
     _id: string;
     name: string;
-    lastname: string;
+    lastName: string;
     email: string;
   };
   chatStatus: ChatStatus;
@@ -50,6 +55,14 @@ export class Request implements IRequest {
       chatStatus: this.chatStatus,
       currentStatus: this.currentStatus,
       messages: this.messages,
+    };
+  }
+
+  toSummary(): IRequestSummary {
+    return {
+      _id: this._id,
+      user: this.user,
+      currentStatus: this.currentStatus,
     };
   }
 }
