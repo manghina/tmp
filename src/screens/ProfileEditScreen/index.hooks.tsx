@@ -1,24 +1,14 @@
-import {
-  MutableRefObject,
-  Ref,
-  RefObject,
-  createRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { User } from "@app/models/User";
 import * as yup from "yup";
 import { countryOptions, phonePrefixOptions } from "./constantData";
-import { useForm, useWatch } from "react-hook-form";
+import { set, useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
-import { TextInput } from "react-native";
+import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
 
 interface UserEditFormData {
   name: string;
@@ -83,22 +73,6 @@ export const useUserProfileEditScreen = () => {
     },
   });
 
-  const [phoneNumberVerification, setPhoneNumberVerification] = useState<{
-    isToVerify: boolean;
-    isVerified: boolean;
-    showPhoneNumberVerificationStep: boolean;
-    values: string[];
-  }>({
-    isToVerify: false,
-    isVerified: false,
-    showPhoneNumberVerificationStep: false,
-    values: [],
-  });
-
-  const phoneVerificationInputRefs = Array.from({ length: 6 }, () =>
-    useRef<TextInput | null>(null),
-  );
-
   const [submitError, setSubmitError] = useState<boolean>(false);
 
   const {
@@ -114,52 +88,73 @@ export const useUserProfileEditScreen = () => {
       name: fieldKeys,
     });
 
-  useEffect(() => {
-    if (phoneNumber && phoneNumber.length > 0) {
-      setPhoneNumberVerification({
-        isToVerify: true,
-        isVerified: false,
-        showPhoneNumberVerificationStep: false,
-        values: [],
-      });
-    } else {
-      setPhoneNumberVerification({
-        isToVerify: false,
-        isVerified: false,
-        showPhoneNumberVerificationStep: false,
-        values: [],
-      });
-    }
-  }, [phoneNumber]);
+  const [otpCode, setOtpCode] = useState<string>("");
+  const isToVerifyPhoneNumber = useMemo(
+    () => Boolean(phoneNumber.length > 0 && otpCode.length < 6),
+    [phoneNumber, otpCode],
+  );
+  const isVerifiedPhoneNumber = useMemo(
+    () => Boolean(phoneNumber.length > 0 && otpCode.length === 6),
+    [phoneNumber, otpCode],
+  );
+  const [showPhoneNumberVerificationStep, setShowPhoneNumberVerificationStep] =
+    useState<boolean>(false);
 
-  const handleOpenPhoneNumberVerification = () => {
-    setPhoneNumberVerification({
-      isToVerify: Boolean(phoneNumber),
-      isVerified: false,
-      values: [],
-      showPhoneNumberVerificationStep:
-        !phoneNumberVerification.showPhoneNumberVerificationStep,
-    });
-  };
+  const handleOpenPhoneNumberVerification = useCallback(() => {
+    setOtpCode("");
+    setShowPhoneNumberVerificationStep(!showPhoneNumberVerificationStep);
+  }, [showPhoneNumberVerificationStep]);
 
   const handlePhoneNumberVerificationCodeChange = useCallback(
     (value: string, index: number) => {
-      const newValues = [...phoneNumberVerification.values];
+      const newValues = otpCode.split("");
       if (value.length > 0) {
-        newValues[index] = value;
+        newValues.push(value);
       } else {
         newValues.splice(index, 1);
       }
-      setPhoneNumberVerification((state) => ({
-        ...state,
-        isVerified: newValues.length === 6,
-        isToVerify: newValues.length !== 6,
-        showPhoneNumberVerificationStep: newValues.length !== 6,
-        values: newValues,
-      }));
+      setOtpCode(newValues.join(""));
+      if (newValues.length === 6) {
+        setShowPhoneNumberVerificationStep(false);
+      }
     },
-    [phoneVerificationInputRefs],
+    [otpCode],
   );
+
+  const onOtpKeyPressCallbacks = useMemo(
+    () =>
+      new Array(6)
+        .fill(0)
+        .map(
+          (_, index) =>
+            ({
+              nativeEvent,
+            }: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+              if (
+                nativeEvent.key === "Backspace" &&
+                !otpCode[index] &&
+                index > 0
+              ) {
+                handlePhoneNumberVerificationCodeChange("", index - 1);
+              }
+            },
+        ),
+    [otpCode],
+  );
+
+  const onOtpChangeTextCallbacks = useMemo(
+    () =>
+      new Array(6).fill(0).map((_, index) => (value: string) => {
+        handlePhoneNumberVerificationCodeChange(value, index);
+      }),
+    [otpCode],
+  );
+
+  useEffect(() => {
+    if (isVerifiedPhoneNumber) {
+      setOtpCode("");
+    }
+  }, [phoneNumber]);
 
   const allFieldsFilled = useMemo(
     () =>
@@ -234,9 +229,12 @@ export const useUserProfileEditScreen = () => {
     submitDisabled,
     triggerProfileEditSubmit,
     submitError,
-    phoneNumberVerification,
+    isToVerifyPhoneNumber,
+    isVerifiedPhoneNumber,
+    showPhoneNumberVerificationStep,
+    otpCode,
     handleOpenPhoneNumberVerification,
-    handlePhoneNumberVerificationCodeChange,
-    phoneVerificationInputRefs,
+    onOtpKeyPressCallbacks,
+    onOtpChangeTextCallbacks,
   };
 };

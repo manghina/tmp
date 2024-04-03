@@ -2,13 +2,7 @@ import React, { Fragment, memo } from "react";
 import { useUserProfileEditScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { userProfileEditStyles } from "./styles";
-import {
-  Button,
-  Text,
-  TextField,
-  TouchableOpacity,
-  View,
-} from "react-native-ui-lib";
+import { Button, Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
@@ -27,18 +21,18 @@ export const ProfileEditScreen = memo(() => {
     phonePrefixOptions,
     triggerProfileEditSubmit,
     submitError,
-    phoneNumberVerification,
+    isToVerifyPhoneNumber,
+    isVerifiedPhoneNumber,
+    showPhoneNumberVerificationStep,
+    otpCode,
     handleOpenPhoneNumberVerification,
-    handlePhoneNumberVerificationCodeChange,
-    phoneVerificationInputRefs,
+    onOtpKeyPressCallbacks,
+    onOtpChangeTextCallbacks,
   } = useUserProfileEditScreen();
 
   const renderPhoneNumberVerification = () => (
     <View style={userProfileEditStyles.phoneNUmberVerificationContainer}>
-      <AnimatedProgressBar
-        value={(1 / 6) * phoneNumberVerification.values.length}
-        duration={250}
-      />
+      <AnimatedProgressBar value={(1 / 6) * otpCode.length} duration={250} />
       <View padding-20>
         <Text marginB-10 h3>
           Numero di contatto
@@ -53,28 +47,18 @@ export const ProfileEditScreen = memo(() => {
             alignItems: "center",
           }}
         >
-          {phoneVerificationInputRefs.map((_, index) => (
+          {new Array(6).fill(0).map((_, index) => (
             <Fragment key={index}>
               <BaseTextField
                 id={index.toString()}
                 autoFocus={index === 0}
-                focus={index === phoneNumberVerification.values.length}
-                value={phoneNumberVerification.values[index]}
+                focus={index === otpCode.length}
+                value={otpCode[index]}
                 style={{ width: 44 }}
                 keyboardType="number-pad"
                 maxLength={1}
-                onKeyPress={({ nativeEvent }) => {
-                  if (
-                    nativeEvent.key === "Backspace" &&
-                    !phoneNumberVerification.values[index] &&
-                    index > 0
-                  ) {
-                    handlePhoneNumberVerificationCodeChange("", index - 1);
-                  }
-                }}
-                onChangeText={(value) =>
-                  handlePhoneNumberVerificationCodeChange(value, index)
-                }
+                onKeyPress={onOtpKeyPressCallbacks[index]}
+                onChangeText={onOtpChangeTextCallbacks[index]}
               />
               {index === 2 && <Text>-</Text>}
             </Fragment>
@@ -155,7 +139,7 @@ export const ProfileEditScreen = memo(() => {
                   key="phoneNumber"
                   name="phoneNumber"
                   trailingAccessory={
-                    phoneNumberVerification.isToVerify ? (
+                    isToVerifyPhoneNumber ? (
                       <TouchableOpacity
                         onPress={handleOpenPhoneNumberVerification}
                       >
@@ -167,7 +151,7 @@ export const ProfileEditScreen = memo(() => {
                           />
                         </View>
                       </TouchableOpacity>
-                    ) : phoneNumberVerification.isVerified ? (
+                    ) : isVerifiedPhoneNumber ? (
                       <View paddingR-10>
                         <SuccessIcon
                           width={24}
@@ -182,7 +166,7 @@ export const ProfileEditScreen = memo(() => {
                   keyboardType="phone-pad"
                   style={{
                     ...userProfileEditStyles.phoneNumber,
-                    ...(phoneNumberVerification.isToVerify
+                    ...(isToVerifyPhoneNumber
                       ? {
                           borderBlockColor: Colors.Orange[600],
                           borderLeftColor: Colors.Orange[600],
@@ -191,7 +175,7 @@ export const ProfileEditScreen = memo(() => {
                       : {}),
                   }}
                 />
-                {phoneNumberVerification.isToVerify && (
+                {isToVerifyPhoneNumber && (
                   <TouchableOpacity onPress={handleOpenPhoneNumberVerification}>
                     <View paddingT-5>
                       <Text
@@ -208,8 +192,7 @@ export const ProfileEditScreen = memo(() => {
           </View>
         </View>
       </View>
-      {phoneNumberVerification.showPhoneNumberVerificationStep &&
-        renderPhoneNumberVerification()}
+      {showPhoneNumberVerificationStep && renderPhoneNumberVerification()}
       <View padding-20 paddingT-0>
         {submitError && (
           <Text marginB-20 color="red">
