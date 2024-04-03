@@ -24,9 +24,6 @@ export const styles = StyleSheet.create({
     gap: dimensionsTokens.paddingXs,
   },
   patientContainer: {},
-  actionsContainer: {
-    alignItems: "center",
-  },
   actionLabel: {
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextDefault,
@@ -166,5 +163,21 @@ export const styles = StyleSheet.create({
   optionPrice: {
     ...textVariants.p1BoldNormal,
     color: colorTokens.colorTextDefault,
+  },
+  actionsContainer: {
+    paddingTop: dimensionsTokens.paddingSm,
+  },
+  actionsDescription: {
+    ...textVariants.p2MediumNormal,
+    color: colorTokens.colorTextDefault,
+    textAlign: "center",
+  },
+  dangerButton: {
+    backgroundColor: colorTokens.colorBackgroundDanger,
+    paddingVertical: dimensionsTokens.paddingXs,
+  },
+  dangerButtonText: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextDanger,
   },
 });

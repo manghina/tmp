@@ -34,7 +34,7 @@ export const ProfessionalOfferDetailScreen = () => {
 
   const renderMainActions = () => (
     <View style={[styles.section, styles.actionsContainer]}>
-      <Text style={styles.pText}>Cosa intende fare?</Text>
+      <Text style={styles.actionsDescription}>Cosa intende fare?</Text>
       <Button
         labelStyle={styles.actionLabel}
         style={styles.buttonGray}
@@ -187,47 +187,59 @@ export const ProfessionalOfferDetailScreen = () => {
             )}
             {currentProfessionalOffer?.status ===
               ProfessionalOfferStatus.readyToBeAccepted && (
-              <View style={[styles.section]}>
-                <Text style={styles.sectionName}>Orari proposti</Text>
-                <View style={styles.proposedSlotsContainer}>
-                  {(currentProfessionalOffer?.slots ?? []).map(
-                    (slot, index) => {
-                      const dayString = moment(slot.startDate).format("dddd");
+              <>
+                <View style={[styles.section]}>
+                  <Text style={styles.sectionName}>Orari proposti</Text>
+                  <View style={styles.proposedSlotsContainer}>
+                    {(currentProfessionalOffer?.slots ?? []).map(
+                      (slot, index) => {
+                        const dayString = moment(slot.startDate).format("dddd");
 
-                      return (
-                        <>
-                          {index !== 0 && <View style={styles.divider} />}
-                          <View key={slot._id} style={styles.slotContainer}>
-                            <Text style={styles.optionCounterText}>
-                              Opzione {index + 1}
-                            </Text>
-                            <View style={styles.optionDetailsContainer}>
-                              <View>
-                                <Text style={styles.pText}>
-                                  {moment(slot.startDate).format(
-                                    "DD MMMM YYYY",
-                                  )}
-                                </Text>
-                                <Text style={styles.optionDayAndTimeText}>
-                                  {dayString.charAt(0).toUpperCase()}
-                                  {dayString.substring(1)} ore{" "}
-                                  {moment(slot.startDate).format("HH:mm")}
+                        return (
+                          <>
+                            {index !== 0 && <View style={styles.divider} />}
+                            <View key={slot._id} style={styles.slotContainer}>
+                              <Text style={styles.optionCounterText}>
+                                Opzione {index + 1}
+                              </Text>
+                              <View style={styles.optionDetailsContainer}>
+                                <View>
+                                  <Text style={styles.pText}>
+                                    {moment(slot.startDate).format(
+                                      "DD MMMM YYYY",
+                                    )}
+                                  </Text>
+                                  <Text style={styles.optionDayAndTimeText}>
+                                    {dayString.charAt(0).toUpperCase()}
+                                    {dayString.substring(1)} ore{" "}
+                                    {moment(slot.startDate).format("HH:mm")}
+                                  </Text>
+                                </View>
+                                <Text style={styles.optionPrice}>
+                                  {(slot.price / 100)
+                                    .toFixed(2)
+                                    .replace(".", ",")}
+                                  €
                                 </Text>
                               </View>
-                              <Text style={styles.optionPrice}>
-                                {(slot.price / 100)
-                                  .toFixed(2)
-                                  .replace(".", ",")}
-                                €
-                              </Text>
                             </View>
-                          </View>
-                        </>
-                      );
-                    },
-                  )}
+                          </>
+                        );
+                      },
+                    )}
+                  </View>
                 </View>
-              </View>
+                <View style={[styles.section, styles.actionsContainer]}>
+                  <Text style={styles.actionsDescription}>
+                    Azioni al momento disponibili
+                  </Text>
+                  <Button style={styles.dangerButton}>
+                    <Text style={styles.dangerButtonText}>
+                      Annulla appuntamento
+                    </Text>
+                  </Button>
+                </View>
+              </>
             )}
           </View>
         </View>
