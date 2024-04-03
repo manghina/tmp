@@ -76,12 +76,8 @@ export const accountStore = createSlice({
       state.professionalMe = null;
     });
     builder.addCase(extraActions.patchUsersMe.success, (state, action) => {
-      console.log("patchUsersMe success", action.payload.data.user);
       state.userMe = action.payload.data.user;
       state.professionalMe = null;
-    });
-    builder.addCase(extraActions.patchUsersMe.fail, (state, action) => {
-      console.log("patchUsersMe fail", action.payload);
     });
     builder.addCase(extraActions.postUsers.success, (state, action) => {
       state.account = action.payload.data.account;
