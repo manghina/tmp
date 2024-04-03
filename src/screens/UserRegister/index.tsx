@@ -4,12 +4,12 @@ import React, { memo } from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
-import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
+import { FormDatePicker } from "@app/components/_form/FormDatePicker";
 import { styles } from "./styles";
 import { ScrollView } from "react-native";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import LottieView from "lottie-react-native";
-import { colorTokens } from "../../theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 type UserRegisterScreenProps = {};
 
@@ -41,7 +41,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
             <View style={styles.formColumn}>
               <FormTextField name="firstName" label="Nome" />
               <FormTextField name="lastName" label="Cognome" />
-              <FormDateTimePicker name="birthDate" label="Data di nascita" />
+              <FormDatePicker name="birthDate" label="Data di nascita" />
               <View style={styles.mainActionLabelContainer}>
                 <Text
                   color={

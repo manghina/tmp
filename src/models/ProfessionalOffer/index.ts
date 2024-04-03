@@ -15,7 +15,7 @@ export type IProfessionalOfferSummary = Pick<
 >;
 
 export type IProfessionalOffer = {
-  _id?: string;
+  _id: string;
   slots?: Slot[];
   request: IRequestSummary;
   professional: IProfessionalSummary;
@@ -26,7 +26,7 @@ export type IProfessionalOffer = {
 };
 
 export class ProfessionalOffer implements IProfessionalOffer {
-  _id?: string;
+  _id: string;
   slots?: Slot[];
   request: IRequestSummary;
   professional: IProfessionalSummary;

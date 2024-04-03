@@ -25,11 +25,12 @@ import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestProfessionalSuccessScreen } from "@app/screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
+import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
 import { UserSettingsScreen } from "@app/screens/UserSettings";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
-import { colorTokens } from "../../theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 const Stack = createNativeStackNavigator();
 
@@ -154,6 +155,21 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
+            }}
+          />
+          <Stack.Screen
+            name="professional-offers/details"
+            component={ProfessionalOfferDetailScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
