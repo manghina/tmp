@@ -15,7 +15,7 @@ import { colorTokens } from "@app/theme/colors/tokens";
 import EditImageIcon from "@app/screens/ProfileScreen/EditImageIcon";
 
 export const UserProfileScreen = memo(() => {
-  const { me, profileMenuItems, handleLogout } = useUserProfileScreen();
+  const { me, profileMenuItems } = useUserProfileScreen();
 
   const renderProfileData = () => (
     <View style={userProfileStyles.profileInfoContainer}>
@@ -51,30 +51,21 @@ export const UserProfileScreen = memo(() => {
 
   const renderMenu = () => (
     <>
-      <View paddingT-20 style={userProfileStyles.menuContainer}>
-        {profileMenuItems.map(({ category, items }, index) => (
-          <TouchableOpacity key={category}>
-            <View>
-              <Text h6>{category}</Text>
-              <View
-                paddingT-15
-                paddingB-15
-                style={userProfileStyles.menuCategoryList}
-              >
-                {items.map(({ icon, label, onPress }) => (
-                  <TouchableOpacity key={label} onPress={onPress}>
-                    <View padding-12 style={userProfileStyles.menuItem}>
-                      <View>{icon}</View>
-                      <Text style={{ fontWeight: "600" }}>{label}</Text>
-                    </View>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </View>
-          </TouchableOpacity>
+      <View style={userProfileStyles.menuContainer}>
+        {profileMenuItems.map(({ category, items }) => (
+          <View key={category} style={userProfileStyles.menuCategory}>
+            <Text style={userProfileStyles.menuCatergoryTitle}>{category}</Text>
+            {items.map(({ icon, label, onPress }) => (
+              <TouchableOpacity key={label} onPress={onPress}>
+                <View style={userProfileStyles.menuItem}>
+                  {icon}
+                  <Text style={userProfileStyles.menuItemText}>{label}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
         ))}
       </View>
-      <Button label="Logout" onPress={handleLogout} />
     </>
   );
 
