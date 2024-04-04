@@ -41,7 +41,7 @@ const schema = yup.object().shape({
       const today = moment();
       const birthDate = moment(value);
       const age = today.diff(birthDate, "years");
-      return age >= 23;
+      return age >= 21;
     }),
   phonePrefix: yup.string().required("Scegli il prefisso telefonico"),
   phoneNumber: yup.string().required("Inserisci il tuo numero di telefono"),
