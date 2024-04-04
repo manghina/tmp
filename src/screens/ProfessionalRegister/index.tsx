@@ -54,6 +54,7 @@ export const ProfessionalRegisterScreen = () => {
                 listTitle: "Lista nazioni",
               }}
               style={styles.phonePrefix}
+              disabled={true}
             />
           </View>
           <View style={styles.phoneNumberContainer}>
