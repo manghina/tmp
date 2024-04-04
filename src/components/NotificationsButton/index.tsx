@@ -12,7 +12,7 @@ export const NotificationsButton = memo(({}: NotificationsButtonProps) => {
   return (
     <TouchableOpacity onPress={onNotificationsButtonPressed}>
       <View style={style.button}>
-        <BellIcon color="#44546F" />
+        <BellIcon />
       </View>
     </TouchableOpacity>
   );

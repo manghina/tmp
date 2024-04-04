@@ -1,9 +1,15 @@
 import { StyleSheet } from "react-native";
-import { headerHeight } from "@app/theme/spacings/dimensions";
+import { Dimensions } from "@app/theme/spacings/dimensions";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const style = StyleSheet.create({
   button: {
-    height: headerHeight - 7,
-    aspectRatio: 1,
+    width: Dimensions.large.spacing_400,
+    height: Dimensions.large.spacing_400,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    color: colorTokens.colorIcon,
   },
 });
