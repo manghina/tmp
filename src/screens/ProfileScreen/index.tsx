@@ -9,31 +9,48 @@ import {
 } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import { userProfileStyles } from "./styles";
-import BellIcon from "@app/components/SvgIcons/BellIcon";
 import profilePicture from "@assets/img/doc15.png";
+import ImageIcon from "@app/components/SvgIcons/ImageIcon";
+import { colorTokens } from "@app/theme/colors/tokens";
+import EditImageIcon from "@app/screens/ProfileScreen/EditImageIcon";
 
 export const UserProfileScreen = memo(() => {
   const { me, profileMenuItems, handleLogout } = useUserProfileScreen();
 
-  const renderProfileImage = () => (
+  const renderProfileData = () => (
     <View style={userProfileStyles.profileInfoContainer}>
       <View style={userProfileStyles.profileImageContainer}>
-        <View style={userProfileStyles.profileImage}>
-          <Image width={110} height={110} source={profilePicture} />
-        </View>
+        {profilePicture ? (
+          <View style={userProfileStyles.profileImage}>
+            <Image
+              style={userProfileStyles.profileImage}
+              source={profilePicture}
+            />
+          </View>
+        ) : (
+          <View style={userProfileStyles.profileImageTextContainer}>
+            <Text style={userProfileStyles.profileImageText}>
+              {me?.name[0]}
+              {me?.lastName[0]}
+            </Text>
+          </View>
+        )}
         <View style={userProfileStyles.editImageButton}>
-          <BellIcon color="#fff" />
+          {profilePicture ? (
+            <EditImageIcon />
+          ) : (
+            <ImageIcon color={colorTokens.colorIconInverse} />
+          )}
         </View>
       </View>
-      <Text h5 style={userProfileStyles.profileInfoText}>
+      <Text style={userProfileStyles.profileInfoText}>
         {me?.name} {me?.lastName}
       </Text>
     </View>
   );
 
-  const renderPageContent = () => (
-    <View padding-20 style={userProfileStyles.mainViewContainer}>
-      {renderProfileImage()}
+  const renderMenu = () => (
+    <>
       <View paddingT-20 style={userProfileStyles.menuContainer}>
         {profileMenuItems.map(({ category, items }, index) => (
           <TouchableOpacity key={category}>
@@ -58,14 +75,15 @@ export const UserProfileScreen = memo(() => {
         ))}
       </View>
       <Button label="Logout" onPress={handleLogout} />
-    </View>
+    </>
   );
 
   return (
     <>
       <SafeAreaView style={userProfileStyles.safeAreaView}>
-        <ScrollView style={{ height: "100%" }}>
-          {renderPageContent()}
+        <ScrollView style={userProfileStyles.scrollView}>
+          {renderProfileData()}
+          {renderMenu()}
         </ScrollView>
       </SafeAreaView>
     </>

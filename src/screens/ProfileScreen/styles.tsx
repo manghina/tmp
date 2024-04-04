@@ -1,51 +1,63 @@
+import { colorTokens } from "@app/theme/colors/tokens";
+import { dimensionsTokens } from "@app/theme/spacings/tokens";
+import { textVariants } from "@app/theme/typographies/variants";
 import { StyleSheet } from "react-native";
 
 export const userProfileStyles = StyleSheet.create({
   safeAreaView: {
     height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: colorTokens.elevationSurface,
   },
-  mainViewContainer: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    gap: 10,
+  scrollView: {
     height: "100%",
   },
   profileInfoContainer: {
     flexDirection: "column",
-    gap: 15,
     alignItems: "center",
+    paddingVertical: dimensionsTokens.paddingMd,
+    gap: dimensionsTokens.paddingXs,
   },
   profileImageContainer: {
-    width: 110,
-    height: 110,
-    position: "relative",
+    width: 120,
+    height: 120,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: 100,
+    backgroundColor: colorTokens.colorBackgroundAccentMagentaSubtle,
+  },
+  profileImageTextContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 120,
+  },
+  profileImageText: {
+    ...textVariants.h1MediumNormal,
+    color: colorTokens.colorTextInverse,
+    textAlign: "center",
   },
   profileImage: {
-    width: 110,
-    height: 110,
+    width: 120,
+    height: 120,
     borderRadius: 100,
-    backgroundColor: "#DBDCDC",
-    overflow: "hidden",
-  },
-  profileInfoText: {
-    fontWeight: "700",
-    fontFamily: "Roboto",
   },
   editImageButton: {
     position: "absolute",
-    bottom: 0,
+    bottom: -4,
     right: 0,
-    width: 40,
-    height: 40,
-    backgroundColor: "#44546F",
+    width: 48,
+    height: 48,
+    backgroundColor: colorTokens.colorBackgroundNeutralBold,
+    borderWidth: 4,
     borderStyle: "solid",
-    borderColor: "#fff",
-    borderWidth: 3,
+    borderColor: colorTokens.colorBorderInverse,
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 5,
+  },
+  profileInfoText: {
+    ...textVariants.h5BoldItalic,
   },
   menuContainer: {
     flexDirection: "column",
