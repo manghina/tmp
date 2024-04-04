@@ -34,7 +34,15 @@ interface ProfessionalRegisterFormData {
 const schema = yup.object().shape({
   name: yup.string().required("Inserisci il tuo nome"),
   lastName: yup.string().required("Inserisci il tuo cognome"),
-  birthDate: yup.date().required("Inserisci la tua data di nascita"),
+  birthDate: yup
+    .date()
+    .required("Inserisci la tua data di nascita")
+    .test("age-check", "Devi avere almeno 23 anni", function (value) {
+      const today = moment();
+      const birthDate = moment(value);
+      const age = today.diff(birthDate, "years");
+      return age >= 23;
+    }),
   phonePrefix: yup.string().required("Scegli il prefisso telefonico"),
   phoneNumber: yup.string().required("Inserisci il tuo numero di telefono"),
   professionalPaperPhoto: yup.mixed().required("Inserisci la tua foto"),
