@@ -101,7 +101,7 @@ export const useProfessionalRegister = () => {
       name: "",
       lastName: "",
       birthDate: undefined,
-      phonePrefix: "",
+      phonePrefix: "+39",
       phoneNumber: "",
       professionalPaperPhoto: undefined,
       professionalRegistrationNumber: "",
