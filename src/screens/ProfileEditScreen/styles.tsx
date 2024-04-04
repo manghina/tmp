@@ -1,19 +1,35 @@
 import { StyleSheet } from "react-native";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { textVariants } from "../../theme/typographies/variants";
+import { colorTokens } from "@app/theme/colors/tokens";
+import { dimensionsTokens } from "@app/theme/spacings/tokens";
 
 export const userProfileEditStyles = StyleSheet.create({
   safeAreaView: {
     height: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: colorTokens.elevationSurface,
+  },
+  scrollView: {
+    height: "100%",
   },
   container: {
     position: "relative",
+    padding: dimensionsTokens.paddingXs,
+    gap: dimensionsTokens.paddingMd,
+  },
+  headingContainer: {
+    gap: dimensionsTokens.padding4Xs,
+  },
+  title: {
+    ...textVariants.h3CondensedBlackNormal,
+  },
+  subTitle: {
+    ...textVariants.p1MediumNormal,
   },
   formColumn: {
     display: "flex",
     flexDirection: "column",
-    gap: 15,
+    gap: dimensionsTokens.paddingXs,
   },
   phoneNumberLabel: {
     ...textVariants.p2MediumNormal,

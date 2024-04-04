@@ -86,113 +86,108 @@ export const ProfileEditScreen = memo(() => {
 
   const renderPageContent = () => (
     <View style={userProfileEditStyles.container}>
-      <View padding-20>
-        <View marginB-20>
-          <Text marginB-10 h3>
-            Modifica profilo
+      <View style={userProfileEditStyles.headingContainer}>
+        <Text style={userProfileEditStyles.title}>Modifica profilo</Text>
+        <Text style={userProfileEditStyles.subTitle}>
+          Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
+        </Text>
+      </View>
+      <View style={userProfileEditStyles.formColumn}>
+        <FormTextField name="name" label="Nome" />
+        <FormTextField name="lastName" label="Cognome" />
+        <FormDateTimePicker name="birthDate" label="Data di nascita" />
+        <FormNewScreenFilterableSelect
+          key="country"
+          name="country"
+          label="Nazione (cittadinanza)"
+          options={countryOptions}
+          pageProps={{
+            pageTitle: "Nazionalità",
+            searchTextLabel: "Cerca...",
+            listTitle: "Lista nazioni",
+          }}
+        />
+        <FormRadioGroup name="gender" />
+        <Text>(Manca il componente radio group)</Text>
+        <View>
+          <Text style={userProfileEditStyles.phoneNumberLabel}>
+            Numero di cellulare
           </Text>
-          <Text>
-            Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
-            metus.
-          </Text>
-        </View>
-        <View marginB-20 style={userProfileEditStyles.formColumn}>
-          <FormTextField name="name" label="Nome" />
-          <FormTextField name="lastName" label="Cognome" />
-          <FormDateTimePicker name="birthDate" label="Data di nascita" />
-          <FormNewScreenFilterableSelect
-            key="country"
-            name="country"
-            label="Nazione (cittadinanza)"
-            options={countryOptions}
-            pageProps={{
-              pageTitle: "Nazionalità",
-              searchTextLabel: "Cerca...",
-              listTitle: "Lista nazioni",
-            }}
-          />
-          <FormRadioGroup name="gender" />
-          <Text>(Manca il componente radio group)</Text>
-          <View>
-            <Text style={userProfileEditStyles.phoneNumberLabel}>
-              Numero di cellulare
-            </Text>
-            <View row style={userProfileEditStyles.phoneInputContainer}>
-              <View style={userProfileEditStyles.phonePrefixContainer}>
-                <FormNewScreenFilterableSelect
-                  key="phonePrefix"
-                  name="phonePrefix"
-                  label=""
-                  options={phonePrefixOptions}
-                  pageProps={{
-                    pageTitle: "Seleziona prefisso",
-                    pageDescription:
-                      "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
-                    searchTextLabel: "Trova nazione",
-                    listTitle: "Lista nazioni",
-                  }}
-                  style={userProfileEditStyles.phonePrefix}
-                />
-              </View>
-              <View style={userProfileEditStyles.phoneNumberContainer}>
-                <FormTextField
-                  key="phoneNumber"
-                  name="phoneNumber"
-                  trailingAccessory={
-                    isToVerifyPhoneNumber ? (
-                      <TouchableOpacity
-                        onPress={handleOpenPhoneNumberVerification}
-                      >
-                        <View paddingR-10>
-                          <WarningIcon
-                            width={24}
-                            height={24}
-                            color={Colors.Orange[600]}
-                          />
-                        </View>
-                      </TouchableOpacity>
-                    ) : isVerifiedPhoneNumber ? (
+          <View row style={userProfileEditStyles.phoneInputContainer}>
+            <View style={userProfileEditStyles.phonePrefixContainer}>
+              <FormNewScreenFilterableSelect
+                key="phonePrefix"
+                name="phonePrefix"
+                label=""
+                options={phonePrefixOptions}
+                pageProps={{
+                  pageTitle: "Seleziona prefisso",
+                  pageDescription:
+                    "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
+                  searchTextLabel: "Trova nazione",
+                  listTitle: "Lista nazioni",
+                }}
+                style={userProfileEditStyles.phonePrefix}
+              />
+            </View>
+            <View style={userProfileEditStyles.phoneNumberContainer}>
+              <FormTextField
+                key="phoneNumber"
+                name="phoneNumber"
+                trailingAccessory={
+                  isToVerifyPhoneNumber ? (
+                    <TouchableOpacity
+                      onPress={handleOpenPhoneNumberVerification}
+                    >
                       <View paddingR-10>
-                        <SuccessIcon
+                        <WarningIcon
                           width={24}
                           height={24}
-                          color={Colors.Green[600]}
+                          color={Colors.Orange[600]}
                         />
                       </View>
-                    ) : (
-                      <></>
-                    )
-                  }
-                  keyboardType="phone-pad"
-                  style={{
-                    ...userProfileEditStyles.phoneNumber,
-                    ...(isToVerifyPhoneNumber
-                      ? {
-                          borderBlockColor: Colors.Orange[600],
-                          borderLeftColor: Colors.Orange[600],
-                          borderRightColor: Colors.Orange[600],
-                        }
-                      : {}),
-                  }}
-                />
-                {isToVerifyPhoneNumber && (
-                  <TouchableOpacity onPress={handleOpenPhoneNumberVerification}>
-                    <View paddingT-5>
-                      <Text
-                        style={{ textDecorationLine: "underline" }}
-                        color={Colors.Orange[600]}
-                      >
-                        Verifica il numero di telefono
-                      </Text>
+                    </TouchableOpacity>
+                  ) : isVerifiedPhoneNumber ? (
+                    <View paddingR-10>
+                      <SuccessIcon
+                        width={24}
+                        height={24}
+                        color={Colors.Green[600]}
+                      />
                     </View>
-                  </TouchableOpacity>
-                )}
-              </View>
+                  ) : (
+                    <></>
+                  )
+                }
+                keyboardType="phone-pad"
+                style={{
+                  ...userProfileEditStyles.phoneNumber,
+                  ...(isToVerifyPhoneNumber
+                    ? {
+                        borderBlockColor: Colors.Orange[600],
+                        borderLeftColor: Colors.Orange[600],
+                        borderRightColor: Colors.Orange[600],
+                      }
+                    : {}),
+                }}
+              />
+              {isToVerifyPhoneNumber && (
+                <TouchableOpacity onPress={handleOpenPhoneNumberVerification}>
+                  <View paddingT-5>
+                    <Text
+                      style={{ textDecorationLine: "underline" }}
+                      color={Colors.Orange[600]}
+                    >
+                      Verifica il numero di telefono
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </View>
       </View>
-      {showPhoneNumberVerificationStep && renderPhoneNumberVerification()}
+      {/* {showPhoneNumberVerificationStep && renderPhoneNumberVerification()} */}
       <View padding-20 paddingT-0>
         {submitError && (
           <Text marginB-20 color="red">
@@ -207,7 +202,7 @@ export const ProfileEditScreen = memo(() => {
   return (
     <>
       <SafeAreaView style={userProfileEditStyles.safeAreaView}>
-        <ScrollView style={{ height: "100%" }}>
+        <ScrollView style={userProfileEditStyles.scrollView}>
           <FormProvider {...formData}>{renderPageContent()}</FormProvider>
         </ScrollView>
       </SafeAreaView>
