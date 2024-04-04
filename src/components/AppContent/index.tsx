@@ -168,6 +168,7 @@ export const AppContent: FC = memo(({}) => {
             name="user-settings"
             component={UserProfileScreen}
             options={{
+              animation: "slide_from_bottom",
               header: () => <HeaderProfileGoBack />,
             }}
           />
@@ -175,6 +176,7 @@ export const AppContent: FC = memo(({}) => {
             name="user-edit"
             component={ProfileEditScreen}
             options={{
+              animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
             }}
           />
