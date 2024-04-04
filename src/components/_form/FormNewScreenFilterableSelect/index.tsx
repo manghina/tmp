@@ -18,6 +18,7 @@ type FormNewScreenFilterableSelectProps<
     renderItem?: (item: T, index: number) => JSX.Element;
   };
   style?: StyleProp<TextStyle>;
+  disabled?: boolean;
 };
 
 export const FormNewScreenFilterableSelect = memo(
@@ -27,19 +28,20 @@ export const FormNewScreenFilterableSelect = memo(
     options,
     pageProps,
     style,
+    disabled = false,
   }: FormNewScreenFilterableSelectProps<T>) => {
     const { onFieldClicked } = useFormNewScreenFilterableSelect({
       name,
       options,
       pageProps,
     });
-
     return (
-      <TouchableOpacity onPress={onFieldClicked}>
+      <TouchableOpacity onPress={!disabled ? onFieldClicked : () => {}}>
         <FormTextField
+          disabled={disabled}
           name={name}
           label={label}
-          onFocus={onFieldClicked}
+          onFocus={!disabled ? onFieldClicked : () => {}}
           style={style}
         />
       </TouchableOpacity>

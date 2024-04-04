@@ -10,6 +10,7 @@ export type FormTextFieldProps = {
   name: string;
   type?: "text" | "password";
   trailingAccessory?: TextFieldProps["trailingAccessory"];
+  disabled: boolean;
 } & TextFieldProps;
 
 export const FormTextField = memo(
@@ -17,6 +18,7 @@ export const FormTextField = memo(
     name,
     type = "text",
     trailingAccessory,
+    disabled = false,
     ...props
   }: FormTextFieldProps) => {
     const {
@@ -30,6 +32,7 @@ export const FormTextField = memo(
 
     return (
       <BaseTextField
+        editable={!disabled}
         value={value !== undefined && value !== null ? `${value}` : undefined}
         onChangeText={handleChange}
         secureTextEntry={hideText}

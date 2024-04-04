@@ -10,6 +10,7 @@ export const BaseTextField = memo(
     enableErrors,
     validationMessage,
     style,
+    editable,
     ...props
   }: TextFieldProps) => {
     const { isFocused, onFocus, onBlur } = useBaseTextField();
@@ -19,6 +20,7 @@ export const BaseTextField = memo(
         {label && <Text style={styles.label}>{label}</Text>}
         <View>
           <TextField
+            editable={editable}
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"
