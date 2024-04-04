@@ -37,7 +37,7 @@ const schema = yup.object().shape({
   birthDate: yup
     .date()
     .required("Inserisci la tua data di nascita")
-    .test("age-check", "Età non valida", function (value) {
+    .test("age-check", "Devi avere compiuto almeno 21 anni per registrarti come professionista", function (value) {
       const today = moment();
       const birthDate = moment(value);
       const age = today.diff(birthDate, "years");
