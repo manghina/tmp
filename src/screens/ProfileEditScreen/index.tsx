@@ -19,6 +19,7 @@ export const ProfileEditScreen = memo(() => {
     formData,
     countryOptions,
     phonePrefixOptions,
+    genderOptions,
     triggerProfileEditSubmit,
     submitError,
     isToVerifyPhoneNumber,
@@ -107,8 +108,11 @@ export const ProfileEditScreen = memo(() => {
             listTitle: "Lista nazioni",
           }}
         />
-        <FormRadioGroup name="gender" />
-        <Text>(Manca il componente radio group)</Text>
+        <FormRadioGroup
+          name="gender"
+          listTitle="Sesso biologico"
+          options={genderOptions}
+        />
         <View>
           <Text style={userProfileEditStyles.phoneNumberLabel}>
             Numero di cellulare

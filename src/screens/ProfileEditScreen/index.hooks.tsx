@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { User } from "@app/models/User";
 import * as yup from "yup";
-import { countryOptions, phonePrefixOptions } from "./constantData";
+import {
+  countryOptions,
+  genderOptions,
+  phonePrefixOptions,
+} from "./constantData";
 import { set, useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
@@ -17,7 +21,7 @@ interface UserEditFormData {
   phonePrefix: string;
   phoneNumber: string;
   country: string;
-  gender: "male" | "female";
+  gender: string;
 }
 
 // const phoneRegExp =
@@ -38,7 +42,7 @@ const schema = yup.object().shape({
     .required("Inserisci la tua nazione"),
   gender: yup
     .string()
-    .oneOf(["male", "female"])
+    .oneOf(genderOptions.map((gender) => gender.value))
     .required("Seleziona il tuo sesso biologico"),
 });
 
@@ -226,6 +230,7 @@ export const useUserProfileEditScreen = () => {
     formData,
     countryOptions,
     phonePrefixOptions,
+    genderOptions,
     submitDisabled,
     triggerProfileEditSubmit,
     submitError,

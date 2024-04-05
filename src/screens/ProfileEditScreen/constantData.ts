@@ -1972,4 +1972,9 @@ const countryOptions = [
   },
 ];
 
-export { phonePrefixOptions, countryOptions };
+const genderOptions = [
+  { label: "Donna", value: "female" },
+  { label: "Uomo", value: "male" },
+];
+
+export { phonePrefixOptions, countryOptions, genderOptions };
