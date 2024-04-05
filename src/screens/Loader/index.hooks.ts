@@ -23,7 +23,7 @@ export const useLoaderScreen = () => {
   console.log(ajaxIsLoading);
 
   useEffect(() => {
-    const redirectDelay = 1000;
+    const redirectDelay = ajaxIsLoading ? Infinity : 1000;
     let route: string = "tutorial";
     if (!account) {
       route = "tutorial";
@@ -40,7 +40,7 @@ export const useLoaderScreen = () => {
     Animated.loop(
       Animated.timing(rotation, {
         toValue: 1,
-        duration: 1500,
+        duration: redirectDelay,
         easing: Easing.linear,
         useNativeDriver: true,
       }),
@@ -48,7 +48,7 @@ export const useLoaderScreen = () => {
 
     Animated.timing(progressBarWidth, {
       toValue: 1,
-      duration: 1000,
+      duration: redirectDelay,
       easing: Easing.linear,
       useNativeDriver: false,
     }).start();
