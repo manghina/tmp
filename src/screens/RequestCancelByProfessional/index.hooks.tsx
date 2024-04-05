@@ -9,7 +9,7 @@ export const useRequestCancelByProfessional = () => {
     option2: false,
   });
 
-  const handleRadioChange = (value) => {
+  const handleRadioChange = (value: string) => {
     setRadioValues({
       option1: value === "option1",
       option2: value === "option2",

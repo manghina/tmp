@@ -5,7 +5,7 @@ import { styles } from "./styles";
 
 type AppRadioButtonProps = {
   label: string;
-  style?;
+  style?: any;
   selected: boolean;
   handlePress: () => void;
 };
