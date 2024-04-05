@@ -34,13 +34,22 @@ interface ProfessionalRegisterFormData {
 const schema = yup.object().shape({
   name: yup.string().required("Inserisci il tuo nome"),
   lastName: yup.string().required("Inserisci il tuo cognome"),
-  birthDate: yup.date().required("Inserisci la tua data di nascita"),
+  birthDate: yup
+    .date()
+    .required("Inserisci la tua data di nascita")
+    .test("age-check", "Devi avere compiuto almeno 21 anni per registrarti come professionista", function (value) {
+      const today = moment();
+      const birthDate = moment(value);
+      const age = today.diff(birthDate, "years");
+      return age >= 21;
+    }),
   phonePrefix: yup.string().required("Scegli il prefisso telefonico"),
   phoneNumber: yup.string().required("Inserisci il tuo numero di telefono"),
   professionalPaperPhoto: yup.mixed().required("Inserisci la tua foto"),
   professionalRegistrationNumber: yup
     .string()
-    .required("Inserisci il tuo numero di registrazione"),
+    .matches(/^[0-9]{4,10}$/, "Inserisci un numero di registrazione valido")
+    .required(),
   province: yup.string().required("Inserisci la tua provincia"),
   specialization: yup
     .string()
@@ -100,7 +109,7 @@ export const useProfessionalRegister = () => {
       name: "",
       lastName: "",
       birthDate: undefined,
-      phonePrefix: "",
+      phonePrefix: "+39",
       phoneNumber: "",
       professionalPaperPhoto: undefined,
       professionalRegistrationNumber: "",

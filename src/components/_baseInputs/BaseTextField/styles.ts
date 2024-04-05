@@ -13,10 +13,11 @@ export const styles = StyleSheet.create({
   field: {
     borderColor: withOpacity(colorTokens.colorBorderAccentGrayBolder, 0.15),
     borderWidth: 1.5,
-    borderRadius: 12,
+    borderRadius: 8,
     backgroundColor: colorTokens.colorBackgroundInput,
   },
   input: {
+    flex: 1,
     paddingTop: dimensionsTokens.paddingXs,
     paddingLeft: dimensionsTokens.paddingXs,
     paddingRight: dimensionsTokens.paddingXs,

@@ -63,6 +63,7 @@ export const accountStore = createSlice({
       extraActions.postAccountsSessions.success,
       (state, action) => {
         state.cookie = action.payload.data.cookie;
+        state.account = action.payload.data.account;
       },
     );
     builder.addCase(extraActions.postAccounts.success, (state, action) => {
@@ -96,11 +97,11 @@ export const accountStore = createSlice({
       state.userMe = null;
       state.professionalMe = action.payload.data.professional;
     });
-    builder.addCase(extraActions.appStartup, (state, action) => {
-      // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
-    });
     builder.addCase(extraActions.clearSession, (state, action) => {
       state.cookie = null;
+    });
+    builder.addCase(extraActions.appStartup, (state, action) => {
+      // state.cookie = null; // Scommentare per prevenire navigazione diretta a home screen utente
     });
   },
 });

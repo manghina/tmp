@@ -20,6 +20,7 @@ import { ChatBubble } from "@app/components/ChatBubble";
 import SendMessageSvg from "@app/components/SendMessageSvg";
 import { ChatStatus } from "@app/models/Request";
 import { TypingIndicator } from "@app/components/TypingIndicator";
+import { colorTokens } from "../../theme/colors/tokens";
 
 type RequestChatProps = {};
 export const RequestChatScreen = memo(({}: RequestChatProps) => {
@@ -46,7 +47,7 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
       }}
     >
       <Text
-        color={Colors.grayText}
+        color={colorTokens.colorTextAccentGray}
         style={{
           fontSize: 12,
         }}
@@ -54,7 +55,7 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
         {moment().format("DD MMM YYYY")}
       </Text>
       <Text
-        color={Colors.grayText}
+        color={colorTokens.colorTextAccentGray}
         style={{
           fontSize: 12,
         }}
