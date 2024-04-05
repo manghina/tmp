@@ -17,12 +17,8 @@ export const useLoaderScreen = () => {
     dispatch(actions.getAccountsMe.request({}));
   }, [dispatch]);
 
-  const ajaxIsLoading = useSelector(
-    selectors.getAjaxIsLoadingByApi(actions.getAccountsMe.api),
-  );
-
   useEffect(() => {
-    const redirectDelay = ajaxIsLoading ? Infinity : 1000;
+    const redirectDelay = 1000;
     let route: string = "tutorial";
     if (!account) {
       route = "tutorial";
@@ -56,7 +52,7 @@ export const useLoaderScreen = () => {
       clearTimeout(loadingDelay);
       progressBarWidth.setValue(0);
     };
-  }, [navigation, rotation, progressBarWidth, account, ajaxIsLoading]);
+  }, [navigation, rotation, progressBarWidth, account]);
 
   const rotateInterpolate = rotation.interpolate({
     inputRange: [0, 1],
