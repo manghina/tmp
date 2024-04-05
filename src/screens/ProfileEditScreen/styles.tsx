@@ -31,11 +31,22 @@ export const userProfileEditStyles = StyleSheet.create({
     flexDirection: "column",
     gap: dimensionsTokens.paddingXs,
   },
+  phoneNumberLabelContainer: {
+    marginBottom: Dimensions.small.spacing_100,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   phoneNumberLabel: {
     ...textVariants.p2MediumNormal,
-    marginBottom: Dimensions.small.spacing_100,
   },
-  phoneInputContainer: { width: "100%" },
+  phoneNumberVerifyText: {
+    ...textVariants.p2BoldItalic,
+    color: colorTokens.colorTextWarning,
+  },
+  phoneInputContainer: {
+    width: "100%",
+    flexDirection: "row",
+  },
   phonePrefixContainer: { width: "25%" },
   phonePrefix: {
     borderTopRightRadius: 0,
@@ -49,11 +60,18 @@ export const userProfileEditStyles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
   },
-  phoneNUmberVerificationContainer: {
-    position: "absolute",
-    backgroundColor: "#fff",
-    width: "100%",
-    height: "100%",
-    zIndex: 1,
+  phoneNumberToVerify: {
+    borderBlockColor: colorTokens.colorBorderWarning,
+    borderLeftColor: colorTokens.colorBorderWarning,
+    borderRightColor: colorTokens.colorBorderWarning,
+  },
+  iconContainer: {
+    paddingHorizontal: dimensionsTokens.paddingXs,
+  },
+  warningIcon: {
+    color: colorTokens.colorIconWarning,
+  },
+  successIcon: {
+    color: colorTokens.colorIconSuccess,
   },
 });

@@ -9,10 +9,9 @@ import {
   genderOptions,
   phonePrefixOptions,
 } from "./constantData";
-import { set, useForm, useWatch } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
-import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
 
 interface UserEditFormData {
   name: string;
@@ -77,8 +76,6 @@ export const useUserProfileEditScreen = () => {
     },
   });
 
-  const [submitError, setSubmitError] = useState<boolean>(false);
-
   const {
     control,
     handleSubmit,
@@ -92,73 +89,27 @@ export const useUserProfileEditScreen = () => {
       name: fieldKeys,
     });
 
-  const [otpCode, setOtpCode] = useState<string>("");
-  const isToVerifyPhoneNumber = useMemo(
-    () => Boolean(phoneNumber.length > 0 && otpCode.length < 6),
-    [phoneNumber, otpCode],
-  );
-  const isVerifiedPhoneNumber = useMemo(
-    () => Boolean(phoneNumber.length > 0 && otpCode.length === 6),
-    [phoneNumber, otpCode],
-  );
-  const [showPhoneNumberVerificationStep, setShowPhoneNumberVerificationStep] =
+  const [isVerifiedPhoneNumber, setIsVerifiedPhoneNumber] =
     useState<boolean>(false);
 
-  const handleOpenPhoneNumberVerification = useCallback(() => {
-    setOtpCode("");
-    setShowPhoneNumberVerificationStep(!showPhoneNumberVerificationStep);
-  }, [showPhoneNumberVerificationStep]);
-
-  const handlePhoneNumberVerificationCodeChange = useCallback(
-    (value: string, index: number) => {
-      const newValues = otpCode.split("");
-      if (value.length > 0) {
-        newValues.push(value);
-      } else {
-        newValues.splice(index, 1);
-      }
-      setOtpCode(newValues.join(""));
-      if (newValues.length === 6) {
-        setShowPhoneNumberVerificationStep(false);
-      }
-    },
-    [otpCode],
+  const isToVerifyPhoneNumber = useMemo(
+    () => Boolean(phoneNumber.length > 0 && !isVerifiedPhoneNumber),
+    [phoneNumber, isVerifiedPhoneNumber],
   );
 
-  const onOtpKeyPressCallbacks = useMemo(
-    () =>
-      new Array(6)
-        .fill(0)
-        .map(
-          (_, index) =>
-            ({
-              nativeEvent,
-            }: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-              if (
-                nativeEvent.key === "Backspace" &&
-                !otpCode[index] &&
-                index > 0
-              ) {
-                handlePhoneNumberVerificationCodeChange("", index - 1);
-              }
-            },
-        ),
-    [otpCode],
-  );
+  const handleGoBackFromOtpVerification = useCallback(() => {
+    navigation.pop();
+  }, [navigation]);
 
-  const onOtpChangeTextCallbacks = useMemo(
-    () =>
-      new Array(6).fill(0).map((_, index) => (value: string) => {
-        handlePhoneNumberVerificationCodeChange(value, index);
-      }),
-    [otpCode],
-  );
+  const handleOtpVerification = useCallback((otpCode: string) => {
+    console.log(otpCode);
+    // make api call to verify otp code
 
-  useEffect(() => {
-    if (isVerifiedPhoneNumber) {
-      setOtpCode("");
-    }
-  }, [phoneNumber]);
+    // fake code
+    setTimeout(() => {
+      setIsVerifiedPhoneNumber(true);
+    }, 1000);
+  }, []);
 
   const allFieldsFilled = useMemo(
     () =>
@@ -180,7 +131,6 @@ export const useUserProfileEditScreen = () => {
   const triggerProfileEditSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        console.log(data);
         dispatch(
           actions.patchUsersMe.request({
             ...data,
@@ -191,17 +141,9 @@ export const useUserProfileEditScreen = () => {
     [dispatch, handleSubmit],
   );
 
-  const isError = useSelector(
-    selectors.getAjaxIsLoadingByApi("apis/users/me/patch"),
-  );
-
   useEffect(() => {
-    console.log("Error", isError);
-    if (isError) {
-      setSubmitError(true);
-      setTimeout(() => setSubmitError(false), 5000);
-    }
-  }, [isError]);
+    setIsVerifiedPhoneNumber(false);
+  }, [phoneNumber]);
 
   useEffect(() => {
     if (allFieldsFilled) {
@@ -221,10 +163,6 @@ export const useUserProfileEditScreen = () => {
     }
   }, [me, navigation]);
 
-  useEffect(() => {
-    dispatch(actions.getUsersMeRequests.request({}));
-  }, [dispatch]);
-
   return {
     me,
     formData,
@@ -233,13 +171,9 @@ export const useUserProfileEditScreen = () => {
     genderOptions,
     submitDisabled,
     triggerProfileEditSubmit,
-    submitError,
     isToVerifyPhoneNumber,
     isVerifiedPhoneNumber,
-    showPhoneNumberVerificationStep,
-    otpCode,
-    handleOpenPhoneNumberVerification,
-    onOtpKeyPressCallbacks,
-    onOtpChangeTextCallbacks,
+    handleGoBackFromOtpVerification,
+    handleOtpVerification,
   };
 };

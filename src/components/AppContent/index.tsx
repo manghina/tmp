@@ -33,6 +33,7 @@ import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByP
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,16 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name="form-filterable-select"
             component={FilterableSelectScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="otp-verification"
+            component={OtpVerificationScreen}
             options={{
               headerTitle: "",
               animationTypeForReplace: "push",

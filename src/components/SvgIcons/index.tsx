@@ -25,12 +25,14 @@ import ProfileIcon from "./ProfileIcon";
 import ReviewIcon from "./ReviewIcon";
 import SearchIcon from "./SearchIcon";
 import StarIcon from "./StarIcon";
+import SuccessFilledIcon from "./SuccessFilledIcon";
 import SurveyIcon from "./SurveyIcon";
 import TermsAndConditionsIcon from "./TermsAndConditionsIcon";
 import TimerIcon from "./TimerIcon";
 import VisibilityIcon from "./VisibilityIcon";
 import VisibilityOffIcon from "./VisibilityOffIcon";
 import WalletIcon from "./WalletIcon";
+import WarningFilledIcon from "./WarningFilledIcon";
 
 export {
   AlarmIcon,
@@ -60,10 +62,12 @@ export {
   ReviewIcon,
   SearchIcon,
   StarIcon,
+  SuccessFilledIcon,
   SurveyIcon,
   TermsAndConditionsIcon,
   TimerIcon,
   VisibilityIcon,
   VisibilityOffIcon,
   WalletIcon,
+  WarningFilledIcon,
 };
