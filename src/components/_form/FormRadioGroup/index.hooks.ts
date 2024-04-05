@@ -13,7 +13,6 @@ export const useFormRadioGroup = (name: string) => {
   );
 
   useEffect(() => {
-    console.log("value", value);
     setSelectedOption(value);
   }, [value]);
 
