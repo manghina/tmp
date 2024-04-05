@@ -20,7 +20,6 @@ export const useLoaderScreen = () => {
   const ajaxIsLoading = useSelector(
     selectors.getAjaxIsLoadingByApi(actions.getAccountsMe.api),
   );
-  console.log(ajaxIsLoading);
 
   useEffect(() => {
     const redirectDelay = ajaxIsLoading ? Infinity : 1000;
@@ -57,7 +56,7 @@ export const useLoaderScreen = () => {
       clearTimeout(loadingDelay);
       progressBarWidth.setValue(0);
     };
-  }, [navigation, rotation, progressBarWidth, account]);
+  }, [navigation, rotation, progressBarWidth, account, ajaxIsLoading]);
 
   const rotateInterpolate = rotation.interpolate({
     inputRange: [0, 1],
