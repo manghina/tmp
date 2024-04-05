@@ -47,7 +47,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName="tutorial">
+        <Stack.Navigator initialRouteName="loader">
           <Stack.Screen
             name="form-filterable-select"
             component={FilterableSelectScreen}

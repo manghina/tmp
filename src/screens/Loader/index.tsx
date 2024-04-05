@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Colors } from "react-native-ui-lib";
+import { View } from "react-native-ui-lib";
 import { Animated } from "react-native";
 import UnionSVG from "@assets/img/union.svg";
 import LogoSVG from "@assets/img/logo.svg";
@@ -31,7 +31,7 @@ export const LoaderScreen = () => {
           style={{
             width: 266,
             height: 8,
-            backgroundColor: colorTokens.elevationSurfaceAlternative, //TODO:
+            backgroundColor: colorTokens.elevationSurfaceAlternative,
             borderRadius: 2,
             overflow: "hidden",
           }}
