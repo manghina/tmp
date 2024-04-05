@@ -10,7 +10,7 @@ export type FormTextFieldProps = {
   name: string;
   type?: "text" | "password";
   trailingAccessory?: TextFieldProps["trailingAccessory"];
-  disabled: boolean;
+  disabled?: boolean;
 } & TextFieldProps;
 
 export const FormTextField = memo(
