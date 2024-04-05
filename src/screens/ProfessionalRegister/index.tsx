@@ -4,6 +4,7 @@ import React from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
+import { FormGooglePlacesTextField } from "@app/components/_form/FormGooglePlacesTextField";
 import { FormDatePicker } from "@app/components/_form/FormDatePicker";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
@@ -107,11 +108,17 @@ export const ProfessionalRegisterScreen = () => {
           listTitle: "Lista professioni",
         }}
       />
-      <FormTextField
+      <FormGooglePlacesTextField
         key="officeLocation"
         name="officeLocation"
         label="Sede dello studio"
+        placeholder="Indirizzo completo"
       />
+      {/* <FormTextField
+        key="officeLocation"
+        name="officeLocation"
+        label="Sede dello studio"
+      /> */}
     </View>
   );
   const renderStep3 = () => (
