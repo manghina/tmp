@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useRequestProfessionalOffersScreen } from "./index.hooks";
 import { View, Text, TouchableOpacity } from "react-native-ui-lib";
-import { ProfessionalSearchCarousel } from "@app/components/users/ProfessionalResearchCarousel";
+import { ProfessionalSearchCarousel } from "@app/components/_users/ProfessionalResearchCarousel";
 import { SafeAreaView } from "react-native";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { headerHeight } from "@app/theme/spacings/dimensions";

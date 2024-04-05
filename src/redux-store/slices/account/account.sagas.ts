@@ -254,6 +254,7 @@ export function* postLoginSaga() {
   yield takeEvery(actions.postAccountsSessions.success, function* (action) {
     if (!action.payload.prepareParams.isSigningUp) {
       const account: IAccount = yield select(selectors.getAccount);
+
       if (account.type === "user") {
         yield put(actions.getUsersMe.request({}));
       } else {

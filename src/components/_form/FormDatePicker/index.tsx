@@ -9,7 +9,7 @@ export type FormDatePickerProps = {
   label?: string;
 };
 
-export const FormDateTimePicker = memo(
+export const FormDatePicker = memo(
   ({ name, label, ...props }: FormDatePickerProps) => {
     const { value, handleChange, error } = useFormDatePicker(name);
 
@@ -31,4 +31,4 @@ export const FormDateTimePicker = memo(
   },
 );
 
-FormDateTimePicker.displayName = "FormDateTimePicker";
+FormDatePicker.displayName = "FormDatePicker";

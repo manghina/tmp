@@ -5,7 +5,7 @@ import { userProfileEditStyles } from "./styles";
 import { Button, Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
-import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
+import { FormDatePicker } from "@app/components/_form/FormDatePicker";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormRadioGroup } from "@app/components/_form/FormRadioGroup";
 import WarningIcon from "@app/components/WarningIcon";
@@ -96,7 +96,7 @@ export const ProfileEditScreen = memo(() => {
       <View style={userProfileEditStyles.formColumn}>
         <FormTextField name="name" label="Nome" />
         <FormTextField name="lastName" label="Cognome" />
-        <FormDateTimePicker name="birthDate" label="Data di nascita" />
+        <FormDatePicker name="birthDate" label="Data di nascita" />
         <FormNewScreenFilterableSelect
           key="country"
           name="country"

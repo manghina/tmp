@@ -1,4 +1,4 @@
-import { Request, RequestStatus } from "@app/models/Request";
+import { IRequestSummary, Request, RequestStatus } from "@app/models/Request";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { styles } from "./styles";
 import { Animated } from "react-native";
@@ -9,32 +9,41 @@ import CalendarIcon from "@app/components/SvgIcons/CalendarIcon";
 import CalendarErrorIcon from "@app/components/SvgIcons/CalendarErrorIcon";
 import CalendarCheckIcon from "@app/components/SvgIcons/CalendarCheckIcon";
 import TimerIcon from "@app/components/SvgIcons/TimerIcon";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { actions } from "../../../redux-store";
+import { actions, selectors } from "@app/redux-store";
+
+export enum CardStatus {
+  PLAIN = "PLAIN",
+  EXPIRING = "EXPIRING",
+  BOOKED = "BOOKED",
+  WAITING_FEEDBACK = "WAITING_FEEDBACK",
+}
 
 const userActionColor = "#FF8F1F";
 const aiActionColor = "#3C77E8";
 const contactTerminatedColor = "#181818";
 
-export const useUserRequestCard = (request: Request) => {
+export const useRequestCard = (status: CardStatus) => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const wiggleAnim = useRef(new Animated.Value(0)).current; // Initial value for wiggle angle: 0
+  const requests = useSelector(selectors.getRequestsList);
+
+  const wiggleAnim = useRef(new Animated.Value(0)).current;
 
   const cardContainerStyles = useMemo(() => {
     const cardStyles: any[] = [styles.cardContainer];
 
-    switch (request.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         cardStyles.push(styles.cardContainerUserInputAwaited);
         break;
       default:
         break;
     }
 
-    if (request.currentStatus === RequestStatus.COLLECTING_INFORMATION) {
+    if (status === CardStatus.EXPIRING) {
       cardStyles.push({
         transform: [
           {
@@ -48,13 +57,13 @@ export const useUserRequestCard = (request: Request) => {
     }
 
     return cardStyles;
-  }, [request]);
+  }, [status]);
 
   const cardTitleStyles = useMemo(() => {
     const titleStyles: any[] = [styles.cardTitle];
 
-    switch (request.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         titleStyles.push({
           color: userActionColor,
         });
@@ -64,13 +73,13 @@ export const useUserRequestCard = (request: Request) => {
     }
 
     return titleStyles;
-  }, [request]);
+  }, [status]);
 
   const cardDescriptionStyles = useMemo(() => {
     const descriptionStyles: any[] = [styles.cardDescription];
 
-    switch (request.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         descriptionStyles.push(styles.cardDescriptionTextUserInputAwaited);
         break;
       default:
@@ -78,36 +87,16 @@ export const useUserRequestCard = (request: Request) => {
     }
 
     return descriptionStyles;
-  }, [request]);
+  }, [status]);
 
   const cardIcon = useMemo(() => {
-    switch (request.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
+    switch (status) {
+      case CardStatus.PLAIN:
         return <ChatIcon color={userActionColor} />;
       default:
         return <ChatIcon color={contactTerminatedColor} />;
     }
-  }, [request, cardTitleStyles]);
-
-  const onCardPressed = useCallback(() => {
-    dispatch(actions.setCurrentRequest(request.toInterface()));
-    dispatch(
-      actions.getUsersMeRequestsByRequestId.request({
-        requestId: request._id,
-      }),
-    );
-
-    switch (request.currentStatus) {
-      case RequestStatus.COLLECTING_INFORMATION:
-        navigation.navigate("requests/chat");
-        return;
-      case RequestStatus.PROFESSIONAL_OFFERS_CREATED:
-        navigation.navigate("requests/professional-offers");
-        return;
-      default:
-        break;
-    }
-  }, [dispatch, navigation, request]);
+  }, [status, cardTitleStyles]);
 
   useEffect(() => {
     Animated.loop(
@@ -156,6 +145,5 @@ export const useUserRequestCard = (request: Request) => {
     cardContainerStyles,
     cardTitleStyles,
     cardDescriptionStyles,
-    onCardPressed,
   };
 };

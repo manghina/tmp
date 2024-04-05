@@ -2,6 +2,7 @@ import React, { FC, memo } from "react";
 import { View, Text, Colors, Image } from "react-native-ui-lib";
 import { FormSlotSelector } from "../_form/FormSlotSelector";
 import { styles } from "./styles";
+import { colorTokens } from "../../theme/colors/tokens";
 
 type ProfessionalCardProps = {
   focused: boolean;
@@ -29,12 +30,7 @@ export const ProfessionalCard: FC<ProfessionalCardProps> = memo(
     distance,
   }: ProfessionalCardProps) => {
     return (
-      <View
-        style={[
-          styles.card,
-          focused ? styles.cardFocused : null,
-        ]}
-      >
+      <View style={[styles.card, focused ? styles.cardFocused : null]}>
         <View row>
           <Image
             marginR-10
@@ -50,14 +46,19 @@ export const ProfessionalCard: FC<ProfessionalCardProps> = memo(
             <Text link style={styles.speciality}>
               Specialità: {specialty}
             </Text>
-            <Text link style={styles.distance}> a {distance} da te</Text>
+            <Text link style={styles.distance}>
+              {" "}
+              a {distance} da te
+            </Text>
           </View>
         </View>
-        <Text marginV-10 style={styles.sectionTitle}>Informativa</Text>
+        <Text marginV-10 style={styles.sectionTitle}>
+          Informativa
+        </Text>
         <View
           width={"100%"}
           padding-20
-          backgroundColor={Colors.cardGray}
+          backgroundColor={colorTokens.colorBackgroundAccentGraySubtlest}
           style={{ borderRadius: 10.8 }}
         >
           <Text style={styles.informativeContent}>{information}</Text>

@@ -14,6 +14,7 @@ export const BaseTextField = memo(
     enableErrors,
     validationMessage,
     style,
+    editable,
     focus,
     ...props
   }: BaseTextFieldProps) => {
@@ -24,6 +25,7 @@ export const BaseTextField = memo(
         {label && <Text style={styles.label}>{label}</Text>}
         <View>
           <TextField
+            editable={editable}
             ref={(ref: any) => (inputRef.current = ref)}
             onFocus={onFocus}
             onBlur={onBlur}

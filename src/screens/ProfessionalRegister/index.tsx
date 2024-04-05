@@ -1,15 +1,16 @@
-import { View, Text, Button, Colors } from "react-native-ui-lib";
+import { View, Text, Button } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
 import React from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
-import { FormDateTimePicker } from "@app/components/_form/FormDatePicker";
+import { FormDatePicker } from "@app/components/_form/FormDatePicker";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
 import { styles } from "./styles";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import { ScrollView } from "react-native";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const ProfessionalRegisterScreen = () => {
   const {
@@ -31,7 +32,7 @@ export const ProfessionalRegisterScreen = () => {
     <View style={styles.fieldsColumn}>
       <FormTextField key="name" name="name" label="Nome" />
       <FormTextField key="lastName" name="lastName" label="Cognome" />
-      <FormDateTimePicker
+      <FormDatePicker
         key="birthDate"
         name="birthDate"
         label="Data di nascita"
@@ -53,6 +54,7 @@ export const ProfessionalRegisterScreen = () => {
                 listTitle: "Lista nazioni",
               }}
               style={styles.phonePrefix}
+              disabled={true}
             />
           </View>
           <View style={styles.phoneNumberContainer}>
@@ -137,7 +139,14 @@ export const ProfessionalRegisterScreen = () => {
     return (
       <>
         <View style={styles.stepperControlsContainer}>
-          <Text center grayText={!currentStepFilled}>
+          <Text
+            center
+            color={
+              !currentStepFilled
+                ? colorTokens.colorTextAccentGray
+                : colorTokens.colorTextDefault
+            }
+          >
             {isLastStep ? "Iscrizione completata!" : "Ci sei quasi..."}
           </Text>
           <Button
@@ -148,7 +157,7 @@ export const ProfessionalRegisterScreen = () => {
                 ? triggerProfessionalRegisterSubmit
                 : onNextStepButtonPressed
             }
-            disabledBackgroundColor={Colors.disabledBlue}
+            disabledBackgroundColor={colorTokens.colorBackgroundDisabled}
             disabled={isLastStep ? submitDisabled : !canGoToNextStep && false}
           />
         </View>

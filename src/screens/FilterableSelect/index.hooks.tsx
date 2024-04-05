@@ -45,7 +45,7 @@ export const useFilterableSelectScreen = () => {
     );
 
   const [searchText, setSearchText] = useState<string>("");
-  const [selectedOption, setSelectedOption] = useState<String | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const onTextFieldChange = useCallback(
     (event: NativeSyntheticEvent<TextInputChangeEventData>) => {

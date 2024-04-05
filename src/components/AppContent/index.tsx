@@ -14,7 +14,7 @@ import { UserRegisterScreen } from "src/screens/UserRegister";
 import { CustomToast } from "@app/components/CustomToast";
 import NavigationService from "@app/models/NavigationService";
 import { UserHomeScreen } from "@app/screens/UserHome";
-import { UserHeader } from "@app/components/users/UserHeader";
+import { UserHeader } from "@app/components/_users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
@@ -24,13 +24,15 @@ import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
-import { RequestProfessionalSuccessScreen } from "../../screens/RequestProfessionalSuccess";
+import { RequestProfessionalSuccessScreen } from "@app/screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
-import { BackButton } from "@app/components/BackButton";
-import { textVariants } from "@app/theme/typographies/variants";
+import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
 import { UserProfileScreen } from "@app/screens/ProfileScreen";
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
+import { BackButton } from "@app/components/BackButton";
+import { textVariants } from "@app/theme/typographies/variants";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 const Stack = createNativeStackNavigator();
 
@@ -119,7 +121,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitleAlign: "center",
               headerTitleStyle: {
                 ...textVariants.h3CondensedBlackNormal,
-                color: Colors.blackText,
+                color: colorTokens.colorTextDefault,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
@@ -137,7 +139,7 @@ export const AppContent: FC = memo(({}) => {
               headerTitleAlign: "center",
               headerTitleStyle: {
                 ...textVariants.h3CondensedBlackNormal,
-                color: Colors.blackText,
+                color: colorTokens.colorTextDefault,
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
@@ -155,6 +157,21 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
+            }}
+          />
+          <Stack.Screen
+            name="professional-offers/details"
+            component={ProfessionalOfferDetailScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
@@ -177,6 +194,16 @@ export const AppContent: FC = memo(({}) => {
             component={ProfileEditScreen}
             options={{
               animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/cancel"
+            component={RequestCancelByProfessionalScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
               header: () => <HeaderGoBack />,
             }}
           />
@@ -215,17 +242,6 @@ export const AppContent: FC = memo(({}) => {
             component={RequestProfessionalSuccessScreen}
             options={{
               headerShown: false,
-            }}
-          />
-
-          <Stack.Screen
-            name="requests/cancel"
-            component={RequestCancelByProfessionalScreen}
-            options={{
-              animation: "slide_from_bottom",
-              headerTintColor: "transparent",
-              headerTransparent: true,
-              header: () => <HeaderGoBack />,
             }}
           />
         </Stack.Navigator>

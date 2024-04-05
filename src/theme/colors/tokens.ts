@@ -199,6 +199,8 @@ export const colorTokensLight = {
   colorBackgroundInformationBoldHovered: Colors.Blue[800],
   colorBackgroundInformationBoldPressed: Colors.Blue[900],
 
+  colorBackgroundAlternativeBrand: Colors.Blue[700],
+
   colorBlanket: Colors.Neutral[500],
   colorBlanketSelected: "#388BF4",
   colorBlanketDanger: "#EFC4B1",
@@ -420,6 +422,8 @@ export const colorTokensDark = {
   colorBackgroundInformationBold: Colors.Blue[400],
   colorBackgroundInformationBoldHovered: Colors.Blue[300],
   colorBackgroundInformationBoldPressed: Colors.Blue[200],
+
+  colorBackgroundAlternativeBrand: Colors.Blue[700],
 
   colorBlanket: "#10121499",
   colorBlanketSelected: "#101214C1",
