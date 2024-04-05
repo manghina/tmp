@@ -5,6 +5,7 @@ import { styles } from "./styles";
 
 type BaseTextFieldProps = TextFieldProps & {
   focus?: boolean;
+  blur?: boolean;
 };
 
 export const BaseTextField = memo(
@@ -16,9 +17,13 @@ export const BaseTextField = memo(
     style,
     editable,
     focus,
+    blur,
     ...props
   }: BaseTextFieldProps) => {
-    const { isFocused, onFocus, onBlur, inputRef } = useBaseTextField(focus);
+    const { isFocused, onFocus, onBlur, inputRef } = useBaseTextField({
+      focus,
+      blur,
+    });
 
     return (
       <View style={styles.fieldContainer}>

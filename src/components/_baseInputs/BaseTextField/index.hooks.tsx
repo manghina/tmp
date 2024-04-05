@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { TextFieldRef } from "react-native-ui-lib";
 
-export const useBaseTextField = (focus?: boolean) => {
+export const useBaseTextField = ({
+  focus,
+  blur,
+}: {
+  focus?: boolean;
+  blur?: boolean;
+}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const onFocus = useCallback(() => {
@@ -17,10 +23,14 @@ export const useBaseTextField = (focus?: boolean) => {
   useEffect(() => {
     if (focus) {
       inputRef.current?.focus();
-    } else if (focus === false) {
-      inputRef.current?.blur();
     }
   }, [focus]);
+
+  useEffect(() => {
+    if (blur) {
+      inputRef.current?.blur();
+    }
+  }, [blur]);
 
   return {
     isFocused,
