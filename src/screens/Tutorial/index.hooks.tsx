@@ -29,6 +29,9 @@ export const useTutorialScreen = () => {
   const [subtitle, setSubTitle] = useState(subtitles[imageIndex]);
   const [bgImage, setBgImage] = useState(bgImages[imageIndex]);
 
+  const [showRegisterBottomSheet, setShowRegisterBottomSheet] = useState(false);
+  const [showLoginBottomSheet, setShowLoginBottomSheet] = useState(false);
+
   const fill1 = useCallback(() => {
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fill1Anim, {
@@ -69,12 +72,34 @@ export const useTutorialScreen = () => {
   }, [fill1Anim, fill2Anim, fill3Anim]);
 
   const onRegisterButtonClick = useCallback(() => {
-    navigation.replace("home");
-  }, [navigation]);
+    setShowRegisterBottomSheet(true);
+    if (showLoginBottomSheet) {
+      setShowLoginBottomSheet(false);
+    }
+  }, [
+    setShowRegisterBottomSheet,
+    setShowLoginBottomSheet,
+    showLoginBottomSheet,
+  ]);
+
+  const onRegisterClose = useCallback(() => {
+    setShowRegisterBottomSheet(false);
+  }, [setShowRegisterBottomSheet]);
 
   const onLoginButtonClick = useCallback(() => {
-    navigation.navigate("login");
-  }, [navigation]);
+    setShowLoginBottomSheet(true);
+    if (showRegisterBottomSheet) {
+      setShowRegisterBottomSheet(false);
+    }
+  }, [
+    setShowLoginBottomSheet,
+    setShowRegisterBottomSheet,
+    showRegisterBottomSheet,
+  ]);
+
+  const onLoginClose = useCallback(() => {
+    setShowLoginBottomSheet(false);
+  }, [setShowLoginBottomSheet]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -119,5 +144,9 @@ export const useTutorialScreen = () => {
     fill3Anim,
     onRegisterButtonClick,
     onLoginButtonClick,
+    onRegisterClose,
+    onLoginClose,
+    showRegisterBottomSheet,
+    showLoginBottomSheet,
   };
 };
