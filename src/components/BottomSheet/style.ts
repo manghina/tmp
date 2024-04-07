@@ -3,11 +3,9 @@ import { Dimensions } from "@app/theme/spacings/dimensions";
 import { colorTokens } from "../../theme/colors/tokens";
 
 export const styles = StyleSheet.create({
-  topContainer: {
-    position: "absolute",
-    width: "100%",
+  mainContainer: {
+    justifyContent: "center",
     alignItems: "center",
-    zIndex: 1,
   },
   closeButton: {
     position: "absolute",
@@ -22,12 +20,17 @@ export const styles = StyleSheet.create({
   closeIcon: {
     color: colorTokens.colorBorderBold,
   },
-  rectangle: {
+  handleContainer: {
     position: "absolute",
     top: Dimensions.medium.spacing_150,
+    width: "100%",
+    padding: 0,
+  },
+  handleIndicator: {
     width: Dimensions.large.spacing_500,
-    height: Dimensions.small.spacing_050,
     backgroundColor: colorTokens.elevationSurfaceOverlay,
-    borderRadius: 2,
+  },
+  contentContainer: {
+    flex: 1,
   },
 });
