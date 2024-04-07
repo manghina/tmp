@@ -16,6 +16,7 @@ type BottomSheetProps = {
   onClose: () => void;
   showCloseButton?: boolean;
   handleColor?: string;
+  snapPoints?: (number | string)[]; // ["95%"] | ["25%", "50%"] | [100, "50%"] | [150, 400]
 };
 
 export const BottomSheet = memo(
@@ -25,8 +26,9 @@ export const BottomSheet = memo(
     children,
     visible,
     handleColor,
+    snapPoints = ["94%"],
   }: BottomSheetProps) => {
-    const { bottomSheetModalRef, snapPoints } = useBottomSheet({ visible });
+    const { bottomSheetModalRef } = useBottomSheet({ visible });
 
     return (
       <BottomSheetModalProvider>
@@ -34,7 +36,7 @@ export const BottomSheet = memo(
           ref={bottomSheetModalRef}
           snapPoints={snapPoints}
           onDismiss={onClose}
-          containerStyle={styles.mainContainer}
+          style={styles.mainContainer}
           handleStyle={styles.handleContainer}
           handleIndicatorStyle={{
             ...styles.handleIndicator,

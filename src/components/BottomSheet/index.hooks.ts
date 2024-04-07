@@ -1,11 +1,9 @@
-import { useRef, useMemo, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect } from "react";
 
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 export const useBottomSheet = ({ visible }: { visible?: boolean }) => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
-  const snapPoints = useMemo(() => ["94%"], []);
 
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
@@ -25,6 +23,5 @@ export const useBottomSheet = ({ visible }: { visible?: boolean }) => {
 
   return {
     bottomSheetModalRef,
-    snapPoints,
   };
 };

@@ -4,10 +4,22 @@ import { colorTokens } from "../../theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   mainContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    overflow: "hidden",
+    borderTopLeftRadius: Dimensions.medium.spacing_250,
+    borderTopRightRadius: Dimensions.medium.spacing_250,
+  },
+  handleContainer: {
+    position: "absolute",
+    top: Dimensions.medium.spacing_150,
+    width: "100%",
+    padding: 0,
+  },
+  handleIndicator: {
+    width: Dimensions.large.spacing_500,
+    backgroundColor: colorTokens.elevationSurface,
   },
   closeButton: {
+    zIndex: 1,
     position: "absolute",
     top: Dimensions.medium.spacing_200,
     right: Dimensions.medium.spacing_200,
@@ -19,16 +31,6 @@ export const styles = StyleSheet.create({
   },
   closeIcon: {
     color: colorTokens.colorBorderBold,
-  },
-  handleContainer: {
-    position: "absolute",
-    top: Dimensions.medium.spacing_150,
-    width: "100%",
-    padding: 0,
-  },
-  handleIndicator: {
-    width: Dimensions.large.spacing_500,
-    backgroundColor: colorTokens.elevationSurfaceOverlay,
   },
   contentContainer: {
     flex: 1,
