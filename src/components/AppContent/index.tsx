@@ -2,8 +2,6 @@ import { FC, memo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Colors } from "react-native-ui-lib";
-
 import { useAppContent } from "./index.hooks";
 
 import { TutorialScreen } from "@app/screens/Tutorial";
@@ -86,10 +84,16 @@ export const AppContent: FC = memo(({}) => {
             name="login"
             component={LoginScreen}
             options={{
-              headerShown: false,
-              statusBarAnimation: "slide",
-              statusBarStyle: "dark",
-              statusBarColor: "#D8E0F2",
+              title: "Accedi",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                ...textVariants.h3CondensedBlackNormal,
+                color: colorTokens.colorTextDefault,
+              },
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <BackButton />,
+              headerShadowVisible: false,
             }}
           />
           <Stack.Screen
