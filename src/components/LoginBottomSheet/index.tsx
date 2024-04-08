@@ -1,12 +1,10 @@
 import React, { memo } from "react";
-import { SafeAreaView } from "react-native";
 import { View, Text, Button } from "react-native-ui-lib";
 import { FormProvider } from "react-hook-form";
 import { useLoginBottomSheet } from "./index.hooks";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { BottomSheet } from "@app/components/BottomSheet";
 import { styles } from "./style";
-import LottieView from "lottie-react-native";
 
 const headerBackgroundGraphicsPercentageOverflow = 20;
 
@@ -22,17 +20,11 @@ export const LoginBottomSheet = memo(
     showLoginBottomSheet,
     onLoginClose,
   }: LoginBottomSheetProps) => {
-    const {
-      formData,
-      submitDisabled,
-      triggerSubmit,
-      onForgotPasswordButtonPressed,
-      allFieldsFilled,
-      showLoadingAnimation,
-    } = useLoginBottomSheet();
+    const { formData, submitDisabled, onProceedButtonPressed } =
+      useLoginBottomSheet({ onLoginClose });
 
     return (
-      <BottomSheet visible={showLoginBottomSheet} onClose={onLoginClose}>
+      <BottomSheet visible={showLoginBottomSheet} onDismiss={onLoginClose}>
         <View
           style={[
             styles.blueRoundedDecoration,
@@ -44,72 +36,23 @@ export const LoginBottomSheet = memo(
         />
         <View style={styles.pageContentWrapper}>
           <View>
-            <Text h1>Accedi</Text>
+            <Text style={styles.pageTitle}>Accedi</Text>
             <Text style={styles.pageSubtitle}>Seleziona metodo preferito</Text>
           </View>
           <FormProvider {...formData}>
-            <View style={styles.formColumn}>
+            <View style={styles.contentContainer}>
               <FormTextField
                 keyboardType="email-address"
                 name="email"
                 label="Indirizzo email"
               />
-              <FormTextField name="password" label="Password" type="password" />
-            </View>
-            <View style={styles.mainActionContainer}>
-              <Text
-                style={[
-                  styles.mainActionLabel,
-                  !allFieldsFilled ? styles.textDisabled : undefined,
-                ]}
-              >
-                Sblocca ingresso applicazione
-              </Text>
               <Button
-                onPress={triggerSubmit}
-                disabled={showLoadingAnimation ?? submitDisabled}
+                onPress={onProceedButtonPressed}
+                disabled={submitDisabled}
                 style={styles.button}
               >
-                {showLoadingAnimation ? (
-                  <LottieView
-                    source={require("../../../assets/animations/loading.json")}
-                    autoPlay
-                    speed={1}
-                    loop={true}
-                    style={styles.loadingAnimation}
-                  />
-                ) : (
-                  <Text style={styles.buttonText}>Accedi</Text>
-                )}
+                <Text style={styles.buttonText}>Procedi</Text>
               </Button>
-              {/* {showLoadingAnimation ? (
-              <LottieView
-                source={require("../../../assets/animations/loading.json")}
-                autoPlay
-                speed={1}
-                loop={true}
-                style={{ width: "100%", height: 40 }}
-              />
-            ) : (
-              <Button
-                label="Accedi"
-                onPress={triggerSubmit}
-                disabled={submitDisabled}
-              />
-            )} */}
-            </View>
-            <View style={styles.secondaryActionsWrapper}>
-              <View style={styles.secondaryActionContainer}>
-                <Text style={styles.secondaryActionText}>
-                  Password dimenticata?
-                </Text>
-                <Text
-                  style={styles.secondaryActionLink}
-                  onPress={onForgotPasswordButtonPressed}
-                >
-                  Clicca qui
-                </Text>
-              </View>
               <View style={styles.secondaryActionContainer}>
                 <Text style={styles.secondaryActionText}>
                   Non hai un profilo?

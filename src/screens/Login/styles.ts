@@ -1,40 +1,29 @@
-  import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { textVariants } from "@app/theme/typographies/variants";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { Dimensions } from "@app/theme/spacings/dimensions";
 import { colorTokens } from "@app/theme/colors/tokens";
-import { Colors } from "@app/theme/colors/palette";
-import { FontSizes } from "../../theme/typographies/properties";
-import { colorTokensLight } from "../../theme/colors/tokens";
+import { FontSizes } from "@app/theme/typographies/properties";
+import { colorTokensLight } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   page: {
+    backgroundColor: colorTokens.elevationSurface,
     height: "100%",
-    width: "100%",
   },
   pageContentWrapper: {
     display: "flex",
     gap: dimensionsTokens.paddingMd,
     padding: dimensionsTokens.paddingSm,
   },
-  blueRoundedDecoration: {
-    position: "absolute",
-    backgroundColor: Colors.Unlisted.LoginBackground,
-    borderBottomLeftRadius: 70,
-    borderBottomRightRadius: 70,
-    height: "38%",
-  },
-  pageTitle: { ...textVariants.h3CondensedBlackNormal },
-  pageSubtitle: { ...textVariants.p1MediumNormal },
-  formColumn: {
-    display: "flex",
-    gap: dimensionsTokens.paddingXs,
-  },
   mainActionContainer: {
     display: "flex",
     gap: Dimensions.small.spacing_100,
   },
-  mainActionLabel: { ...textVariants.p2MediumNormal, textAlign: "center" },
+  mainActionLabel: {
+    ...textVariants.p2MediumNormal,
+    textAlign: "center",
+  },
   secondaryActionsWrapper: {
     display: "flex",
     gap: dimensionsTokens.paddingXs,

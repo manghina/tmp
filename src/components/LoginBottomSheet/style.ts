@@ -1,39 +1,38 @@
-  import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { textVariants } from "@app/theme/typographies/variants";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
-import { Dimensions } from "@app/theme/spacings/dimensions";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { Colors } from "@app/theme/colors/palette";
-import { FontSizes } from "../../theme/typographies/properties";
-import { colorTokensLight } from "../../theme/colors/tokens";
+import { FontSizes } from "@app/theme/typographies/properties";
+import { colorTokensLight } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   pageContentWrapper: {
-    display: "flex",
     gap: dimensionsTokens.paddingMd,
-    padding: dimensionsTokens.paddingSm,
+    paddingHorizontal: dimensionsTokens.paddingSm,
+    paddingVertical: dimensionsTokens.paddingMd,
   },
   blueRoundedDecoration: {
     position: "absolute",
     backgroundColor: Colors.Unlisted.LoginBackground,
     borderBottomLeftRadius: 70,
     borderBottomRightRadius: 70,
-    height: "38%",
+    height: "20%",
   },
   pageTitle: { ...textVariants.h3CondensedBlackNormal },
-  pageSubtitle: { ...textVariants.p1MediumNormal },
-  formColumn: {
-    display: "flex",
+  pageSubtitle: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextSubtle,
+  },
+  contentContainer: {
     gap: dimensionsTokens.paddingXs,
   },
-  mainActionContainer: {
-    display: "flex",
-    gap: Dimensions.small.spacing_100,
+  button: {
+    paddingVertical: dimensionsTokens.paddingXs,
   },
-  mainActionLabel: { ...textVariants.p2MediumNormal, textAlign: "center" },
-  secondaryActionsWrapper: {
-    display: "flex",
-    gap: dimensionsTokens.paddingXs,
+  buttonText: {
+    fontSize: FontSizes.P1,
+    color: colorTokensLight.colorTextInverse,
   },
   secondaryActionContainer: {
     flexDirection: "row",
@@ -44,17 +43,5 @@ export const styles = StyleSheet.create({
   secondaryActionLink: {
     ...textVariants.p2MediumItalic,
     color: colorTokens.colorTextLink,
-  },
-  textDisabled: { color: colorTokens.colorTextDisabled },
-  button: {
-    paddingVertical: dimensionsTokens.paddingXs,
-  },
-  buttonText: {
-    fontSize: FontSizes.P1,
-    color: colorTokensLight.colorTextInverse,
-  },
-  loadingAnimation: {
-    width: "100%",
-    height: 20, //FontSizes.H6,
   },
 });

@@ -1,83 +1,55 @@
 import { useNavigation } from "@react-navigation/native";
-import { useForm, useWatch } from "react-hook-form";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useMemo } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { actions, selectors } from "../../redux-store";
-import { useDispatch, useSelector } from "react-redux";
-
-type LoginFormData = {
-  email: string;
-  password: string;
-};
+import { useDispatch } from "react-redux";
 
 const schema = yup.object().shape({
   email: yup
     .string()
     .email("Inserisci una mail valida")
     .required("La mail è obbligatoria"),
-  password: yup.string().required("Inserisci la tua password"),
 });
 
-export const useLoginBottomSheet = () => {
+export const useLoginBottomSheet = ({
+  onLoginClose,
+}: {
+  onLoginClose: () => void;
+}) => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const formData = useForm<LoginFormData>({
+  const formData = useForm<{ email: string }>({
     resolver: yupResolver(schema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
   const {
-    control,
     handleSubmit,
-    formState: { isDirty, isSubmitted, isValid },
+    formState: { isDirty },
+    reset,
   } = formData;
 
-  const isLogginIn = useSelector(
-    selectors.getAjaxIsLoadingByApi("apis/accounts/sessions/post"),
-  );
-  const [showLoadingAnimation, setShowLoadingAnimation] =
-    useState(!!isLogginIn);
+  const submitDisabled = useMemo(() => !isDirty, [isDirty]);
 
-  useEffect(() => {
-    if (isLogginIn) {
-      setShowLoadingAnimation(true);
-      setTimeout(() => setShowLoadingAnimation(false), 500);
-    }
-  }, [isLogginIn]);
-
-  const submitDisabled = !isDirty || (isSubmitted && !isValid) || !!isLogginIn;
-
-  const triggerSubmit = useMemo(
+  const onProceedButtonPressed = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(actions.postAccountsSessions.request(data));
+        navigation.navigate("login", {
+          email: data.email,
+        });
+        onLoginClose();
+        reset();
       }),
-    [handleSubmit],
+    [dispatch, navigation, handleSubmit],
   );
-
-  const [email, password] = useWatch({ control, name: ["email", "password"] });
-
-  const allFieldsFilled = useMemo(
-    () => Boolean(email) && Boolean(password),
-    [email, password],
-  );
-
-  const onForgotPasswordButtonPressed = useCallback(() => {
-    dispatch(actions.setForgotPasswordStepperCounter(1));
-    navigation.navigate("forgot-password");
-  }, [dispatch, navigation]);
 
   return {
     formData,
     submitDisabled,
-    triggerSubmit,
-    onForgotPasswordButtonPressed,
-    allFieldsFilled,
-    showLoadingAnimation,
+    onProceedButtonPressed,
   };
 };
