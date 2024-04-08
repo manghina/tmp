@@ -18,7 +18,7 @@ import { UserHeader } from "@app/components/_users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
-import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessionalOffers";
+import { RequestSearchProfessionalsScreen } from "src/screens/RequestSearchProfessionals";
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
@@ -208,7 +208,7 @@ export const AppContent: FC = memo(({}) => {
           />
           <Stack.Screen
             name="requests/professional-offers"
-            component={RequestsProfessionalOffersScreen}
+            component={RequestSearchProfessionalsScreen}
             options={{
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
