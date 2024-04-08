@@ -31,6 +31,7 @@ import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByP
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { UserChooseProfessionalOfferScreen } from "../../screens/UserChooseProfessionalOffer";
 
 const Stack = createNativeStackNavigator();
 
@@ -207,8 +208,18 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="requests/professional-offers"
+            name="requests/search-professionals"
             component={RequestSearchProfessionalsScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/professional-offers"
+            component={UserChooseProfessionalOfferScreen}
             options={{
               animation: "slide_from_bottom",
               headerTintColor: "transparent",

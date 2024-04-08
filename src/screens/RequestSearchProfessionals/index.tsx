@@ -13,7 +13,7 @@ export const RequestSearchProfessionalsScreen = memo(
       useRequestSearchProfessionalsScreen();
 
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.safeArea}>
         <View style={styles.mainContainer}>
           <View style={styles.contentWrapper}>
             <Text style={styles.pageTitle}>Prenotazione</Text>

@@ -5,10 +5,14 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: colorTokens.elevationSurface,
+  },
   mainContainer: {
     paddingVertical: headerHeight + dimensionsTokens.paddingXs,
     flexDirection: "column",
     gap: dimensionsTokens.paddingMd,
+    height: "100%",
   },
   contentWrapper: { paddingHorizontal: dimensionsTokens.paddingSm },
   descriptionContainer: {
