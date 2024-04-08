@@ -1,7 +1,6 @@
 import { View, Text, Button, Image, Modal } from "react-native-ui-lib";
 import WebView from "react-native-webview";
 import homeBgImage from "@assets/img/doc1.png";
-import { SafeAreaView } from "react-native";
 import { styles } from "./style";
 import { useRegisterBottomSheet } from "./index.hooks";
 import React from "react";
@@ -26,7 +25,7 @@ export const RegisterBottomSheet = ({
   } = useRegisterBottomSheet();
 
   return (
-    <BottomSheet visible={showRegisterBottomSheet} onClose={onRegisterClose}>
+    <BottomSheet visible={showRegisterBottomSheet} onDismiss={onRegisterClose}>
       <View style={styles.pageContent}>
         <View style={styles.background} />
         <View>
