@@ -9,17 +9,6 @@ import moment from "moment";
 const formatPrice = (price: number): string =>
   `€ ${(price / 100).toFixed(2).replace(".", ",")}`;
 
-const detailsContent = [
-  {
-    title: "Onorario visita",
-    value: "€ 80,00",
-  },
-  {
-    title: "Acconto richiesto (20%)",
-    value: "€ 16,00",
-  },
-];
-
 export const RequestConfirmPaymentScreen = memo(() => {
   const { professionalOffer, slot } = useRequestConfirmPaymentScreen();
 
