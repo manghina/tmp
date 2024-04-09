@@ -4,6 +4,7 @@ import { actions, selectors } from "@app/redux-store";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigation } from "@react-navigation/native";
 
 export type ProfessionalOffersFormData = {
   professionalOfferId: string;
@@ -17,6 +18,7 @@ const schema = yup.object().shape({
 
 export const useUserChooseProfessionalOfferScreen = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation<any>();
 
   const currentRequest = useSelector(selectors.getCurrentRequest);
 
@@ -31,7 +33,12 @@ export const useUserChooseProfessionalOfferScreen = () => {
     name: ["professionalOfferId", "slotId"],
   });
 
-  const onSubmit = useCallback(() => {}, []);
+  const onSubmit = useCallback(() => {
+    dispatch(actions.setChosenProfessionalOfferId(professionalOfferId));
+    dispatch(actions.setChosenSlotId(slotId));
+
+    navigation.navigate("requests/confirm-payment");
+  }, [navigation, professionalOfferId, slotId]);
 
   const slotChosen = useMemo(
     () => Boolean(professionalOfferId) && Boolean(slotId),

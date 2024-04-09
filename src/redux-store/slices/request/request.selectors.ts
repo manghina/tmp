@@ -21,5 +21,24 @@ export const getCurrentRequestProfessionalOffers = createSelector(
     ),
 );
 
+export const getChosenProfessionalOffer = createSelector(
+  getCurrentRequestProfessionalOffers,
+  (state: RootState) => state?.request?.chosenProfessionalOfferId ?? null,
+  (professionalOffers, chosenProfessionalOfferId) =>
+    professionalOffers.find(
+      (professionalOffer) =>
+        professionalOffer._id === chosenProfessionalOfferId,
+    ) ?? null,
+);
+
+export const getChosenSlot = createSelector(
+  getChosenProfessionalOffer,
+  (state: RootState) => state?.request?.chosenSlotId ?? null,
+  (professionalOffer, chosenSlotId) =>
+    (professionalOffer?.slots ?? []).find(
+      (slot) => slot._id === chosenSlotId,
+    ) ?? null,
+);
+
 export const getIsPolling = (state: RootState) =>
   state?.request?.isPolling ?? false;

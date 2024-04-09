@@ -9,6 +9,8 @@ const initialState: RequestsState = {
   list: [],
   currentRequest: null,
   currentRequestProfessionalOffers: null,
+  chosenProfessionalOfferId: null,
+  chosenSlotId: null,
   isPolling: false,
 };
 
@@ -26,6 +28,12 @@ export const requestStore = createSlice({
     setCurrentRequest: (state, action: PayloadAction<IRequest | null>) => {
       state.currentRequest = action.payload;
       state.currentRequestProfessionalOffers = null;
+    },
+    setChosenProfessionalOfferId: (state, action: PayloadAction<string>) => {
+      state.chosenProfessionalOfferId = action.payload;
+    },
+    setChosenSlotId: (state, action: PayloadAction<string>) => {
+      state.chosenSlotId = action.payload;
     },
   },
   extraReducers: (builder) => {
