@@ -18,7 +18,7 @@ import { UserHeader } from "@app/components/_users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
-import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessionalOffers";
+import { RequestSearchProfessionalsScreen } from "src/screens/RequestSearchProfessionals";
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
@@ -31,6 +31,7 @@ import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByP
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { UserChooseProfessionalOfferScreen } from "../../screens/UserChooseProfessionalOffer";
 
 const Stack = createNativeStackNavigator();
 
@@ -167,7 +168,6 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
-              headerTintColor: "transparent",
               headerTransparent: true,
               headerLeft: () => <BackButton />,
             }}
@@ -207,13 +207,23 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="requests/professional-offers"
-            component={RequestsProfessionalOffersScreen}
+            name="requests/search-professionals"
+            component={RequestSearchProfessionalsScreen}
             options={{
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
               headerTransparent: true,
               header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="requests/professional-offers"
+            component={UserChooseProfessionalOfferScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
@@ -223,7 +233,7 @@ export const AppContent: FC = memo(({}) => {
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
               headerTransparent: true,
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen

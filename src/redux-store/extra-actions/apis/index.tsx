@@ -5,6 +5,7 @@ export { default as getProfessionalsMeProfessionalOffersByProfessionalOfferId } 
 export { default as getUsersMe } from "./get-users-me";
 export { default as getUsersMeRequests } from "./get-users-me-requests";
 export { default as getUsersMeRequestsByRequestId } from "./get-users-me-requests-by-request-id";
+export { default as getUsersMeRequestsProfessionalOffersByRequestId } from "./get-users-me-requests-professional-offers-by-request-id";
 export { default as postAccounts } from "./post-accounts";
 export { default as postAccountsSessions } from "./post-accounts-sessions";
 export { default as postRecoveryPasswordTokens } from "./post-recovery-password-tokens";

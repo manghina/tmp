@@ -1,9 +1,10 @@
-import { IMessage } from "../Message";
+import { IMessage } from "@app/models/Message";
 
 export enum RequestStatus {
   COLLECTING_INFORMATION = "collecting-information",
   INFORMATION_COLLECTED = "information-collected",
   PROFESSIONAL_OFFERS_CREATED = "professional_offers_created",
+  PROFESSIONAL_OFFERS_FILLED = "professional_offers_filled",
   CLOSED = "closed",
 }
 
