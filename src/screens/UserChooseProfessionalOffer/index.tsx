@@ -3,8 +3,9 @@ import { useUserChooseProfessionalOfferScreen } from "./index.hooks";
 import { Text, View } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./styles";
+import { colorTokens } from "@app/theme/colors/tokens";
 import InfoIcon from "@app/components/SvgIcons/InfoIcon";
-import { colorTokens } from "../../theme/colors/tokens";
+import { ProfessionalOffersCarousel } from "@app/components/_users/ProfessionalOffersCarousel";
 
 type UserChooseProfessionalOfferScreenProps = {};
 
@@ -23,6 +24,7 @@ export const UserChooseProfessionalOfferScreen = memo(
                 metus.
               </Text>
             </View>
+            <ProfessionalOffersCarousel />
             <View style={styles.contentWrapper}>
               <View style={styles.howDoesItWorkContainer}>
                 <View style={styles.howDoesItWorkFirstColumn}>

@@ -6,9 +6,6 @@ export const useUserChooseProfessionalOfferScreen = () => {
   const dispatch = useDispatch();
 
   const currentRequest = useSelector(selectors.getCurrentRequest);
-  const professionalOffers = useSelector(
-    selectors.getCurrentRequestProfessionalOffers,
-  );
 
   useEffect(() => {
     if (currentRequest) {
@@ -20,5 +17,5 @@ export const useUserChooseProfessionalOfferScreen = () => {
     }
   }, [dispatch, currentRequest]);
 
-  return { professionalOffers };
+  return {};
 };
