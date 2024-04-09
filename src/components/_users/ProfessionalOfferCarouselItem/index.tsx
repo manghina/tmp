@@ -82,9 +82,11 @@ export const ProfessionalOfferCarouselItem = memo(
               slotDay.format("DD/MM/YYYY") === moment().format("DD/MM/YYYY");
 
             return (
-              <TouchableOpacity onPress={onSlotChosenCallbacks[index]}>
+              <TouchableOpacity
+                key={slot._id}
+                onPress={onSlotChosenCallbacks[index]}
+              >
                 <View
-                  key={slot._id}
                   style={[styles.slot, slotSelected && styles.slotSelected]}
                 >
                   <View style={styles.slotFirstColumn}>
