@@ -27,7 +27,10 @@ export const requestStore = createSlice({
     },
     setCurrentRequest: (state, action: PayloadAction<IRequest | null>) => {
       state.currentRequest = action.payload;
-      state.currentRequestProfessionalOffers = null;
+      state.currentRequestProfessionalOffers =
+        initialState.currentRequestProfessionalOffers;
+      state.chosenProfessionalOfferId = initialState.chosenProfessionalOfferId;
+      state.chosenSlotId = initialState.chosenSlotId;
     },
     setChosenProfessionalOfferId: (state, action: PayloadAction<string>) => {
       state.chosenProfessionalOfferId = action.payload;
@@ -47,7 +50,11 @@ export const requestStore = createSlice({
       extraActions.getUsersMeRequestsByRequestId.success,
       (state, action) => {
         state.currentRequest = action.payload.data.request;
-        state.currentRequestProfessionalOffers = null;
+        state.currentRequestProfessionalOffers =
+          initialState.currentRequestProfessionalOffers;
+        state.chosenProfessionalOfferId =
+          initialState.chosenProfessionalOfferId;
+        state.chosenSlotId = initialState.chosenSlotId;
       },
     );
     builder.addCase(
@@ -57,7 +64,11 @@ export const requestStore = createSlice({
 
         state.list = [request, ...state.list];
         state.currentRequest = request;
-        state.currentRequestProfessionalOffers = null;
+        state.currentRequestProfessionalOffers =
+          initialState.currentRequestProfessionalOffers;
+        state.chosenProfessionalOfferId =
+          initialState.chosenProfessionalOfferId;
+        state.chosenSlotId = initialState.chosenSlotId;
       },
     );
     builder.addCase(
@@ -66,7 +77,11 @@ export const requestStore = createSlice({
         const { request } = action.payload.data;
 
         state.currentRequest = request;
-        state.currentRequestProfessionalOffers = null;
+        state.currentRequestProfessionalOffers =
+          initialState.currentRequestProfessionalOffers;
+        state.chosenProfessionalOfferId =
+          initialState.chosenProfessionalOfferId;
+        state.chosenSlotId = initialState.chosenSlotId;
       },
     );
     builder.addCase(
@@ -81,6 +96,8 @@ export const requestStore = createSlice({
       state.currentRequest = initialState.currentRequest;
       state.currentRequestProfessionalOffers =
         initialState.currentRequestProfessionalOffers;
+      state.chosenProfessionalOfferId = initialState.chosenProfessionalOfferId;
+      state.chosenSlotId = initialState.chosenSlotId;
       state.isPolling = initialState.isPolling;
     });
   },
