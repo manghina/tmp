@@ -21,6 +21,11 @@ export const useUserChooseProfessionalOfferScreen = () => {
   const navigation = useNavigation<any>();
 
   const currentRequest = useSelector(selectors.getCurrentRequest);
+  const isFetchingProfessionalOffers = useSelector(
+    selectors.getAjaxIsLoadingByApi(
+      actions.getUsersMeRequestsProfessionalOffersByRequestId.api,
+    ),
+  );
 
   const formData = useForm<ProfessionalOffersFormData>({
     resolver: yupResolver(schema),
@@ -55,5 +60,5 @@ export const useUserChooseProfessionalOfferScreen = () => {
     }
   }, [dispatch, currentRequest]);
 
-  return { formData, slotChosen, onSubmit };
+  return { isFetchingProfessionalOffers, formData, slotChosen, onSubmit };
 };

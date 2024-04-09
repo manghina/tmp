@@ -69,4 +69,7 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextInverse,
     textAlign: "center",
   },
+  activityContainer: {
+    padding: dimensionsTokens.paddingMd,
+  },
 });

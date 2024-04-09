@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useUserChooseProfessionalOfferScreen } from "./index.hooks";
-import { Text, TouchableOpacity, View } from "react-native-ui-lib";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ProgressBar, Text, TouchableOpacity, View } from "react-native-ui-lib";
+import { ActivityIndicator, SafeAreaView, ScrollView } from "react-native";
 import { bottomInfoHeight, bottomInteractionHeight, styles } from "./styles";
 import { colorTokens } from "@app/theme/colors/tokens";
 import InfoIcon from "@app/components/SvgIcons/InfoIcon";
@@ -12,7 +12,7 @@ type UserChooseProfessionalOfferScreenProps = {};
 
 export const UserChooseProfessionalOfferScreen = memo(
   ({}: UserChooseProfessionalOfferScreenProps) => {
-    const { formData, slotChosen, onSubmit } =
+    const { formData, isFetchingProfessionalOffers, slotChosen, onSubmit } =
       useUserChooseProfessionalOfferScreen();
 
     const renderHowDoesItWork = () => (
@@ -62,9 +62,15 @@ export const UserChooseProfessionalOfferScreen = memo(
                 metus.
               </Text>
             </View>
-            <FormProvider {...formData}>
-              <ProfessionalOffersCarousel />
-            </FormProvider>
+            {isFetchingProfessionalOffers ? (
+              <View style={styles.activityContainer}>
+                <ActivityIndicator />
+              </View>
+            ) : (
+              <FormProvider {...formData}>
+                <ProfessionalOffersCarousel />
+              </FormProvider>
+            )}
           </View>
           <View
             style={{
