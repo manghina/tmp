@@ -63,26 +63,24 @@ export const RequestConfirmPaymentScreen = memo(() => {
                   </Text>
                 </View>
                 <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>Onorario visita</Text>
+                  <Text style={styles.detailLabel}>Conferma</Text>
                   <Text style={styles.detailValue}>
-                    {formatPrice(slot.price)}
+                    {formatPrice(slot.price * 0.2)}
                   </Text>
                 </View>
                 <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>
-                    Acconto richiesto (20%)
-                  </Text>
+                  <Text style={styles.detailLabel}>Saldo alla visita</Text>
                   <Text style={styles.detailValue}>
-                    {formatPrice(slot.price * 0.2)}
+                    {formatPrice(slot.price)}
                   </Text>
                 </View>
               </View>
               <View style={styles.dividerDark} />
 
               <View style={styles.detailRow}>
-                <Text style={styles.sumRecap}>TOTALE A GARANZIA</Text>
+                <Text style={styles.sumRecap}>TOTALE</Text>
                 <Text style={styles.sumRecap}>
-                  {formatPrice(slot.price * 0.2)}
+                  {formatPrice(slot.price * 1.2)}
                 </Text>
               </View>
             </View>
