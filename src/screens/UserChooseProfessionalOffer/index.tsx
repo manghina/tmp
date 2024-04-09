@@ -68,9 +68,7 @@ export const UserChooseProfessionalOfferScreen = memo(
           </View>
           <View
             style={{
-              height: slotChosen
-                ? bottomInteractionHeight / 2
-                : bottomInfoHeight / 2,
+              height: slotChosen ? bottomInteractionHeight : bottomInfoHeight,
             }}
           />
         </ScrollView>

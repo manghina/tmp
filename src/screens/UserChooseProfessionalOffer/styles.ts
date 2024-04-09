@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     height: "100%",
   },
   mainContainer: {
-    paddingVertical: headerHeight + dimensionsTokens.paddingXs,
+    paddingVertical: dimensionsTokens.paddingXs,
     flexDirection: "column",
     gap: dimensionsTokens.paddingMd,
   },

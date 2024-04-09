@@ -168,7 +168,6 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
-              headerTintColor: "transparent",
               headerTransparent: true,
               headerLeft: () => <BackButton />,
             }}
@@ -224,7 +223,7 @@ export const AppContent: FC = memo(({}) => {
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
               headerTransparent: true,
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
@@ -234,7 +233,7 @@ export const AppContent: FC = memo(({}) => {
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
               headerTransparent: true,
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
