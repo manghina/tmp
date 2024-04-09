@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
-import { selectors } from "@app/redux-store";
 import { useCallback, useRef } from "react";
 import {
   Animated,
   NativeScrollEvent,
   NativeSyntheticEvent,
 } from "react-native";
+import { useSelector } from "react-redux";
+import { selectors } from "@app/redux-store";
 
 export const useProfessionalOffersCarousel = () => {
   const scrollX = useRef(new Animated.Value(0)).current;

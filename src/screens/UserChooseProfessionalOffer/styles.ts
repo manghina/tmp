@@ -4,9 +4,16 @@ import { Dimensions, headerHeight } from "@app/theme/spacings/dimensions";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { textVariants } from "@app/theme/typographies/variants";
 
+export const bottomInteractionHeight = 100;
+export const bottomInfoHeight = 120;
+
 export const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: colorTokens.elevationSurface,
+    position: "relative",
+  },
+  scrollView: {
+    height: "100%",
   },
   mainContainer: {
     paddingVertical: headerHeight + dimensionsTokens.paddingXs,
@@ -27,9 +34,13 @@ export const styles = StyleSheet.create({
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextSubtle,
   },
+  howDoesItWork: {
+    height: bottomInfoHeight,
+  },
   howDoesItWorkContainer: {
     flexDirection: "row",
     gap: Dimensions.small.spacing_100,
+    backgroundColor: colorTokens.elevationSurface,
   },
   howDoesItWorkFirstColumn: {},
   howDoesItWorkSecondColumn: {
@@ -43,7 +54,19 @@ export const styles = StyleSheet.create({
     color: colorTokens.colorTextSubtle,
     ...textVariants.p2MediumNormal,
   },
-  fullHeight: {
-    height: "100%",
+  absoluteBottom: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    paddingVertical: dimensionsTokens.paddingSm,
+  },
+  submitContainer: {
+    height: bottomInteractionHeight,
+    backgroundColor: colorTokens.colorBackgroundBrandBold,
+  },
+  submitText: {
+    ...textVariants.p1BoldNormal,
+    color: colorTokens.colorTextInverse,
+    textAlign: "center",
   },
 });

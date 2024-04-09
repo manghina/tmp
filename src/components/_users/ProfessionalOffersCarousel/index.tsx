@@ -1,13 +1,10 @@
 import { memo } from "react";
-import { Animated, Dimensions } from "react-native";
-import { useProfessionalOffersCarousel } from "./index.hooks";
+import { FlatList } from "react-native";
 import { View } from "react-native-ui-lib";
-import { FlashList } from "@shopify/flash-list";
+import { useProfessionalOffersCarousel } from "./index.hooks";
 import { ProfessionalOfferCarouselItem } from "@app/components/_users/ProfessionalOfferCarouselItem";
 
 type ProfessionalOffersCarouselProps = {};
-
-const { width } = Dimensions.get("screen");
 
 export const ProfessionalOffersCarousel = memo(
   ({}: ProfessionalOffersCarouselProps) => {
@@ -15,15 +12,14 @@ export const ProfessionalOffersCarousel = memo(
       useProfessionalOffersCarousel();
 
     return (
-      <View style={{}}>
+      <View>
         {professionalOffers.length > 0 && (
-          <FlashList
+          <FlatList
             horizontal
             pagingEnabled
             data={professionalOffers}
             showsHorizontalScrollIndicator={false}
             snapToAlignment="center"
-            estimatedItemSize={width}
             keyExtractor={(item) => item._id}
             onScroll={onScroll}
             renderItem={({ item, index }) => (

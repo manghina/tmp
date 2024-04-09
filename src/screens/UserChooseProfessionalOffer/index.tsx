@@ -1,21 +1,59 @@
 import { memo } from "react";
 import { useUserChooseProfessionalOfferScreen } from "./index.hooks";
-import { Text, View } from "react-native-ui-lib";
+import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
-import { styles } from "./styles";
+import { bottomInfoHeight, bottomInteractionHeight, styles } from "./styles";
 import { colorTokens } from "@app/theme/colors/tokens";
 import InfoIcon from "@app/components/SvgIcons/InfoIcon";
 import { ProfessionalOffersCarousel } from "@app/components/_users/ProfessionalOffersCarousel";
+import { FormProvider } from "react-hook-form";
 
 type UserChooseProfessionalOfferScreenProps = {};
 
 export const UserChooseProfessionalOfferScreen = memo(
   ({}: UserChooseProfessionalOfferScreenProps) => {
-    const {} = useUserChooseProfessionalOfferScreen();
+    const { formData, slotChosen, onSubmit } =
+      useUserChooseProfessionalOfferScreen();
+
+    const renderHowDoesItWork = () => (
+      <View
+        style={[
+          styles.absoluteBottom,
+          styles.howDoesItWork,
+          styles.contentWrapper,
+        ]}
+      >
+        <View style={styles.howDoesItWorkContainer}>
+          <View style={styles.howDoesItWorkFirstColumn}>
+            <InfoIcon color={colorTokens.colorIconAccentBlue} />
+          </View>
+          <View style={styles.howDoesItWorkSecondColumn}>
+            <Text style={styles.howDoesItWorkTitle}>Come funziona?</Text>
+            <Text style={styles.howDoesItWorkSubtitle}>
+              Scegli e conferma con il 20%. Salda il resto a fine visita
+              direttamente al medico!
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+
+    const renderSubmitButton = () => (
+      <TouchableOpacity
+        onPress={onSubmit}
+        style={[
+          styles.absoluteBottom,
+          styles.contentWrapper,
+          styles.submitContainer,
+        ]}
+      >
+        <Text style={styles.submitText}>Conferma appuntamento</Text>
+      </TouchableOpacity>
+    );
 
     return (
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView style={styles.fullHeight}>
+        <ScrollView style={styles.scrollView}>
           <View style={styles.mainContainer}>
             <View style={styles.contentWrapper}>
               <Text style={styles.pageTitle}>Prenotazione</Text>
@@ -24,23 +62,19 @@ export const UserChooseProfessionalOfferScreen = memo(
                 metus.
               </Text>
             </View>
-            <ProfessionalOffersCarousel />
-            <View style={styles.contentWrapper}>
-              <View style={styles.howDoesItWorkContainer}>
-                <View style={styles.howDoesItWorkFirstColumn}>
-                  <InfoIcon color={colorTokens.colorIconAccentBlue} />
-                </View>
-                <View style={styles.howDoesItWorkSecondColumn}>
-                  <Text style={styles.howDoesItWorkTitle}>Come funziona?</Text>
-                  <Text style={styles.howDoesItWorkSubtitle}>
-                    Scegli e conferma con il 20%. Salda il resto a fine visita
-                    direttamente al medico!
-                  </Text>
-                </View>
-              </View>
-            </View>
+            <FormProvider {...formData}>
+              <ProfessionalOffersCarousel />
+            </FormProvider>
           </View>
+          <View
+            style={{
+              height: slotChosen
+                ? bottomInteractionHeight / 2
+                : bottomInfoHeight / 2,
+            }}
+          />
         </ScrollView>
+        {slotChosen ? renderSubmitButton() : renderHowDoesItWork()}
       </SafeAreaView>
     );
   },
