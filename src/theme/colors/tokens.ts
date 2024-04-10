@@ -9,7 +9,7 @@ export const colorTokensLight = {
   colorTextSelected: Colors.Blue[700],
   colorTextBrand: Colors.Blue[700],
   colorTextDanger: Colors.Red[800],
-  colorTextWarning: Colors.Yellow[300],
+  colorTextWarning: Colors.Orange[600],
   colorTextWarningInverse: Colors.Yellow[300],
   colorTextSuccess: Colors.Green[600],
   colorTextDiscovery: Colors.Purple[600],

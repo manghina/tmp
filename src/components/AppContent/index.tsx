@@ -20,17 +20,20 @@ import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestSearchProfessionalsScreen } from "src/screens/RequestSearchProfessionals";
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
+import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestProfessionalSuccessScreen } from "@app/screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
-import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { UserChooseProfessionalOfferScreen } from "../../screens/UserChooseProfessionalOffer";
 
 const Stack = createNativeStackNavigator();
@@ -52,6 +55,16 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name="form-filterable-select"
             component={FilterableSelectScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="otp-verification"
+            component={OtpVerificationScreen}
             options={{
               headerTitle: "",
               animationTypeForReplace: "push",
@@ -181,9 +194,18 @@ export const AppContent: FC = memo(({}) => {
           />
           <Stack.Screen
             name="user-settings"
-            component={UserSettingsScreen}
+            component={UserProfileScreen}
             options={{
-              header: () => <UserHeader />,
+              animation: "slide_from_bottom",
+              header: () => <HeaderProfileGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name="user-edit"
+            component={ProfileEditScreen}
+            options={{
+              animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
