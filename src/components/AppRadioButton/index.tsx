@@ -1,11 +1,10 @@
-import { TouchableOpacity, View, Text } from "react-native-ui-lib";
+import { TouchableOpacity, View, Text, ViewProps } from "react-native-ui-lib";
 import { useAppRadioButton } from "./index.hooks";
 import RadioButtonCircleIcon from "./RadioButtonCircleIcon";
 import { styles } from "./styles";
 
-type AppRadioButtonProps = {
+type AppRadioButtonProps = ViewProps & {
   label: string;
-  style?: any;
   selected: boolean;
   handlePress: () => void;
 };

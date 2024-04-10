@@ -9,12 +9,15 @@ export const useRequestCancelByProfessional = () => {
     option2: false,
   });
 
-  const handleRadioChange = (value: string) => {
-    setRadioValues({
-      option1: value === "option1",
-      option2: value === "option2",
-    });
-  };
+  const handleRadioChange = useCallback(
+    (value: string) => {
+      setRadioValues({
+        option1: value === "option1",
+        option2: value === "option2",
+      });
+    },
+    [setRadioValues],
+  );
 
   const [textValue, setTextValue] = useState<string>("");
 

@@ -35,7 +35,7 @@ export const RequestCancelByProfessionalScreen = memo(
             </Text>
 
             <RadioGroup
-              onValueChange={(value: string) => handleRadioChange(value)}
+              onValueChange={handleRadioChange}
             >
               <AppRadioButton
                 selected={radioValues.option1}
