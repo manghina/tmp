@@ -3,6 +3,11 @@ import { useBaseTextField } from "./index.hooks";
 import { Text, TextField, TextFieldProps, View } from "react-native-ui-lib";
 import { styles } from "./styles";
 
+type BaseTextFieldProps = TextFieldProps & {
+  focus?: boolean;
+  blur?: boolean;
+};
+
 export const BaseTextField = memo(
   ({
     ref,
@@ -11,9 +16,14 @@ export const BaseTextField = memo(
     validationMessage,
     style,
     editable,
+    focus,
+    blur,
     ...props
-  }: TextFieldProps) => {
-    const { isFocused, onFocus, onBlur } = useBaseTextField();
+  }: BaseTextFieldProps) => {
+    const { isFocused, onFocus, onBlur, inputRef } = useBaseTextField({
+      focus,
+      blur,
+    });
 
     return (
       <View style={styles.fieldContainer}>
@@ -21,6 +31,7 @@ export const BaseTextField = memo(
         <View>
           <TextField
             editable={editable}
+            ref={(ref: any) => (inputRef.current = ref)}
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"

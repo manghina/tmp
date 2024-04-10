@@ -1,12 +1,15 @@
 import { StyleSheet } from "react-native";
 import { textVariants } from "@app/theme/typographies/variants";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
-import { Dimensions, headerHeight } from "@app/theme/spacings/dimensions";
+import { Dimensions } from "@app/theme/spacings/dimensions";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: colorTokens.elevationSurface,
+  },
   pageContainer: {
-    paddingTop: headerHeight + dimensionsTokens.paddingXs,
-    paddingBottom: dimensionsTokens.paddingXs,
+    paddingVertical: dimensionsTokens.paddingXs,
     paddingHorizontal: dimensionsTokens.paddingMd,
     gap: dimensionsTokens.paddingMd,
     height: "100%",

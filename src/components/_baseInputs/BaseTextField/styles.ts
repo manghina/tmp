@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundInput,
   },
   input: {
-    flex: 1,
     paddingTop: dimensionsTokens.paddingXs,
     paddingLeft: dimensionsTokens.paddingXs,
     paddingRight: dimensionsTokens.paddingXs,

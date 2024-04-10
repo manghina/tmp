@@ -154,7 +154,7 @@ export const ProfessionalRegisterScreen = () => {
                 : colorTokens.colorTextDefault
             }
           >
-            {isLastStep ? "Iscrizione completata!" : "Ci sei quasi..."}
+            Ci sei quasi...
           </Text>
           <Button
             style={styles.callToAction}
