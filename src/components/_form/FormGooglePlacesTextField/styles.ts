@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colorTokens.colorBackgroundInput,
     alignItems: "center",
+    paddingRight: dimensionsTokens.padding3Xs,
   },
   input: {
     flex: 1,
