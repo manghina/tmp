@@ -45,25 +45,14 @@ const schema = yup.object().shape({
     .required("Seleziona il tuo sesso biologico"),
 });
 
-const fieldKeys = [
-  "name",
-  "lastName",
-  "birthDate",
-  "phonePrefix",
-  "phoneNumber",
-  "country",
-  "gender",
-] as const;
-
 export const useUserProfileEditScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
   const me: User | null = useSelector(selectors.getMe);
 
-  const formData = useForm<UserEditFormData>({
-    resolver: yupResolver(schema),
-    defaultValues: {
+  const defaultValues = useMemo(
+    () => ({
       name: me?.name || "",
       lastName: me?.lastName || "",
       birthDate: me?.birthDate
@@ -73,21 +62,26 @@ export const useUserProfileEditScreen = () => {
       phoneNumber: "",
       country: "🇮🇹 Italy",
       gender: "male",
-    },
+    }),
+    [me],
+  );
+
+  const formData = useForm<UserEditFormData>({
+    resolver: yupResolver(schema),
+    defaultValues,
   });
 
   const {
     control,
     handleSubmit,
-    trigger,
-    formState: { isDirty, isValid, isSubmitted, errors },
+    reset,
+    formState: { isDirty },
   } = formData;
 
-  const [name, lastName, birthDate, phonePrefix, phoneNumber, country, gender] =
-    useWatch({
-      control,
-      name: fieldKeys,
-    });
+  const phoneNumber = useWatch({
+    control,
+    name: "phoneNumber",
+  });
 
   const [isVerifiedPhoneNumber, setIsVerifiedPhoneNumber] =
     useState<boolean>(false);
@@ -111,21 +105,16 @@ export const useUserProfileEditScreen = () => {
     }, 1000);
   }, []);
 
-  const allFieldsFilled = useMemo(
-    () =>
-      Boolean(name) &&
-      Boolean(lastName) &&
-      Boolean(birthDate) &&
-      Boolean(phonePrefix) &&
-      Boolean(phoneNumber) &&
-      Boolean(country) &&
-      Boolean(gender),
-    [name, lastName, birthDate, phonePrefix, phoneNumber, country, gender],
+  const isPatchingUser = useSelector(
+    selectors.getAjaxIsLoadingByApi(actions.patchUsersMe.api),
   );
 
   const submitDisabled = useMemo(
-    () => !isDirty || (isSubmitted && !isValid) || !allFieldsFilled,
-    [isDirty, isSubmitted, isValid, allFieldsFilled],
+    () =>
+      !isDirty ||
+      isPatchingUser ||
+      (phoneNumber.length > 0 && isToVerifyPhoneNumber),
+    [isDirty, isPatchingUser, isToVerifyPhoneNumber, phoneNumber],
   );
 
   const triggerProfileEditSubmit = useMemo(
@@ -142,20 +131,12 @@ export const useUserProfileEditScreen = () => {
   );
 
   useEffect(() => {
-    setIsVerifiedPhoneNumber(false);
-  }, [phoneNumber]);
+    reset(defaultValues);
+  }, [defaultValues, reset]);
 
   useEffect(() => {
-    if (allFieldsFilled) {
-      trigger("name").then();
-      trigger("lastName").then();
-      trigger("birthDate").then();
-      trigger("phonePrefix").then();
-      trigger("phoneNumber").then();
-      trigger("country").then();
-      trigger("gender").then();
-    }
-  }, [trigger, allFieldsFilled]);
+    setIsVerifiedPhoneNumber(false);
+  }, [phoneNumber]);
 
   useEffect(() => {
     if (!me) {

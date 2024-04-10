@@ -28,6 +28,7 @@ export const ProfileEditScreen = memo(() => {
     isVerifiedPhoneNumber,
     handleGoBackFromOtpVerification,
     handleOtpVerification,
+    submitDisabled,
   } = useUserProfileEditScreen();
 
   const OtpNewScreenWrapper = ({ children }: { children: JSX.Element }) => {
@@ -136,7 +137,11 @@ export const ProfileEditScreen = memo(() => {
         </View>
       </View>
       <View>
-        <Button label="Salva informazioni" onPress={triggerProfileEditSubmit} />
+        <Button
+          label="Salva informazioni"
+          disabled={submitDisabled}
+          onPress={triggerProfileEditSubmit}
+        />
       </View>
     </View>
   );
