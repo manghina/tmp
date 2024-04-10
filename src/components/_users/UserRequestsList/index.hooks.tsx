@@ -25,6 +25,9 @@ export const useUserRequestsList = () => {
           navigation.navigate("requests/chat");
           return;
         case RequestStatus.PROFESSIONAL_OFFERS_CREATED:
+          navigation.navigate("requests/search-professionals");
+          return;
+        case RequestStatus.PROFESSIONAL_OFFERS_FILLED:
           navigation.navigate("requests/professional-offers");
           return;
         default:
@@ -43,6 +46,7 @@ export const useUserRequestsList = () => {
             [RequestStatus.COLLECTING_INFORMATION]: CardStatus.PLAIN,
             [RequestStatus.INFORMATION_COLLECTED]: CardStatus.EXPIRING,
             [RequestStatus.PROFESSIONAL_OFFERS_CREATED]: CardStatus.PLAIN,
+            [RequestStatus.PROFESSIONAL_OFFERS_FILLED]: CardStatus.PLAIN,
             [RequestStatus.CLOSED]: CardStatus.PLAIN,
           }[request.currentStatus] || CardStatus.PLAIN,
         title:
@@ -50,6 +54,7 @@ export const useUserRequestsList = () => {
             [RequestStatus.COLLECTING_INFORMATION]: "Completa la richiesta",
             [RequestStatus.INFORMATION_COLLECTED]: "Richiesta completata",
             [RequestStatus.PROFESSIONAL_OFFERS_CREATED]: "In attesa di offerte",
+            [RequestStatus.PROFESSIONAL_OFFERS_FILLED]: "Offerte disponibili",
             [RequestStatus.CLOSED]: "Richiesta scaduta",
           }[request.currentStatus] || "???",
         description: "-",
