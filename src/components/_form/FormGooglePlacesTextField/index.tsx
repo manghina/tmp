@@ -25,7 +25,7 @@ export const FormGooglePlacesTextField = memo(
           onFail={(error) => console.log(error)}
           onNotFound={() => console.log("no results")}
           query={{
-            key: "YOUR API KEY",
+            key: "AIzaSyAIjKhORY1ndCu3Xww0F7t70b29hjyUPg8",
             // components: "country:it",
           }}
           disableScroll={true}
