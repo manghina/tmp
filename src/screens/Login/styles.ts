@@ -50,4 +50,5 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: 20, //FontSizes.H6,
   },
+  formColumn: { gap: dimensionsTokens.paddingMd },
 });
