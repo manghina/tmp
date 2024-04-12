@@ -8,9 +8,11 @@ export const useFormNewScreenFilterableSelect = <
   name,
   options,
   pageProps,
+  multipleSelection,
 }: {
   name: string;
   options: T[];
+  multipleSelection?: boolean;
   pageProps: {
     pageTitle: string;
     pageDescription?: string;
@@ -37,6 +39,7 @@ export const useFormNewScreenFilterableSelect = <
       options,
       value,
       pageProps,
+      multipleSelection,
     });
   }, [navigation, onBackFromChoosingScreen, options, pageProps, value]);
 

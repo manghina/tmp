@@ -1209,104 +1209,1716 @@ const provincesOptions = [
 ];
 
 const professionsOptions = [
-  { value: "agopuntore", label: "Agopuntore" },
-  { value: "analista_clinico", label: "Analista Clinico" },
-  { value: "allergologo", label: "Allergologo" },
-  { value: "anatomopatologo", label: "Anatomopatologo" },
-  { value: "andrologo", label: "Andrologo" },
-  { value: "anestesista", label: "Anestesista" },
-  { value: "angiologo", label: "Angiologo" },
-  { value: "audioprotesista", label: "Audioprotesista" },
-  { value: "cardiochirurgo", label: "Cardiochirurgo" },
-  { value: "cardiologo", label: "Cardiologo" },
-  { value: "chinesiologo", label: "Chinesiologo" },
-  { value: "chiropratico", label: "Chiropratico" },
-  { value: "chirurgo", label: "Chirurgo" },
-  { value: "chirurgo_estetico", label: "Chirurgo Estetico" },
-  { value: "chirurgo_generale", label: "Chirurgo Generale" },
-  { value: "chirurgo_maxillo_facciale", label: "Chirurgo Maxillo Facciale" },
-  { value: "chirurgo_pediatrico", label: "Chirurgo Pediatrico" },
-  { value: "chirurgo_plastico", label: "Chirurgo Plastico" },
-  { value: "chirurgo_toracico", label: "Chirurgo Toracico" },
-  { value: "chirurgo_vascolare", label: "Chirurgo Vascolare" },
-  { value: "chirurgo_vertebrale", label: "Chirurgo Vertebrale" },
-  { value: "covid_test", label: "COVID Test" },
-  { value: "dentista", label: "Dentista" },
-  { value: "dermatologo", label: "Dermatologo" },
-  { value: "diabetologo", label: "Diabetologo" },
-  { value: "dietista", label: "Dietista" },
-  { value: "dietologo", label: "Dietologo" },
-  { value: "donazione_sangue", label: "Donazione Sangue" },
-  { value: "ecografista", label: "Ecografista" },
-  { value: "ematologo", label: "Ematologo" },
-  { value: "endocrinologo", label: "Endocrinologo" },
-  { value: "epatologo", label: "Epatologo" },
-  { value: "epidemiologo", label: "Epidemiologo" },
-  { value: "fisiatra", label: "Fisiatra" },
-  { value: "fisioterapista", label: "Fisioterapista" },
-  { value: "foniatra", label: "Foniatra" },
-  { value: "gastroenterologo", label: "Gastroenterologo" },
-  { value: "geriatra", label: "Geriatra" },
-  { value: "ginecologo", label: "Ginecologo" },
-  { value: "igienista_dentale", label: "Igienista Dentale" },
-  { value: "immunologo", label: "Immunologo" },
-  { value: "infermiere", label: "Infermiere" },
-  { value: "infettivologo", label: "Infettivologo" },
-  { value: "internista", label: "Internista" },
-  { value: "logopedista", label: "Logopedista" },
-  { value: "massofisioterapista", label: "Massofisioterapista" },
-  { value: "medico_certificatore", label: "Medico Certificatore" },
-  { value: "medico_competente", label: "Medico Competente" },
-  { value: "medico_dello_sport", label: "Medico dello Sport" },
+  {
+    value: "agopuntore",
+    label: "Agopuntore",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "analista_clinico",
+    label: "Analista Clinico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "allergologo",
+    label: "Allergologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "anatomopatologo",
+    label: "Anatomopatologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "andrologo",
+    label: "Andrologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "anestesista",
+    label: "Anestesista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "angiologo",
+    label: "Angiologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "audioprotesista",
+    label: "Audioprotesista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "cardiochirurgo",
+    label: "Cardiochirurgo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "cardiologo",
+    label: "Cardiologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chinesiologo",
+    label: "Chinesiologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chiropratico",
+    label: "Chiropratico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo",
+    label: "Chirurgo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_estetico",
+    label: "Chirurgo Estetico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_generale",
+    label: "Chirurgo Generale",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_maxillo_facciale",
+    label: "Chirurgo Maxillo Facciale",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_pediatrico",
+    label: "Chirurgo Pediatrico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_plastico",
+    label: "Chirurgo Plastico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_toracico",
+    label: "Chirurgo Toracico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_vascolare",
+    label: "Chirurgo Vascolare",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "chirurgo_vertebrale",
+    label: "Chirurgo Vertebrale",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "covid_test",
+    label: "COVID Test",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "dentista",
+    label: "Dentista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "dermatologo",
+    label: "Dermatologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "diabetologo",
+    label: "Diabetologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "dietista",
+    label: "Dietista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "dietologo",
+    label: "Dietologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "donazione_sangue",
+    label: "Donazione Sangue",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ecografista",
+    label: "Ecografista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ematologo",
+    label: "Ematologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "endocrinologo",
+    label: "Endocrinologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "epatologo",
+    label: "Epatologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "epidemiologo",
+    label: "Epidemiologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "fisiatra",
+    label: "Fisiatra",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "fisioterapista",
+    label: "Fisioterapista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "foniatra",
+    label: "Foniatra",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "gastroenterologo",
+    label: "Gastroenterologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "geriatra",
+    label: "Geriatra",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ginecologo",
+    label: "Ginecologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "igienista_dentale",
+    label: "Igienista Dentale",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "immunologo",
+    label: "Immunologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "infermiere",
+    label: "Infermiere",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "infettivologo",
+    label: "Infettivologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "internista",
+    label: "Internista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "logopedista",
+    label: "Logopedista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "massofisioterapista",
+    label: "Massofisioterapista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "medico_certificatore",
+    label: "Medico Certificatore",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "medico_competente",
+    label: "Medico Competente",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "medico_dello_sport",
+    label: "Medico dello Sport",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
   {
     value: "medico_di_medicina_generale",
     label: "Medico di Medicina Generale",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
   },
-  { value: "medico_estetico", label: "Medico Estetico" },
-  { value: "medico_genetista", label: "Medico Genetista" },
-  { value: "medico_legale", label: "Medico Legale" },
-  { value: "medico_nucleare", label: "Medico Nucleare" },
-  { value: "nefrologo", label: "Nefrologo" },
-  { value: "neurochirurgo", label: "Neurochirurgo" },
-  { value: "neurologo", label: "Neurologo" },
-  { value: "neuropsichiatra_infantile", label: "Neuropsichiatra Infantile" },
-  { value: "neuropsicologo", label: "Neuropsicologo" },
-  { value: "nutrizionista", label: "Nutrizionista" },
-  { value: "oculista", label: "Oculista" },
-  { value: "odontotecnico", label: "Odontotecnico" },
-  { value: "omeopata", label: "Omeopata" },
-  { value: "oncologo", label: "Oncologo" },
-  { value: "ortodontista", label: "Ortodontista" },
-  { value: "ortopedico", label: "Ortopedico" },
-  { value: "ortottista", label: "Ortottista" },
-  { value: "osteopata", label: "Osteopata" },
-  { value: "ostetrica", label: "Ostetrica" },
-  { value: "otorino", label: "Otorino" },
-  { value: "pediatra", label: "Pediatra" },
-  { value: "pediatra_di_libera_scelta", label: "Pediatra di Libera Scelta" },
-  { value: "pneumologo", label: "Pneumologo" },
-  { value: "podologo", label: "Podologo" },
-  { value: "posturologo", label: "Posturologo" },
-  { value: "proctologo", label: "Proctologo" },
-  { value: "professional_counselor", label: "Professional Counselor" },
-  { value: "psichiatra", label: "Psichiatra" },
-  { value: "psicologo", label: "Psicologo" },
-  { value: "psicologo_clinico", label: "Psicologo Clinico" },
-  { value: "psicoterapeuta", label: "Psicoterapeuta" },
-  { value: "radiologo", label: "Radiologo" },
-  { value: "radiologo_diagnostico", label: "Radiologo Diagnostico" },
-  { value: "radioterapista", label: "Radioterapista" },
-  { value: "reumatologo", label: "Reumatologo" },
-  { value: "senologo", label: "Senologo" },
-  { value: "sessuologo", label: "Sessuologo" },
-  { value: "stomatologo", label: "Stomatologo" },
-  { value: "tecnico_radiologo", label: "Tecnico Radiologo" },
-  { value: "tecnico_sanitario", label: "Tecnico Sanitario" },
-  { value: "terapeuta", label: "Terapeuta" },
-  { value: "terapista_del_dolore", label: "Terapista del Dolore" },
-  { value: "tricologo", label: "Tricologo" },
-  { value: "urologo", label: "Urologo" },
-  { value: "venereologo", label: "Venereologo" },
+  {
+    value: "medico_estetico",
+    label: "Medico Estetico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "medico_genetista",
+    label: "Medico Genetista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "medico_legale",
+    label: "Medico Legale",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "medico_nucleare",
+    label: "Medico Nucleare",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "nefrologo",
+    label: "Nefrologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "neurochirurgo",
+    label: "Neurochirurgo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "neurologo",
+    label: "Neurologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "neuropsichiatra_infantile",
+    label: "Neuropsichiatra Infantile",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "neuropsicologo",
+    label: "Neuropsicologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "nutrizionista",
+    label: "Nutrizionista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "oculista",
+    label: "Oculista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "odontotecnico",
+    label: "Odontotecnico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "omeopata",
+    label: "Omeopata",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "oncologo",
+    label: "Oncologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ortodontista",
+    label: "Ortodontista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ortopedico",
+    label: "Ortopedico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ortottista",
+    label: "Ortottista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "osteopata",
+    label: "Osteopata",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "ostetrica",
+    label: "Ostetrica",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "otorino",
+    label: "Otorino",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "pediatra",
+    label: "Pediatra",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "pediatra_di_libera_scelta",
+    label: "Pediatra di Libera Scelta",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "pneumologo",
+    label: "Pneumologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "podologo",
+    label: "Podologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "posturologo",
+    label: "Posturologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "proctologo",
+    label: "Proctologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "professional_counselor",
+    label: "Professional Counselor",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "psichiatra",
+    label: "Psichiatra",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "psicologo",
+    label: "Psicologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "psicologo_clinico",
+    label: "Psicologo Clinico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "psicoterapeuta",
+    label: "Psicoterapeuta",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "radiologo",
+    label: "Radiologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "radiologo_diagnostico",
+    label: "Radiologo Diagnostico",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "radioterapista",
+    label: "Radioterapista",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "reumatologo",
+    label: "Reumatologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "senologo",
+    label: "Senologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "sessuologo",
+    label: "Sessuologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "stomatologo",
+    label: "Stomatologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "tecnico_radiologo",
+    label: "Tecnico Radiologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "tecnico_sanitario",
+    label: "Tecnico Sanitario",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "terapeuta",
+    label: "Terapeuta",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "terapista_del_dolore",
+    label: "Terapista del Dolore",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "tricologo",
+    label: "Tricologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "urologo",
+    label: "Urologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
+  {
+    value: "venereologo",
+    label: "Venereologo",
+    options: [
+      {
+        value: "subCategory1",
+        label: "Sottocategoria1",
+      },
+      {
+        value: "subCategory2",
+        label: "Sottocategoria2",
+      },
+      {
+        value: "subCategory3",
+        label: "Sottocategoria3",
+      },
+    ],
+  },
 ];
 
 /* const professionsOptions = [

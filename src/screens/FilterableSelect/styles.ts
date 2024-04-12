@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     borderColor: colorTokens.colorBorder,
     justifyContent: "space-between",
     padding: dimensionsTokens.paddingXs,
-    backgroundColor: colorTokens.colorBackgroundNeutralSubtle,
+    backgroundColor: colorTokens.elevationSurface,
   },
   firstListItem: {
     borderTopLeftRadius: Dimensions.small.spacing_100,
@@ -49,6 +49,19 @@ export const styles = StyleSheet.create({
   },
   listItemSelected: {
     backgroundColor: colorTokens.colorBackgroundNeutralBold,
+  },
+  listItemOpened: {
+    borderBottomWidth: 0,
+    backgroundColor: colorTokens.colorBackgroundNeutral,
+  },
+  listItemSubOption: {
+    paddingLeft: dimensionsTokens.paddingLg,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+  optionTextContainer: {
+    flexDirection: "row",
+    gap: dimensionsTokens.paddingXs,
   },
   optionText: {
     color: colorTokens.colorTextDefault,

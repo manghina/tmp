@@ -99,6 +99,7 @@ export const ProfessionalRegisterScreen = () => {
         name="specialization"
         label="Specializzazione"
         options={professionsOptions}
+        multipleSelection={true}
         pageProps={{
           pageTitle: "Seleziona tipologia",
           pageDescription:

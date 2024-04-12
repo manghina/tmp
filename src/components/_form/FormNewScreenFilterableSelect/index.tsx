@@ -10,6 +10,7 @@ type FormNewScreenFilterableSelectProps<
   name: string;
   options: T[];
   label?: string;
+  multipleSelection?: boolean;
   pageProps: {
     pageTitle: string;
     pageDescription?: string;
@@ -29,11 +30,13 @@ export const FormNewScreenFilterableSelect = memo(
     pageProps,
     style,
     disabled = false,
+    multipleSelection,
   }: FormNewScreenFilterableSelectProps<T>) => {
     const { onFieldClicked } = useFormNewScreenFilterableSelect({
       name,
       options,
       pageProps,
+      multipleSelection,
     });
     return (
       <TouchableOpacity onPress={!disabled ? onFieldClicked : () => {}}>
