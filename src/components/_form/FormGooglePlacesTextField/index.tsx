@@ -10,7 +10,7 @@ export type FormGooglePlacesTextFieldProps = {
 
 export const FormGooglePlacesTextField = memo(
   ({ name, placeholder, ...props }: FormGooglePlacesTextFieldProps) => {
-    const { isFocused, value, onBlur, onFocus } =
+    const { isFocused, onBlur, onFocus, handleChange } =
       useFormGooglePlacesTextField(name);
 
     return (
@@ -19,14 +19,16 @@ export const FormGooglePlacesTextField = memo(
         <GooglePlacesAutocomplete
           placeholder={placeholder ?? "Cerca..."}
           onPress={(data, details = null) => {
-            console.log(data, details);
+            console.log(data, details); // check the data and details object
+            handleChange(data.description);
           }}
           fetchDetails={true}
           onFail={(error) => console.log(error)}
           onNotFound={() => console.log("no results")}
           query={{
             key: "AIzaSyAIjKhORY1ndCu3Xww0F7t70b29hjyUPg8",
-            // components: "country:it",
+            components: "country:it",
+            language: "it",
           }}
           disableScroll={true}
           listEmptyComponent={
@@ -40,16 +42,15 @@ export const FormGooglePlacesTextField = memo(
             onFocus,
             onBlur,
             style: styles.input,
-            onChangeText: (e) => console.log(e),
-            // value:
-            //   value !== undefined && value !== null ? `${value}` : undefined,
-            // onChangeText: handleChange, // NOT WORKING !!!
           }}
           styles={{
             textInputContainer: [
               styles.field,
               isFocused ? styles.focused : undefined,
             ],
+            poweredContainer: styles.poweredByGoogleContainer,
+            listView: styles.listView,
+            row: styles.listRow,
           }}
         />
       </View>

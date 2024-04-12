@@ -30,6 +30,19 @@ export const styles = StyleSheet.create({
     borderColor: colorTokens.colorBorderAccentBlue,
   },
   label: { ...textVariants.p2MediumNormal },
+  listView: {
+    backgroundColor: colorTokens.colorBackgroundDisabled,
+    borderRadius: 8,
+    marginTop: dimensionsTokens.paddingXs,
+    borderWidth: 1,
+    borderColor: withOpacity(colorTokens.colorBorderAccentGrayBolder, 0.15),
+  },
+  listRow: {
+    backgroundColor: "transparent",
+  },
+  poweredByGoogleContainer: {
+    backgroundColor: colorTokens.colorBackgroundNeutral,
+  },
   noResultsContainer: {
     paddingVertical: dimensionsTokens.paddingXs,
   },
