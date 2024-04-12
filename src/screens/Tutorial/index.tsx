@@ -6,6 +6,8 @@ import {
   SafeAreaView,
   StyleSheet,
 } from "react-native";
+import { RegisterBottomSheet } from "@app/components/RegisterBottomSheet";
+import { LoginBottomSheet } from "@app/components/LoginBottomSheet";
 
 const styles = StyleSheet.create({
   defaultAnimatedBarStyles: {
@@ -28,6 +30,10 @@ export const TutorialScreen = () => {
     fill3Anim,
     onRegisterButtonClick,
     onLoginButtonClick,
+    onRegisterClose,
+    onLoginClose,
+    showRegisterBottomSheet,
+    showLoginBottomSheet,
   } = useTutorialScreen();
 
   return (
@@ -168,6 +174,16 @@ export const TutorialScreen = () => {
           </View>
         </View>
       </SafeAreaView>
+      <RegisterBottomSheet
+        onLoginButtonPressed={onLoginButtonClick}
+        showRegisterBottomSheet={showRegisterBottomSheet}
+        onRegisterClose={onRegisterClose}
+      />
+      <LoginBottomSheet
+        onRegisterButtonPressed={onRegisterButtonClick}
+        showLoginBottomSheet={showLoginBottomSheet}
+        onLoginClose={onLoginClose}
+      />
     </ImageBackground>
   );
 };

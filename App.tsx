@@ -8,6 +8,7 @@ import { enableDebugging } from "./src/utils/debug";
 import { PersistGate } from "redux-persist/integration/react";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import { stripePublishableKey } from "./src/config";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 if (process.env.NODE_ENV === "development") {
   enableDebugging().then();
@@ -20,7 +21,9 @@ export default function App() {
     <StripeProvider publishableKey={stripePublishableKey}>
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={<LoaderScreen />}>
-          <AppContent />
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <AppContent />
+          </GestureHandlerRootView>
         </PersistGate>
       </Provider>
     </StripeProvider>
