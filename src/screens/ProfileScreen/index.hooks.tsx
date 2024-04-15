@@ -19,6 +19,9 @@ import {
   SurveyIcon,
   TermsAndConditionsIcon,
 } from "@app/components/SvgIcons";
+import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
+import { TutorialScreen } from "@app/screens/Tutorial";
+import { LoginScreen } from "@app/screens/Login";
 
 type UserProfileMenuItem = {
   label: string;
@@ -39,7 +42,7 @@ export const useUserProfileScreen = () => {
 
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
-    navigation.replace("tutorial");
+    navigation.replace(TutorialScreen.RouteName);
   }, [dispatch, navigation]);
 
   const profileMenuItems: UserProfileMenu = useMemo(
@@ -50,7 +53,7 @@ export const useUserProfileScreen = () => {
           {
             label: "Modifica profilo",
             icon: <EditIcon />,
-            onPress: () => navigation.navigate("user-edit"),
+            onPress: () => navigation.navigate(ProfileEditScreen.RouteName),
           },
           {
             label: "Credenziali di accesso",
@@ -140,7 +143,7 @@ export const useUserProfileScreen = () => {
 
   useEffect(() => {
     if (!me) {
-      navigation.replace("login");
+      navigation.replace(LoginScreen.RouteName);
     }
   }, [me, navigation]);
 

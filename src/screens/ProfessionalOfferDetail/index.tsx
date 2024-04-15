@@ -247,3 +247,7 @@ export const ProfessionalOfferDetailScreen = () => {
     </SafeAreaView>
   );
 };
+
+ProfessionalOfferDetailScreen.displayName = "ProfessionalOfferDetailsScreen";
+ProfessionalOfferDetailScreen.RouteName =
+  "professional-offers/details" as const;

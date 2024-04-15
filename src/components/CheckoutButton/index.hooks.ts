@@ -4,12 +4,14 @@ import { actions, selectors } from "@app/redux-store";
 import { apiBaseUrl } from "@app/config";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Linking } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export const useCheckoutButton = (
   professionalOfferId: string,
   slotId: string,
 ) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation<any>();
 
   const { initPaymentSheet, presentPaymentSheet, handleURLCallback } =
     useStripe();
@@ -116,6 +118,7 @@ export const useCheckoutButton = (
           message: "Pagamento completato con successo",
         }),
       );
+      navigation.navigate("requests/payment-succeeded");
     }
   }, [dispatch, presentPaymentSheet]);
 

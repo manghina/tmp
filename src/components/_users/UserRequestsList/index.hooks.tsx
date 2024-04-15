@@ -5,6 +5,9 @@ import { Request, RequestStatus } from "src/models/Request";
 import { useNavigation } from "@react-navigation/native";
 import { RequestCardProps } from "src/components/RequestCard";
 import { CardStatus } from "src/components/RequestCard/index.hooks";
+import { RequestChatScreen } from "@app/screens/RequestChat";
+import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
+import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
 
 export const useUserRequestsList = () => {
   const navigation = useNavigation<any>();
@@ -22,13 +25,13 @@ export const useUserRequestsList = () => {
 
       switch (request.currentStatus) {
         case RequestStatus.COLLECTING_INFORMATION:
-          navigation.navigate("requests/chat");
+          navigation.navigate(RequestChatScreen.RouteName);
           return;
         case RequestStatus.PROFESSIONAL_OFFERS_CREATED:
-          navigation.navigate("requests/search-professionals");
+          navigation.navigate(RequestSearchProfessionalsScreen.RouteName);
           return;
         case RequestStatus.PROFESSIONAL_OFFERS_FILLED:
-          navigation.navigate("requests/professional-offers");
+          navigation.navigate(UserChooseProfessionalOfferScreen.RouteName);
           return;
         default:
           break;

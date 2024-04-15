@@ -105,3 +105,6 @@ export const HomeScreen = () => {
     </SafeAreaView>
   );
 };
+
+HomeScreen.displayName = "HomeScreen";
+HomeScreen.RouteName = "home" as const;

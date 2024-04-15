@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { actions } from "@app/redux-store";
+import { TutorialScreen } from "@app/screens/Tutorial";
 
 export const useUserSettingsScreen = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,7 @@ export const useUserSettingsScreen = () => {
 
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
-    navigation.navigate("tutorial");
+    navigation.navigate(TutorialScreen.RouteName);
   }, [dispatch, navigation]);
 
   return { handleLogout };
