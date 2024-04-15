@@ -51,17 +51,64 @@ export const styles = StyleSheet.create({
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextDefault,
   },
+  costRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  costLabelTitle: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextDefault,
+  },
+  costLabelSpecification: {
+    ...textVariants.p1MediumItalic,
+    color: colorTokens.colorTextDefault,
+  },
+  costValue: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextDefault,
+  },
+  costTotal: {
+    ...textVariants.p1BoldNormal,
+    color: colorTokens.colorTextDefault,
+  },
+  totalCostContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   timingInfoContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   addToCalendarButton: {
     backgroundColor: colorTokens.colorBackgroundNeutral,
-    padding: dimensionsTokens.padding4Xs,
+    paddingVertical: dimensionsTokens.padding4Xs,
+    paddingHorizontal: dimensionsTokens.padding3Xs,
     borderRadius: 8,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: dimensionsTokens.padding4Xs,
   },
   addToCalendarText: {
     ...textVariants.p4MediumNormal,
+    color: colorTokens.colorTextInformation,
+  },
+  row: {
+    flexDirection: "row",
+    gap: dimensionsTokens.padding3Xs,
+  },
+  infoIndicator: {
+    ...textVariants.p4MediumNormal,
+    color: colorTokens.colorTextInformation,
+  },
+  infoText: {
+    ...textVariants.p4MediumNormal,
+    color: colorTokens.colorTextDisabled,
+  },
+  infoIndicatorP1: {
+    ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextInformation,
   },
 });
