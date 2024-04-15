@@ -33,7 +33,7 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
-import { UserRequestAppointmentDetailsScreen } from "@app/screens/UserRequestAppointmentDetailsScreen";
+import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 
 const Stack = createNativeStackNavigator();
 

@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useCallback } from "react";
 import { UserHomeScreen } from "@app/screens/UserHome";
-import { UserRequestAppointmentDetailsScreen } from "@app/screens/UserRequestAppointmentDetailsScreen";
+import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 
 export const useRequestPaymentSucceededScreen = () => {
   const navigation = useNavigation<any>();
