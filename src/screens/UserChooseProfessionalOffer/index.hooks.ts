@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
+import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 
 export type ProfessionalOffersFormData = {
   professionalOfferId: string;
@@ -42,7 +43,7 @@ export const useUserChooseProfessionalOfferScreen = () => {
     dispatch(actions.setChosenProfessionalOfferId(professionalOfferId));
     dispatch(actions.setChosenSlotId(slotId));
 
-    navigation.navigate("requests/confirm-payment");
+    navigation.navigate(RequestConfirmPaymentScreen.RouteName);
   }, [navigation, professionalOfferId, slotId]);
 
   const slotChosen = useMemo(

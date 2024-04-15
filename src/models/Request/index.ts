@@ -5,7 +5,8 @@ export enum RequestStatus {
   INFORMATION_COLLECTED = "information-collected",
   PROFESSIONAL_OFFERS_CREATED = "professional_offers_created",
   PROFESSIONAL_OFFERS_FILLED = "professional_offers_filled",
-  CLOSED = "closed",
+  VISIT_SCHEDULED = "visit_scheduled",
+  VISIT_COMPLETED = "visit_completed",
 }
 
 export enum ChatStatus {

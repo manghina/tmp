@@ -50,7 +50,8 @@ export const useUserRequestsList = () => {
             [RequestStatus.INFORMATION_COLLECTED]: CardStatus.EXPIRING,
             [RequestStatus.PROFESSIONAL_OFFERS_CREATED]: CardStatus.PLAIN,
             [RequestStatus.PROFESSIONAL_OFFERS_FILLED]: CardStatus.PLAIN,
-            [RequestStatus.CLOSED]: CardStatus.PLAIN,
+            [RequestStatus.VISIT_SCHEDULED]: CardStatus.PLAIN,
+            [RequestStatus.VISIT_COMPLETED]: CardStatus.PLAIN,
           }[request.currentStatus] || CardStatus.PLAIN,
         title:
           {
@@ -58,7 +59,8 @@ export const useUserRequestsList = () => {
             [RequestStatus.INFORMATION_COLLECTED]: "Richiesta completata",
             [RequestStatus.PROFESSIONAL_OFFERS_CREATED]: "In attesa di offerte",
             [RequestStatus.PROFESSIONAL_OFFERS_FILLED]: "Offerte disponibili",
-            [RequestStatus.CLOSED]: "Richiesta scaduta",
+            [RequestStatus.VISIT_SCHEDULED]: CardStatus.PLAIN,
+            [RequestStatus.VISIT_COMPLETED]: CardStatus.PLAIN,
           }[request.currentStatus] || "???",
         description: "-",
         onPress: () => onCardPressed(request),
