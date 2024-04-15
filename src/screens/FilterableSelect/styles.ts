@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: dimensionsTokens.paddingSm,
     backgroundColor: colorTokens.elevationSurface,
     gap: dimensionsTokens.paddingMd,
+    paddingBottom: dimensionsTokens.paddingLg,
   },
   headingContainer: {
     display: "flex",
@@ -30,29 +31,46 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     ...textVariants.p2MediumNormal,
   },
-  listContainer: { flex: 1, gap: Dimensions.small.spacing_100 },
-  list: { flex: 1, marginBottom: Dimensions.large.spacing_500 },
+  listContainer: {
+    flex: 1,
+    gap: dimensionsTokens.padding3Xs,
+  },
+  list: {
+    flexGrow: 0,
+    borderWidth: 1.5,
+    borderRadius: Dimensions.small.spacing_100,
+    borderColor: colorTokens.colorBorder,
+  },
+  noList: {
+    display: "none",
+  },
+  noResultsText: {
+    ...textVariants.p2MediumNormal,
+    color: colorTokens.colorTextSubtle,
+    textAlign: "center",
+    paddingTop: dimensionsTokens.paddingMd,
+  },
   listItem: {
-    borderWidth: 1,
+    borderTopWidth: 1.5,
     borderColor: colorTokens.colorBorder,
     justifyContent: "space-between",
     padding: dimensionsTokens.paddingXs,
     backgroundColor: colorTokens.elevationSurface,
   },
   firstListItem: {
-    borderTopLeftRadius: Dimensions.small.spacing_100,
-    borderTopRightRadius: Dimensions.small.spacing_100,
-  },
-  lastListItem: {
-    borderBottomRightRadius: Dimensions.small.spacing_100,
-    borderBottomLeftRadius: Dimensions.small.spacing_100,
+    borderTopWidth: 0,
   },
   listItemSelected: {
     backgroundColor: colorTokens.colorBackgroundNeutralBold,
   },
+  listItemSelectedMultiple: {
+    backgroundColor: colorTokens.colorBackgroundSelected,
+  },
   listItemOpened: {
-    borderBottomWidth: 0,
     backgroundColor: colorTokens.colorBackgroundNeutral,
+  },
+  listItemWithSubOptionsSelected: {
+    backgroundColor: colorTokens.colorBackgroundInformation,
   },
   listItemSubOption: {
     paddingLeft: dimensionsTokens.paddingLg,
@@ -61,18 +79,42 @@ export const styles = StyleSheet.create({
   },
   optionTextContainer: {
     flexDirection: "row",
-    gap: dimensionsTokens.paddingXs,
+    alignItems: "center",
+    gap: dimensionsTokens.padding3Xs,
+  },
+  optionTextQuantityContainer: {
+    backgroundColor: colorTokens.colorBackgroundBrandBold,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 20,
+    height: 20,
+  },
+  optionTextQuantity: {
+    ...textVariants.p3BoldNormal,
+    color: colorTokens.colorTextInverse,
   },
   optionText: {
+    ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextDefault,
   },
   optionIcon: {
     color: colorTokens.colorBorder,
   },
+  optionIconSelected: {
+    color: colorTokens.colorBorderInverse,
+  },
+  optionIconMultiple: {
+    borderRadius: 100,
+    color: colorTokens.colorBorder,
+  },
+  optionIconSelectedMultiple: {
+    color: colorTokens.colorBorderSelected,
+  },
   optionTextSelected: {
     color: colorTokens.colorTextInverse,
   },
-  optionIconSelected: {
-    color: colorTokens.colorBorderInverse,
+  optionTextSelectedMultiple: {
+    color: colorTokens.colorTextSelected,
   },
 });

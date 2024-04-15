@@ -2,17 +2,11 @@ import { JSX, useCallback, useEffect, useMemo, useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-type SelectOption = {
-  label: string;
-  value: string;
-  isSelected?: boolean;
-  selectedQuantity?: number;
-  options?: Omit<SelectOption, "options" | "selectedQuantity">[];
-};
+type SelectValue = SelectOption | SelectOption[] | string;
 
 type FilterableSelectScreenRouteParams = {
-  value: string;
-  onGoBack?: (value: string) => void;
+  value: SelectValue;
+  onGoBack?: (value: SelectValue) => void;
   options: SelectOption[];
   multipleSelection?: boolean;
   pageProps: {
@@ -58,16 +52,8 @@ export const useFilterableSelectScreen = () => {
 
   const [filteredOptions, setFilteredOptions] =
     useState<SelectOption[]>(options);
+  const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>([]);
   const [searchText, setSearchText] = useState<string>("");
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [selectedOptions, setSelectedOptions] = useState<string[] | null>(null);
-  const [selectedSubOption, setSelectedSubOption] = useState<{
-    category: string;
-    value: string;
-  } | null>(null);
-  const [selectedSubOptions, setSelectedSubOptions] = useState<{
-    [category: string]: string[];
-  } | null>(null);
   const [openedOption, setOpenedOption] = useState<string | null>(null);
 
   const onTextFieldChange = useCallback(
@@ -86,79 +72,98 @@ export const useFilterableSelectScreen = () => {
     [setOpenedOption],
   );
 
+  const confirmSelection = useCallback(
+    (values?: SelectOption[]) => {
+      const value = multipleSelection
+        ? values ?? selectedOptions
+        : (values ?? selectedOptions)[0];
+      onGoBack?.(value);
+      setTimeout(() => {
+        navigation.goBack();
+      }, 50);
+    },
+    [selectedOptions, onGoBack, navigation, multipleSelection, hasSubOptions],
+  );
+
   const onOptionSelected = useCallback(
     (option: SelectOption) => {
+      let newValue: SelectOption[] = [];
       if (multipleSelection) {
-        setSelectedOptions((prevValue) => {
-          if (Array.isArray(prevValue)) {
-            if (prevValue.includes(option.value)) {
-              return prevValue.filter((value) => value !== option.value);
-            }
-            return [...prevValue, option.value];
-          }
-          return [option.value];
-        });
+        if (
+          selectedOptions.find(
+            (prevOption) => prevOption.value === option.value,
+          )
+        ) {
+          newValue = selectedOptions.filter(
+            (prevOption) => prevOption.value !== option.value,
+          );
+        } else {
+          newValue = [...selectedOptions, option];
+        }
+        setSelectedOptions(newValue);
       } else {
-        setSelectedOption(option.value);
-        onGoBack?.(option.value);
-        setTimeout(() => {
-          navigation.goBack();
-        }, 50);
+        newValue = [option];
+        setSelectedOptions(newValue);
+        confirmSelection(newValue);
       }
     },
-    [setSelectedOption, onGoBack, navigation, multipleSelection],
+    [selectedOptions, onGoBack, navigation, multipleSelection],
   );
 
   const onSubOptionSelected = useCallback(
-    (category: string, option: SelectOption) => {
+    (category: string, subOption: SelectOption) => {
+      const mainOption = options.find(
+        (option) => option.value === category,
+      ) as SelectOption;
+      let newValue: SelectOption[] = [];
       if (multipleSelection) {
-        setFilteredOptions((prevValue) => {
-          const newOptions = prevValue.map((prevOption) => {
-            if (prevOption.value === category) {
-              return {
-                ...prevOption,
-                options: prevOption.options?.map((subOption) => {
-                  if (subOption.value === option.value) {
-                    return {
-                      ...subOption,
-                      isSelected: !subOption.isSelected,
-                    };
-                  }
-                  return subOption;
-                }),
-              };
-            }
-            return prevOption;
-          });
-          return newOptions;
-        });
-        // setSelectedSubOptions((prevValue) => {
-        //   if (prevValue) {
-        //     if (prevValue[category]?.includes(option.value)) {
-        //       return {
-        //         ...prevValue,
-        //         [category]: prevValue[category].filter(
-        //           (value) => value !== option.value,
-        //         ),
-        //       };
-        //     }
-        //     return {
-        //       ...prevValue,
-        //       [category]: [...(prevValue[category] ?? []), option.value],
-        //     };
-        //   }
-        //   return { [category]: [option.value] };
-        // });
+        const existingOption = Boolean(
+          selectedOptions.find((prevOption) => prevOption.value === category),
+        );
+        if (existingOption) {
+          newValue = selectedOptions.reduce(
+            (acc: SelectOption[], prevOption) => {
+              if (prevOption.value === category) {
+                let updatedOption = {
+                  ...prevOption,
+                };
+                let newSubOptions: SelectOption[] = [];
+                const existingSubOption = Boolean(
+                  prevOption.options?.find(
+                    (prevSubOption) => prevSubOption.value === subOption.value,
+                  ),
+                );
+                if (existingSubOption) {
+                  newSubOptions = prevOption.options!.filter(
+                    (prevSubOption) => prevSubOption.value !== subOption.value,
+                  );
+                } else {
+                  newSubOptions = [...(prevOption.options ?? []), subOption];
+                }
+                updatedOption = { ...updatedOption, options: newSubOptions };
+                if (!updatedOption?.options?.length) return acc;
+                return [...acc, updatedOption];
+              }
+              return [...acc, prevOption];
+            },
+            [],
+          );
+        } else {
+          newValue = [
+            ...selectedOptions,
+            { ...mainOption, options: [subOption] },
+          ];
+        }
+        setSelectedOptions(newValue);
       } else {
-        setSelectedSubOption({ category, value: option.value });
-        onGoBack?.(option.value);
-        setTimeout(() => {
-          navigation.goBack();
-        }, 50);
+        newValue = [{ ...mainOption, options: [subOption] }];
+        setSelectedOptions(newValue);
+        confirmSelection(newValue);
       }
     },
     [
-      setSelectedOption,
+      options,
+      selectedOptions,
       onGoBack,
       navigation,
       multipleSelection,
@@ -167,39 +172,34 @@ export const useFilterableSelectScreen = () => {
     ],
   );
 
-  useEffect(() => {
-    console.log("selectedOptions", selectedOptions);
-    console.log("selectedSubOptions", selectedSubOptions);
-  }, [selectedOptions, selectedSubOptions]);
+  const isSelected = useCallback(
+    (option: SelectOption, category?: string) =>
+      category
+        ? selectedOptions.some(
+            (selectedOption) =>
+              selectedOption.value === category &&
+              selectedOption.options?.some(
+                (subOption) => subOption.value === option.value,
+              ),
+          )
+        : selectedOptions.some(
+            (selectedOption) => selectedOption.value === option.value,
+          ),
+    [selectedOptions],
+  );
 
-  const isOptionSelected = useCallback(
-    (item: SelectOption, isSubOption?: boolean, categoryValue?: string) => {
-      console.log("multipleSelection");
-      if (multipleSelection) {
-        if (isSubOption && selectedSubOptions) {
-          return selectedSubOptions[categoryValue!]?.includes(item.value);
-        }
-        if (selectedOptions) {
-          return selectedOptions.includes(item.value);
-        }
-      } else {
-        if (isSubOption && selectedSubOption) {
-          return selectedSubOption.value === item.value;
-        }
-        if (selectedOption) {
-          return selectedOption === item.value;
-        }
-      }
-      return false;
-    },
-    [selectedOption, selectedOptions, multipleSelection],
+  const selectedQuantity = useCallback(
+    (category?: string) =>
+      selectedOptions.find((option) => option.value === category)?.options
+        ?.length,
+    [selectedOptions],
   );
 
   useEffect(() => {
     if (!searchText) {
       setFilteredOptions(options);
     } else {
-      const newOptions = options
+      const newOptions = [...options]
         .map((option) => {
           if (option.label.toLowerCase().includes(searchText.toLowerCase())) {
             return option;
@@ -218,29 +218,23 @@ export const useFilterableSelectScreen = () => {
     }
   }, [options, searchText, hasSubOptions]);
 
-  // const filteredOptions = useMemo(
-  //   () =>
-  //     options.filter(
-  //       (option) =>
-  //         option.label.toLowerCase().includes(searchText.toLowerCase()) ||
-  //         option.options?.some((subOption) =>
-  //           subOption.label.toLowerCase().includes(searchText.toLowerCase()),
-  //         ),
-  //     ),
-  //   [options, searchText],
-  // );
-
-  useEffect(() => {
-    console.log(filteredOptions);
-  }, [filteredOptions]);
-
   useEffect(() => {
     // Get initial value from route params
-    setSelectedOption(value);
-  }, [value]);
+    if (value && options.length) {
+      if (typeof value === "string") {
+        const option = options.find(
+          (option) => option.value === value,
+        ) as SelectOption;
+        setSelectedOptions([option]);
+      } else if ("value" in value) {
+        setSelectedOptions([value]);
+      } else if (Array.isArray(value)) {
+        setSelectedOptions(value);
+      }
+    }
+  }, [value, options]);
 
   return {
-    selectedOption,
     filteredOptions,
     onTextFieldChange,
     pageTitle,
@@ -254,10 +248,9 @@ export const useFilterableSelectScreen = () => {
     openedOption,
     hasSubOptions,
     onSubOptionSelected,
-    selectedOptions,
-    selectedSubOption,
-    selectedSubOptions,
     multipleSelection,
-    isOptionSelected,
+    isSelected,
+    selectedQuantity,
+    confirmSelection,
   };
 };

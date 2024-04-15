@@ -1,7 +1,6 @@
 import { View, Text, Button } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
 import React from "react";
-
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormDatePicker } from "@app/components/_form/FormDatePicker";
@@ -44,7 +43,6 @@ export const ProfessionalRegisterScreen = () => {
             <FormNewScreenFilterableSelect
               key="phonePrefix"
               name="phonePrefix"
-              label=""
               options={phonePrefixOptions}
               pageProps={{
                 pageTitle: "Seleziona prefisso",
@@ -55,6 +53,7 @@ export const ProfessionalRegisterScreen = () => {
               }}
               style={styles.phonePrefix}
               disabled={true}
+              reducedLabel
             />
           </View>
           <View style={styles.phoneNumberContainer}>

@@ -1,12 +1,10 @@
 import React, { JSX, memo } from "react";
-import { FormTextField } from "@app/components/_form/FormTextField";
 import { TouchableOpacity } from "react-native-ui-lib";
 import { useFormNewScreenFilterableSelect } from "./index.hooks";
 import { StyleProp, TextStyle } from "react-native";
+import { FormSelectField } from "../FormSelectField";
 
-type FormNewScreenFilterableSelectProps<
-  T extends { label: string; value: string },
-> = {
+type FormNewScreenFilterableSelectProps<T> = {
   name: string;
   options: T[];
   label?: string;
@@ -20,10 +18,11 @@ type FormNewScreenFilterableSelectProps<
   };
   style?: StyleProp<TextStyle>;
   disabled?: boolean;
+  reducedLabel?: boolean;
 };
 
 export const FormNewScreenFilterableSelect = memo(
-  <T extends { label: string; value: string }>({
+  <T extends SelectOption>({
     name,
     label,
     options,
@@ -31,8 +30,9 @@ export const FormNewScreenFilterableSelect = memo(
     style,
     disabled = false,
     multipleSelection,
+    reducedLabel,
   }: FormNewScreenFilterableSelectProps<T>) => {
-    const { onFieldClicked } = useFormNewScreenFilterableSelect({
+    const { onFieldClicked, inputRef } = useFormNewScreenFilterableSelect({
       name,
       options,
       pageProps,
@@ -40,7 +40,10 @@ export const FormNewScreenFilterableSelect = memo(
     });
     return (
       <TouchableOpacity onPress={!disabled ? onFieldClicked : () => {}}>
-        <FormTextField
+        <FormSelectField
+          reducedLabel={reducedLabel}
+          options={options}
+          inputRef={inputRef}
           disabled={disabled}
           name={name}
           label={label}

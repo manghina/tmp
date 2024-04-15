@@ -1,6 +1,7 @@
 import { useFilterableSelectScreen } from "./index.hooks";
 import {
-  Colors,
+  Button,
+  Checkbox,
   ExpandableSection,
   RadioButton,
   Text,
@@ -15,18 +16,9 @@ import { ToggleOffIcon, ToggleOnIcon } from "@app/components/SvgIcons";
 
 type FilterableSelectScreenProps = {};
 
-type SelectOption = {
-  label: string;
-  value: string;
-  isSelected?: boolean;
-  selectedQuantity?: number;
-  options?: Omit<SelectOption, "options" | "selectedQuantity">[];
-};
-
 export const FilterableSelectScreen = memo(
   ({}: FilterableSelectScreenProps) => {
     const {
-      selectedOption,
       filteredOptions,
       onTextFieldChange,
       pageTitle,
@@ -40,11 +32,10 @@ export const FilterableSelectScreen = memo(
       openedOption,
       hasSubOptions,
       onSubOptionSelected,
-      selectedOptions,
-      selectedSubOption,
-      selectedSubOptions,
       multipleSelection,
-      isOptionSelected,
+      isSelected,
+      selectedQuantity,
+      confirmSelection,
     } = useFilterableSelectScreen();
 
     const _renderItem = ({
@@ -52,81 +43,78 @@ export const FilterableSelectScreen = memo(
       index,
       isCategory,
       isSubOption,
-      categoryIndex,
       categoryValue,
     }: {
       item: SelectOption;
       index: number;
-      categoryValue?: string;
       isCategory?: boolean;
       isSubOption?: boolean;
+      categoryValue?: string;
       categoryIndex?: number;
     }) => {
       const isOpened = isCategory && item.value === openedOption;
-      const checkIfSelected = () => {
-        if (multipleSelection) {
-          if (isSubOption && selectedSubOptions) {
-            return selectedSubOptions[categoryValue!]?.includes(item.value);
-          }
-          if (selectedOptions) {
-            return selectedOptions.includes(item.value);
-          }
-        } else {
-          if (isSubOption && selectedSubOption) {
-            return selectedSubOption.value === item.value;
-          }
-          if (selectedOption) {
-            return selectedOption === item.value;
-          }
-        }
-        return false;
-      };
-      const isSelected = item.isSelected;
-      const isLastItem = () => {
-        if ((hasSubOptions && isCategory && !isOpened) || !hasSubOptions) {
-          return index === filteredOptions.length - 1;
-        }
-        return Boolean(
-          isSubOption &&
-            index === filteredOptions[categoryIndex!].options!.length - 1 &&
-            categoryIndex === filteredOptions.length - 1 &&
-            isSubOption,
-        );
-      };
-
-      if (isSubOption) console.log(categoryValue, item.value, isSelected);
+      const firstListItem =
+        (index === 0 && hasSubOptions && isCategory) ||
+        (index === 0 && !hasSubOptions);
 
       return (
         <View
           row
           style={[
             styles.listItem,
-            index === 0 ? styles.firstListItem : undefined,
-            isLastItem() ? styles.lastListItem : undefined,
-            isSelected ? styles.listItemSelected : undefined,
+            firstListItem ? styles.firstListItem : undefined,
+            isSelected(item, categoryValue)
+              ? multipleSelection
+                ? styles.listItemSelectedMultiple
+                : styles.listItemSelected
+              : undefined,
             isOpened ? styles.listItemOpened : undefined,
             isSubOption ? styles.listItemSubOption : undefined,
+            Boolean(isCategory && selectedQuantity(item.value) && !isOpened)
+              ? styles.listItemWithSubOptionsSelected
+              : undefined,
           ]}
         >
           <View style={styles.optionTextContainer}>
             <Text
-              style={isSelected ? styles.optionTextSelected : styles.optionText}
+              style={[
+                styles.optionText,
+                isSelected(item, categoryValue)
+                  ? multipleSelection || Boolean(isCategory && !isOpened)
+                    ? styles.optionTextSelectedMultiple
+                    : !isOpened && styles.optionTextSelected
+                  : undefined,
+              ]}
             >
               {item.label}
             </Text>
-            {isCategory && item.selectedQuantity && (
-              <Text
-                style={styles.optionText}
-              >{`(${item.selectedQuantity})`}</Text>
+            {Boolean(
+              isCategory && selectedQuantity(item.value) && multipleSelection,
+            ) && (
+              <View style={styles.optionTextQuantityContainer}>
+                <Text style={styles.optionTextQuantity}>
+                  {selectedQuantity(item.value)}
+                </Text>
+              </View>
             )}
           </View>
           {isCategory ? (
             <View>{isOpened ? <ToggleOnIcon /> : <ToggleOffIcon />}</View>
+          ) : multipleSelection ? (
+            <Checkbox
+              value={isSelected(item, categoryValue)}
+              borderRadius={styles.optionIconMultiple.borderRadius}
+              color={
+                isSelected(item, categoryValue)
+                  ? styles.optionIconSelectedMultiple.color
+                  : styles.optionIconMultiple.color
+              }
+            />
           ) : (
             <RadioButton
-              selected={isSelected}
+              selected={isSelected(item, categoryValue)}
               color={
-                isSelected
+                isSelected(item, categoryValue)
                   ? styles.optionIconSelected.color
                   : styles.optionIcon.color
               }
@@ -156,60 +144,67 @@ export const FilterableSelectScreen = memo(
         />
         <View style={styles.listContainer}>
           {listTitle && <Text style={styles.sectionTitle}>{listTitle}</Text>}
-          <View style={styles.list}>
-            <FlatList
-              removeClippedSubviews
-              data={filteredOptions}
-              initialNumToRender={15}
-              renderItem={({ item, index }) => {
-                return hasSubOptions ? (
-                  <ExpandableSection
-                    sectionHeader={_renderItem({
-                      item,
-                      index,
-                      isCategory: true,
-                    })}
-                    expanded={item.value === openedOption}
-                    onPress={() => onOpenOption(item)}
-                  >
-                    <FlatList
-                      data={item.options}
-                      renderItem={({
-                        item: subOption,
-                        index: subOtionIndex,
-                      }) => {
-                        return (
-                          <TouchableWithoutFeedback
-                            onPress={() =>
-                              onSubOptionSelected(item.value, subOption)
-                            }
-                          >
-                            {renderItem?.(subOption, subOtionIndex) ??
-                              _renderItem({
-                                item: subOption,
-                                index: subOtionIndex,
-                                categoryValue: item.value,
-                                isSubOption: true,
-                                categoryIndex: index,
-                              })}
-                          </TouchableWithoutFeedback>
-                        );
-                      }}
-                      showsVerticalScrollIndicator={false}
-                    />
-                  </ExpandableSection>
-                ) : (
-                  <TouchableWithoutFeedback
-                    onPress={() => onOptionSelected(item)}
-                  >
-                    {renderItem?.(item, index) ?? _renderItem({ item, index })}
-                  </TouchableWithoutFeedback>
-                );
-              }}
-              showsVerticalScrollIndicator={false}
+          <FlatList
+            style={[
+              styles.list,
+              !filteredOptions.length ? styles.noList : undefined,
+            ]}
+            removeClippedSubviews
+            data={filteredOptions}
+            initialNumToRender={15}
+            renderItem={({ item, index }) => {
+              return hasSubOptions ? (
+                <ExpandableSection
+                  sectionHeader={_renderItem({
+                    item,
+                    index,
+                    isCategory: true,
+                  })}
+                  expanded={item.value === openedOption}
+                  onPress={() => onOpenOption(item)}
+                >
+                  <FlatList
+                    data={item.options}
+                    renderItem={({ item: subOption, index: subOtionIndex }) => {
+                      return (
+                        <TouchableWithoutFeedback
+                          onPress={() =>
+                            onSubOptionSelected(item.value, subOption)
+                          }
+                        >
+                          {renderItem?.(subOption, subOtionIndex) ??
+                            _renderItem({
+                              item: subOption,
+                              index: subOtionIndex,
+                              isSubOption: true,
+                              categoryValue: item.value,
+                            })}
+                        </TouchableWithoutFeedback>
+                      );
+                    }}
+                  />
+                </ExpandableSection>
+              ) : (
+                <TouchableWithoutFeedback
+                  onPress={() => onOptionSelected(item)}
+                >
+                  {renderItem?.(item, index) ?? _renderItem({ item, index })}
+                </TouchableWithoutFeedback>
+              );
+            }}
+          />
+          {!filteredOptions.length && (
+            <Text style={styles.noResultsText}>Nessun risultato trovato</Text>
+          )}
+        </View>
+        {multipleSelection && (
+          <View>
+            <Button
+              onPress={() => confirmSelection()}
+              label="Conferma selezione"
             />
           </View>
-        </View>
+        )}
       </View>
     );
   },

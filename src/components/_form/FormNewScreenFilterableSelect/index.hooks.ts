@@ -1,10 +1,11 @@
-import { JSX, useCallback } from "react";
+import { JSX, useCallback, useMemo, useRef } from "react";
 import useFormField from "@app/hooks/useFormField";
 import { useNavigation } from "@react-navigation/native";
+import { TextInput } from "react-native";
 
-export const useFormNewScreenFilterableSelect = <
-  T extends { label: string; value: string },
->({
+type SelectValue = SelectOption | SelectOption[] | string;
+
+export const useFormNewScreenFilterableSelect = <T extends SelectOption>({
   name,
   options,
   pageProps,
@@ -22,18 +23,34 @@ export const useFormNewScreenFilterableSelect = <
   };
 }) => {
   const navigation = useNavigation<any>();
-  const { value, setValue } = useFormField<string>({ name });
+  const { value, setValue } = useFormField<SelectValue>({ name });
+
+  const inputRef = useRef<TextInput>(null);
+
+  const hasSubOptions = useMemo(
+    () => options.some((option) => option.options),
+    [options],
+  );
 
   const onBackFromChoosingScreen = useCallback(
-    (value?: string) => {
+    (value?: SelectValue) => {
       if (value) {
-        setValue(value);
+        if (
+          !hasSubOptions &&
+          !Array.isArray(value) &&
+          typeof value !== "string"
+        ) {
+          setValue(value.value);
+        } else {
+          setValue(value);
+        }
       }
     },
-    [setValue],
+    [setValue, value, multipleSelection, options],
   );
 
   const onFieldClicked = useCallback(() => {
+    inputRef.current?.blur();
     navigation.navigate("form-filterable-select", {
       onGoBack: onBackFromChoosingScreen,
       options,
@@ -41,7 +58,15 @@ export const useFormNewScreenFilterableSelect = <
       pageProps,
       multipleSelection,
     });
-  }, [navigation, onBackFromChoosingScreen, options, pageProps, value]);
+  }, [
+    navigation,
+    onBackFromChoosingScreen,
+    options,
+    pageProps,
+    value,
+    inputRef,
+    multipleSelection,
+  ]);
 
-  return { onFieldClicked };
+  return { onFieldClicked, inputRef };
 };

@@ -10,3 +10,12 @@ declare module "react-native-svg" {
     size?: number;
   }
 }
+
+declare global {
+  type SelectOption = {
+    label: string;
+    reducedLabel?: string;
+    value: string;
+    options?: Omit<SelectOption, "options">[];
+  };
+}
