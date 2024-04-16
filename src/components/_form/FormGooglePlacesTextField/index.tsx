@@ -26,7 +26,7 @@ export const FormGooglePlacesTextField = memo(
           onFail={(error) => console.log(error)}
           onNotFound={() => console.log("no results")}
           query={{
-            key: "AIzaSyAIjKhORY1ndCu3Xww0F7t70b29hjyUPg8",
+            key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
             components: "country:it",
             language: "it",
           }}
