@@ -32,7 +32,8 @@ import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
-import { UserChooseProfessionalOfferScreen } from "../../screens/UserChooseProfessionalOffer";
+import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
+import { DeleteReservationScreen } from "@app/screens/DeleteReservation";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,7 +50,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName="tutorial">
+        <Stack.Navigator initialRouteName="professional-delete-reservation">
           <Stack.Screen
             name="form-filterable-select"
             component={FilterableSelectScreen}
@@ -173,6 +174,18 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
+            }}
+          />
+          <Stack.Screen
+            name="professional-delete-reservation"
+            component={DeleteReservationScreen}
+            options={{
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen
