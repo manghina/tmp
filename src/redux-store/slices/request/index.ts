@@ -18,6 +18,9 @@ export const requestStore = createSlice({
   name: "request",
   initialState,
   reducers: {
+    setRequestsList: (state, action: PayloadAction<IRequest[]>) => {
+      state.list = action.payload;
+    },
     messageSubmitted: (state, action: PayloadAction<string>) => {},
     startPollingRequest: (state) => {
       state.isPolling = true;
@@ -26,11 +29,18 @@ export const requestStore = createSlice({
       state.isPolling = false;
     },
     setCurrentRequest: (state, action: PayloadAction<IRequest | null>) => {
+      const shouldResetRelatedFields =
+        action.payload?._id !== state.currentRequest?._id;
+
       state.currentRequest = action.payload;
-      state.currentRequestProfessionalOffers =
-        initialState.currentRequestProfessionalOffers;
-      state.chosenProfessionalOfferId = initialState.chosenProfessionalOfferId;
-      state.chosenSlotId = initialState.chosenSlotId;
+
+      if (shouldResetRelatedFields) {
+        state.currentRequestProfessionalOffers =
+          initialState.currentRequestProfessionalOffers;
+        state.chosenProfessionalOfferId =
+          initialState.chosenProfessionalOfferId;
+        state.chosenSlotId = initialState.chosenSlotId;
+      }
     },
     setChosenProfessionalOfferId: (state, action: PayloadAction<string>) => {
       state.chosenProfessionalOfferId = action.payload;
@@ -38,6 +48,7 @@ export const requestStore = createSlice({
     setChosenSlotId: (state, action: PayloadAction<string>) => {
       state.chosenSlotId = action.payload;
     },
+    paymentSucceeded: (state) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(

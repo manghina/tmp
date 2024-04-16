@@ -10,6 +10,7 @@ import {
 import { actions, selectors } from "@app/redux-store";
 import { IRequest, Request, RequestStatus } from "@app/models/Request";
 import NavigationService from "../../../models/NavigationService";
+import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
 
 export function* sendMessageSaga() {
   yield takeEvery(actions.messageSubmitted, function* (messageSubmittedAction) {
@@ -75,7 +76,26 @@ export function* requestUpdatingSaga() {
       currentRequest?.currentStatus ===
       RequestStatus.PROFESSIONAL_OFFERS_CREATED
     ) {
-      NavigationService.replace("requests/professional-offers");
+      NavigationService.replace(RequestSearchProfessionalsScreen.RouteName);
     }
   }
+}
+
+export function* paymentSucceededSaga() {
+  yield takeEvery(actions.paymentSucceeded, function* () {
+    const currentRequest: Request | null = yield select(
+      selectors.getCurrentRequest,
+    );
+
+    if (!currentRequest) {
+      return;
+    }
+
+    const updatedRequest = new Request({
+      ...currentRequest,
+      currentStatus: RequestStatus.VISIT_SCHEDULED,
+    });
+
+    yield put(actions.setCurrentRequest(updatedRequest.toInterface()));
+  });
 }

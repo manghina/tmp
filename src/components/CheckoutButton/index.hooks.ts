@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
+import { RequestStatus } from "@app/models/Request";
 
 export const useCheckoutButton = (
   professionalOfferId: string,
@@ -18,6 +19,7 @@ export const useCheckoutButton = (
     useStripe();
 
   const cookie = useSelector(selectors.getCookie);
+  const currentRequest = useSelector(selectors.getCurrentRequest);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -113,15 +115,10 @@ export const useCheckoutButton = (
         );
       }
     } else {
-      dispatch(
-        actions.setFeedback({
-          type: "success",
-          message: "Pagamento completato con successo",
-        }),
-      );
+      dispatch(actions.paymentSucceeded());
       navigation.navigate(RequestPaymentSucceededScreen.RouteName);
     }
-  }, [dispatch, presentPaymentSheet]);
+  }, [dispatch, presentPaymentSheet, initializePaymentSheet, currentRequest]);
 
   // TODO: capire come e dove gestire il deep link
   // Qui dice che serve solo per iOS
