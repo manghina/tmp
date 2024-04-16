@@ -22,7 +22,7 @@ interface ProfessionalRegisterFormData {
   professionalPaperPhoto: any;
   professionalRegistrationNumber: string;
   province: string;
-  specialization: SelectOption[];
+  specialization: string[];
   officeLocation: string;
   email: string;
   password: string;
@@ -55,18 +55,7 @@ const schema = yup.object().shape({
   province: yup.string().required("Inserisci la tua provincia"),
   specialization: yup
     .array()
-    .of(
-      yup.object().shape({
-        label: yup.string().required(),
-        value: yup.string().required(),
-        options: yup.array().of(
-          yup.object().shape({
-            label: yup.string().required(),
-            value: yup.string().required(),
-          }),
-        ),
-      }),
-    )
+    .of(yup.string().required())
     .required("Inserisci la tua specializzazione"),
   officeLocation: yup.string().required("Inserisci la tua sede"),
   email: yup
@@ -294,8 +283,7 @@ export const useProfessionalRegister = () => {
             lastName: data.lastName,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
             phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
-            // @ts-ignore
-            specializations: [data.specialization],
+            specializations: data.specialization,
             city: data.officeLocation,
             alboId: data.professionalRegistrationNumber,
           }),

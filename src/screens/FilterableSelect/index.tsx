@@ -23,15 +23,12 @@ export const FilterableSelectScreen = memo(
       onTextFieldChange,
       pageTitle,
       pageDescription,
-      searchText,
       searchTextLabel,
       listTitle,
       onOptionSelected,
-      renderItem,
       onOpenOption,
       openedOption,
       hasSubOptions,
-      onSubOptionSelected,
       multipleSelection,
       isSelected,
       selectedQuantity,
@@ -43,14 +40,11 @@ export const FilterableSelectScreen = memo(
       index,
       isCategory,
       isSubOption,
-      categoryValue,
     }: {
       item: SelectOption;
       index: number;
       isCategory?: boolean;
       isSubOption?: boolean;
-      categoryValue?: string;
-      categoryIndex?: number;
     }) => {
       const isOpened = isCategory && item.value === openedOption;
       const firstListItem =
@@ -63,14 +57,14 @@ export const FilterableSelectScreen = memo(
           style={[
             styles.listItem,
             firstListItem ? styles.firstListItem : undefined,
-            isSelected(item, categoryValue)
+            isSelected(item)
               ? multipleSelection
                 ? styles.listItemSelectedMultiple
                 : styles.listItemSelected
               : undefined,
             isOpened ? styles.listItemOpened : undefined,
             isSubOption ? styles.listItemSubOption : undefined,
-            Boolean(isCategory && selectedQuantity(item.value) && !isOpened)
+            Boolean(isCategory && selectedQuantity(item) && !isOpened)
               ? styles.listItemWithSubOptionsSelected
               : undefined,
           ]}
@@ -79,7 +73,7 @@ export const FilterableSelectScreen = memo(
             <Text
               style={[
                 styles.optionText,
-                isSelected(item, categoryValue)
+                isSelected(item)
                   ? multipleSelection || Boolean(isCategory && !isOpened)
                     ? styles.optionTextSelectedMultiple
                     : !isOpened && styles.optionTextSelected
@@ -89,11 +83,11 @@ export const FilterableSelectScreen = memo(
               {item.label}
             </Text>
             {Boolean(
-              isCategory && selectedQuantity(item.value) && multipleSelection,
+              isCategory && selectedQuantity(item) && multipleSelection,
             ) && (
               <View style={styles.optionTextQuantityContainer}>
                 <Text style={styles.optionTextQuantity}>
-                  {selectedQuantity(item.value)}
+                  {selectedQuantity(item)}
                 </Text>
               </View>
             )}
@@ -103,19 +97,19 @@ export const FilterableSelectScreen = memo(
               <View>{isOpened ? <ToggleOnIcon /> : <ToggleOffIcon />}</View>
             ) : multipleSelection ? (
               <Checkbox
-                value={isSelected(item, categoryValue)}
+                value={isSelected(item)}
                 borderRadius={styles.optionIconMultiple.borderRadius}
                 color={
-                  isSelected(item, categoryValue)
+                  isSelected(item)
                     ? styles.optionIconSelectedMultiple.color
                     : styles.optionIconMultiple.color
                 }
               />
             ) : (
               <RadioButton
-                selected={isSelected(item, categoryValue)}
+                selected={isSelected(item)}
                 color={
-                  isSelected(item, categoryValue)
+                  isSelected(item)
                     ? styles.optionIconSelected.color
                     : styles.optionIcon.color
                 }
@@ -141,7 +135,6 @@ export const FilterableSelectScreen = memo(
             </View>
           }
           label={searchTextLabel}
-          value={searchText}
           onChange={onTextFieldChange}
         />
         <View style={styles.listContainer}>
@@ -170,17 +163,13 @@ export const FilterableSelectScreen = memo(
                     renderItem={({ item: subOption, index: subOtionIndex }) => {
                       return (
                         <TouchableWithoutFeedback
-                          onPress={() =>
-                            onSubOptionSelected(item.value, subOption)
-                          }
+                          onPress={() => onOptionSelected(subOption.value)}
                         >
-                          {renderItem?.(subOption, subOtionIndex) ??
-                            _renderItem({
-                              item: subOption,
-                              index: subOtionIndex,
-                              isSubOption: true,
-                              categoryValue: item.value,
-                            })}
+                          {_renderItem({
+                            item: subOption,
+                            index: subOtionIndex,
+                            isSubOption: true,
+                          })}
                         </TouchableWithoutFeedback>
                       );
                     }}
@@ -188,9 +177,9 @@ export const FilterableSelectScreen = memo(
                 </ExpandableSection>
               ) : (
                 <TouchableWithoutFeedback
-                  onPress={() => onOptionSelected(item)}
+                  onPress={() => onOptionSelected(item.value)}
                 >
-                  {renderItem?.(item, index) ?? _renderItem({ item, index })}
+                  {_renderItem({ item, index })}
                 </TouchableWithoutFeedback>
               );
             }}

@@ -12,10 +12,10 @@ declare module "react-native-svg" {
 }
 
 declare global {
-  type SelectOption = {
+  interface SelectOption {
     label: string;
     reducedLabel?: string;
     value: string;
     options?: Omit<SelectOption, "options">[];
-  };
+  }
 }

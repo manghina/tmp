@@ -1231,7 +1231,7 @@ const phonePrefixOptions = [
   },
 ];
 
-const provincesOptions = [
+const provincesOptions: SelectOption[] = [
   {
     label: "Agrigento",
     value: "AG",
@@ -3533,4 +3533,12 @@ const professionsOptions = [
   },
 ];
 
-export { phonePrefixOptions, provincesOptions, professionsOptions };
+const newData = [
+  {
+    label: "Hello",
+    value: "1",
+    prova: "heeeee",
+  },
+];
+
+export { phonePrefixOptions, provincesOptions, professionsOptions, newData };

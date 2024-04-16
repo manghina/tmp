@@ -1,5 +1,3 @@
-import { Specialization } from "@app/models/common/DoctorCommon";
-
 export interface IProfessional {
   _id: string;
   accountId: string;
@@ -8,7 +6,7 @@ export interface IProfessional {
   birthDate: string;
   email: string;
   phones: string[];
-  specializations: Specialization[];
+  specializations: string[];
   city: string;
   alboId: string;
   created: Date;
@@ -28,7 +26,7 @@ export class Professional implements IProfessional {
   birthDate!: string;
   email!: string;
   phones!: string[];
-  specializations!: Specialization[];
+  specializations!: string[];
   city!: string;
   alboId!: string;
   created!: Date;

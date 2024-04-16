@@ -11,6 +11,18 @@ import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import { ScrollView } from "react-native";
 import { colorTokens } from "@app/theme/colors/tokens";
 
+const newData: {
+  label: string;
+  value: string;
+  prova: string;
+}[] = [
+  {
+    label: "Hello",
+    value: "1",
+    prova: "heeeee",
+  },
+];
+
 export const ProfessionalRegisterScreen = () => {
   const {
     formData,
@@ -99,6 +111,7 @@ export const ProfessionalRegisterScreen = () => {
         label="Specializzazione"
         options={professionsOptions}
         multipleSelection={true}
+        showSubOptions={true}
         pageProps={{
           pageTitle: "Seleziona tipologia",
           pageDescription:

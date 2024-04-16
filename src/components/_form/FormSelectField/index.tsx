@@ -11,6 +11,7 @@ export type FormSelectFieldProps = {
   inputRef?: React.RefObject<TextInput>;
   options: SelectOption[];
   reducedLabel?: boolean;
+  showSubOptions?: boolean;
 } & TextFieldProps;
 
 export const FormSelectField = memo(
@@ -22,12 +23,14 @@ export const FormSelectField = memo(
     placeholder,
     options,
     reducedLabel,
+    showSubOptions,
     ...props
   }: FormSelectFieldProps) => {
     const { error, formattedValue, subOptionsValue } = useFormSelectField(
       name,
       options,
       reducedLabel,
+      showSubOptions,
     );
     return (
       <BaseTextField
