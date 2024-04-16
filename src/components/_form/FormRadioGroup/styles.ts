@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     borderColor: colorTokens.colorBorder,
     justifyContent: "space-between",
     padding: dimensionsTokens.paddingXs,
+    alignItems: "center",
   },
   firstListItem: {
     borderTopLeftRadius: Dimensions.small.spacing_100,
