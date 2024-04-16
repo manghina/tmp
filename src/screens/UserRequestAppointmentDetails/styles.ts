@@ -51,6 +51,15 @@ export const styles = StyleSheet.create({
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextDefault,
   },
+  professionalDescriptionContainer: {
+    padding: dimensionsTokens.paddingXs,
+    backgroundColor: colorTokens.colorBackgroundNeutral,
+    borderRadius: 8,
+  },
+  professionalDescription: {
+    ...textVariants.p2BoldItalic,
+    color: colorTokens.colorTextDefault,
+  },
   costRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -110,5 +119,26 @@ export const styles = StyleSheet.create({
   infoIndicatorP1: {
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextInformation,
+  },
+  actionsContainer: {
+    paddingTop: dimensionsTokens.padding3Xs,
+    gap: dimensionsTokens.padding3Xs,
+  },
+  actionsContainerTitle: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextDefault,
+    textAlign: "center",
+  },
+  actionButton: {
+    backgroundColor: colorTokens.colorBackgroundBrandBold,
+    paddingVertical: dimensionsTokens.paddingXs,
+    borderRadius: 8,
+  },
+  actionText: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextInverse,
+  },
+  actionDanger: {
+    backgroundColor: colorTokens.colorBackgroundDangerBold,
   },
 });

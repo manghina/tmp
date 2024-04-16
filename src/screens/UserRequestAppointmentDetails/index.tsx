@@ -1,10 +1,11 @@
-import { Text, TouchableOpacity, View } from "react-native-ui-lib";
+import { Button, Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { useUserRequestAppointmentDetailsScreen } from "@app/screens/UserRequestAppointmentDetails/index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./styles";
 import { RequestStatus } from "@app/models/Request";
 import CalendarAddIcon from "@app/components/SvgIcons/CalendarAddIcon";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { ProfessionalAvatarDetails } from "@app/components/_users/ProfessionalAvatarDetails";
 
 type UserRequestAppointmentDetailsScreenProps = {};
 
@@ -24,7 +25,23 @@ export const UserRequestAppointmentDetailsScreen =
     const renderProfessionalCard = () => (
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Professionista</Text>
-        <View style={styles.sectionContent}></View>
+        <View style={styles.sectionContent}>
+          {chosenProfessionalOffer && (
+            <ProfessionalAvatarDetails
+              professional={chosenProfessionalOffer.professional}
+            />
+          )}
+          <View style={styles.subSection}>
+            <Text style={styles.sectionSubtitle}>Perfetto per te!</Text>
+            <View style={styles.professionalDescriptionContainer}>
+              <Text style={styles.professionalDescription}>
+                “ Lorem ipsum dolor sit amet consectetur. Id facilisis
+                vestibulum metus. Lorem ipsum dolor sit amet consectetur. Id
+                facilisis vestibulum metus. ”
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
     );
 
@@ -120,6 +137,24 @@ export const UserRequestAppointmentDetailsScreen =
       </View>
     );
 
+    const renderActions = () => (
+      <View style={styles.actionsContainer}>
+        <Text style={styles.actionsContainerTitle}>
+          Azioni al momento disponibili
+        </Text>
+        {currentRequest?.currentStatus === RequestStatus.VISIT_SCHEDULED && (
+          <Button style={[styles.actionButton, styles.actionDanger]}>
+            <Text style={styles.actionText}>Annulla appuntamento</Text>
+          </Button>
+        )}
+        {currentRequest?.currentStatus === RequestStatus.VISIT_COMPLETED && (
+          <Button style={[styles.actionButton]}>
+            <Text style={styles.actionText}>Lascia una recensione</Text>
+          </Button>
+        )}
+      </View>
+    );
+
     return (
       <SafeAreaView style={styles.safeArea}>
         <ScrollView style={styles.scrollView}>
@@ -144,6 +179,7 @@ export const UserRequestAppointmentDetailsScreen =
               {renderProfessionalCard()}
               {renderVisitDetails()}
               {renderCosts()}
+              {renderActions()}
             </View>
           </View>
         </ScrollView>
