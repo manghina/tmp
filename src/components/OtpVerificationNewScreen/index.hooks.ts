@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 
 type OtpVerificationNewScreenProps = {
   componentProps: {
@@ -18,7 +19,7 @@ export const useOtpVerificationNewScreen = ({
   const navigation = useNavigation<any>();
 
   const onOpenScreenClicked = useCallback(() => {
-    navigation.navigate("otp-verification", {
+    navigation.navigate(OtpVerificationScreen.RouteName, {
       handleGoBack,
       componentProps,
       handleVerification,

@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { actions, selectors } from "@app/redux-store";
 import { useDispatch, useSelector } from "react-redux";
+import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
+import { HomeScreen } from "@app/screens/Home";
 
 type LoginFormData = {
   email: string;
@@ -84,11 +86,11 @@ export const useLoginScreen = () => {
 
   const onForgotPasswordButtonPressed = useCallback(() => {
     dispatch(actions.setForgotPasswordStepperCounter(1));
-    navigation.navigate("forgot-password");
+    navigation.navigate(ForgotPasswordScreen.RouteName);
   }, [dispatch, navigation]);
 
   const onRegisterButtonPressed = useCallback(
-    () => navigation.replace("home"),
+    () => navigation.replace(HomeScreen.RouteName),
     [navigation],
   );
 

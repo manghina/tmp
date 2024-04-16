@@ -5,6 +5,7 @@ import { apiBaseUrl } from "@app/config";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
 
 export const useCheckoutButton = (
   professionalOfferId: string,
@@ -118,7 +119,7 @@ export const useCheckoutButton = (
           message: "Pagamento completato con successo",
         }),
       );
-      navigation.navigate("requests/payment-succeeded");
+      navigation.navigate(RequestPaymentSucceededScreen.RouteName);
     }
   }, [dispatch, presentPaymentSheet]);
 
