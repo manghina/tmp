@@ -98,28 +98,30 @@ export const FilterableSelectScreen = memo(
               </View>
             )}
           </View>
-          {isCategory ? (
-            <View>{isOpened ? <ToggleOnIcon /> : <ToggleOffIcon />}</View>
-          ) : multipleSelection ? (
-            <Checkbox
-              value={isSelected(item, categoryValue)}
-              borderRadius={styles.optionIconMultiple.borderRadius}
-              color={
-                isSelected(item, categoryValue)
-                  ? styles.optionIconSelectedMultiple.color
-                  : styles.optionIconMultiple.color
-              }
-            />
-          ) : (
-            <RadioButton
-              selected={isSelected(item, categoryValue)}
-              color={
-                isSelected(item, categoryValue)
-                  ? styles.optionIconSelected.color
-                  : styles.optionIcon.color
-              }
-            />
-          )}
+          <View style={styles.optionIconContainer}>
+            {isCategory ? (
+              <View>{isOpened ? <ToggleOnIcon /> : <ToggleOffIcon />}</View>
+            ) : multipleSelection ? (
+              <Checkbox
+                value={isSelected(item, categoryValue)}
+                borderRadius={styles.optionIconMultiple.borderRadius}
+                color={
+                  isSelected(item, categoryValue)
+                    ? styles.optionIconSelectedMultiple.color
+                    : styles.optionIconMultiple.color
+                }
+              />
+            ) : (
+              <RadioButton
+                selected={isSelected(item, categoryValue)}
+                color={
+                  isSelected(item, categoryValue)
+                    ? styles.optionIconSelected.color
+                    : styles.optionIcon.color
+                }
+              />
+            )}
+          </View>
         </View>
       );
     };

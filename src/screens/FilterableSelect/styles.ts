@@ -56,6 +56,8 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: dimensionsTokens.paddingXs,
     backgroundColor: colorTokens.elevationSurface,
+    alignItems: "center",
+    gap: dimensionsTokens.padding3Xs,
   },
   firstListItem: {
     borderTopWidth: 0,
@@ -81,6 +83,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: dimensionsTokens.padding3Xs,
+    flexShrink: 1,
   },
   optionTextQuantityContainer: {
     backgroundColor: colorTokens.colorBackgroundBrandBold,
@@ -97,6 +100,9 @@ export const styles = StyleSheet.create({
   optionText: {
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextDefault,
+  },
+  optionIconContainer: {
+    flexShrink: 0,
   },
   optionIcon: {
     color: colorTokens.colorBorder,
