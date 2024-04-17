@@ -56,7 +56,7 @@ export const ProfileEditScreen = () => {
         <FormTextField name="lastName" label="Cognome" />
         <FormDatePicker name="birthDate" label="Data di nascita" />
         <FormNewScreenFilterableSelect
-          // key="country"
+          key="country"
           name="country"
           label="Nazione (cittadinanza)"
           options={countryOptions}
@@ -87,7 +87,7 @@ export const ProfileEditScreen = () => {
           <View style={userProfileEditStyles.phoneInputContainer}>
             <View style={userProfileEditStyles.phonePrefixContainer}>
               <FormNewScreenFilterableSelect
-                // key="phonePrefix"
+                key="phonePrefix"
                 name="phonePrefix"
                 label=""
                 options={phonePrefixOptions}
@@ -99,6 +99,7 @@ export const ProfileEditScreen = () => {
                   listTitle: "Lista nazioni",
                 }}
                 style={userProfileEditStyles.phonePrefix}
+                reducedLabel
               />
             </View>
             <View style={userProfileEditStyles.phoneNumberContainer}>

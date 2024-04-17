@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, Button } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
-
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { FormGooglePlacesTextField } from "@app/components/_form/FormGooglePlacesTextField";
@@ -10,7 +9,7 @@ import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScre
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
 import { styles } from "./styles";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
-import { SafeAreaView, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 import { colorTokens } from "@app/theme/colors/tokens";
 
 export const ProfessionalRegisterScreen = () => {
@@ -45,7 +44,6 @@ export const ProfessionalRegisterScreen = () => {
             <FormNewScreenFilterableSelect
               key="phonePrefix"
               name="phonePrefix"
-              label=""
               options={phonePrefixOptions}
               pageProps={{
                 pageTitle: "Seleziona prefisso",
@@ -56,6 +54,7 @@ export const ProfessionalRegisterScreen = () => {
               }}
               style={styles.phonePrefix}
               disabled={true}
+              reducedLabel
             />
           </View>
           <View style={styles.phoneNumberContainer}>
@@ -100,6 +99,8 @@ export const ProfessionalRegisterScreen = () => {
         name="specialization"
         label="Specializzazione"
         options={professionsOptions}
+        multipleSelection={true}
+        showSubOptions={true}
         pageProps={{
           pageTitle: "Seleziona tipologia",
           pageDescription:

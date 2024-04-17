@@ -22,6 +22,20 @@ export const styles = StyleSheet.create({
     paddingRight: dimensionsTokens.paddingXs,
     paddingBottom: dimensionsTokens.paddingXs,
   },
+  inputWithSubText: {
+    paddingTop: dimensionsTokens.padding3Xs,
+    paddingBottom: dimensionsTokens.paddingMd,
+  },
+  subTextContainer: {
+    position: "absolute",
+    bottom: 0,
+    paddingHorizontal: dimensionsTokens.paddingXs,
+    paddingBottom: dimensionsTokens.padding3Xs,
+  },
+  subText: {
+    ...textVariants.p3MediumItalic,
+    color: colorTokens.colorTextSubtlest,
+  },
   showHidePasswordButton: {
     width: 40,
     height: 40,

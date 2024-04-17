@@ -1,4 +1,3 @@
-import { Specialization } from "../../../../models/common/DoctorCommon";
 import {
   apiActionBuilder,
   apiRequestPayloadBuilder,
@@ -7,15 +6,15 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
-import { IAccount } from "../../../../models/Account";
-import { IProfessional } from "../../../../models/Professional";
+import { IAccount } from "@app/models/Account";
+import { IProfessional } from "@app/models/Professional";
 
 export interface PostProfessionalsParams {
   name: string;
   lastName: string;
   birthDate: string;
   phones: string[];
-  specializations: Specialization[];
+  specializations: string[];
   city: string;
   alboId: string;
 }
