@@ -178,6 +178,18 @@ export const useProfessionalRegister = () => {
     ],
   );
 
+  const macroSpecializations = useMemo(
+    () =>
+      professionsOptions
+        .filter((specializationData) =>
+          specializationData.options.some((pathology) =>
+            (specialization ?? []).includes(pathology.value),
+          ),
+        )
+        .map((specData) => specData.value),
+    [specialization],
+  );
+
   useEffect(() => {
     console.log("province", province);
     console.log("specialization", specialization);
@@ -210,6 +222,15 @@ export const useProfessionalRegister = () => {
       !step3Filled,
     [isDirty, isSubmitted, isValid, step1Filled, step2Filled, step3Filled],
   );
+
+  console.log({
+    isDirty,
+    isSubmitted,
+    isValid,
+    step1Filled,
+    step2Filled,
+    step3Filled,
+  });
 
   const canGoToNextStep = useMemo(() => {
     switch (stepperIndex) {
@@ -283,13 +304,13 @@ export const useProfessionalRegister = () => {
             lastName: data.lastName,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
             phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
-            specializations: data.specialization,
+            specializations: macroSpecializations,
             city: data.officeLocation,
             alboId: data.professionalRegistrationNumber,
           }),
         );
       }),
-    [dispatch, handleSubmit],
+    [dispatch, handleSubmit, macroSpecializations],
   );
 
   const onNextStepButtonPressed = useCallback(async () => {

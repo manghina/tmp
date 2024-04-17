@@ -1,3 +1,5 @@
+import { Specialization } from "@app/models/Doctor";
+
 const phonePrefixOptions = [
   {
     label: "🇦🇫 Afghanistan (+93)",
@@ -1454,10 +1456,17 @@ const provincesOptions: SelectOption[] = [
   },
 ];
 
-const professionsOptions = [
+const professionsOptions: {
+  label: string;
+  value: Specialization;
+  options: {
+    label: string;
+    value: string;
+  }[];
+}[] = [
   {
     label: "Allergologo",
-    value: "3a458b9b-d016-47b7-867e-fbde00be4bda",
+    value: Specialization.ALLERGOLOGO,
     options: [
       {
         label: "Immunologia clinica",
@@ -1491,7 +1500,7 @@ const professionsOptions = [
   },
   {
     label: "Andrologo",
-    value: "12e642d5-acfd-454f-bf30-198698c06a20",
+    value: Specialization.ANDROLOGO,
     options: [
       {
         label: "Disfunzione erettile",
@@ -1525,7 +1534,7 @@ const professionsOptions = [
   },
   {
     label: "Angiologo",
-    value: "f7aa04c9-fe70-43f6-87b7-f44c7906051d",
+    value: Specialization.ANGIOLOGO,
     options: [
       {
         label: "Malattie arteriose",
@@ -1559,7 +1568,7 @@ const professionsOptions = [
   },
   {
     label: "Audiologo, Foniatra",
-    value: "07f07f0e-47fe-48fc-a278-5f864e984711",
+    value: Specialization.AUDIOPROTESISTA,
     options: [
       {
         label: "Audiologia pediatrica",
@@ -1605,7 +1614,7 @@ const professionsOptions = [
   },
   {
     label: "Cardiochirurgo",
-    value: "d796c2a2-03d3-4b70-8612-084a9905d68b",
+    value: Specialization.CARDIOCHIRURGO,
     options: [
       {
         label: "Chirurgia coronarica",
@@ -1651,7 +1660,7 @@ const professionsOptions = [
   },
   {
     label: "Cardiologo",
-    value: "169b822c-b1cc-4f71-b03d-0513f5e3af40",
+    value: Specialization.CARDIOLOGO,
     options: [
       {
         label: "Cardiologia preventiva",
@@ -1689,7 +1698,7 @@ const professionsOptions = [
   },
   {
     label: "Chirurgo Generale",
-    value: "e79f915b-f87f-4101-b825-434369b8d1f6",
+    value: Specialization.CHIRURGO_GENERALE,
     options: [
       {
         label: "Chirurgia laparoscopica",
@@ -1727,7 +1736,7 @@ const professionsOptions = [
   },
   {
     label: "Chirurgo Maxillo-Facciale",
-    value: "ec452644-31d5-46e4-88f1-b9567b2ac235",
+    value: Specialization.CHIRURGO_MAXILLO_FACCIALE,
     options: [
       {
         label: "Chirurgia ortognatica",
@@ -1765,7 +1774,7 @@ const professionsOptions = [
   },
   {
     label: "Chiururgo Pediatrico",
-    value: "766ffc3b-c53c-477c-921b-ac79eac90a36",
+    value: Specialization.CHIRURGO_PEDIATRICO,
     options: [
       {
         label: "Chirurgia neonatale",
@@ -1803,7 +1812,7 @@ const professionsOptions = [
   },
   {
     label: "Chirurgo Plastico, Estetico e Ricostruttivo",
-    value: "80d32adf-50f6-468f-ac35-b3af252475ca",
+    value: Specialization.CHIRURGO_PLASTICO,
     options: [
       {
         label:
@@ -1843,7 +1852,7 @@ const professionsOptions = [
   },
   {
     label: "Chirurgo Toracico",
-    value: "3e309c33-67cb-4a6e-b608-ec9f83220832",
+    value: Specialization.CHIRURGO_TORACICO,
     options: [
       {
         label: "Chirurgia oncologica toracica",
@@ -1881,7 +1890,7 @@ const professionsOptions = [
   },
   {
     label: "Chirurgo Vascolare",
-    value: "6f7aefda-8bd4-4176-b84b-06237792080f",
+    value: Specialization.CHIRURGO_VASCOLARE,
     options: [
       {
         label: "Chirurgia dell'aneurisma aortico",
@@ -1919,7 +1928,7 @@ const professionsOptions = [
   },
   {
     label: "Proctologo",
-    value: "a3763cb9-27d6-42b7-94a4-349c6919ec4c",
+    value: Specialization.PROCTOLOGO,
     options: [
       {
         label: "Malattie emorroidali",
@@ -1958,7 +1967,7 @@ const professionsOptions = [
   },
   {
     label: "Dermatologo",
-    value: "f504de59-5e55-4f76-8dbe-ba972674b024",
+    value: Specialization.DERMATOLOGO,
     options: [
       {
         label: "Dermatologia clinica",
@@ -1996,7 +2005,7 @@ const professionsOptions = [
   },
   {
     label: "Diabetologo",
-    value: "1f09a876-5a78-4ede-a8dc-0c29f54c38e4",
+    value: Specialization.DIABETOLOGO,
     options: [
       {
         label: "Gestione del diabete di tipo 1",
@@ -2034,7 +2043,7 @@ const professionsOptions = [
   },
   {
     label: "Dietologo",
-    value: "07f4f910-241b-403d-820b-ca5280531175",
+    value: Specialization.DIETOLOGO,
     options: [
       {
         label: "Nutrizione clinica",
@@ -2073,7 +2082,7 @@ const professionsOptions = [
   },
   {
     label: "Ematologo",
-    value: "0c9833b9-026a-4fcc-9a04-09a1c883b3ee",
+    value: Specialization.EMATOLOGO,
     options: [
       {
         label: "Oncologia ematologica",
@@ -2111,7 +2120,7 @@ const professionsOptions = [
   },
   {
     label: "Endocrinologo",
-    value: "0700a0a6-7699-4221-a315-b4397d290053",
+    value: Specialization.ENDOCRINOLOGO,
     options: [
       {
         label: "Diabete e disturbi del metabolismo",
@@ -2149,7 +2158,7 @@ const professionsOptions = [
   },
   {
     label: "Fisiatra",
-    value: "9107b433-8f8b-46fc-b2f0-98e99bb8c739",
+    value: Specialization.FISIATRA,
     options: [
       {
         label: "Riabilitazione ortopedica",
@@ -2187,7 +2196,7 @@ const professionsOptions = [
   },
   {
     label: "Fisioterapista",
-    value: "a0fd3e0e-c6a5-4f71-b205-f25c11dc7330",
+    value: Specialization.FISIOTERAPISTA,
     options: [
       {
         label: "Ortopedia e traumatologia",
@@ -2225,7 +2234,7 @@ const professionsOptions = [
   },
   {
     label: "Gastroenterologo",
-    value: "aacdcdf9-a133-455e-af1c-41e80da43daa",
+    value: Specialization.GASTROENTEROLOGO,
     options: [
       {
         label: "Endoscopia digestiva",
@@ -2263,7 +2272,7 @@ const professionsOptions = [
   },
   {
     label: "Medico Genetista",
-    value: "bc31e349-6cdd-403f-9b7b-265268743238",
+    value: Specialization.MEDICO_GENETISTA,
     options: [
       {
         label: "Genetica clinica",
@@ -2301,7 +2310,7 @@ const professionsOptions = [
   },
   {
     label: "Geriatra, Gerontologo",
-    value: "ff67c695-21e5-4a84-a443-c74b50b44870",
+    value: Specialization.GERIATRA,
     options: [
       {
         label: "Gestione della polifarmacoterapia",
@@ -2339,7 +2348,7 @@ const professionsOptions = [
   },
   {
     label: "Ginecologo",
-    value: "c8f89642-0b52-4a1e-b761-ec3ef5d010cc",
+    value: Specialization.GINECOLOGO,
     options: [
       {
         label: "Ostetricia",
@@ -2377,7 +2386,7 @@ const professionsOptions = [
   },
   {
     label: "Logopedista",
-    value: "17f06c7c-0ab5-4f63-9182-93bf580a60ff",
+    value: Specialization.LOGOPEDISTA,
     options: [
       {
         label: "Disturbi dell'articolazione e della fonazione",
@@ -2417,7 +2426,7 @@ const professionsOptions = [
   },
   {
     label: "Infettivologo",
-    value: "060c1869-a5f6-4892-9d4e-00f0d731a3b8",
+    value: Specialization.INFETTIVOLOGO,
     options: [
       {
         label: "HIV/AIDS",
@@ -2455,7 +2464,7 @@ const professionsOptions = [
   },
   {
     label: "Medicina Certificativa",
-    value: "8c0a8430-7a68-490c-974f-3c95a0d55a81",
+    value: Specialization.MEDICO_CERTIFICATORE,
     options: [
       {
         label: "Medicina del lavoro e valutazioni di idoneità lavorativa",
@@ -2494,7 +2503,7 @@ const professionsOptions = [
   },
   {
     label: "Medico del Sonno",
-    value: "ce5661dd-7f20-463c-8e41-40e0f01583cb",
+    value: Specialization.MEDICINA_DEL_SONNO,
     options: [
       {
         label: "Apnea ostruttiva del sonno",
@@ -2532,7 +2541,7 @@ const professionsOptions = [
   },
   {
     label: "Medico dello Sport",
-    value: "f4446eeb-454d-425f-8a66-2973d947ef9a",
+    value: Specialization.MEDICO_DELLO_SPORT,
     options: [
       {
         label: "Medicina fisica e riabilitazione sportiva",
@@ -2570,7 +2579,7 @@ const professionsOptions = [
   },
   {
     label: "Medico Estetico",
-    value: "74034da9-36ca-42f7-b54a-3618b013d4ff",
+    value: Specialization.MEDICO_ESTETICO,
     options: [
       {
         label: "Dermatologia estetica",
@@ -2609,7 +2618,7 @@ const professionsOptions = [
   },
   {
     label: "Medico Legale",
-    value: "e433bb2b-1ed4-4ca8-88fa-383a4f1d9f71",
+    value: Specialization.MEDICO_LEGALE,
     options: [
       {
         label: "Valutazione del danno biologico",
@@ -2647,12 +2656,12 @@ const professionsOptions = [
   },
   {
     label: "Medico Nucleare",
-    value: "33bc6c48-8abf-484a-b386-c9e1ee3c6d63",
+    value: Specialization.MEDICO_NUCLEARE,
     options: [],
   },
   {
     label: "Nefrologo",
-    value: "e4ce9202-0bcb-41cb-b91e-595022f449e5",
+    value: Specialization.NEFROLOGO,
     options: [
       {
         label: "Insufficienza renale acuta e cronica",
@@ -2690,7 +2699,7 @@ const professionsOptions = [
   },
   {
     label: "Neurochirurgo",
-    value: "0454df62-88e5-49ba-8bfd-358565273298",
+    value: Specialization.NEUROCHIRURGO,
     options: [
       {
         label: "Chirurgia del tumore cerebrale",
@@ -2728,7 +2737,7 @@ const professionsOptions = [
   },
   {
     label: "Neurologo",
-    value: "aaeefe54-fbd3-429c-a1f1-16144a735f20",
+    value: Specialization.NEUROLOGO,
     options: [
       {
         label: "Malattie cerebrovascolari (ictus)",
@@ -2766,7 +2775,7 @@ const professionsOptions = [
   },
   {
     label: "Neuropsichiatra infantile",
-    value: "dc29d590-5fb6-4e79-9e06-c4edeec1f88d",
+    value: Specialization.NEUROPSICHIATRA_INFANTILE,
     options: [
       {
         label: "Disturbi dello spettro autistico",
@@ -2804,7 +2813,7 @@ const professionsOptions = [
   },
   {
     label: "Oculista",
-    value: "a940ac79-9144-4609-ab2f-64f9bce01a69",
+    value: Specialization.OCULISTA,
     options: [
       {
         label: "Cataratta",
@@ -2842,7 +2851,7 @@ const professionsOptions = [
   },
   {
     label: "Odontoiatra",
-    value: "f81c13c6-83a6-4d75-b574-91d0e3072a66",
+    value: Specialization.ODONTOTECNICO,
     options: [
       {
         label: "Ortodonzia",
@@ -2884,7 +2893,7 @@ const professionsOptions = [
   },
   {
     label: "Oncologo",
-    value: "72fd83cb-6d71-4a67-a09d-3ad7aaddebea",
+    value: Specialization.ONCOLOGO,
     options: [
       {
         label: "Oncologia medica",
@@ -2922,7 +2931,7 @@ const professionsOptions = [
   },
   {
     label: "Ortopedico e Traumatologo",
-    value: "8d4c59aa-5929-48cd-90a8-ce5804bd62f4",
+    value: Specialization.ORTOPEDICO,
     options: [
       {
         label: "Chirurgia artroscopica",
@@ -2960,7 +2969,7 @@ const professionsOptions = [
   },
   {
     label: "Pediatra Ortopedico",
-    value: "26d06441-54f9-4ad5-ba87-6841a69e2e0b",
+    value: Specialization.PEDIATRA_ORTOPEDICO,
     options: [
       {
         label: "Deformità congenite degli arti",
@@ -2998,7 +3007,7 @@ const professionsOptions = [
   },
   {
     label: "Osteopata",
-    value: "89e0a761-a3a8-42ef-bcad-5be859d9d79e",
+    value: Specialization.OSTEOPATA,
     options: [
       {
         label: "Osteopatia strutturale",
@@ -3036,7 +3045,7 @@ const professionsOptions = [
   },
   {
     label: "Otorinolaringoiatra",
-    value: "13994d36-6f6e-4751-b6a8-dcc9caabadb8",
+    value: Specialization.OTORINO,
     options: [
       {
         label: "Audiologia e sordità",
@@ -3074,7 +3083,7 @@ const professionsOptions = [
   },
   {
     label: "Pediatra",
-    value: "f222a8f4-66dc-48c2-b434-136b14703926",
+    value: Specialization.PEDIATRA,
     options: [
       {
         label: "Pediatria generale",
@@ -3112,7 +3121,7 @@ const professionsOptions = [
   },
   {
     label: "Pneumologo",
-    value: "448a2232-34da-453b-8e85-054d82f66c8c",
+    value: Specialization.PNEUMOLOGO,
     options: [
       {
         label: "Asma e malattie ostruttive croniche",
@@ -3150,7 +3159,7 @@ const professionsOptions = [
   },
   {
     label: "Podologo",
-    value: "5105d1cf-818e-428e-b6c8-9f2d87ec7e09",
+    value: Specialization.PODOLOGO,
     options: [
       {
         label: "Ortopodologia",
@@ -3188,7 +3197,7 @@ const professionsOptions = [
   },
   {
     label: "Medico della Procreazione",
-    value: "d7563051-77dd-4da6-bc06-06a371420730",
+    value: Specialization.MEDICO_DELLA_PROCREAZIONE,
     options: [
       {
         label: "Fertilità e infertilità",
@@ -3226,7 +3235,7 @@ const professionsOptions = [
   },
   {
     label: "Psichiatra",
-    value: "e1325936-4323-4f56-acf9-1a0415250220",
+    value: Specialization.PSICHIATRA,
     options: [
       {
         label: "Psichiatria clinica",
@@ -3264,7 +3273,7 @@ const professionsOptions = [
   },
   {
     label: "Psicologo",
-    value: "3719f719-d238-427f-9605-e241c2fd367b",
+    value: Specialization.PSICOLOGO,
     options: [
       {
         label: "Psicologia clinica",
@@ -3302,7 +3311,7 @@ const professionsOptions = [
   },
   {
     label: "Radiologo",
-    value: "beca4a23-7c20-4568-89c3-3c5ece9da722",
+    value: Specialization.RADIOLOGO,
     options: [
       {
         label: "Radiologia diagnostica",
@@ -3340,7 +3349,7 @@ const professionsOptions = [
   },
   {
     label: "Radioterapista",
-    value: "875e5717-4303-4dcd-a86d-6899e3541bbd",
+    value: Specialization.RADIOTERAPISTA,
     options: [
       {
         label: "Oncologia radioterapica",
@@ -3378,7 +3387,7 @@ const professionsOptions = [
   },
   {
     label: "Reumatologo",
-    value: "6c55efe0-234f-4bce-858a-d9ca568fc71f",
+    value: Specialization.REUMATOLOGO,
     options: [
       {
         label: "Artrite reumatoide",
@@ -3416,7 +3425,7 @@ const professionsOptions = [
   },
   {
     label: "Medico del Dolore",
-    value: "77a5ff87-7d7e-4f58-8cf5-02a068f0c7c1",
+    value: Specialization.MEDICO_DEL_DOLORE,
     options: [
       {
         label: "Terapia del dolore acuto",
@@ -3454,7 +3463,7 @@ const professionsOptions = [
   },
   {
     label: "Tricologo",
-    value: "94fb7f3e-d323-4011-ace1-1cb2fc5b290e",
+    value: Specialization.TRICOLOGO,
     options: [
       {
         label: "Diagnosi e trattamento della calvizie (alopecia androgenetica)",
@@ -3495,7 +3504,7 @@ const professionsOptions = [
   },
   {
     label: "Urologo",
-    value: "a8fb7bc3-b541-41fa-b605-ce0fd48be798",
+    value: Specialization.UROLOGO,
     options: [
       {
         label: "Oncologia urologica",
@@ -3533,12 +3542,4 @@ const professionsOptions = [
   },
 ];
 
-const newData = [
-  {
-    label: "Hello",
-    value: "1",
-    prova: "heeeee",
-  },
-];
-
-export { phonePrefixOptions, provincesOptions, professionsOptions, newData };
+export { phonePrefixOptions, provincesOptions, professionsOptions };

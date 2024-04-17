@@ -3,6 +3,7 @@ import { AccountState } from "./account.interfaces";
 import * as selectors from "./account.selectors";
 import * as sagas from "./account.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
+import { Specialization } from "@app/models/Doctor";
 
 export const accountStore = createSlice({
   name: "account",
@@ -42,7 +43,7 @@ export const accountStore = createSlice({
         lastName: string;
         birthDate: string;
         phones: string[];
-        specializations: string[];
+        specializations: Specialization[];
         city: string;
         alboId: string;
         email: string;
