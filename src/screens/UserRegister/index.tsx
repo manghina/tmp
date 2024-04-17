@@ -1,6 +1,6 @@
-import { View, Text, Button, Colors } from "react-native-ui-lib";
+import React from "react";
+import { View, Text, Button } from "react-native-ui-lib";
 import { useUserRegisterScreen } from "./index.hooks";
-import React, { memo } from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
@@ -13,7 +13,7 @@ import { colorTokens } from "@app/theme/colors/tokens";
 
 type UserRegisterScreenProps = {};
 
-export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
+export const UserRegisterScreen = ({}: UserRegisterScreenProps) => {
   const {
     formData,
     stepperCounter,
@@ -134,6 +134,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
       </FormProvider>
     </ScrollView>
   );
-});
+};
 
 UserRegisterScreen.displayName = "UserRegisterScreen";
+UserRegisterScreen.RouteName = "user-register" as const;

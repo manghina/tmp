@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React from "react";
 import { useRequestSearchProfessionalsScreen } from "./index.hooks";
 import { View, Text, TouchableOpacity } from "react-native-ui-lib";
 import { ProfessionalSearchCarousel } from "@app/components/_users/ProfessionalResearchCarousel";
@@ -7,7 +7,7 @@ import { styles } from "./styles";
 
 type RequestSearchProfessionalsScreenProps = {};
 
-export const RequestSearchProfessionalsScreen = memo(
+export const RequestSearchProfessionalsScreen =
   ({}: RequestSearchProfessionalsScreenProps) => {
     const { onBackButtonPress, pageDescription } =
       useRequestSearchProfessionalsScreen();
@@ -35,8 +35,9 @@ export const RequestSearchProfessionalsScreen = memo(
         </View>
       </SafeAreaView>
     );
-  },
-);
+  };
 
 RequestSearchProfessionalsScreen.displayName =
   "RequestSearchProfessionalsScreen";
+RequestSearchProfessionalsScreen.RouteName =
+  "requests/search-professionals" as const;

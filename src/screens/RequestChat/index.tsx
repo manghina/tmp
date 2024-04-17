@@ -1,11 +1,5 @@
-import { memo } from "react";
-import {
-  Colors,
-  Text,
-  TextField,
-  TouchableOpacity,
-  View,
-} from "react-native-ui-lib";
+import React from "react";
+import { Text, TextField, TouchableOpacity, View } from "react-native-ui-lib";
 import { useRequestChatScreen } from "./index.hooks";
 import {
   ActivityIndicator,
@@ -20,10 +14,10 @@ import { ChatBubble } from "@app/components/ChatBubble";
 import SendMessageSvg from "@app/components/SendMessageSvg";
 import { ChatStatus } from "@app/models/Request";
 import { TypingIndicator } from "@app/components/TypingIndicator";
-import { colorTokens } from "../../theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 type RequestChatProps = {};
-export const RequestChatScreen = memo(({}: RequestChatProps) => {
+export const RequestChatScreen = ({}: RequestChatProps) => {
   const {
     isLoading,
     writingDisabled,
@@ -191,6 +185,7 @@ export const RequestChatScreen = memo(({}: RequestChatProps) => {
       )}
     </SafeAreaView>
   );
-});
+};
 
 RequestChatScreen.displayName = "RequestChatScreen";
+RequestChatScreen.RouteName = "requests/chat" as const;

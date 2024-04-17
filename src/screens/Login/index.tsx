@@ -10,7 +10,7 @@ import LottieView from "lottie-react-native";
 
 type LoginScreenProps = {};
 
-export const LoginScreen = memo(({}: LoginScreenProps) => {
+export const LoginScreen = ({}: LoginScreenProps) => {
   const {
     formData,
     submitDisabled,
@@ -78,6 +78,7 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
       </View>
     </SafeAreaView>
   );
-});
+};
 
 LoginScreen.displayName = "LoginScreen";
+LoginScreen.RouteName = "login" as const;

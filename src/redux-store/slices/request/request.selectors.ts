@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "@app/redux-store";
 import { Request } from "@app/models/Request";
-import { ProfessionalOffer } from "../../../models/ProfessionalOffer";
+import { ProfessionalOffer } from "@app/models/ProfessionalOffer";
 
 export const getRequestsList = createSelector(
   (state: RootState) => state?.request?.list ?? [],

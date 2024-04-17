@@ -1,6 +1,6 @@
+import React from "react";
 import { View, Text, Button } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
-import React from "react";
 
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
@@ -193,3 +193,6 @@ export const ProfessionalRegisterScreen = () => {
     </View>
   );
 };
+
+ProfessionalRegisterScreen.displayName = "ProfessionalRegisterScreen";
+ProfessionalRegisterScreen.RouteName = "professional-register" as const;

@@ -1,6 +1,5 @@
-import { memo } from "react";
 import { useUserChooseProfessionalOfferScreen } from "./index.hooks";
-import { ProgressBar, Text, TouchableOpacity, View } from "react-native-ui-lib";
+import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { ActivityIndicator, SafeAreaView, ScrollView } from "react-native";
 import { bottomInfoHeight, bottomInteractionHeight, styles } from "./styles";
 import { colorTokens } from "@app/theme/colors/tokens";
@@ -10,7 +9,7 @@ import { FormProvider } from "react-hook-form";
 
 type UserChooseProfessionalOfferScreenProps = {};
 
-export const UserChooseProfessionalOfferScreen = memo(
+export const UserChooseProfessionalOfferScreen =
   ({}: UserChooseProfessionalOfferScreenProps) => {
     const { formData, isFetchingProfessionalOffers, slotChosen, onSubmit } =
       useUserChooseProfessionalOfferScreen();
@@ -81,8 +80,9 @@ export const UserChooseProfessionalOfferScreen = memo(
         {slotChosen ? renderSubmitButton() : renderHowDoesItWork()}
       </SafeAreaView>
     );
-  },
-);
+  };
 
 UserChooseProfessionalOfferScreen.displayName =
   "UserChooseProfessionalOfferScreen";
+UserChooseProfessionalOfferScreen.RouteName =
+  "requests/professional-offers" as const;
