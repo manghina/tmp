@@ -3,6 +3,7 @@ import { selectors } from "@app/redux-store";
 import { useCallback, useMemo } from "react";
 import { User } from "@app/models/User";
 import { useNavigation } from "@react-navigation/native";
+import { UserSettingsScreen } from "@app/screens/UserSettings";
 
 export const useUserHeader = () => {
   const me: User | null = useSelector(selectors.getMe);
@@ -19,7 +20,7 @@ export const useUserHeader = () => {
   );
 
   const goToProfile = useCallback(() => {
-    navigation.navigate("user-settings");
+    navigation.navigate(UserSettingsScreen.RouteName);
   }, []);
 
   return { initials, goToProfile };

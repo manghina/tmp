@@ -23,30 +23,6 @@ export const styles = StyleSheet.create({
   cardSelected: {
     borderColor: colorTokens.colorBorderFocused,
   },
-  doctorGeneralitiesContainer: {
-    flexDirection: "row",
-    gap: Dimensions.small.spacing_100,
-  },
-  doctorAvatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    flexShrink: 0,
-    borderWidth: 2,
-    borderColor: colorTokens.colorBorder,
-  },
-  doctorNameText: {
-    ...textVariants.p1BoldNormal,
-    color: colorTokens.colorTextDefault,
-  },
-  doctorSpecializationText: {
-    ...textVariants.p2BoldItalic,
-    color: colorTokens.colorTextBrand,
-  },
-  doctorDistanceText: {
-    ...textVariants.p2BoldNormal,
-    color: colorTokens.colorTextBrand,
-  },
   section: {
     gap: Dimensions.small.spacing_100,
   },

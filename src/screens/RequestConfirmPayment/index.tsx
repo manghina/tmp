@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { Text, View } from "react-native-ui-lib";
 import { useRequestConfirmPaymentScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
@@ -9,7 +8,7 @@ import moment from "moment";
 const formatPrice = (price: number): string =>
   `€ ${(price / 100).toFixed(2).replace(".", ",")}`;
 
-export const RequestConfirmPaymentScreen = memo(() => {
+export const RequestConfirmPaymentScreen = () => {
   const { professionalOffer, slot } = useRequestConfirmPaymentScreen();
 
   if (!slot || !professionalOffer) {
@@ -82,6 +81,7 @@ export const RequestConfirmPaymentScreen = memo(() => {
       </ScrollView>
     </SafeAreaView>
   );
-});
+};
 
 RequestConfirmPaymentScreen.displayName = "RequestConfirmPaymentScreen";
+RequestConfirmPaymentScreen.RouteName = "requests/confirm-payment" as const;

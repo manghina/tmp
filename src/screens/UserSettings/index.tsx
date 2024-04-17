@@ -4,7 +4,7 @@ import { Button } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import { userHomeStyles } from "./styles";
 
-export const UserSettingsScreen = memo(() => {
+export const UserSettingsScreen = () => {
   const { handleLogout } = useUserSettingsScreen();
 
   return (
@@ -16,6 +16,7 @@ export const UserSettingsScreen = memo(() => {
       </SafeAreaView>
     </>
   );
-});
+};
 
 UserSettingsScreen.displayName = "UserSettingsScreen";
+UserSettingsScreen.RouteName = "user-settings";

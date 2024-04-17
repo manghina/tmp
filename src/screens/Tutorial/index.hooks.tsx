@@ -5,8 +5,6 @@ import tutorialImage1 from "@assets/img/doc11.png";
 import tutorialImage2 from "@assets/img/doc9.png";
 import tutorialImage3 from "@assets/img/doc15.png";
 
-import { Button, Text, View } from "react-native-ui-lib";
-
 const intervalBetweenImages = 5000;
 
 const bgImages = [tutorialImage1, tutorialImage2, tutorialImage3];

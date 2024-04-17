@@ -5,6 +5,7 @@ import { RequestStatus } from "src/models/Request";
 import { RequestCardProps } from "src/components/RequestCard";
 import { CardStatus } from "src/components/RequestCard/index.hooks";
 import { useNavigation } from "@react-navigation/native";
+import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
 
 export const useProfessionalActiveProfessionalOffersList = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export const useProfessionalActiveProfessionalOffersList = () => {
                 },
               ),
             );
-            navigator.navigate("professional-offers/details");
+            navigator.navigate(ProfessionalOfferDetailScreen.RouteName);
           },
         };
       }),

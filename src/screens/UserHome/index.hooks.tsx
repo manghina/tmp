@@ -3,6 +3,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { User } from "@app/models/User";
+import { RequestChatScreen } from "@app/screens/RequestChat";
+import { LoginScreen } from "@app/screens/Login";
 
 export const useUserHomeScreen = () => {
   const dispatch = useDispatch();
@@ -13,12 +15,12 @@ export const useUserHomeScreen = () => {
 
   const onSweepNowButtonPressed = useCallback(() => {
     dispatch(actions.setCurrentRequest(null));
-    navigation.navigate("requests/chat");
+    navigation.navigate(RequestChatScreen.RouteName);
   }, [dispatch, navigation]);
 
   useEffect(() => {
     if (!me) {
-      navigation.replace("login");
+      navigation.replace(LoginScreen.RouteName);
     }
   }, [me, navigation]);
 

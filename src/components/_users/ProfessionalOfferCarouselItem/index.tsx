@@ -5,6 +5,7 @@ import moment from "moment";
 import { IProfessionalOffer } from "@app/models/ProfessionalOffer";
 import { useProfessionalOfferCarouselItem } from "./index.hooks";
 import { styles } from "./styles";
+import { ProfessionalAvatarDetails } from "@app/components/_users/ProfessionalAvatarDetails";
 
 type ProfessionalOfferCarouselItemProps = {
   professionalOffer: IProfessionalOffer;
@@ -28,23 +29,6 @@ export const ProfessionalOfferCarouselItem = memo(
       professionalOfferSelected,
       onSlotChosenCallbacks,
     } = useProfessionalOfferCarouselItem(index, scrollX, professionalOffer);
-
-    const renderDoctorGeneralities = () => (
-      <View style={styles.doctorGeneralitiesContainer}>
-        <View style={styles.doctorAvatar}></View>
-        <View>
-          <Text style={styles.doctorNameText}>
-            Dott. {professionalOffer.professional.name}{" "}
-            {professionalOffer.professional.lastName[0].toUpperCase()}.
-          </Text>
-          <Text style={styles.doctorSpecializationText}>
-            Specialità:{" "}
-            {professionalOffer.professional?.specializations[0] ?? "xxxxxxxxx"}
-          </Text>
-          <Text style={styles.doctorDistanceText}>a 10 min da te</Text>
-        </View>
-      </View>
-    );
 
     const renderDoctorInfo = () => (
       <View style={styles.section}>
@@ -145,7 +129,9 @@ export const ProfessionalOfferCarouselItem = memo(
             professionalOfferSelected && styles.cardSelected,
           ]}
         >
-          {renderDoctorGeneralities()}
+          <ProfessionalAvatarDetails
+            professional={professionalOffer.professional}
+          />
           {renderDoctorInfo()}
           {renderSlotsOptions()}
         </View>

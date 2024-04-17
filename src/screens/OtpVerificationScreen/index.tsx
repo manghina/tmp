@@ -4,7 +4,7 @@ import { SafeAreaView, ScrollView } from "react-native";
 import { style } from "./styles";
 import { OtpVerification } from "@app/components/OtpVerification";
 
-export const OtpVerificationScreen = memo(() => {
+export const OtpVerificationScreen = () => {
   const {
     componentDescription,
     componentTitle,
@@ -28,6 +28,7 @@ export const OtpVerificationScreen = memo(() => {
       </SafeAreaView>
     </>
   );
-});
+};
 
 OtpVerificationScreen.displayName = "OtpVerificationScreen";
+OtpVerificationScreen.RouteName = "otp-verification" as const;

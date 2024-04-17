@@ -1,6 +1,7 @@
 import { JSX, useCallback } from "react";
 import useFormField from "@app/hooks/useFormField";
 import { useNavigation } from "@react-navigation/native";
+import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 
 export const useFormNewScreenFilterableSelect = <
   T extends { label: string; value: string },
@@ -32,7 +33,7 @@ export const useFormNewScreenFilterableSelect = <
   );
 
   const onFieldClicked = useCallback(() => {
-    navigation.navigate("form-filterable-select", {
+    navigation.navigate(FilterableSelectScreen.RouteName, {
       onGoBack: onBackFromChoosingScreen,
       options,
       value,

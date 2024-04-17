@@ -1,25 +1,9 @@
 import { Button, Text, View } from "react-native-ui-lib";
 import { useTutorialScreen } from "./index.hooks";
-import {
-  Animated,
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { Animated, ImageBackground, SafeAreaView } from "react-native";
 import { RegisterBottomSheet } from "@app/components/RegisterBottomSheet";
 import { LoginBottomSheet } from "@app/components/LoginBottomSheet";
-
-const styles = StyleSheet.create({
-  defaultAnimatedBarStyles: {
-    position: "absolute",
-    width: 4,
-    height: "100%",
-    backgroundColor: "#3C77E8",
-    borderRadius: 1,
-    bottom: 0,
-    transformOrigin: "bottom",
-  },
-});
+import { styles } from "./styles";
 
 export const TutorialScreen = () => {
   const {
@@ -187,3 +171,6 @@ export const TutorialScreen = () => {
     </ImageBackground>
   );
 };
+
+TutorialScreen.displayName = "TutorialScreen";
+TutorialScreen.RouteName = "tutorial" as const;
