@@ -1233,7 +1233,7 @@ const phonePrefixOptions = [
   },
 ];
 
-const provincesOptions: SelectOption[] = [
+const provincesOptions = [
   {
     label: "Agrigento",
     value: "AG",
