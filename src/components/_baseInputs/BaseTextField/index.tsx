@@ -36,7 +36,7 @@ export const BaseTextField = memo(
         <View>
           <TextField
             editable={editable}
-            ref={(ref: TextInput) =>
+            ref={(ref: any) =>
               _inputRef ? (_inputRef.current = ref) : (inputRef.current = ref)
             }
             onFocus={onFocus}
