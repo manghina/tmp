@@ -223,15 +223,6 @@ export const useProfessionalRegister = () => {
     [isDirty, isSubmitted, isValid, step1Filled, step2Filled, step3Filled],
   );
 
-  console.log({
-    isDirty,
-    isSubmitted,
-    isValid,
-    step1Filled,
-    step2Filled,
-    step3Filled,
-  });
-
   const canGoToNextStep = useMemo(() => {
     switch (stepperIndex) {
       case 1:
