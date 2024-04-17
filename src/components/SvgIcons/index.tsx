@@ -29,6 +29,8 @@ import SuccessFilledIcon from "./SuccessFilledIcon";
 import SurveyIcon from "./SurveyIcon";
 import TermsAndConditionsIcon from "./TermsAndConditionsIcon";
 import TimerIcon from "./TimerIcon";
+import ToggleOffIcon from "./ToggleOffIcon";
+import ToggleOnIcon from "./ToggleOnIcon";
 import VisibilityIcon from "./VisibilityIcon";
 import VisibilityOffIcon from "./VisibilityOffIcon";
 import WalletIcon from "./WalletIcon";
@@ -66,6 +68,8 @@ export {
   SurveyIcon,
   TermsAndConditionsIcon,
   TimerIcon,
+  ToggleOffIcon,
+  ToggleOnIcon,
   VisibilityIcon,
   VisibilityOffIcon,
   WalletIcon,
