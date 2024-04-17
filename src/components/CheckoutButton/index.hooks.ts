@@ -4,8 +4,6 @@ import { actions, selectors } from "@app/redux-store";
 import { apiBaseUrl } from "@app/config";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Linking } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
 import { RequestStatus } from "@app/models/Request";
 
 export const useCheckoutButton = (
@@ -13,7 +11,6 @@ export const useCheckoutButton = (
   slotId: string,
 ) => {
   const dispatch = useDispatch();
-  const navigation = useNavigation<any>();
 
   const { initPaymentSheet, presentPaymentSheet, handleURLCallback } =
     useStripe();
@@ -115,8 +112,12 @@ export const useCheckoutButton = (
         );
       }
     } else {
-      dispatch(actions.paymentSucceeded());
-      navigation.navigate(RequestPaymentSucceededScreen.RouteName);
+      dispatch(
+        actions.patchUsersMeRequestsByRequestId.request({
+          requestId: currentRequest!._id,
+          status: RequestStatus.VERIFYING_PAYMENT,
+        }),
+      );
     }
   }, [dispatch, presentPaymentSheet, initializePaymentSheet, currentRequest]);
 

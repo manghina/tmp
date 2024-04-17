@@ -142,12 +142,16 @@ export const UserRequestAppointmentDetailsScreen =
         <Text style={styles.actionsContainerTitle}>
           Azioni al momento disponibili
         </Text>
-        {currentRequest?.currentStatus === RequestStatus.VISIT_SCHEDULED && (
+        {[
+          RequestStatus.VERIFYING_PAYMENT,
+          RequestStatus.APPOINTMENT_SCHEDULED,
+        ].includes(currentRequest?.currentStatus!) && (
           <Button style={[styles.actionButton, styles.actionDanger]}>
             <Text style={styles.actionText}>Annulla appuntamento</Text>
           </Button>
         )}
-        {currentRequest?.currentStatus === RequestStatus.VISIT_COMPLETED && (
+        {currentRequest?.currentStatus ===
+          RequestStatus.APPOINTMENT_COMPLETED && (
           <Button style={[styles.actionButton]}>
             <Text style={styles.actionText}>Lascia una recensione</Text>
           </Button>
@@ -161,17 +165,22 @@ export const UserRequestAppointmentDetailsScreen =
           <View style={styles.mainContainer}>
             <View style={styles.pageTitleContainer}>
               <Text style={styles.pageTitle}>
+                {[
+                  RequestStatus.VERIFYING_PAYMENT,
+                  RequestStatus.APPOINTMENT_SCHEDULED,
+                ].includes(currentRequest?.currentStatus!) &&
+                  "Tutto confermato!"}
                 {currentRequest?.currentStatus ===
-                  RequestStatus.VISIT_SCHEDULED && "Tutto confermato!"}
-                {currentRequest?.currentStatus ===
-                  RequestStatus.VISIT_COMPLETED && "Sei stato visitato!"}
+                  RequestStatus.APPOINTMENT_COMPLETED && "Sei stato visitato!"}
               </Text>
               <Text style={styles.pageSubtitle}>
-                {currentRequest?.currentStatus ===
-                  RequestStatus.VISIT_SCHEDULED &&
+                {[
+                  RequestStatus.VERIFYING_PAYMENT,
+                  RequestStatus.APPOINTMENT_SCHEDULED,
+                ].includes(currentRequest?.currentStatus!) &&
                   "Preparati ad essere ricevut@! Il Medico ti aspetta."}
                 {currentRequest?.currentStatus ===
-                  RequestStatus.VISIT_COMPLETED &&
+                  RequestStatus.APPOINTMENT_COMPLETED &&
                   "Raccontaci come è andata. Tutto quello che dirai non verrà condiviso se non in forma anonima e servirà a Sweep a migliorare enormemente!"}
               </Text>
             </View>

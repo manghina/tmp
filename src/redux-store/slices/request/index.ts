@@ -4,6 +4,7 @@ import * as selectors from "./request.selectors";
 import * as sagas from "./request.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
 import { IRequest } from "@app/models/Request";
+import { ProfessionalOfferStatus } from "@app/models/ProfessionalOffer";
 
 const initialState: RequestsState = {
   list: [],
@@ -18,9 +19,6 @@ export const requestStore = createSlice({
   name: "request",
   initialState,
   reducers: {
-    setRequestsList: (state, action: PayloadAction<IRequest[]>) => {
-      state.list = action.payload;
-    },
     messageSubmitted: (state, action: PayloadAction<string>) => {},
     startPollingRequest: (state) => {
       state.isPolling = true;
@@ -48,7 +46,6 @@ export const requestStore = createSlice({
     setChosenSlotId: (state, action: PayloadAction<string>) => {
       state.chosenSlotId = action.payload;
     },
-    paymentSucceeded: (state) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -61,11 +58,6 @@ export const requestStore = createSlice({
       extraActions.getUsersMeRequestsByRequestId.success,
       (state, action) => {
         state.currentRequest = action.payload.data.request;
-        state.currentRequestProfessionalOffers =
-          initialState.currentRequestProfessionalOffers;
-        state.chosenProfessionalOfferId =
-          initialState.chosenProfessionalOfferId;
-        state.chosenSlotId = initialState.chosenSlotId;
       },
     );
     builder.addCase(
@@ -96,10 +88,48 @@ export const requestStore = createSlice({
       },
     );
     builder.addCase(
+      extraActions.patchUsersMeRequestsByRequestId.success,
+      (state, action) => {
+        const { request } = action.payload.data;
+
+        state.currentRequest = request;
+        state.list = state.list.map((iRequest) =>
+          iRequest._id === request._id ? request : iRequest,
+        );
+      },
+    );
+    builder.addCase(
       extraActions.getUsersMeRequestsProfessionalOffersByRequestId.success,
       (state, action) => {
-        state.currentRequestProfessionalOffers =
-          action.payload.data.professionalOffers;
+        const { professionalOffers } = action.payload.data;
+
+        state.currentRequestProfessionalOffers = professionalOffers;
+
+        const acceptedProfessionalOffer = professionalOffers.find(
+          (professionalOffer) =>
+            professionalOffer.status === ProfessionalOfferStatus.Accepted,
+        );
+
+        if (!acceptedProfessionalOffer) {
+          state.chosenProfessionalOfferId =
+            initialState.chosenProfessionalOfferId;
+          state.chosenSlotId = initialState.chosenSlotId;
+          return;
+        }
+
+        const chosenSlot = (acceptedProfessionalOffer.slots ?? []).find(
+          (slot) => slot._id === acceptedProfessionalOffer!.selectedSlotIndex,
+        );
+
+        if (!chosenSlot) {
+          state.chosenSlotId = initialState.chosenSlotId;
+          state.chosenProfessionalOfferId =
+            initialState.chosenProfessionalOfferId;
+          return;
+        }
+
+        state.chosenSlotId = chosenSlot!._id!;
+        state.chosenProfessionalOfferId = acceptedProfessionalOffer!._id;
       },
     );
     builder.addCase(extraActions.clearSession, (state, action) => {

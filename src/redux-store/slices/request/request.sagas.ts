@@ -9,8 +9,9 @@ import {
 } from "redux-saga/effects";
 import { actions, selectors } from "@app/redux-store";
 import { IRequest, Request, RequestStatus } from "@app/models/Request";
-import NavigationService from "../../../models/NavigationService";
+import NavigationService from "@app/models/NavigationService";
 import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
 
 export function* sendMessageSaga() {
   yield takeEvery(actions.messageSubmitted, function* (messageSubmittedAction) {
@@ -81,21 +82,11 @@ export function* requestUpdatingSaga() {
   }
 }
 
-export function* paymentSucceededSaga() {
-  yield takeEvery(actions.paymentSucceeded, function* () {
-    const currentRequest: Request | null = yield select(
-      selectors.getCurrentRequest,
-    );
-
-    if (!currentRequest) {
-      return;
-    }
-
-    const updatedRequest = new Request({
-      ...currentRequest,
-      currentStatus: RequestStatus.VISIT_SCHEDULED,
-    });
-
-    yield put(actions.setCurrentRequest(updatedRequest.toInterface()));
-  });
+export function* requestPaidSaga() {
+  yield takeEvery(
+    actions.patchUsersMeRequestsByRequestId.success,
+    function* () {
+      NavigationService.navigate(RequestPaymentSucceededScreen.RouteName);
+    },
+  );
 }
