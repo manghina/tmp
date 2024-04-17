@@ -47,4 +47,8 @@ export const styles = StyleSheet.create({
   callToAction: {
     width: "100%",
   },
+  goBackText: {
+    textAlign: "center",
+    textDecorationLine: "underline",
+  },
 });

@@ -168,7 +168,10 @@ export const ProfessionalRegisterScreen = () => {
             disabled={isLastStep ? submitDisabled : !canGoToNextStep && false}
           />
           {!isFirstStep && (
-            <Text center underline onPress={onPreviousStepButtonPressed}>
+            <Text
+              style={styles.goBackText}
+              onPress={onPreviousStepButtonPressed}
+            >
               Torna indietro
             </Text>
           )}

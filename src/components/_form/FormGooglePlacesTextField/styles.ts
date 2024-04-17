@@ -44,7 +44,8 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundNeutral,
   },
   noResultsContainer: {
-    paddingVertical: dimensionsTokens.paddingXs,
+    paddingHorizontal: dimensionsTokens.paddingXs,
+    paddingVertical: dimensionsTokens.padding2Xs,
   },
   noResultsText: {
     ...textVariants.p2MediumNormal,

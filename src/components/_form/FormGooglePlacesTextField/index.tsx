@@ -18,13 +18,10 @@ export const FormGooglePlacesTextField = memo(
         <Text style={styles.label}>{props.label}</Text>
         <GooglePlacesAutocomplete
           placeholder={placeholder ?? "Cerca..."}
-          onPress={(data, details = null) => {
-            console.log(data, details); // check the data and details object
+          onPress={(data) => {
             handleChange(data.description);
           }}
           fetchDetails={true}
-          onFail={(error) => console.log(error)}
-          onNotFound={() => console.log("no results")}
           query={{
             key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
             components: "country:it",
