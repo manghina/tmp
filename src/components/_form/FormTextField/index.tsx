@@ -10,7 +10,10 @@ export type FormTextFieldProps = {
   name: string;
   type?: "text" | "password";
   trailingAccessory?: TextFieldProps["trailingAccessory"];
-  disabled: boolean;
+  textContentType?: string;
+  autoCorrect?: boolean;
+  keyboardType?: string;
+  disabled?: boolean;
 } & TextFieldProps;
 
 export const FormTextField = memo(
@@ -18,6 +21,9 @@ export const FormTextField = memo(
     name,
     type = "text",
     trailingAccessory,
+    textContentType,
+    autoCorrect,
+    keyboardType,
     disabled = false,
     ...props
   }: FormTextFieldProps) => {
@@ -38,6 +44,9 @@ export const FormTextField = memo(
         secureTextEntry={hideText}
         enableErrors={Boolean(error)}
         validationMessage={error}
+        textContentType={textContentType}
+        autoCorrect= {autoCorrect}
+        keyboardType= {keyboardType}
         trailingAccessory={
           trailingAccessory ||
           (type === "password" && (

@@ -11,6 +11,9 @@ export const BaseTextField = memo(
     validationMessage,
     style,
     editable,
+    textContentType,
+    autoCorrect,
+    keyboardType,
     ...props
   }: TextFieldProps) => {
     const { isFocused, onFocus, onBlur } = useBaseTextField();
@@ -25,9 +28,9 @@ export const BaseTextField = memo(
             onBlur={onBlur}
             autoCapitalize="none"
             secureTextEntry={true}
-            autoCorrect={false}
-
-            autoCorrect={false}
+            textContentType={textContentType}
+            autoCorrect= {autoCorrect}
+            keyboardType= {keyboardType}
             containerStyle={[
               styles.field,
               style,
