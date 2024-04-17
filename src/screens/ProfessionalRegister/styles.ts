@@ -6,17 +6,17 @@ import { colorTokens } from "../../theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   pageContainer: {
-    height: "100%",
     backgroundColor: colorTokens.elevationSurface,
+    height: "100%",
+  },
+  scrollView: {
+    height: "100%",
   },
   stepContent: {
-    display: "flex",
-    flexDirection: "column",
     gap: dimensionsTokens.paddingXs,
     padding: dimensionsTokens.paddingSm,
   },
   fieldsColumn: {
-    display: "flex",
     flexDirection: "column",
     gap: dimensionsTokens.paddingXs,
   },
@@ -39,12 +39,16 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
   },
   stepperControlsContainer: {
-    display: "flex",
     alignItems: "center",
-    gap: Dimensions.small.spacing_100,
-    marginVertical: Dimensions.small.spacing_100,
+    gap: dimensionsTokens.padding3Xs,
+    paddingHorizontal: dimensionsTokens.paddingSm,
+    paddingBottom: dimensionsTokens.paddingMd,
   },
   callToAction: {
     width: "100%",
+  },
+  goBackText: {
+    textAlign: "center",
+    textDecorationLine: "underline",
   },
 });

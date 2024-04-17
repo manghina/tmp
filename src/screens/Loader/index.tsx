@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Colors } from "react-native-ui-lib";
+import { View } from "react-native-ui-lib";
 import { Animated } from "react-native";
 import UnionSVG from "@assets/img/union.svg";
 import LogoSVG from "@assets/img/logo.svg";
 import { useLoaderScreen } from "./index.hooks";
-import { colorTokens } from "../../theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const LoaderScreen = () => {
   const { rotateInterpolate, progressBarWidth } = useLoaderScreen();
@@ -52,3 +52,6 @@ export const LoaderScreen = () => {
     </View>
   );
 };
+
+LoaderScreen.displayName = "LoaderScreen";
+LoaderScreen.RouteName = "loader" as const;

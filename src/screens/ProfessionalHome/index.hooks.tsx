@@ -3,6 +3,8 @@ import { Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { useNavigation } from "@react-navigation/native";
+import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { UserProfileScreen } from "@app/screens/ProfileScreen";
 
 export const useProfessionalHomeScreen = () => {
   const dispatch = useDispatch();
@@ -59,7 +61,7 @@ export const useProfessionalHomeScreen = () => {
   }, [dispatch]);
 
   const onGoToProfile = useCallback(() => {
-    navigation.navigate("user-settings");
+    navigation.navigate(UserProfileScreen.RouteName);
   }, []);
 
   return {

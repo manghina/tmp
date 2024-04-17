@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { useUserProfileEditScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { userProfileEditStyles } from "./styles";
@@ -17,7 +17,7 @@ const otpComponentProps = {
     "Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.",
 };
 
-export const ProfileEditScreen = memo(() => {
+export const ProfileEditScreen = () => {
   const {
     formData,
     countryOptions,
@@ -156,6 +156,7 @@ export const ProfileEditScreen = memo(() => {
       </SafeAreaView>
     </>
   );
-});
+};
 
 ProfileEditScreen.displayName = "ProfileEditScreen";
+ProfileEditScreen.RouteName = "user-edit" as const;

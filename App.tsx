@@ -18,7 +18,7 @@ export default function App() {
   initTheme();
 
   return (
-    <StripeProvider publishableKey={stripePublishableKey}>
+    <StripeProvider publishableKey={stripePublishableKey()}>
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={<LoaderScreen />}>
           <GestureHandlerRootView style={{ flex: 1 }}>

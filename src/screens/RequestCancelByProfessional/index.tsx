@@ -1,12 +1,12 @@
-import { memo } from "react";
+import React from "react";
 import { useRequestCancelByProfessional } from "./index.hooks";
 import { Button, Text, View, RadioGroup } from "react-native-ui-lib";
 import { ScrollView, TextInput } from "react-native";
 import { styles } from "./styles";
-import AppRadioButton from "../../components/AppRadioButton";
+import { AppRadioButton } from "@app/components/AppRadioButton";
 type RequestCancelByProfessionalScreenProps = {};
 
-export const RequestCancelByProfessionalScreen = memo(
+export const RequestCancelByProfessionalScreen =
   ({}: RequestCancelByProfessionalScreenProps) => {
     const {
       handleDeleteRequest,
@@ -34,9 +34,7 @@ export const RequestCancelByProfessionalScreen = memo(
               ac ornare adipiscing
             </Text>
 
-            <RadioGroup
-              onValueChange={handleRadioChange}
-            >
+            <RadioGroup onValueChange={handleRadioChange}>
               <AppRadioButton
                 selected={radioValues.option1}
                 handlePress={() => {
@@ -99,5 +97,8 @@ export const RequestCancelByProfessionalScreen = memo(
         </View>
       </ScrollView>
     );
-  },
-);
+  };
+
+RequestCancelByProfessionalScreen.displayName =
+  "RequestCancelByProfessionalScreen";
+RequestCancelByProfessionalScreen.RouteName = "requests/cancel" as const;

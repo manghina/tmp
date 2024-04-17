@@ -12,6 +12,7 @@ import {
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
+import { LoginScreen } from "@app/screens/Login";
 
 interface UserEditFormData {
   name: string;
@@ -140,7 +141,7 @@ export const useUserProfileEditScreen = () => {
 
   useEffect(() => {
     if (!me) {
-      navigation.replace("login");
+      navigation.replace(LoginScreen.RouteName);
     }
   }, [me, navigation]);
 

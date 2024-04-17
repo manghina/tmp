@@ -9,31 +9,31 @@ import {
 } from "react-native-ui-lib";
 import { FlatList, TouchableWithoutFeedback } from "react-native";
 import { styles } from "./styles";
-import React, { memo } from "react";
+import React from "react";
 import SearchIcon from "@app/components/SvgIcons/SearchIcon";
 import { BaseTextField } from "@app/components/_baseInputs/BaseTextField";
 import { ToggleOffIcon, ToggleOnIcon } from "@app/components/SvgIcons";
 
 type FilterableSelectScreenProps = {};
 
-export const FilterableSelectScreen = memo(
+export const FilterableSelectScreen =
   ({}: FilterableSelectScreenProps) => {
     const {
       filteredOptions,
       onTextFieldChange,
       pageTitle,
       pageDescription,
-      searchTextLabel,
-      listTitle,
-      onOptionSelected,
-      onOpenOption,
+    searchTextLabel,
+    listTitle,
+    onOptionSelected,
+    onOpenOption,
       openedOption,
       hasSubOptions,
       multipleSelection,
       isSelected,
       selectedQuantity,
       confirmSelection,
-    } = useFilterableSelectScreen();
+  } = useFilterableSelectScreen();
 
     const _renderItem = ({
       item,
@@ -51,18 +51,18 @@ export const FilterableSelectScreen = memo(
         (index === 0 && hasSubOptions && isCategory) ||
         (index === 0 && !hasSubOptions);
 
-      return (
-        <View
-          row
-          style={[
-            styles.listItem,
-            firstListItem ? styles.firstListItem : undefined,
-            isSelected(item)
+    return (
+      <View
+        row
+        style={[
+          styles.listItem,
+          firstListItem ? styles.firstListItem : undefined,
+          isSelected(item)
               ? multipleSelection
                 ? styles.listItemSelectedMultiple
                 : styles.listItemSelected
-              : undefined,
-            isOpened ? styles.listItemOpened : undefined,
+            : undefined,
+          isOpened ? styles.listItemOpened : undefined,
             isSubOption ? styles.listItemSubOption : undefined,
             Boolean(isCategory && selectedQuantity(item) && !isOpened)
               ? styles.listItemWithSubOptionsSelected
@@ -116,17 +116,16 @@ export const FilterableSelectScreen = memo(
               />
             )}
           </View>
-        </View>
-      );
-    };
+      </View>
+    );
+  };
 
-    return (
-      <View style={styles.pageContainer}>
-        <View style={styles.headingContainer}>
-          <Text style={styles.title}>{pageTitle}</Text>
-          {pageDescription && (
-            <Text style={styles.info}>{pageDescription}</Text>
-          )}
+  return (
+    <View style={styles.pageContainer}>
+      <View style={styles.headingContainer}>
+        <Text style={styles.title}>{pageTitle}</Text>
+        {pageDescription && <Text style={styles.info}>{pageDescription}</Text>}
+
         </View>
         <BaseTextField
           leadingAccessory={
@@ -196,9 +195,9 @@ export const FilterableSelectScreen = memo(
             />
           </View>
         )}
-      </View>
-    );
-  },
-);
+    </View>
+  );
+};
 
 FilterableSelectScreen.displayName = "FilterableSelectScreen";
+FilterableSelectScreen.RouteName = "form-filterable-select" as const;

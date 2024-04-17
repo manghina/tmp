@@ -1,6 +1,7 @@
 import { JSX, useCallback, useMemo, useRef } from "react";
 import useFormField from "@app/hooks/useFormField";
 import { useNavigation } from "@react-navigation/native";
+import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { TextInput } from "react-native";
 
 type SelectValue = string | string[];
@@ -39,7 +40,7 @@ export const useFormNewScreenFilterableSelect = <T extends SelectOption>({
 
   const onFieldClicked = useCallback(() => {
     inputRef.current?.blur();
-    navigation.navigate("form-filterable-select", {
+    navigation.navigate(FilterableSelectScreen.RouteName, {
       onGoBack: onBackFromChoosingScreen,
       options,
       value,

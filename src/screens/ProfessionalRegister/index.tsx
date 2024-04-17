@@ -1,8 +1,9 @@
+import React from "react";
 import { View, Text, Button } from "react-native-ui-lib";
 import { useProfessionalRegister } from "./index.hooks";
-import React from "react";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
+import { FormGooglePlacesTextField } from "@app/components/_form/FormGooglePlacesTextField";
 import { FormDatePicker } from "@app/components/_form/FormDatePicker";
 import { FormNewScreenFilterableSelect } from "@app/components/_form/FormNewScreenFilterableSelect";
 import { FormImagePicker } from "@app/components/_form/FormImagePicker";
@@ -120,11 +121,17 @@ export const ProfessionalRegisterScreen = () => {
           listTitle: "Lista professioni",
         }}
       />
-      <FormTextField
+      <FormGooglePlacesTextField
         key="officeLocation"
         name="officeLocation"
         label="Sede dello studio"
+        placeholder="Indirizzo completo"
       />
+      {/* <FormTextField
+        key="officeLocation"
+        name="officeLocation"
+        label="Sede dello studio"
+      /> */}
     </View>
   );
   const renderStep3 = () => (
@@ -173,12 +180,15 @@ export const ProfessionalRegisterScreen = () => {
             disabledBackgroundColor={colorTokens.colorBackgroundDisabled}
             disabled={isLastStep ? submitDisabled : !canGoToNextStep && false}
           />
+          {!isFirstStep && (
+            <Text
+              style={styles.goBackText}
+              onPress={onPreviousStepButtonPressed}
+            >
+              Torna indietro
+            </Text>
+          )}
         </View>
-        {!isFirstStep && (
-          <Text center underline onPress={onPreviousStepButtonPressed}>
-            Torna indietro
-          </Text>
-        )}
       </>
     );
   };
@@ -190,19 +200,24 @@ export const ProfessionalRegisterScreen = () => {
           value={currentStepCompletionPercentage}
           duration={250}
         />
-        <ScrollView style={styles.stepContent}>
-          {stepperIndex === 1 ? (
-            renderStep1()
-          ) : stepperIndex === 2 ? (
-            renderStep2()
-          ) : stepperIndex === 3 ? (
-            renderStep3()
-          ) : (
-            <View />
-          )}
-          {renderStepControls()}
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.stepContent}>
+            {stepperIndex === 1 ? (
+              renderStep1()
+            ) : stepperIndex === 2 ? (
+              renderStep2()
+            ) : stepperIndex === 3 ? (
+              renderStep3()
+            ) : (
+              <View />
+            )}
+            {renderStepControls()}
+          </View>
         </ScrollView>
       </FormProvider>
     </View>
   );
 };
+
+ProfessionalRegisterScreen.displayName = "ProfessionalRegisterScreen";
+ProfessionalRegisterScreen.RouteName = "professional-register" as const;

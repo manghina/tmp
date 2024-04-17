@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
+import { LoginScreen } from "@app/screens/Login";
 
 const schema = yup.object().shape({
   email: yup
@@ -38,7 +39,7 @@ export const useLoginBottomSheet = ({
   const onProceedButtonPressed = useMemo(
     () =>
       handleSubmit((data) => {
-        navigation.navigate("login", {
+        navigation.navigate(LoginScreen.RouteName, {
           email: data.email,
         });
         onLoginClose();
