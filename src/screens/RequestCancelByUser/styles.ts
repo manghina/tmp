@@ -20,7 +20,9 @@ export const styles = StyleSheet.create({
     ...textVariants.h3CondensedBlackNormal,
     color: colorTokens.colorTextDanger,
   },
-  headingSubtitle: {},
+  headingSubtitle: {
+    ...textVariants.p1MediumNormal,
+  },
   motivationsContainer: {
     gap: dimensionsTokens.paddingMd,
   },
@@ -30,7 +32,9 @@ export const styles = StyleSheet.create({
   motivationTitle: {
     ...textVariants.h6CondensedBlackNormal,
   },
-  motivationSubtitle: {},
+  motivationSubtitle: {
+    ...textVariants.p1MediumNormal,
+  },
   feedbackContainer: {
     gap: dimensionsTokens.paddingMd,
   },
@@ -40,7 +44,9 @@ export const styles = StyleSheet.create({
   feedbackTitle: {
     ...textVariants.h6CondensedBlackNormal,
   },
-  feedbackSubtitle: {},
+  feedbackSubtitle: {
+    ...textVariants.p1MediumNormal,
+  },
   feedbackFieldContainer: {
     height: 156,
   },
@@ -49,5 +55,23 @@ export const styles = StyleSheet.create({
   },
   disclaimerTitle: {
     ...textVariants.h6CondensedBlackNormal,
+  },
+  disclaimerText: {
+    ...textVariants.p1MediumNormal,
+  },
+  ctaContainer: {
+    paddingTop: dimensionsTokens.padding3Xs,
+    gap: dimensionsTokens.padding3Xs,
+  },
+  ctaText: {
+    ...textVariants.p2MediumNormal,
+    textAlign: "center",
+  },
+  ctaButton: {
+    paddingVertical: dimensionsTokens.paddingXs,
+    backgroundColor: colorTokens.colorBackgroundDangerBold,
+  },
+  ctaButtonDisabled: {
+    backgroundColor: colorTokens.colorBackgroundDanger
   },
 });

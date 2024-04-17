@@ -6,8 +6,9 @@ import { FormRadioGroup } from "@app/components/_form/FormRadioGroup";
 import { FormProvider } from "react-hook-form";
 import { FormTextField } from "@app/components/_form/FormTextField";
 
-export const DeleteReservationScreen = () => {
-  const { formData } = useDeleteReservationScreen();
+export const RequestCancelByUserScreen = () => {
+  const { formData, triggerRequestCancel, canSubmit } =
+    useDeleteReservationScreen();
 
   return (
     <SafeAreaView style={styles.pageContainer}>
@@ -17,8 +18,8 @@ export const DeleteReservationScreen = () => {
             <View style={styles.headingContainer}>
               <Text style={styles.headingTitle}>Cancellazione</Text>
               <Text style={styles.headingSubtitle}>
-                Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum
-                metus.
+                Ci spiace molto! Potrebbero essere addebitati dei costi per la
+                cancellazione. Sei sicuro?
               </Text>
             </View>
             <View style={styles.motivationsContainer}>
@@ -30,10 +31,10 @@ export const DeleteReservationScreen = () => {
                 </Text>
               </View>
               <FormRadioGroup
-                name="motivations"
+                name="motivation"
                 options={[
-                  { label: "Option A", value: "option_a" },
-                  { label: "Option B", value: "option_b" },
+                  { label: "Problema con orario e/o data", value: "option_a" },
+                  { label: "Trovato soluzione alternativa", value: "option_b" },
                 ]}
               />
             </View>
@@ -41,8 +42,7 @@ export const DeleteReservationScreen = () => {
               <View style={styles.feedbackHeading}>
                 <Text style={styles.feedbackTitle}>Title</Text>
                 <Text style={styles.feedbackSubtitle}>
-                  Lorem ipsum dolor sit amet consectetur. Urna urna sed dui
-                  mattis ac ornare adipiscing.
+                  Spiega a Sweep come mai desideri disdire l'appuntamento.
                 </Text>
               </View>
               <FormTextField
@@ -53,7 +53,24 @@ export const DeleteReservationScreen = () => {
               />
             </View>
             <View style={styles.disclaimerContainer}>
-                
+              <Text style={styles.disclaimerTitle}>Disclaimer</Text>
+              <Text style={styles.disclaimerText}>
+                Il medico ha riservato l'agenda per risolvere il tuo problema e
+                il non presentarsi comporta una difficoltà organizzativa.
+                Potrebbero esserti addebitati costi per la mancata visita.
+              </Text>
+            </View>
+            <View style={styles.ctaContainer}>
+              <Text style={styles.ctaText}>Sicuro di voler procedere?</Text>
+              <Button
+                style={[
+                  styles.ctaButton,
+                  !canSubmit ? styles.ctaButtonDisabled : undefined,
+                ]}
+                label="Anulla prenotazione"
+                onPress={triggerRequestCancel}
+                disabled={!canSubmit}
+              />
             </View>
           </FormProvider>
         </View>
@@ -62,4 +79,5 @@ export const DeleteReservationScreen = () => {
   );
 };
 
-DeleteReservationScreen.displayName = "DeleteReservationScreen";
+RequestCancelByUserScreen.displayName = "RequestCancelByUserScreen";
+RequestCancelByUserScreen.RouteName = "user-request/cancel" as const;

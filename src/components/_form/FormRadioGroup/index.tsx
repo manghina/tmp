@@ -12,7 +12,7 @@ type FormRadioGroupProps = {
 
 export const FormRadioGroup = memo(
   ({ name, options, listTitle }: FormRadioGroupProps) => {
-    const { onOptionSelected, selectedOption } = useFormRadioGroup(name);
+    const { onOptionSelected, selectedOption, error } = useFormRadioGroup(name);
 
     const _renderItem = ({
       item,
@@ -34,7 +34,10 @@ export const FormRadioGroup = memo(
           ]}
         >
           <Text
-            style={isSelected ? styles.optionTextSelected : styles.optionText}
+            style={[
+              styles.optionText,
+              isSelected ? styles.optionTextSelected : undefined,
+            ]}
           >
             {item.label}
           </Text>
@@ -53,18 +56,22 @@ export const FormRadioGroup = memo(
     return (
       <View style={styles.listContainer}>
         {listTitle && <Text style={styles.sectionTitle}>{listTitle}</Text>}
-        <View>
+        <View
+          style={[
+            styles.list,
+            Boolean(error) ? styles.listWithError : undefined,
+          ]}
+        >
           {options.map((item, index) => (
             <TouchableWithoutFeedback
               key={item.value}
-              onPress={() => {
-                onOptionSelected(item);
-              }}
+              onPress={() => onOptionSelected(item)}
             >
               {_renderItem({ item, index })}
             </TouchableWithoutFeedback>
           ))}
         </View>
+        {Boolean(error) && <Text style={styles.errorText}>{error}</Text>}
       </View>
     );
   },

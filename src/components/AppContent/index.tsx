@@ -33,7 +33,7 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
-import { DeleteReservationScreen } from "@app/screens/DeleteReservation";
+import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
 import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 
 const Stack = createNativeStackNavigator();
@@ -51,7 +51,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName={TutorialScreen.RouteName}>
+        <Stack.Navigator initialRouteName={RequestCancelByUserScreen.RouteName}>
           <Stack.Screen
             name={FilterableSelectScreen.RouteName}
             component={FilterableSelectScreen}
@@ -178,8 +178,8 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="professional-delete-reservation"
-            component={DeleteReservationScreen}
+            name={RequestCancelByUserScreen.RouteName}
+            component={RequestCancelByUserScreen}
             options={{
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
