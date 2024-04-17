@@ -190,11 +190,6 @@ export const useProfessionalRegister = () => {
     [specialization],
   );
 
-  useEffect(() => {
-    console.log("province", province);
-    console.log("specialization", specialization);
-  }, [province, specialization]);
-
   const step3Filled = useMemo(
     () => Boolean(email) && Boolean(password) && Boolean(confirmPassword),
     [email, password, confirmPassword],
