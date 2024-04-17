@@ -1,4 +1,4 @@
-import { Specialization } from "@app/models/Doctor";
+import { Specialization } from "src/models/common/DoctorCommon";
 
 const phonePrefixOptions = [
   {
