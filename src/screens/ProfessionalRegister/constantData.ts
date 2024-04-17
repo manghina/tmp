@@ -989,222 +989,552 @@ const provincesOptions = [
   {
     label: "Agrigento",
     value: "AG",
+    region: "Sicilia",
   },
   {
     label: "Alessandria",
     value: "AL",
+    region: "Piemonte",
   },
   {
     label: "Ancona",
     value: "AN",
-  },
-  {
-    label: "Aosta",
-    value: "AO",
+    region: "Marche",
   },
   {
     label: "Arezzo",
     value: "AR",
+    region: "Toscana",
   },
   {
     label: "Ascoli Piceno",
     value: "AP",
+    region: "Marche",
   },
   {
     label: "Asti",
     value: "AT",
+    region: "Piemonte",
   },
   {
     label: "Avellino",
     value: "AV",
+    region: "Campania",
   },
   {
     label: "Bari",
     value: "BA",
+    region: "Puglia",
   },
   {
     label: "Barletta-Andria-Trani",
     value: "BT",
+    region: "Puglia",
   },
   {
     label: "Belluno",
     value: "BL",
+    region: "Veneto",
   },
   {
     label: "Benevento",
     value: "BN",
+    region: "Campania",
   },
   {
     label: "Bergamo",
     value: "BG",
+    region: "Lombardia",
   },
   {
     label: "Biella",
     value: "BI",
+    region: "Piemonte",
   },
   {
     label: "Bologna",
     value: "BO",
+    region: "Emilia-Romagna",
   },
   {
-    label: "Bolzano",
+    label: "Bolzano/Bozen",
     value: "BZ",
+    region: "Trentino-Alto Adige/Südtirol",
   },
   {
     label: "Brescia",
     value: "BS",
+    region: "Lombardia",
   },
   {
     label: "Brindisi",
     value: "BR",
+    region: "Puglia",
   },
   {
     label: "Cagliari",
     value: "CA",
+    region: "Sardegna",
   },
   {
     label: "Caltanissetta",
     value: "CL",
+    region: "Sicilia",
   },
   {
     label: "Campobasso",
     value: "CB",
+    region: "Molise",
   },
   {
     label: "Carbonia-Iglesias",
     value: "CI",
+    region: "Sardegna",
   },
   {
     label: "Caserta",
     value: "CE",
+    region: "Campania",
   },
   {
     label: "Catania",
     value: "CT",
+    region: "Sicilia",
   },
   {
     label: "Catanzaro",
     value: "CZ",
+    region: "Calabria",
   },
   {
     label: "Chieti",
     value: "CH",
+    region: "Abruzzo",
   },
   {
     label: "Como",
     value: "CO",
+    region: "Lombardia",
   },
   {
     label: "Cosenza",
     value: "CS",
+    region: "Calabria",
   },
   {
     label: "Cremona",
     value: "CR",
+    region: "Lombardia",
   },
   {
     label: "Crotone",
     value: "KR",
+    region: "Calabria",
   },
   {
     label: "Cuneo",
     value: "CN",
+    region: "Piemonte",
   },
   {
     label: "Enna",
     value: "EN",
+    region: "Sicilia",
   },
   {
     label: "Fermo",
     value: "FM",
+    region: "Marche",
   },
   {
     label: "Ferrara",
     value: "FE",
+    region: "Emilia-Romagna",
   },
   {
     label: "Firenze",
     value: "FI",
+    region: "Toscana",
   },
   {
     label: "Foggia",
     value: "FG",
+    region: "Puglia",
   },
   {
     label: "Forlì-Cesena",
     value: "FC",
+    region: "Emilia-Romagna",
   },
   {
     label: "Frosinone",
     value: "FR",
+    region: "Lazio",
   },
   {
     label: "Genova",
     value: "GE",
+    region: "Liguria",
   },
   {
     label: "Gorizia",
     value: "GO",
+    region: "Friuli-Venezia Giulia",
   },
   {
     label: "Grosseto",
     value: "GR",
+    region: "Toscana",
   },
   {
     label: "Imperia",
     value: "IM",
+    region: "Liguria",
   },
   {
     label: "Isernia",
     value: "IS",
-  },
-  {
-    label: "La Spezia",
-    value: "SP",
+    region: "Molise",
   },
   {
     label: "L'Aquila",
     value: "AQ",
+    region: "Abruzzo",
+  },
+  {
+    label: "La Spezia",
+    value: "SP",
+    region: "Liguria",
   },
   {
     label: "Latina",
     value: "LT",
+    region: "Lazio",
   },
   {
     label: "Lecce",
     value: "LE",
+    region: "Puglia",
   },
   {
     label: "Lecco",
     value: "LC",
+    region: "Lombardia",
   },
   {
     label: "Livorno",
     value: "LI",
+    region: "Toscana",
   },
   {
     label: "Lodi",
     value: "LO",
+    region: "Lombardia",
   },
   {
     label: "Lucca",
     value: "LU",
+    region: "Toscana",
   },
   {
     label: "Macerata",
     value: "MC",
+    region: "Marche",
   },
   {
     label: "Mantova",
     value: "MN",
+    region: "Lombardia",
   },
   {
     label: "Massa-Carrara",
     value: "MS",
+    region: "Toscana",
   },
   {
     label: "Matera",
     value: "MT",
+    region: "Basilicata",
+  },
+  {
+    label: "Medio Campidano",
+    value: "VS",
+    region: "Sardegna",
+  },
+  {
+    label: "Messina",
+    value: "ME",
+    region: "Sicilia",
+  },
+  {
+    label: "Milano",
+    value: "MI",
+    region: "Lombardia",
+  },
+  {
+    label: "Modena",
+    value: "MO",
+    region: "Emilia-Romagna",
+  },
+  {
+    label: "Monza e della Brianza",
+    value: "MB",
+    region: "Lombardia",
+  },
+  {
+    label: "Napoli",
+    value: "NA",
+    region: "Campania",
+  },
+  {
+    label: "Novara",
+    value: "NO",
+    region: "Piemonte",
+  },
+  {
+    label: "Nuoro",
+    value: "NU",
+    region: "Sardegna",
+  },
+  {
+    label: "Ogliastra",
+    value: "OG",
+    region: "Sardegna",
+  },
+  {
+    label: "Olbia-Tempio",
+    value: "OT",
+    region: "Sardegna",
+  },
+  {
+    label: "Oristano",
+    value: "OR",
+    region: "Sardegna",
+  },
+  {
+    label: "Padova",
+    value: "PD",
+    region: "Veneto",
+  },
+  {
+    label: "Palermo",
+    value: "PA",
+    region: "Sicilia",
+  },
+  {
+    label: "Parma",
+    value: "PR",
+    region: "Emilia-Romagna",
+  },
+  {
+    label: "Pavia",
+    value: "PV",
+    region: "Lombardia",
+  },
+  {
+    label: "Perugia",
+    value: "PG",
+    region: "Umbria",
+  },
+  {
+    label: "Pesaro e Urbino",
+    value: "PU",
+    region: "Marche",
+  },
+  {
+    label: "Pescara",
+    value: "PE",
+    region: "Abruzzo",
+  },
+  {
+    label: "Piacenza",
+    value: "PC",
+    region: "Emilia-Romagna",
+  },
+  {
+    label: "Pisa",
+    value: "PI",
+    region: "Toscana",
+  },
+  {
+    label: "Pistoia",
+    value: "PT",
+    region: "Toscana",
+  },
+  {
+    label: "Pordenone",
+    value: "PN",
+    region: "Friuli-Venezia Giulia",
+  },
+  {
+    label: "Potenza",
+    value: "PZ",
+    region: "Basilicata",
+  },
+  {
+    label: "Prato",
+    value: "PO",
+    region: "Toscana",
+  },
+  {
+    label: "Ragusa",
+    value: "RG",
+    region: "Sicilia",
+  },
+  {
+    label: "Ravenna",
+    value: "RA",
+    region: "Emilia-Romagna",
+  },
+  {
+    label: "Reggio di Calabria",
+    value: "RC",
+    region: "Calabria",
+  },
+  {
+    label: "Reggio nell'Emilia",
+    value: "RE",
+    region: "Emilia-Romagna",
+  },
+  {
+    label: "Rieti",
+    value: "RI",
+    region: "Lazio",
+  },
+  {
+    label: "Rimini",
+    value: "RN",
+    region: "Emilia-Romagna",
+  },
+  {
+    label: "Roma",
+    value: "RM",
+    region: "Lazio",
+  },
+  {
+    label: "Rovigo",
+    value: "RO",
+    region: "Veneto",
+  },
+  {
+    label: "Salerno",
+    value: "SA",
+    region: "Campania",
+  },
+  {
+    label: "Sassari",
+    value: "SS",
+    region: "Sardegna",
+  },
+  {
+    label: "Savona",
+    value: "SV",
+    region: "Liguria",
+  },
+  {
+    label: "Siena",
+    value: "SI",
+    region: "Toscana",
+  },
+  {
+    label: "Siracusa",
+    value: "SR",
+    region: "Sicilia",
+  },
+  {
+    label: "Sondrio",
+    value: "SO",
+    region: "Lombardia",
+  },
+  {
+    label: "Taranto",
+    value: "TA",
+    region: "Puglia",
+  },
+  {
+    label: "Teramo",
+    value: "TE",
+    region: "Abruzzo",
+  },
+  {
+    label: "Terni",
+    value: "TR",
+    region: "Umbria",
+  },
+  {
+    label: "Torino",
+    value: "TO",
+    region: "Piemonte",
+  },
+  {
+    label: "Trapani",
+    value: "TP",
+    region: "Sicilia",
+  },
+  {
+    label: "Trento",
+    value: "TN",
+    region: "Trentino-Alto Adige/Südtirol",
+  },
+  {
+    label: "Treviso",
+    value: "TV",
+    region: "Veneto",
+  },
+  {
+    label: "Trieste",
+    value: "TS",
+    region: "Friuli-Venezia Giulia",
+  },
+  {
+    label: "Udine",
+    value: "UD",
+    region: "Friuli-Venezia Giulia",
+  },
+  {
+    label: "Valle d'Aosta/Vallée d'Aoste",
+    value: "AO",
+    region: "Valle d'Aosta/Vallée d'Aoste",
+  },
+  {
+    label: "Varese",
+    value: "VA",
+    region: "Lombardia",
+  },
+  {
+    label: "Venezia",
+    value: "VE",
+    region: "Veneto",
+  },
+  {
+    label: "Verbano-Cusio-Ossola",
+    value: "VB",
+    region: "Piemonte",
+  },
+  {
+    label: "Vercelli",
+    value: "VC",
+    region: "Piemonte",
+  },
+  {
+    label: "Verona",
+    value: "VR",
+    region: "Veneto",
+  },
+  {
+    label: "Vibo Valentia",
+    value: "VV",
+    region: "Calabria",
+  },
+  {
+    label: "Vicenza",
+    value: "VI",
+    region: "Veneto",
+  },
+  {
+    label: "Viterbo",
+    value: "VT",
+    region: "Lazio",
   },
 ];
 
