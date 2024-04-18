@@ -28,10 +28,9 @@ export const LoginScreen = ({}: LoginScreenProps) => {
         <FormProvider {...formData}>
           <View style={styles.formColumn}>
             <FormTextField
-              textContentType="username"
+              textContentType="emailAddress"
               keyboardType="email-address"
-              autoCorrect={true}            
-              autoCompleteType="email"
+              autoCorrect={true}
               clearTextOnFocus={false}
               name="email"
               label="Indirizzo email"
@@ -40,8 +39,10 @@ export const LoginScreen = ({}: LoginScreenProps) => {
             textContentType="password"
             password={true} 
             secureTextEntry={true} 
-            autoCorrect={true} 
-            name="password" label="Password" 
+            autoCorrect={false}
+            autoComplete="password" 
+            name="password" 
+            label="Password" 
             type="password" />
           </View>
           <View style={styles.mainActionContainer}>

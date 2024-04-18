@@ -27,6 +27,8 @@ export const ForgotPasswordScreen = () => {
         keyboardType="email-address"
         name="email"
         label="Indirizzo email usato in fase di registrazione"
+        textContentType="emailAddress"
+        autoCorrect={true}
       />
       <View style={styles.mainActionContainer}>
         <Text
@@ -91,11 +93,17 @@ export const ForgotPasswordScreen = () => {
         name="newPassword"
         label="Crea nuova password"
         type="password"
+        textContentType="password"
+        password={true} 
+        secureTextEntry={true} 
       />
       <FormTextField
         name="confirmNewPassword"
         label="Comferma password"
         type="password"
+        textContentType="password"
+        password={true} 
+        secureTextEntry={true} 
       />
       <View style={styles.mainActionContainer}>
         <Text
