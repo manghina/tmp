@@ -17,11 +17,24 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundInput,
   },
   input: {
-    flex: 1,
     paddingTop: dimensionsTokens.paddingXs,
     paddingLeft: dimensionsTokens.paddingXs,
     paddingRight: dimensionsTokens.paddingXs,
     paddingBottom: dimensionsTokens.paddingXs,
+  },
+  inputWithSubText: {
+    paddingTop: dimensionsTokens.padding3Xs,
+    paddingBottom: dimensionsTokens.paddingMd,
+  },
+  subTextContainer: {
+    position: "absolute",
+    bottom: 0,
+    paddingHorizontal: dimensionsTokens.paddingXs,
+    paddingBottom: dimensionsTokens.padding3Xs,
+  },
+  subText: {
+    ...textVariants.p3MediumItalic,
+    color: colorTokens.colorTextSubtlest,
   },
   showHidePasswordButton: {
     width: 40,

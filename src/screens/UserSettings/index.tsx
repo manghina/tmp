@@ -1,12 +1,10 @@
 import React, { memo } from "react";
 import { useUserSettingsScreen } from "./index.hooks";
-import { View, Text, Button, TouchableOpacity } from "react-native-ui-lib";
+import { Button } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
-import SweepSvg from "@app/components/SweepSvg";
 import { userHomeStyles } from "./styles";
-import { UserRequestsList } from "@app/components/users/UserRequestsList";
 
-export const UserSettingsScreen = memo(() => {
+export const UserSettingsScreen = () => {
   const { handleLogout } = useUserSettingsScreen();
 
   return (
@@ -18,6 +16,7 @@ export const UserSettingsScreen = memo(() => {
       </SafeAreaView>
     </>
   );
-});
+};
 
 UserSettingsScreen.displayName = "UserSettingsScreen";
+UserSettingsScreen.RouteName = "user-settings";

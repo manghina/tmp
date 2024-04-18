@@ -1,3 +1,4 @@
+import React from "react";
 import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import { useProfessionalHomeScreen } from "./index.hooks";
 import { styles } from "./styles";
@@ -6,10 +7,9 @@ import SweepLogoSvg from "@app/components/SweepLogoSvg";
 import CalendarCheckIcon from "@app/components/SvgIcons/CalendarCheckIcon";
 import WalletIcon from "@app/components/SvgIcons/WalletIcon";
 import EllipseIcon from "@app/components/SvgIcons/EllipseIcon";
-import { BookingItem } from "@app/components/BookingItem";
 import ExpandListIcon from "@app/components/SvgIcons/ExpandListIcon";
-import { ProfessionalActiveProfessionalOffersList } from "../../components/_professionals/ProfessionalActiveProfessionalOffersList";
-import { ProfessionalArchivedProfessionalOffersList } from "../../components/_professionals/ProfessionalArchivedProfessionalOffersList";
+import { ProfessionalActiveProfessionalOffersList } from "@app/components/_professionals/ProfessionalActiveProfessionalOffersList";
+import { ProfessionalArchivedProfessionalOffersList } from "@app/components/_professionals/ProfessionalArchivedProfessionalOffersList";
 
 export const ProfessionalHomeScreen = () => {
   const {
@@ -190,3 +190,6 @@ export const ProfessionalHomeScreen = () => {
     </SafeAreaView>
   );
 };
+
+ProfessionalHomeScreen.displayName = "ProfessionalHomeScreen";
+ProfessionalHomeScreen.RouteName = "professional-home" as const;

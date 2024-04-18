@@ -93,7 +93,7 @@ export const Colors = {
     200: "#CCE0FF",
     300: "#85B8FF",
     400: "#579DFF",
-    500: "#368BFF",
+    500: "#388BFF",
     600: "#1D7AFC",
     700: "#0C66E4",
     800: "#0055CC",
@@ -127,7 +127,7 @@ export const Colors = {
   Neutral: {
     0: "#FEFEFE",
     100: "#F7F8F9",
-    200: "#F1F2F4",
+    200: "#EFF1F3",
     300: "#DCDFE4",
     400: "#B3B9C4",
     500: "#8590A2",

@@ -1,3 +1,9 @@
+import { useSelector } from "react-redux";
+import { selectors } from "@app/redux-store";
+
 export const useRequestConfirmPaymentScreen = () => {
-  return {};
+  const professionalOffer = useSelector(selectors.getChosenProfessionalOffer);
+  const slot = useSelector(selectors.getChosenSlot);
+
+  return { professionalOffer, slot };
 };

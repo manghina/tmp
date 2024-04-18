@@ -2,6 +2,14 @@ import React, { memo } from "react";
 import { useBaseTextField } from "./index.hooks";
 import { Text, TextField, TextFieldProps, View } from "react-native-ui-lib";
 import { styles } from "./styles";
+import { TextInput } from "react-native";
+
+type BaseTextFieldProps = TextFieldProps & {
+  focus?: boolean;
+  blur?: boolean;
+  subText?: string;
+  inputRef?: React.MutableRefObject<TextInput>;
+};
 
 export const BaseTextField = memo(
   ({
@@ -14,9 +22,16 @@ export const BaseTextField = memo(
     textContentType,
     autoCorrect,
     keyboardType,
+    focus,
+    blur,
+    subText,
+    inputRef: _inputRef,
     ...props
-  }: TextFieldProps) => {
-    const { isFocused, onFocus, onBlur } = useBaseTextField();
+  }: BaseTextFieldProps) => {
+    const { isFocused, onFocus, onBlur, inputRef } = useBaseTextField({
+      focus,
+      blur,
+    });
 
     return (
       <View style={styles.fieldContainer}>
@@ -24,6 +39,9 @@ export const BaseTextField = memo(
         <View>
           <TextField
             editable={editable}
+            ref={(ref: any) =>
+              _inputRef ? (_inputRef.current = ref) : (inputRef.current = ref)
+            }
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"
@@ -37,9 +55,17 @@ export const BaseTextField = memo(
               isFocused ? styles.focused : undefined,
               enableErrors ? styles.error : undefined,
             ]}
-            style={styles.input}
+            style={[
+              styles.input,
+              subText ? styles.inputWithSubText : undefined,
+            ]}
             {...props}
           />
+          {subText && (
+            <View style={styles.subTextContainer}>
+              <Text style={styles.subText}>{subText}</Text>
+            </View>
+          )}
           {enableErrors && (
             <Text style={styles.errorText}>{validationMessage}</Text>
           )}

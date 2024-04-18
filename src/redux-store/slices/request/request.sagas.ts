@@ -9,7 +9,9 @@ import {
 } from "redux-saga/effects";
 import { actions, selectors } from "@app/redux-store";
 import { IRequest, Request, RequestStatus } from "@app/models/Request";
-import NavigationService from "../../../models/NavigationService";
+import NavigationService from "@app/models/NavigationService";
+import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
 
 export function* sendMessageSaga() {
   yield takeEvery(actions.messageSubmitted, function* (messageSubmittedAction) {
@@ -75,7 +77,16 @@ export function* requestUpdatingSaga() {
       currentRequest?.currentStatus ===
       RequestStatus.PROFESSIONAL_OFFERS_CREATED
     ) {
-      NavigationService.replace("requests/professional-offers");
+      NavigationService.replace(RequestSearchProfessionalsScreen.RouteName);
     }
   }
+}
+
+export function* requestPaidSaga() {
+  yield takeEvery(
+    actions.patchUsersMeRequestsByRequestId.success,
+    function* () {
+      NavigationService.navigate(RequestPaymentSucceededScreen.RouteName);
+    },
+  );
 }

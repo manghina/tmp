@@ -1,35 +1,19 @@
-import { memo } from "react";
 import { Text, View } from "react-native-ui-lib";
 import { useRequestConfirmPaymentScreen } from "./index.hooks";
 import { SafeAreaView, ScrollView } from "react-native";
 import { styles } from "./styles";
 import { CheckoutButton } from "@app/components/CheckoutButton";
+import moment from "moment";
 
-const detailsContent = [
-  {
-    title: "Professionista",
-    value: "Dott. Mario R.",
-  },
-  {
-    title: "Data prenotazione",
-    value: "11 Apr 2023",
-  },
-  {
-    title: "Orario appuntamento",
-    value: "02:30 pm",
-  },
-  {
-    title: "Onorario visits",
-    value: "€ 80,00",
-  },
-  {
-    title: "Acconto richiesto (20%)",
-    value: "€ 16,00",
-  },
-];
+const formatPrice = (price: number): string =>
+  `€ ${(price / 100).toFixed(2).replace(".", ",")}`;
 
-export const RequestConfirmPaymentScreen = memo(() => {
-  const {} = useRequestConfirmPaymentScreen();
+export const RequestConfirmPaymentScreen = () => {
+  const { professionalOffer, slot } = useRequestConfirmPaymentScreen();
+
+  if (!slot || !professionalOffer) {
+    return <View />;
+  }
 
   return (
     <SafeAreaView>
@@ -46,30 +30,58 @@ export const RequestConfirmPaymentScreen = memo(() => {
             <Text style={styles.sectionName}>Dettagli</Text>
             <View style={styles.detailsCard}>
               <View style={styles.detailsContainer}>
-                {detailsContent.map((detail) => (
-                  <View key={detail.value} style={styles.detailRow}>
-                    <Text style={styles.detailLabel}>{detail.title}</Text>
-                    <Text style={styles.detailValue}>{detail.value}</Text>
-                  </View>
-                ))}
+                <View style={styles.detailRow}>
+                  <Text style={styles.detailLabel}>Professionista</Text>
+                  <Text style={styles.detailValue}>
+                    Dott. {professionalOffer.professional?.name}{" "}
+                    {professionalOffer.professional?.lastName?.[0]?.toUpperCase()}
+                    .
+                  </Text>
+                </View>
+                <View style={styles.detailRow}>
+                  <Text style={styles.detailLabel}>Data prenotazione</Text>
+                  <Text style={styles.detailValue}>
+                    {moment(slot.startDate).format("DD MMM YYYY")}
+                  </Text>
+                </View>
+                <View style={styles.detailRow}>
+                  <Text style={styles.detailLabel}>Orario appuntamento</Text>
+                  <Text style={styles.detailValue}>
+                    {moment(slot.startDate).format("hh:mm a")}
+                  </Text>
+                </View>
+                <View style={styles.detailRow}>
+                  <Text style={styles.detailLabel}>Conferma</Text>
+                  <Text style={styles.detailValue}>
+                    {formatPrice(slot.price * 0.2)}
+                  </Text>
+                </View>
+                <View style={styles.detailRow}>
+                  <Text style={styles.detailLabel}>Saldo alla visita</Text>
+                  <Text style={styles.detailValue}>
+                    {formatPrice(slot.price)}
+                  </Text>
+                </View>
               </View>
               <View style={styles.dividerDark} />
 
               <View style={styles.detailRow}>
-                <Text style={styles.sumRecap}>TOTALE A GARANZIA</Text>
-                <Text style={styles.sumRecap}>€ 16,00</Text>
+                <Text style={styles.sumRecap}>TOTALE</Text>
+                <Text style={styles.sumRecap}>
+                  {formatPrice(slot.price * 1.2)}
+                </Text>
               </View>
             </View>
           </View>
-          {/* @TODO: Replace with actual dynamic values */}
           <CheckoutButton
-            professionalOfferId={"65e736cb55872f86077fe6ad"}
-            slotId={"65e736cb55872f86077fe6dd"}
+            professionalOfferId={professionalOffer._id}
+            slotId={slot._id!}
           />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-});
+};
 
 RequestConfirmPaymentScreen.displayName = "RequestConfirmPaymentScreen";
+RequestConfirmPaymentScreen.RouteName = "requests/confirm-payment" as const;
