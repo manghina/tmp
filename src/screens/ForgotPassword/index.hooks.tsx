@@ -1,11 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import YupPassword from "yup-password";
 import { useForm, useWatch } from "react-hook-form";
 import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { ForgotPasswordStepCounter } from "./ForgotPasswordStepCounter";
+
+YupPassword(yup);
 
 type PasswordResetFormData = {
   email: string;
@@ -27,13 +30,13 @@ const schema = yup.object().shape({
     ),
   newPassword: yup
     .string()
-    .min(8, "La password deve contenere almeno 8 caratteri")
-    .matches(
-      /[A-Z]/,
-      "La password deve contenere almeno un carattere maiuscolo",
-    )
-    .matches(/[0-9]/, "La password deve contenere almeno un numero")
-    .matches(/[-!|]/, "La password deve contenere almeno uno tra -!|")
+    .password()
+    .min(8, "La password deve essere di almeno 8 caratteri")
+    .max(50, "La password deve essere di al massimo 50 caratteri")
+    .minLowercase(1, "La password deve contenere almeno una lettera minuscola")
+    .minUppercase(1, "La password deve contenere almeno una lettera maiuscola")
+    .minNumbers(1, "La password deve contenere almeno un numero")
+    .minSymbols(1, "La password deve contenere almeno un simbolo")
     .required(),
   confirmNewPassword: yup
     .string()
