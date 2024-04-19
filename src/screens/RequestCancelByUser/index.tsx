@@ -12,7 +12,7 @@ export const RequestCancelByUserScreen = () => {
 
   return (
     <SafeAreaView style={styles.pageContainer}>
-      <ScrollView>
+      <ScrollView automaticallyAdjustKeyboardInsets>
         <View style={styles.pageContent}>
           <FormProvider {...formData}>
             <View style={styles.headingContainer}>
