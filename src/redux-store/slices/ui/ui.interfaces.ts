@@ -8,6 +8,7 @@ export interface UiState {
   };
   forgotPasswordStepperCounter: number;
   professionalRegisterStepperCounter: number;
+  isOtpError: boolean | null;
 }
 
 export interface SetDialogOpenAction extends Action {
