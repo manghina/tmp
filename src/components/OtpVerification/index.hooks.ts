@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export const useOtpVerification = ({
   handleVerification,
   handleGoBack,
 }: {
   handleVerification: (otp: string) => void;
-  handleGoBack: () => void;
+  handleGoBack?: () => void;
 }) => {
+  const navigation = useNavigation();
   const [otpCode, setOtpCode] = useState<string>("");
 
   // fake code
@@ -56,6 +58,14 @@ export const useOtpVerification = ({
     [otpCode],
   );
 
+  const triggerGoBack = useCallback(() => {
+    if (handleGoBack) {
+      handleGoBack();
+    } else {
+      navigation.goBack();
+    }
+  }, [handleGoBack, navigation]);
+
   useEffect(() => {
     if (otpCode.length === 6) {
       handleVerification(otpCode);
@@ -63,10 +73,10 @@ export const useOtpVerification = ({
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
-        handleGoBack();
+        triggerGoBack();
       }, 3000);
     }
-  }, [otpCode, handleVerification]);
+  }, [otpCode, handleVerification, triggerGoBack]);
 
   return {
     otpCode,
@@ -74,5 +84,6 @@ export const useOtpVerification = ({
     onOtpKeyPressCallbacks,
     isLoading,
     isError,
+    triggerGoBack,
   };
 };

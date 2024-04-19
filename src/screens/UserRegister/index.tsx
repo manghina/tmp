@@ -10,6 +10,7 @@ import { ScrollView } from "react-native";
 import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import LottieView from "lottie-react-native";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { OtpVerificationNewScreen } from "@app/components/OtpVerificationNewScreen";
 
 type UserRegisterScreenProps = {};
 
@@ -27,6 +28,7 @@ export const UserRegisterScreen = ({}: UserRegisterScreenProps) => {
     submitDisabled,
     triggerSubmit,
     showLoadingAnimation,
+    triggerEmailVerification,
   } = useUserRegisterScreen();
 
   return (
@@ -92,25 +94,38 @@ export const UserRegisterScreen = ({}: UserRegisterScreenProps) => {
               >
                 Iscrizione completata!
               </Text>
-              <Button
-                onPress={triggerSubmit}
-                disabled={
-                  !secondStepFilled || submitDisabled || showLoadingAnimation
-                }
-                style={styles.button}
+              <OtpVerificationNewScreen
+                componentProps={{
+                  componentTitle: "Verifica email",
+                  componentDescription:
+                    "Inserisci il codice numerico che abbiamo inviato al tuo indirizzo email",
+                }}
+                // handleGoBack={() => console.log("handleGoBack")}
+                handleVerification={triggerEmailVerification}
+                disableChildrenPointerEvents
+                hideGoBack
+                hideHeader
               >
-                {showLoadingAnimation ? (
-                  <LottieView
-                    source={require("../../../assets/animations/loading.json")}
-                    autoPlay
-                    speed={1}
-                    loop={true}
-                    style={styles.loadingAnimation}
-                  />
-                ) : (
-                  <Text style={styles.buttonText}>Registrati</Text>
-                )}
-              </Button>
+                <Button
+                  onPress={() => console.log("submit")}
+                  disabled={
+                    !secondStepFilled || submitDisabled || showLoadingAnimation
+                  }
+                  style={styles.button}
+                >
+                  {showLoadingAnimation ? (
+                    <LottieView
+                      source={require("../../../assets/animations/loading.json")}
+                      autoPlay
+                      speed={1}
+                      loop={true}
+                      style={styles.loadingAnimation}
+                    />
+                  ) : (
+                    <Text style={styles.buttonText}>Registrati</Text>
+                  )}
+                </Button>
+              </OtpVerificationNewScreen>
               {/* <Button
                 label="Registrati"
                 style={styles.mainAction}

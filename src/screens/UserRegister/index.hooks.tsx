@@ -124,15 +124,24 @@ export const useUserRegisterScreen = () => {
   const triggerSubmit = useMemo(
     () =>
       handleSubmit((data) => {
-        dispatch(
-          actions.userRegistrationFormSubmitted({
-            ...data,
-            birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
-          }),
-        );
+        // dispatch(
+        //   actions.userRegistrationFormSubmitted({
+        //     ...data,
+        //     birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
+        //   }),
+        // );
       }),
     [dispatch, handleSubmit],
   );
+
+  const triggerEmailVerification = useCallback((otp: string) => {
+    console.log("triggerEmailVerification", otp);
+    // dispatch(
+    //   actions.userRegistrationEmailVerificationRequested({
+    //     email,
+    //   }),
+    // );
+  }, [dispatch, email]);
 
   const isSigningUp = useSelector(
     selectors.getAjaxIsLoadingByApi("apis/accounts/post"),
@@ -178,5 +187,6 @@ export const useUserRegisterScreen = () => {
     submitDisabled,
     triggerSubmit,
     showLoadingAnimation,
+    triggerEmailVerification
   };
 };

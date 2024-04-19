@@ -64,12 +64,20 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={OtpVerificationScreen.RouteName}
             component={OtpVerificationScreen}
-            options={{
+            options={({ route }) => ({
               headerTitle: "",
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              header: () => <HeaderGoBack />,
-            }}
+              header: () =>
+                // @ts-ignore
+                // route.params?.hideHeader ?
+                 <HeaderGoBack />, 
+                // : false,
+              // @ts-ignore
+              headerShown: route.params?.hideHeader ? false : true,
+              // @ts-ignore
+              gestureEnabled: route.params?.hideGoBack ? false : true,
+            })}
           />
           <Stack.Screen
             name={LoaderScreen.RouteName}

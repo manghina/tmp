@@ -7,14 +7,18 @@ type OtpVerificationNewScreenProps = {
     componentTitle: string;
     componentDescription: string;
   };
-  handleGoBack: () => void;
+  handleGoBack?: () => void;
   handleVerification: (otp: string) => void;
+  hideGoBack?: boolean;
+  hideHeader?: boolean;
 };
 
 export const useOtpVerificationNewScreen = ({
   componentProps,
   handleGoBack,
   handleVerification,
+  hideGoBack,
+  hideHeader,
 }: OtpVerificationNewScreenProps) => {
   const navigation = useNavigation<any>();
 
@@ -23,6 +27,8 @@ export const useOtpVerificationNewScreen = ({
       handleGoBack,
       componentProps,
       handleVerification,
+      hideGoBack,
+      hideHeader,
     });
   }, [navigation, componentProps]);
 

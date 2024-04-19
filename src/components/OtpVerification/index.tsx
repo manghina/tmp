@@ -9,8 +9,9 @@ interface OtpVerificationProps {
     componentTitle: string;
     componentDescription: string;
   };
-  handleGoBack: () => void;
   handleVerification: (otp: string) => void;
+  handleGoBack?: () => void;
+  hideGoBack?: boolean;
 }
 
 export const OtpVerification = memo(
@@ -18,6 +19,7 @@ export const OtpVerification = memo(
     componentProps: { componentTitle, componentDescription },
     handleGoBack,
     handleVerification,
+    hideGoBack,
   }: OtpVerificationProps) => {
     const {
       otpCode,
@@ -25,6 +27,7 @@ export const OtpVerification = memo(
       onOtpKeyPressCallbacks,
       isLoading,
       isError,
+      triggerGoBack,
     } = useOtpVerification({ handleVerification, handleGoBack });
 
     return (
@@ -66,11 +69,13 @@ export const OtpVerification = memo(
               : "Inserisci codice entro 00:29"}
           </Text>
         </View>
-        <View style={styles.otpGoBackContainer}>
-          <TouchableOpacity onPress={!isLoading ? handleGoBack : () => {}}>
-            <Text style={styles.otpGoBack}>Torna indietro</Text>
-          </TouchableOpacity>
-        </View>
+        {!hideGoBack && (
+          <View style={styles.otpGoBackContainer}>
+            <TouchableOpacity onPress={!isLoading ? triggerGoBack : () => {}}>
+              <Text style={styles.otpGoBack}>Torna indietro</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   },

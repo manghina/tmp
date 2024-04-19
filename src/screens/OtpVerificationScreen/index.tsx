@@ -10,21 +10,21 @@ export const OtpVerificationScreen = () => {
     componentTitle,
     handleGoBack,
     handleVerification,
+    hideGoBack,
   } = useOtpVerificationScreen();
 
   return (
     <>
       <SafeAreaView style={style.pageContainer}>
-        <ScrollView>
-          <OtpVerification
-            componentProps={{
-              componentTitle,
-              componentDescription,
-            }}
-            handleGoBack={handleGoBack}
-            handleVerification={handleVerification}
-          />
-        </ScrollView>
+        <OtpVerification
+          componentProps={{
+            componentTitle,
+            componentDescription,
+          }}
+          handleGoBack={handleGoBack}
+          handleVerification={handleVerification}
+          hideGoBack={hideGoBack}
+        />
       </SafeAreaView>
     </>
   );
