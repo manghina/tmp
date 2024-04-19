@@ -18,6 +18,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingRight: dimensionsTokens.padding3Xs,
   },
+  fieldWithError: {
+    borderColor: "#FF0000",
+  },
   input: {
     flex: 1,
     paddingTop: dimensionsTokens.paddingXs,
@@ -50,5 +53,9 @@ export const styles = StyleSheet.create({
   noResultsText: {
     ...textVariants.p2MediumNormal,
     color: colorTokens.colorTextDisabled,
+  },
+  textError: {
+    ...textVariants.p3MediumNormal,
+    color: "#FF0000",
   },
 });
