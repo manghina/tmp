@@ -51,7 +51,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName={RequestCancelByUserScreen.RouteName}>
+        <Stack.Navigator initialRouteName={TutorialScreen.RouteName}>
           <Stack.Screen
             name={FilterableSelectScreen.RouteName}
             component={FilterableSelectScreen}
