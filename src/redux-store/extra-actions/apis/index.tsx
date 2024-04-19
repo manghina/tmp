@@ -8,6 +8,7 @@ export { default as getUsersMeRequestsByRequestId } from "./get-users-me-request
 export { default as patchUsersMe } from "./patch-users-me";
 export { default as getUsersMeRequestsProfessionalOffersByRequestId } from "./get-users-me-requests-professional-offers-by-request-id";
 export { default as postAccounts } from "./post-accounts";
+export { default as patchAccountsMe } from "./patch-accounts-me";
 export { default as postAccountsSessions } from "./post-accounts-sessions";
 export { default as postRecoveryPasswordTokens } from "./post-recovery-password-tokens";
 export { default as patchPasswords } from "./patch-passwords";
