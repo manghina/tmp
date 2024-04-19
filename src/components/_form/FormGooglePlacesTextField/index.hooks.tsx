@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 export const useFormGooglePlacesTextField = (name: string) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const { value, setValue, error } = useFormField<string>({
+  const { value, setValue, error, clearErrors } = useFormField<string>({
     name,
   });
 
@@ -18,6 +18,16 @@ export const useFormGooglePlacesTextField = (name: string) => {
 
   const handleChange = useCallback(
     (newValue: string) => {
+      clearErrors(name);
+      if (!newValue) {
+        setValue("");
+      }
+    },
+    [setValue, clearErrors, name],
+  );
+
+  const handleSelect = useCallback(
+    (newValue: string) => {
       setValue(newValue);
     },
     [setValue],
@@ -30,5 +40,6 @@ export const useFormGooglePlacesTextField = (name: string) => {
     error,
     onFocus,
     onBlur,
+    handleSelect,
   };
 };
