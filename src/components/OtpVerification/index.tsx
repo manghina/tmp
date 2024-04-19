@@ -26,7 +26,7 @@ export const OtpVerification = memo(
       onOtpChangeTextCallbacks,
       onOtpKeyPressCallbacks,
       isLoading,
-      isError,
+      isOtpError,
       triggerGoBack,
     } = useOtpVerification({ handleVerification, handleGoBack });
 
@@ -62,6 +62,9 @@ export const OtpVerification = memo(
             ))}
           </View>
         </View>
+        {isOtpError && (
+          <Text style={styles.otpErrorText}>Codice non valido. Riprova</Text>
+        )}
         <View style={styles.otpReset}>
           <Text style={styles.otpTimerText}>
             {isLoading
@@ -72,7 +75,14 @@ export const OtpVerification = memo(
         {!hideGoBack && (
           <View style={styles.otpGoBackContainer}>
             <TouchableOpacity onPress={!isLoading ? triggerGoBack : () => {}}>
-              <Text style={styles.otpGoBack}>Torna indietro</Text>
+              <Text
+                style={[
+                  styles.otpGoBack,
+                  isLoading ? styles.otpGoBackDisabled : undefined,
+                ]}
+              >
+                Torna indietro
+              </Text>
             </TouchableOpacity>
           </View>
         )}

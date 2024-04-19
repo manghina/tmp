@@ -31,6 +31,11 @@ export const styles = StyleSheet.create({
   otpInputItem: {
     width: 44,
   },
+  otpErrorText: {
+    ...textVariants.p2MediumNormal,
+    color: "#FF0000",
+    textAlign: "center",
+  },
   otpReset: {
     padding: dimensionsTokens.padding4Xs,
   },
@@ -46,5 +51,8 @@ export const styles = StyleSheet.create({
     ...textVariants.p2MediumNormal,
     padding: dimensionsTokens.padding2Xs,
     textDecorationLine: "underline",
+  },
+  otpGoBackDisabled: {
+    color: colorTokens.colorTextDisabled,
   },
 });

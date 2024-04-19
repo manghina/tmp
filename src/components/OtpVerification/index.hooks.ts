@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
 
 export const useOtpVerification = ({
   handleVerification,
@@ -9,12 +11,14 @@ export const useOtpVerification = ({
   handleVerification: (otp: string) => void;
   handleGoBack?: () => void;
 }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const [otpCode, setOtpCode] = useState<string>("");
+  const isOtpError = useSelector(selectors.getIsOtpError);
+  const dispatch = useDispatch();
 
-  // fake code
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  // fake loader
+  const [isLoading, setIsLoading] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleOtpCodeChange = useCallback(
     (value: string, index: number) => {
@@ -54,36 +58,54 @@ export const useOtpVerification = ({
     () =>
       new Array(6).fill(0).map((_, index) => (value: string) => {
         handleOtpCodeChange(value, index);
+        if (isOtpError) {
+          dispatch(actions.setIsOtpError(null));
+        }
       }),
-    [otpCode],
+    [otpCode, isOtpError],
   );
 
   const triggerGoBack = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     if (handleGoBack) {
       handleGoBack();
     } else {
-      navigation.goBack();
+      navigation.pop();
     }
-  }, [handleGoBack, navigation]);
+  }, [handleGoBack, navigation, timerRef]);
 
   useEffect(() => {
-    if (otpCode.length === 6) {
+    if (otpCode.length === 6 && !isOtpError) {
       handleVerification(otpCode);
-      // fake code
+      // fake loader
       setIsLoading(true);
-      setTimeout(() => {
+      timerRef.current = setTimeout(() => {
         setIsLoading(false);
-        triggerGoBack();
-      }, 3000);
+      }, 5000);
     }
-  }, [otpCode, handleVerification, triggerGoBack]);
+  }, [otpCode, handleVerification, isOtpError, timerRef]);
+
+  useEffect(() => {
+    if (isLoading && isOtpError && timerRef.current) {
+      setOtpCode("");
+      // fake loader
+      clearTimeout(timerRef.current);
+      setIsLoading(false);
+    }
+  }, [isLoading, isOtpError, setOtpCode, setIsLoading, timerRef]);
+
+  useEffect(() => () => {
+    dispatch(actions.setIsOtpError(null));
+  }, [dispatch])
 
   return {
     otpCode,
     onOtpChangeTextCallbacks,
     onOtpKeyPressCallbacks,
     isLoading,
-    isError,
+    isOtpError,
     triggerGoBack,
   };
 };
