@@ -6,12 +6,15 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import YupPassword from "yup-password";
 import { useForm, useWatch } from "react-hook-form";
-import React, { useCallback, useEffect, useLayoutEffect, useMemo } from "react";
+import React, { useCallback, useLayoutEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
+
+YupPassword(yup);
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -64,16 +67,13 @@ const schema = yup.object().shape({
     .required("Inserisci il tuo indirizzo email"),
   password: yup
     .string()
-    .min(8, "La password deve contenere almeno 8 caratteri")
-    .matches(
-      /[A-Z]/,
-      "La password deve contenere almeno un carattere maiuscolo",
-    )
-    .matches(/[0-9]/, "La password deve contenere almeno un numero")
-    .matches(
-      /[-!|]/,
-      "La password deve contenere almeno uno tra -!|",
-    ) /* @antoniogiordano qui aggiungerei anche il "." */
+    .password()
+    .min(8, "La password deve essere di almeno 8 caratteri")
+    .max(50, "La password deve essere di al massimo 50 caratteri")
+    .minLowercase(1, "La password deve contenere almeno una lettera minuscola")
+    .minUppercase(1, "La password deve contenere almeno una lettera maiuscola")
+    .minNumbers(1, "La password deve contenere almeno un numero")
+    .minSymbols(1, "La password deve contenere almeno un simbolo")
     .required(),
   confirmPassword: yup
     .string()
