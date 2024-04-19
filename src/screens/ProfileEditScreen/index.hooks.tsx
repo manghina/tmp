@@ -102,8 +102,9 @@ export const useUserProfileEditScreen = () => {
 
     // fake code
     setTimeout(() => {
+      navigation.pop();
       setIsVerifiedPhoneNumber(true);
-    }, 1000);
+    }, 2000);
   }, []);
 
   const isPatchingUser = useSelector(
