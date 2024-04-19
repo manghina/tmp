@@ -57,6 +57,7 @@ export const accountStore = createSlice({
       state.professionalMe = null;
       state.cookie = null;
     },
+    verifyEmailOtp: (state, action: PayloadAction<string>) => {},
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -70,6 +71,9 @@ export const accountStore = createSlice({
       state.account = action.payload.data.account;
     });
     builder.addCase(extraActions.getAccountsMe.success, (state, action) => {
+      state.account = action.payload.data.account;
+    });
+    builder.addCase(extraActions.patchAccountsMe.success, (state, action) => {
       state.account = action.payload.data.account;
     });
     builder.addCase(extraActions.getUsersMe.success, (state, action) => {

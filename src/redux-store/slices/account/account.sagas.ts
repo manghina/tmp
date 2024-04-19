@@ -193,6 +193,39 @@ export function* userRegistrationSaga() {
   });
 }
 
+export function* verifyEmailSaga() {
+  yield takeEvery(actions.verifyEmailOtp, function* (action) {
+    const account: IAccount = yield select(selectors.getAccount);
+
+    if (account.emailVerified) {
+      return;
+    }
+
+    yield put(
+      actions.patchAccountsMe.request({
+        emailVerificationToken: action.payload,
+      }),
+    );
+
+    // @ts-ignore
+    const patchAccountsMeResultAction = yield take([
+      actions.patchAccountsMe.success,
+      actions.patchAccountsMe.fail,
+    ]);
+
+    if (
+      patchAccountsMeResultAction.type === actions.patchAccountsMe.fail.type
+    ) {
+      yield put(actions.setIsOtpError(true));
+      return;
+    }
+
+    yield put(actions.setIsOtpError(null));
+
+    NavigationService.replace(UserHomeScreen.RouteName);
+  });
+}
+
 export function* professionalRegistrationSaga() {
   yield takeEvery(
     actions.professionalRegistrationFormSubmitted,
