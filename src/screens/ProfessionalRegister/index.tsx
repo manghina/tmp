@@ -126,7 +126,6 @@ export const ProfessionalRegisterScreen = () => {
     <View style={styles.fieldsColumn}>
       <FormTextField 
         textContentType="emailAddress"
-        autoCorrect={true}        
         key="email" 
         name="email" 
         label="Indirizzo email" />
@@ -134,19 +133,17 @@ export const ProfessionalRegisterScreen = () => {
         key="password"
         name="password"
         type="password"
+        autoComplete="password"
         label="Password"
         textContentType="password"
-        password={true} 
-        secureTextEntry={true} 
 />
       <FormTextField
         key="confirmPassword"
         name="confirmPassword"
         type="password"
+        autoComplete="password"
         label="Conferma password"
         textContentType="password"
-        password={true} 
-        secureTextEntry={true} 
       />
     </View>
   );

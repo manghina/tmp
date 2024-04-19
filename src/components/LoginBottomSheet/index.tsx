@@ -46,7 +46,6 @@ export const LoginBottomSheet = memo(
                 name="email"
                 label="Indirizzo email"
                 textContentType="emailAddress"
-                autoCorrect={true}
               />
               <Button
                 onPress={onProceedButtonPressed}

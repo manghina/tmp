@@ -30,17 +30,16 @@ export const LoginScreen = ({}: LoginScreenProps) => {
             <FormTextField
               textContentType="emailAddress"
               keyboardType="email-address"
-              autoCorrect={true}
               clearTextOnFocus={false}
               name="email"
               label="Indirizzo email"
+              autoComplete="email"
             />
             <FormTextField 
             textContentType="password"
-            password={true} 
-            secureTextEntry={true} 
             autoCorrect={false}
             autoComplete="password" 
+            
             name="password" 
             label="Password" 
             type="password" />

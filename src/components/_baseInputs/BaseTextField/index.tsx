@@ -45,7 +45,6 @@ export const BaseTextField = memo(
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"
-            secureTextEntry={true}
             textContentType={textContentType}
             autoCorrect= {autoCorrect}
             keyboardType= {keyboardType}
