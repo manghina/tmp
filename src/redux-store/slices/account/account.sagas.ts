@@ -13,6 +13,7 @@ import { LoginScreen } from "@app/screens/Login";
 import { UserHomeScreen } from "@app/screens/UserHome";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
+import { EmailVerificationScreen } from "@app/screens/EmailVerificationScreen";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -58,17 +59,29 @@ export function* autoLoginSaga() {
       actions.getProfessionalsMe.fail,
     ],
     function* (action) {
+      const account: IAccount = yield select(selectors.getAccount);
       switch (action.type) {
-        case actions.getUsersMe.success.type:
-          NavigationService.replace(UserHomeScreen.RouteName);
+        case actions.getUsersMe.success.type: {
+          if (account.emailVerified) {
+            NavigationService.replace(UserHomeScreen.RouteName);
+          } else {
+            NavigationService.replace(EmailVerificationScreen.RouteName);
+          }
           break;
-        case actions.getProfessionalsMe.success.type:
-          NavigationService.replace(ProfessionalHomeScreen.RouteName);
+        }
+        case actions.getProfessionalsMe.success.type: {
+          if (account.emailVerified) {
+            NavigationService.replace(ProfessionalHomeScreen.RouteName);
+          } else {
+            NavigationService.replace(EmailVerificationScreen.RouteName);
+          }
           break;
+        }
         default:
           const { status } = action.payload as ApiFailData<
             GetUsersMeParams | GetProfessionalsMeParams
           >;
+          console.log("status", status);
 
           switch (status) {
             case 401:
@@ -193,39 +206,6 @@ export function* userRegistrationSaga() {
   });
 }
 
-export function* verifyEmailSaga() {
-  yield takeEvery(actions.verifyEmailOtp, function* (action) {
-    const account: IAccount = yield select(selectors.getAccount);
-
-    if (account.emailVerified) {
-      return;
-    }
-
-    yield put(
-      actions.patchAccountsMe.request({
-        emailVerificationToken: action.payload,
-      }),
-    );
-
-    // @ts-ignore
-    const patchAccountsMeResultAction = yield take([
-      actions.patchAccountsMe.success,
-      actions.patchAccountsMe.fail,
-    ]);
-
-    if (
-      patchAccountsMeResultAction.type === actions.patchAccountsMe.fail.type
-    ) {
-      yield put(actions.setIsOtpError(true));
-      return;
-    }
-
-    yield put(actions.setIsOtpError(null));
-
-    NavigationService.replace(UserHomeScreen.RouteName);
-  });
-}
-
 export function* professionalRegistrationSaga() {
   yield takeEvery(
     actions.professionalRegistrationFormSubmitted,
@@ -304,5 +284,38 @@ export function* postLoginSaga() {
 export function* postResetPasswordSaga() {
   yield takeEvery(actions.patchPasswords.success, function* () {
     NavigationService.replace(PasswordResetSuccessScreen.RouteName);
+  });
+}
+
+export function* verifyEmailSaga() {
+  yield takeEvery(actions.verifyEmailOtp, function* (action) {
+    yield put(
+      actions.patchAccountsMe.request({
+        emailVerificationToken: action.payload,
+      }),
+    );
+
+    // @ts-ignore
+    const patchAccountsMeResultAction = yield take([
+      actions.patchAccountsMe.success,
+      actions.patchAccountsMe.fail,
+    ]);
+
+    if (
+      patchAccountsMeResultAction.type === actions.patchAccountsMe.fail.type
+    ) {
+      yield put(actions.setIsOtpError(true));
+      return;
+    }
+
+    yield put(actions.setIsOtpError(null));
+
+    const account: IAccount = yield select(selectors.getAccount);
+
+    if (account.type === "user") {
+      NavigationService.replace(UserHomeScreen.RouteName);
+    } else {
+      NavigationService.replace(ProfessionalHomeScreen.RouteName);
+    }
   });
 }
