@@ -12,7 +12,6 @@ import {
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
-import { LoginScreen } from "@app/screens/Login";
 
 interface UserEditFormData {
   name: string;
@@ -107,6 +106,10 @@ export const useUserProfileEditScreen = () => {
     }, 2000);
   }, []);
 
+  const handleResendOtpCode = useCallback(() => {
+    console.log("resend otp code");
+  }, []);
+
   const isPatchingUser = useSelector(
     selectors.getAjaxIsLoadingByApi(actions.patchUsersMe.api),
   );
@@ -140,12 +143,6 @@ export const useUserProfileEditScreen = () => {
     setIsVerifiedPhoneNumber(false);
   }, [phoneNumber]);
 
-  useEffect(() => {
-    if (!me) {
-      navigation.replace(LoginScreen.RouteName);
-    }
-  }, [me, navigation]);
-
   return {
     me,
     formData,
@@ -158,5 +155,6 @@ export const useUserProfileEditScreen = () => {
     isVerifiedPhoneNumber,
     handleGoBackFromOtpVerification,
     handleOtpVerification,
+    handleResendOtpCode,
   };
 };

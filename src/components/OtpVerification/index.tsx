@@ -10,6 +10,7 @@ interface OtpVerificationProps {
     componentDescription: string;
   };
   handleVerification: (otp: string) => void;
+  handleResendCode: () => void;
   handleGoBack?: () => void;
   hideGoBack?: boolean;
 }
@@ -20,6 +21,7 @@ export const OtpVerification = memo(
     handleGoBack,
     handleVerification,
     hideGoBack,
+    handleResendCode,
   }: OtpVerificationProps) => {
     const {
       otpCode,
@@ -28,7 +30,14 @@ export const OtpVerification = memo(
       isLoading,
       isOtpError,
       triggerGoBack,
-    } = useOtpVerification({ handleVerification, handleGoBack });
+      countdown,
+      isCountdownActive,
+      triggerResendCode,
+    } = useOtpVerification({
+      handleVerification,
+      handleGoBack,
+      handleResendCode,
+    });
 
     return (
       <View style={styles.otpContainer}>
@@ -65,12 +74,29 @@ export const OtpVerification = memo(
         {isOtpError && (
           <Text style={styles.otpErrorText}>Codice non valido. Riprova</Text>
         )}
-        <View style={styles.otpReset}>
-          <Text style={styles.otpTimerText}>
-            {isLoading
-              ? "Verifica codice in corso..."
-              : "Inserisci codice entro 00:29"}
-          </Text>
+        <View style={styles.otpTextContainer}>
+          {isLoading || isCountdownActive ? (
+            <Text style={styles.otpTimerText}>
+              {isLoading
+                ? "Verifica codice in corso..."
+                : `Inserisci codice entro 00:${
+                    (countdown < 10 ? `0${countdown}` : countdown) ?? "00"
+                  }`}
+            </Text>
+          ) : (
+            <View style={styles.otpResetContainer}>
+              <View>
+                <Text style={styles.otpResetText}>
+                  Non hai ricevuto il codice?
+                </Text>
+              </View>
+              <View>
+                <TouchableOpacity onPress={triggerResendCode}>
+                  <Text style={styles.otpResetCta}>Clicca qui</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
         </View>
         {!hideGoBack && (
           <View style={styles.otpGoBackContainer}>

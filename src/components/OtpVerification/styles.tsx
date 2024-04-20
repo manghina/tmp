@@ -36,13 +36,26 @@ export const styles = StyleSheet.create({
     color: "#FF0000",
     textAlign: "center",
   },
-  otpReset: {
+  otpTextContainer: {
     padding: dimensionsTokens.padding4Xs,
   },
   otpTimerText: {
     ...textVariants.p2MediumNormal,
     textAlign: "center",
     color: colorTokens.colorTextDisabled,
+  },
+  otpResetContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: dimensionsTokens.padding4Xs,
+  },
+  otpResetText: {
+    ...textVariants.p2MediumNormal,
+  },
+  otpResetCta: {
+    ...textVariants.p2BoldItalic,
+    color: colorTokens.colorTextAccentBlue,
   },
   otpGoBackContainer: {
     alignSelf: "center",

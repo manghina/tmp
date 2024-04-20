@@ -8,6 +8,7 @@ type OtpVerificationNewScreenProps = {
     componentDescription: string;
   };
   handleVerification: (otp: string) => void;
+  handleResendCode: () => void;
   children: ReactElement;
   handleGoBack?: () => void;
   disableChildrenPointerEvents?: boolean;
@@ -24,6 +25,7 @@ export const OtpVerificationNewScreen = memo(
     disableChildrenPointerEvents,
     hideGoBack,
     hideHeader,
+    handleResendCode,
   }: OtpVerificationNewScreenProps) => {
     const { onOpenScreenClicked } = useOtpVerificationNewScreen({
       componentProps,
@@ -31,6 +33,7 @@ export const OtpVerificationNewScreen = memo(
       handleVerification,
       hideGoBack,
       hideHeader,
+      handleResendCode,
     });
     return (
       <TouchableOpacity onPress={onOpenScreenClicked}>

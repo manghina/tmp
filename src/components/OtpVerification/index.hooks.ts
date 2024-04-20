@@ -6,15 +6,21 @@ import { actions, selectors } from "@app/redux-store";
 
 export const useOtpVerification = ({
   handleVerification,
+  handleResendCode,
   handleGoBack,
 }: {
   handleVerification: (otp: string) => void;
+  handleResendCode: () => void;
   handleGoBack?: () => void;
 }) => {
   const navigation = useNavigation<any>();
   const [otpCode, setOtpCode] = useState<string>("");
   const isOtpError = useSelector(selectors.getIsOtpError);
   const dispatch = useDispatch();
+
+  const [countdown, setCountdown] = useState(30);
+  const [isCountdownActive, setIsCountdownActive] = useState(true);
+  const countdownTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // fake loader
   const [isLoading, setIsLoading] = useState(false);
@@ -76,6 +82,11 @@ export const useOtpVerification = ({
     }
   }, [handleGoBack, navigation, timerRef]);
 
+  const triggerResendCode = useCallback(() => {
+    handleResendCode();
+    setIsCountdownActive(true);
+  }, [handleResendCode, setIsCountdownActive]);
+
   useEffect(() => {
     if (otpCode.length === 6 && !isOtpError) {
       handleVerification(otpCode);
@@ -96,9 +107,25 @@ export const useOtpVerification = ({
     }
   }, [isLoading, isOtpError, setOtpCode, setIsLoading, timerRef]);
 
-  useEffect(() => () => {
-    dispatch(actions.setIsOtpError(null));
-  }, [dispatch])
+  useEffect(() => {
+    if (isCountdownActive) {
+      countdownTimerRef.current = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 0) {
+            setIsCountdownActive(false);
+            clearInterval(countdownTimerRef.current!);
+            return 30;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (countdownTimerRef.current) {
+        clearInterval(countdownTimerRef.current);
+      }
+    };
+  }, [isCountdownActive]);
 
   return {
     otpCode,
@@ -107,5 +134,8 @@ export const useOtpVerification = ({
     isLoading,
     isOtpError,
     triggerGoBack,
+    countdown,
+    isCountdownActive,
+    triggerResendCode,
   };
 };
