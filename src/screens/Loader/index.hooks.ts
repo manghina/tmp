@@ -1,63 +1,73 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Animated, Easing } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { actions, selectors } from "@app/redux-store";
-import { IAccount } from "@app/models/Account";
 
 export const useLoaderScreen = () => {
   const navigation = useNavigation<any>();
   const rotation = useRef(new Animated.Value(0)).current;
-  const progressBarWidth = useRef(new Animated.Value(0)).current;
-  const dispatch = useDispatch();
-
-  const account: IAccount = useSelector(selectors.getAccount);
+  const progressBar = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    dispatch(actions.getAccountsMe.request({}));
-  }, [dispatch]);
-
-  useEffect(() => {
-    const redirectDelay = 1000;
-    let route: string = "tutorial";
-    if (!account) {
-      route = "tutorial";
-    } else if (account.type === "user") {
-      route = "user-home";
-    } else {
-      route = "professional-home";
-    }
-
-    const loadingDelay = setTimeout(() => {
-      navigation.replace(route);
-    }, redirectDelay);
-
     Animated.loop(
       Animated.timing(rotation, {
         toValue: 1,
-        duration: redirectDelay,
+        duration: 1000,
         easing: Easing.linear,
         useNativeDriver: true,
       }),
     ).start();
 
-    Animated.timing(progressBarWidth, {
-      toValue: 1,
-      duration: redirectDelay,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
+    Animated.sequence([
+      Animated.timing(progressBar, {
+        toValue: 0.5,
+        duration: 2000,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      }),
+      Animated.timing(progressBar, {
+        delay: 1000,
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      }),
+      Animated.timing(progressBar, {
+        toValue: 0,
+        duration: 0,
+        useNativeDriver: false,
+      }),
+      Animated.loop(
+        Animated.timing(progressBar, {
+          toValue: 1,
+          duration: 1500,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ),
+    ]).start();
 
     return () => {
-      clearTimeout(loadingDelay);
-      progressBarWidth.setValue(0);
+      progressBar.setValue(0);
     };
-  }, [navigation, rotation, progressBarWidth, account]);
+  }, [navigation, rotation, progressBar]);
 
-  const rotateInterpolate = rotation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["0deg", "360deg"],
-  });
+  const rotateInterpolate = useMemo(
+    () =>
+      rotation.interpolate({
+        inputRange: [0, 1],
+        outputRange: ["0deg", "360deg"],
+      }),
+    [rotation],
+  );
 
-  return { rotateInterpolate, progressBarWidth };
+  const progressBarXTranslation = useMemo(
+    () =>
+      progressBar.interpolate({
+        inputRange: [0, 1],
+        outputRange: [-300, 300],
+      }),
+    [progressBar],
+  );
+
+  return { rotateInterpolate, progressBarXTranslation };
 };

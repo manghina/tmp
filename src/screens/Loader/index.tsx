@@ -4,18 +4,13 @@ import { Animated } from "react-native";
 import UnionSVG from "@assets/img/union.svg";
 import LogoSVG from "@assets/img/logo.svg";
 import { useLoaderScreen } from "./index.hooks";
-import { colorTokens } from "@app/theme/colors/tokens";
+import { styles } from "./styles";
 
 export const LoaderScreen = () => {
-  const { rotateInterpolate, progressBarWidth } = useLoaderScreen();
+  const { rotateInterpolate, progressBarXTranslation } = useLoaderScreen();
 
   return (
-    <View
-      flex
-      centerV
-      centerH
-      backgroundColor={colorTokens.elevationSurfaceAlternative}
-    >
+    <View style={styles.loaderContainer}>
       <Animated.View
         style={{
           transform: [{ rotate: rotateInterpolate }],
@@ -23,29 +18,16 @@ export const LoaderScreen = () => {
       >
         <UnionSVG />
       </Animated.View>
-      <View marginT-41>
-        <LogoSVG />
-      </View>
-      <View marginT-41>
-        <View
-          style={{
-            width: 266,
-            height: 8,
-            backgroundColor: colorTokens.elevationSurfaceAlternative,
-            borderRadius: 2,
-            overflow: "hidden",
-          }}
-        >
+      <LogoSVG />
+      <View>
+        <View style={styles.progressBarContainer}>
           <Animated.View
-            style={{
-              height: "100%",
-              width: progressBarWidth.interpolate({
-                inputRange: [0, 1],
-                outputRange: ["0%", "101%"],
-              }),
-              borderRadius: 2,
-              backgroundColor: colorTokens.colorBackgroundAlternativeBrand,
-            }}
+            style={[
+              styles.progressBar,
+              {
+                transform: [{ translateX: progressBarXTranslation }],
+              },
+            ]}
           />
         </View>
       </View>
