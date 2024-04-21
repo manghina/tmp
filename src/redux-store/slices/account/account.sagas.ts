@@ -9,6 +9,10 @@ import { PostUsersParams } from "@app/redux-store/extra-actions/apis/post-users"
 import { GetUsersMeParams } from "@app/redux-store/extra-actions/apis/get-users-me";
 import { IAccount } from "@app/models/Account";
 import { GetProfessionalsMeParams } from "../../extra-actions/apis/get-professionals-me";
+import { LoginScreen } from "@app/screens/Login";
+import { UserHomeScreen } from "@app/screens/UserHome";
+import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
+import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -39,7 +43,7 @@ export function* userInitSaga() {
         }
       } else {
         yield put(actions.resetAccount());
-        NavigationService.replace("login");
+        NavigationService.replace(LoginScreen.RouteName);
       }
     }
   });
@@ -56,10 +60,10 @@ export function* autoLoginSaga() {
     function* (action) {
       switch (action.type) {
         case actions.getUsersMe.success.type:
-          NavigationService.replace("user-home");
+          NavigationService.replace(UserHomeScreen.RouteName);
           break;
         case actions.getProfessionalsMe.success.type:
-          NavigationService.replace("professional-home");
+          NavigationService.replace(ProfessionalHomeScreen.RouteName);
           break;
         default:
           const { status } = action.payload as ApiFailData<
@@ -69,11 +73,11 @@ export function* autoLoginSaga() {
           switch (status) {
             case 401:
               yield put(actions.resetAccount());
-              NavigationService.replace("login");
+              NavigationService.replace(LoginScreen.RouteName);
               break;
             case 403:
               yield put(actions.resetAccount());
-              NavigationService.replace("login");
+              NavigationService.replace(LoginScreen.RouteName);
               break;
             case 404:
               // Here we need to create a page only for account creation without email and password
@@ -111,7 +115,7 @@ function* createAccountAndLogin(email: string, password: string) {
     if (status === 409) {
       // Account already exists, redirect to log in options
       yield put(actions.resetAccount());
-      NavigationService.replace("login");
+      NavigationService.replace(LoginScreen.RouteName);
     }
 
     return;
@@ -266,12 +270,6 @@ export function* postLoginSaga() {
 
 export function* postResetPasswordSaga() {
   yield takeEvery(actions.patchPasswords.success, function* () {
-    NavigationService.replace("password-reset-success");
-  });
-}
-
-export function* postProfessionalRequestSaga() {
-  yield takeEvery(actions.postPaymentIntents.success, function* () {
-    NavigationService.replace("RequestProfessionalSucess");
+    NavigationService.replace(PasswordResetSuccessScreen.RouteName);
   });
 }

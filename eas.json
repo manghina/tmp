@@ -13,7 +13,8 @@
     "production": {
       "node": "20.10.0",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://www.sweepit.ai/api"
+        "EXPO_PUBLIC_API_URL": "https://www.sweepit.ai/api",
+        "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyAIjKhORY1ndCu3Xww0F7t70b29hjyUPg8"
       }
     }
   },

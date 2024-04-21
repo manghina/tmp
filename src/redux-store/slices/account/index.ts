@@ -3,7 +3,7 @@ import { AccountState } from "./account.interfaces";
 import * as selectors from "./account.selectors";
 import * as sagas from "./account.sagas";
 import * as extraActions from "@app/redux-store/extra-actions";
-import { Specialization } from "@app/models/common/DoctorCommon";
+import { Specialization } from "src/models/common/DoctorCommon";
 
 export const accountStore = createSlice({
   name: "account",
@@ -22,6 +22,18 @@ export const accountStore = createSlice({
         firstName: string;
         lastName: string;
         birthDate: string;
+      }>,
+    ) => {},
+    userEditFormSubmitted: (
+      state,
+      action: PayloadAction<{
+        name: string;
+        lastName: string;
+        birthDate: string;
+        phonePrefix: string;
+        phoneNumber: string;
+        country: string;
+        gender: string;
       }>,
     ) => {},
     professionalRegistrationFormSubmitted: (
@@ -61,6 +73,10 @@ export const accountStore = createSlice({
       state.account = action.payload.data.account;
     });
     builder.addCase(extraActions.getUsersMe.success, (state, action) => {
+      state.userMe = action.payload.data.user;
+      state.professionalMe = null;
+    });
+    builder.addCase(extraActions.patchUsersMe.success, (state, action) => {
       state.userMe = action.payload.data.user;
       state.professionalMe = null;
     });

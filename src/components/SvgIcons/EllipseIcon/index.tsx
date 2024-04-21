@@ -1,14 +1,24 @@
+import { useSvgSizes } from "@app/hooks/useSvgSizes";
+import { colorTokens } from "@app/theme/colors/tokens";
 import * as React from "react";
-import Svg, { Circle } from "react-native-svg";
+import Svg, { Circle, SvgProps } from "react-native-svg";
 
-type EllipseIconProps = {
-  color?: string;
+const EllipseIcon = ({ color, size = 8, ...props }: SvgProps) => {
+  const { width, height, viewBox } = useSvgSizes({
+    size,
+    viewBoxWidth: 8,
+    viewBoxHeight: 8,
+  });
+  return (
+    <Svg width={width} height={height} viewBox={viewBox} {...props}>
+      <Circle
+        id="Ellipse"
+        cx="4"
+        cy="4"
+        r="4"
+        fill={color ?? colorTokens.colorIcon}
+      />
+    </Svg>
+  );
 };
-
-const EllipseIcon = ({ color, ...props }: EllipseIconProps) => (
-  <Svg width={8} height={8} fill="none" {...props}>
-    <Circle id="Ellipse" cx="4" cy="4" r="4" fill={color ?? "#000"} />
-  </Svg>
-);
-
 export default EllipseIcon;

@@ -1,44 +1,62 @@
-import { JSX, useCallback } from "react";
+import { JSX, useCallback, useMemo, useRef } from "react";
 import useFormField from "@app/hooks/useFormField";
 import { useNavigation } from "@react-navigation/native";
+import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
+import { TextInput } from "react-native";
 
-export const useFormNewScreenFilterableSelect = <
-  T extends { label: string; value: string },
->({
+type SelectValue = string | string[];
+
+export const useFormNewScreenFilterableSelect = <T extends SelectOption>({
   name,
   options,
   pageProps,
+  multipleSelection,
+  showSubOptions,
 }: {
   name: string;
   options: T[];
+  multipleSelection?: boolean;
+  showSubOptions?: boolean;
   pageProps: {
     pageTitle: string;
     pageDescription?: string;
     searchTextLabel?: string;
     listTitle?: string;
-    renderItem?: (item: T, index: number) => JSX.Element;
   };
 }) => {
   const navigation = useNavigation<any>();
-  const { value, setValue } = useFormField<string>({ name });
+  const { value, setValue } = useFormField<SelectValue>({ name });
+
+  const inputRef = useRef<TextInput>(null);
 
   const onBackFromChoosingScreen = useCallback(
-    (value?: string) => {
+    (value?: SelectValue) => {
       if (value) {
         setValue(value);
       }
     },
-    [setValue],
+    [setValue, value, multipleSelection, options],
   );
 
   const onFieldClicked = useCallback(() => {
-    navigation.navigate("form-filterable-select", {
+    inputRef.current?.blur();
+    navigation.navigate(FilterableSelectScreen.RouteName, {
       onGoBack: onBackFromChoosingScreen,
       options,
       value,
       pageProps,
+      multipleSelection,
+      showSubOptions,
     });
-  }, [navigation, onBackFromChoosingScreen, options, pageProps, value]);
+  }, [
+    navigation,
+    onBackFromChoosingScreen,
+    options,
+    pageProps,
+    value,
+    inputRef,
+    multipleSelection,
+  ]);
 
-  return { onFieldClicked };
+  return { onFieldClicked, inputRef };
 };

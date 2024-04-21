@@ -1,8 +1,8 @@
 import React, { memo } from "react";
 import { useBackButton } from "./index.hooks";
 import { TouchableOpacity, View } from "react-native-ui-lib";
-import ArrowDownIcon from "@app/components/SvgIcons/ArrowDownIcon";
 import { styles } from "./styles";
+import { ArrowDownIcon } from "@app/components/SvgIcons";
 
 type BackButtonProps = {};
 

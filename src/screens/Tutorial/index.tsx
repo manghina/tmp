@@ -1,23 +1,9 @@
 import { Button, Text, View } from "react-native-ui-lib";
 import { useTutorialScreen } from "./index.hooks";
-import {
-  Animated,
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
-
-const styles = StyleSheet.create({
-  defaultAnimatedBarStyles: {
-    position: "absolute",
-    width: 4,
-    height: "100%",
-    backgroundColor: "#3C77E8",
-    borderRadius: 1,
-    bottom: 0,
-    transformOrigin: "bottom",
-  },
-});
+import { Animated, ImageBackground, SafeAreaView } from "react-native";
+import { RegisterBottomSheet } from "@app/components/RegisterBottomSheet";
+import { LoginBottomSheet } from "@app/components/LoginBottomSheet";
+import { styles } from "./styles";
 
 export const TutorialScreen = () => {
   const {
@@ -28,7 +14,10 @@ export const TutorialScreen = () => {
     fill3Anim,
     onRegisterButtonClick,
     onLoginButtonClick,
-    goto,
+    onRegisterClose,
+    onLoginClose,
+    showRegisterBottomSheet,
+    showLoginBottomSheet,
   } = useTutorialScreen();
 
   return (
@@ -169,6 +158,19 @@ export const TutorialScreen = () => {
           </View>
         </View>
       </SafeAreaView>
+      <RegisterBottomSheet
+        onLoginButtonPressed={onLoginButtonClick}
+        showRegisterBottomSheet={showRegisterBottomSheet}
+        onRegisterClose={onRegisterClose}
+      />
+      <LoginBottomSheet
+        onRegisterButtonPressed={onRegisterButtonClick}
+        showLoginBottomSheet={showLoginBottomSheet}
+        onLoginClose={onLoginClose}
+      />
     </ImageBackground>
   );
 };
+
+TutorialScreen.displayName = "TutorialScreen";
+TutorialScreen.RouteName = "tutorial" as const;

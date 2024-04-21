@@ -14,6 +14,7 @@ export const Dimensions = {
   },
   medium: {
     spacing_150: baseSpacing * 1.5,
+    spacing_175: baseSpacing * 1.75,
     spacing_200: baseSpacing * 2,
     spacing_250: baseSpacing * 2.5,
     spacing_300: baseSpacing * 3,

@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { useFormTextField } from "./index.hooks";
-import { Button, Colors, TextFieldProps, View } from "react-native-ui-lib";
+import { Button, TextFieldProps, View } from "react-native-ui-lib";
 import { styles } from "./styles";
 import VisibilityIcon from "@app/components/SvgIcons/VisibilityIcon";
 import VisibilityOffIcon from "@app/components/SvgIcons/VisibilityOffIcon";
@@ -10,7 +10,7 @@ export type FormTextFieldProps = {
   name: string;
   type?: "text" | "password";
   trailingAccessory?: TextFieldProps["trailingAccessory"];
-  disabled: boolean;
+  disabled?: boolean;
 } & TextFieldProps;
 
 export const FormTextField = memo(
@@ -48,7 +48,6 @@ export const FormTextField = memo(
                 styles.showHidePasswordButton,
                 isFocused ? { opacity: 1 } : undefined,
               ]}
-              color={Colors.white}
             >
               <View style={styles.showHidePasswordIcon}>
                 {hideText ? <VisibilityIcon /> : <VisibilityOffIcon />}

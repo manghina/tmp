@@ -2,8 +2,6 @@ import { FC, memo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Colors } from "react-native-ui-lib";
-
 import { useAppContent } from "./index.hooks";
 
 import { TutorialScreen } from "@app/screens/Tutorial";
@@ -18,19 +16,24 @@ import { UserHeader } from "@app/components/_users/UserHeader";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
-import { RequestsProfessionalOffersScreen } from "@app/screens/RequestsProfessionalOffers";
+import { RequestSearchProfessionalsScreen } from "src/screens/RequestSearchProfessionals";
 import { HeaderGoBack } from "@app/components/HeaderGoBack";
+import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
-import { RequestProfessionalSuccessScreen } from "@app/screens/RequestProfessionalSuccess";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
-import { UserSettingsScreen } from "@app/screens/UserSettings";
+import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
+import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
+import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
+import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,9 +50,9 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName="loader">
+        <Stack.Navigator initialRouteName={TutorialScreen.RouteName}>
           <Stack.Screen
-            name="form-filterable-select"
+            name={FilterableSelectScreen.RouteName}
             component={FilterableSelectScreen}
             options={{
               headerTitle: "",
@@ -59,21 +62,31 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="loader"
+            name={OtpVerificationScreen.RouteName}
+            component={OtpVerificationScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name={LoaderScreen.RouteName}
             component={LoaderScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="tutorial"
+            name={TutorialScreen.RouteName}
             component={TutorialScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="home"
+            name={HomeScreen.RouteName}
             component={HomeScreen}
             options={{
               headerShown: false,
@@ -83,17 +96,23 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="login"
+            name={LoginScreen.RouteName}
             component={LoginScreen}
             options={{
-              headerShown: false,
-              statusBarAnimation: "slide",
-              statusBarStyle: "dark",
-              statusBarColor: "#D8E0F2",
+              title: "Accedi",
+              headerTitleAlign: "center",
+              headerTitleStyle: {
+                ...textVariants.h3CondensedBlackNormal,
+                color: colorTokens.colorTextDefault,
+              },
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerLeft: () => <BackButton />,
+              headerShadowVisible: false,
             }}
           />
           <Stack.Screen
-            name="forgot-password"
+            name={ForgotPasswordScreen.RouteName}
             component={ForgotPasswordScreen}
             options={{
               title: "",
@@ -105,14 +124,14 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="password-reset-success"
+            name={PasswordResetSuccessScreen.RouteName}
             component={PasswordResetSuccessScreen}
             options={{
               headerShown: false,
             }}
           />
           <Stack.Screen
-            name="user-register"
+            name={UserRegisterScreen.RouteName}
             component={UserRegisterScreen}
             options={{
               title: "Registrati",
@@ -130,7 +149,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="professional-register"
+            name={ProfessionalRegisterScreen.RouteName}
             component={ProfessionalRegisterScreen}
             options={{
               title: "Registrati",
@@ -148,7 +167,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="professional-home"
+            name={ProfessionalHomeScreen.RouteName}
             component={ProfessionalHomeScreen}
             options={{
               headerShown: false,
@@ -158,7 +177,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="professional-offers/details"
+            name={ProfessionalOfferDetailScreen.RouteName}
             component={ProfessionalOfferDetailScreen}
             options={{
               headerTitle: "",
@@ -167,27 +186,35 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
-              headerTintColor: "transparent",
               headerTransparent: true,
               headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
-            name="user-home"
+            name={UserHomeScreen.RouteName}
             component={UserHomeScreen}
             options={{
               header: () => <UserHeader />,
             }}
           />
           <Stack.Screen
-            name="user-settings"
-            component={UserSettingsScreen}
+            name={UserProfileScreen.RouteName}
+            component={UserProfileScreen}
             options={{
-              header: () => <UserHeader />,
+              animation: "slide_from_bottom",
+              header: () => <HeaderProfileGoBack />,
             }}
           />
           <Stack.Screen
-            name="requests/cancel"
+            name={ProfileEditScreen.RouteName}
+            component={ProfileEditScreen}
+            options={{
+              animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name={RequestCancelByProfessionalScreen.RouteName}
             component={RequestCancelByProfessionalScreen}
             options={{
               animation: "slide_from_bottom",
@@ -197,7 +224,7 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="requests/chat"
+            name={RequestChatScreen.RouteName}
             component={RequestChatScreen}
             options={{
               animation: "slide_from_bottom",
@@ -207,8 +234,8 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="requests/professional-offers"
-            component={RequestsProfessionalOffersScreen}
+            name={RequestSearchProfessionalsScreen.RouteName}
+            component={RequestSearchProfessionalsScreen}
             options={{
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
@@ -217,20 +244,40 @@ export const AppContent: FC = memo(({}) => {
             }}
           />
           <Stack.Screen
-            name="requests/confirm-payment"
+            name={UserChooseProfessionalOfferScreen.RouteName}
+            component={UserChooseProfessionalOfferScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              headerLeft: () => <BackButton />,
+            }}
+          />
+          <Stack.Screen
+            name={RequestConfirmPaymentScreen.RouteName}
             component={RequestConfirmPaymentScreen}
             options={{
               animation: "slide_from_bottom",
               headerTintColor: "transparent",
               headerTransparent: true,
-              header: () => <HeaderGoBack />,
+              headerLeft: () => <BackButton />,
             }}
           />
           <Stack.Screen
-            name="RequestProfessionalSuccess"
-            component={RequestProfessionalSuccessScreen}
+            name={RequestPaymentSucceededScreen.RouteName}
+            component={RequestPaymentSucceededScreen}
             options={{
               headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name={UserRequestAppointmentDetailsScreen.RouteName}
+            component={UserRequestAppointmentDetailsScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTintColor: "transparent",
+              headerTransparent: true,
+              headerLeft: () => <BackButton />,
             }}
           />
         </Stack.Navigator>
