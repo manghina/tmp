@@ -45,7 +45,18 @@ const schema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password")], "Le password devono coincidere")
     .required("Conferma la tua password"),
-  birthDate: yup.date().required("Inserisci la tua data di nascita"),
+  birthDate: yup.date()
+  .required("Inserisci la tua data di nascita")
+  .test(
+    "age-check",
+    "Devi avere compiuto almeno 21 anni per registrarti al servizio",
+    function (value) {
+      const today = moment();
+      const birthDate = moment(value);
+      const age = today.diff(birthDate, "years");
+      return age >= 21;
+    },
+  ),
 });
 
 export const useUserRegisterScreen = () => {
@@ -85,6 +96,8 @@ export const useUserRegisterScreen = () => {
         "confirmPassword",
       ],
     });
+
+    
 
   const onNextStepButtonPressed = useCallback(
     () => setStepperCounter(2),
