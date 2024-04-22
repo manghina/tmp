@@ -183,6 +183,7 @@ export const ProfessionalRegisterScreen = () => {
 
   return (
     <View style={styles.pageContainer}>
+      <ScrollView automaticallyAdjustKeyboardInsets={true} >
       <FormProvider {...formData}>
         <AnimatedProgressBar
           value={currentStepCompletionPercentage}
@@ -203,6 +204,7 @@ export const ProfessionalRegisterScreen = () => {
           </View>
         </ScrollView>
       </FormProvider>
+      </ScrollView>
     </View>
   );
 };

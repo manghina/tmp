@@ -5,6 +5,7 @@ import { useLoginBottomSheet } from "./index.hooks";
 import { FormTextField } from "@app/components/_form/FormTextField";
 import { BottomSheet } from "@app/components/BottomSheet";
 import { styles } from "./style";
+import { ScrollView } from "react-native";
 
 const headerBackgroundGraphicsPercentageOverflow = 20;
 
@@ -39,33 +40,35 @@ export const LoginBottomSheet = memo(
             <Text style={styles.pageTitle}>Accedi</Text>
             <Text style={styles.pageSubtitle}>Seleziona metodo preferito</Text>
           </View>
-          <FormProvider {...formData}>
-            <View style={styles.contentContainer}>
-              <FormTextField
-                keyboardType="email-address"
-                name="email"
-                label="Indirizzo email"
-              />
-              <Button
-                onPress={onProceedButtonPressed}
-                disabled={submitDisabled}
-                style={styles.button}
-              >
-                <Text style={styles.buttonText}>Procedi</Text>
-              </Button>
-              <View style={styles.secondaryActionContainer}>
-                <Text style={styles.secondaryActionText}>
-                  Non hai un profilo?
-                </Text>
-                <Text
-                  style={styles.secondaryActionLink}
-                  onPress={onRegisterButtonPressed}
+          <ScrollView automaticallyAdjustKeyboardInsets={true} >
+            <FormProvider {...formData}>
+              <View style={styles.contentContainer}>
+                <FormTextField
+                  keyboardType="email-address"
+                  name="email"
+                  label="Indirizzo email"
+                />
+                <Button
+                  onPress={onProceedButtonPressed}
+                  disabled={submitDisabled}
+                  style={styles.button}
                 >
-                  Registrati
-                </Text>
+                  <Text style={styles.buttonText}>Procedi</Text>
+                </Button>
+                <View style={styles.secondaryActionContainer}>
+                  <Text style={styles.secondaryActionText}>
+                    Non hai un profilo?
+                  </Text>
+                  <Text
+                    style={styles.secondaryActionLink}
+                    onPress={onRegisterButtonPressed}
+                  >
+                    Registrati
+                  </Text>
+                </View>
               </View>
-            </View>
-          </FormProvider>
+            </FormProvider>
+          </ScrollView>
         </View>
       </BottomSheet>
     );

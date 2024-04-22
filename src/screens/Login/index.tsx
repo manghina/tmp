@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, ScrollView } from "react-native";
 import { View, Text, Button } from "react-native-ui-lib";
 import { FormProvider } from "react-hook-form";
 import { useLoginScreen } from "./index.hooks";
@@ -25,6 +25,7 @@ export const LoginScreen = ({}: LoginScreenProps) => {
     <SafeAreaView style={styles.page}>
       <AnimatedProgressBar value={completionPercentage} duration={250} />
       <View style={styles.pageContentWrapper}>
+      <ScrollView automaticallyAdjustKeyboardInsets={true} >
         <FormProvider {...formData}>
           <View style={styles.formColumn}>
             <FormTextField
@@ -75,6 +76,7 @@ export const LoginScreen = ({}: LoginScreenProps) => {
             </View>
           </View>
         </FormProvider>
+      </ScrollView>
       </View>
     </SafeAreaView>
   );

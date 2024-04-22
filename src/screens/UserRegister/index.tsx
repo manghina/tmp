@@ -30,7 +30,7 @@ export const UserRegisterScreen = ({}: UserRegisterScreenProps) => {
   } = useUserRegisterScreen();
 
   return (
-    <ScrollView style={styles.pageContainer}>
+    <ScrollView style={styles.pageContainer} automaticallyAdjustKeyboardInsets={true}>
       <FormProvider {...formData}>
         {stepperCounter == 1 ? (
           <View key="step1" style={styles.step}>

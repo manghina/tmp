@@ -52,7 +52,7 @@ export const UserChooseProfessionalOfferScreen =
 
     return (
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView} automaticallyAdjustKeyboardInsets={true}>
           <View style={styles.mainContainer}>
             <View style={styles.contentWrapper}>
               <Text style={styles.pageTitle}>Prenotazione</Text>

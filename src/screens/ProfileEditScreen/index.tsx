@@ -149,8 +149,8 @@ export const ProfileEditScreen = () => {
 
   return (
     <>
-      <SafeAreaView style={userProfileEditStyles.safeAreaView}>
-        <ScrollView style={userProfileEditStyles.scrollView}>
+      <SafeAreaView style={userProfileEditStyles.safeAreaView} >
+        <ScrollView style={userProfileEditStyles.scrollView}  automaticallyAdjustKeyboardInsets={true} >
           <FormProvider {...formData}>{renderPageContent()}</FormProvider>
         </ScrollView>
       </SafeAreaView>
