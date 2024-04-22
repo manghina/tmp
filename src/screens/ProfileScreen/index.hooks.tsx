@@ -22,6 +22,9 @@ import {
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoginScreen } from "@app/screens/Login";
+import { Asset } from "react-native-image-picker";
+import { convertImageToBlob, MediaTypes } from "@app/models/Media";
+import { useImagePicker } from "@app/hooks/useImagePicker";
 
 type UserProfileMenuItem = {
   label: string;
@@ -39,6 +42,15 @@ export const useUserProfileScreen = () => {
   const navigation = useNavigation<any>();
 
   const me: User | null = useSelector(selectors.getMe);
+  const uploadedImage = useSelector(selectors.getUploadedMedia);
+  const isUploadingMedia = useSelector(selectors.getIsUploadingMedia);
+
+  const mediaUrl = useMemo(
+    () =>
+      uploadedImage?.getUrlFromKeyAndExtension() ||
+      me?.media?.getUrlFromKeyAndExtension(),
+    [uploadedImage, me],
+  );
 
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
@@ -141,6 +153,27 @@ export const useUserProfileScreen = () => {
     [navigation],
   );
 
+  const onProfilePictureChosen = useCallback(
+    async (image: Asset) => {
+      const imageBytes = await convertImageToBlob(image.uri!);
+
+      dispatch(
+        actions.mediaUpload({
+          data: imageBytes,
+          fileName: image.fileName!,
+          mime: image.type!,
+          type: MediaTypes.IMAGE,
+          isPrivate: false,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
+  const { dialog, onImagePickerPressed } = useImagePicker(
+    onProfilePictureChosen,
+  );
+
   useEffect(() => {
     if (!me) {
       navigation.replace(LoginScreen.RouteName);
@@ -151,5 +184,13 @@ export const useUserProfileScreen = () => {
     dispatch(actions.getUsersMeRequests.request({}));
   }, [dispatch]);
 
-  return { me, profileMenuItems, handleLogout };
+  return {
+    isUploadingMedia,
+    me,
+    uploadedImage,
+    mediaUrl,
+    profileMenuItems,
+    dialog,
+    onImagePickerPressed,
+  };
 };

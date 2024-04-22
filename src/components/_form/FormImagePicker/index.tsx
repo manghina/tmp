@@ -1,18 +1,10 @@
 import { useFormImagePicker } from "./index.hooks";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Dialog,
-  Image,
-  PanningProvider,
-} from "react-native-ui-lib";
+import { View, Text, TouchableOpacity, Image } from "react-native-ui-lib";
 import { memo } from "react";
 import { colorTokensLight } from "@app/theme/colors/tokens";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { textVariants } from "@app/theme/typographies/variants";
 import PictureIcon from "@app/components/SvgIcons/PictureIcon";
-import CameraIcon from "@app/components/SvgIcons/CameraIcon";
 
 type FormImagePickerProps = {
   name: string;
@@ -20,15 +12,8 @@ type FormImagePickerProps = {
 };
 
 export const FormImagePicker = memo(({ name, label }: FormImagePickerProps) => {
-  const {
-    value,
-    error,
-    chooseMediaSourceDialogOpen,
-    onImagePickerPressed,
-    onDialogClose,
-    onChooseFromCameraClicked,
-    onChooseFromLibraryClicked,
-  } = useFormImagePicker(name);
+  const { value, error, dialog, onImagePickerPressed } =
+    useFormImagePicker(name);
 
   return (
     <View
@@ -73,80 +58,7 @@ export const FormImagePicker = memo(({ name, label }: FormImagePickerProps) => {
         </Text>
       )}
       {label && <Text style={{ ...textVariants.h5BoldItalic }}>{label}</Text>}
-      <Dialog
-        visible={chooseMediaSourceDialogOpen}
-        onDismiss={onDialogClose}
-        panDirection={PanningProvider.Directions.DOWN}
-        containerStyle={{
-          backgroundColor: "#FFF",
-          padding: dimensionsTokens.paddingSm,
-          borderRadius: 10,
-          // Shadow
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 1,
-        }}
-      >
-        <View
-          style={{
-            display: "flex",
-            gap: dimensionsTokens.paddingSm,
-          }}
-        >
-          <Text
-            style={{
-              ...textVariants.p1BoldNormal,
-            }}
-          >
-            Seleziona immagine
-          </Text>
-          <TouchableOpacity onPress={onChooseFromCameraClicked}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: dimensionsTokens.paddingSm,
-              }}
-            >
-              <View style={{ width: 40, height: 40 }}>
-                <CameraIcon />
-              </View>
-              <Text
-                style={{
-                  ...textVariants.p2MediumNormal,
-                }}
-              >
-                Scatta una foto
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onChooseFromLibraryClicked}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: dimensionsTokens.paddingSm,
-              }}
-            >
-              <View style={{ width: 40, height: 40 }}>
-                <PictureIcon />
-              </View>
-              <Text
-                style={{
-                  ...textVariants.p2MediumNormal,
-                }}
-              >
-                Scegli dalla galleria
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </Dialog>
+      {dialog}
     </View>
   );
 });

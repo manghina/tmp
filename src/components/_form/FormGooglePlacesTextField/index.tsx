@@ -3,6 +3,7 @@ import { useFormGooglePlacesTextField } from "./index.hooks";
 import { Text, TextFieldProps, View } from "react-native-ui-lib";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { styles } from "./styles";
+import { googleMapsApiKey } from "@app/config";
 
 export type FormGooglePlacesTextFieldProps = {
   name: string;
@@ -23,7 +24,7 @@ export const FormGooglePlacesTextField = memo(
           }}
           fetchDetails={true}
           query={{
-            key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
+            key: googleMapsApiKey(),
             components: "country:it",
             language: "it",
           }}

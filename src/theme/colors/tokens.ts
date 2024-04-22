@@ -51,7 +51,7 @@ export const colorTokensLight = {
   colorIcon: Colors.Neutral[800],
   colorIconSubtle: Colors.Neutral[700],
   colorIconInverse: Colors.Neutral[0],
-  colorIconDisabled: Colors.NeutralAlpha[400],
+  colorIconDisabled: Colors.Neutral[400],
   colorIconSelected: Colors.Blue[700],
   colorIconBrand: Colors.Brand[400],
   colorIconDanger: Colors.Red[600],
