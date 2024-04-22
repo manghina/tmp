@@ -1,4 +1,4 @@
-import { View, Text, Image, Button } from "react-native-ui-lib";
+import { View, Text, Button } from "react-native-ui-lib";
 import { useDeleteReservationScreen } from "./index.hooks";
 import { styles } from "./styles";
 import { SafeAreaView, ScrollView } from "react-native";

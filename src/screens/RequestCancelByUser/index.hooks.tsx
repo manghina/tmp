@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { actions } from "@app/redux-store";
 
 interface CancelReservationFormData {
   motivation: string;
@@ -13,9 +15,11 @@ const schema = yup.object().shape({
   feedback: yup.string(),
 });
 
-const fieldKeys = ["motivation", "feedback"] as const;
-
 export const useDeleteReservationScreen = () => {
+  const dispatch = useDispatch();
+
+  const appointmentId = useMemo(() => "000000000000000000000000", []);
+
   const formData = useForm<CancelReservationFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -25,26 +29,23 @@ export const useDeleteReservationScreen = () => {
 
   const {
     handleSubmit,
-    control,
     formState: { isDirty },
   } = formData;
 
-  const [motivation] = useWatch({
-    control,
-    name: fieldKeys,
-  });
-
   const canSubmit = useMemo(() => isDirty, [isDirty]);
 
-  useEffect(() => {
-    console.log(motivation);
-  }, [motivation]);
-
-  const triggerRequestCancel = useCallback(() => {
-    handleSubmit((data) => {
-      console.log(data);
-    })();
-  }, [handleSubmit]);
+  const triggerRequestCancel = useMemo(
+    () =>
+      handleSubmit((data) => {
+        dispatch(
+          actions.deleteUsersMeAppointmentsByAppointmentId.request({
+            appointmentId,
+            ...data,
+          }),
+        );
+      }),
+    [handleSubmit],
+  );
 
   return {
     formData,
