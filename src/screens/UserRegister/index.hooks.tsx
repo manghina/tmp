@@ -59,10 +59,25 @@ const schema = yup.object().shape({
   ),
 });
 
+const firstStepFieldKeys = [
+  "firstName",
+  "lastName",
+  "birthDate",
+] as const;
+const secondStepFieldKeys = [
+  "email",
+  "password",
+  "confirmPassword",
+] as const;
+
 export const useUserRegisterScreen = () => {
   const dispatch = useDispatch();
-
   const [stepperCounter, setStepperCounter] = useState(1);
+
+  const stepperIndex: number = useSelector(
+    selectors.getProfessionalRegisterStepperCounter,
+  );
+  
   const navigation = useNavigation<any>();
 
   const formData = useForm<SignUpFormData>({
@@ -99,14 +114,19 @@ export const useUserRegisterScreen = () => {
 
     
 
-  const onNextStepButtonPressed = useCallback(
-    () => setStepperCounter(2),
-    [setStepperCounter],
-  );
-  const onPreviousStepButtonPressed = useCallback(
-    () => setStepperCounter(1),
-    [setStepperCounter],
-  );
+    const onNextStepButtonPressed = useCallback(async () => {
+      let stepValid = false;
+  
+
+          stepValid = await trigger(firstStepFieldKeys);
+      if(stepValid)
+        setStepperCounter(2)
+  
+    }, [dispatch, stepperIndex, trigger]);
+  
+    const onPreviousStepButtonPressed = useCallback(() => {
+        setStepperCounter(1)
+    }, [dispatch, stepperIndex]);
 
   const firstStepFilled = useMemo(
     () => Boolean(firstName) && Boolean(lastName) && Boolean(birthDate),
@@ -134,7 +154,7 @@ export const useUserRegisterScreen = () => {
       !errors.firstName &&
       !errors.lastName &&
       !errors.birthDate,
-    [firstStepFilled, secondStepFilled],
+    [firstStepFilled],
   );
 
   const triggerSubmit = useMemo(
@@ -183,8 +203,8 @@ export const useUserRegisterScreen = () => {
 
   return {
     formData,
-    stepperCounter,
     firstStepFilled,
+    stepperCounter,
     firstStepCompletionPercentage,
     secondStepFilled,
     secondStepCompletionPercentage,
