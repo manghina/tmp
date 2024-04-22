@@ -13,6 +13,7 @@ import { LoginScreen } from "@app/screens/Login";
 import { UserHomeScreen } from "@app/screens/UserHome";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
+import { TutorialScreen } from "@app/screens/Tutorial";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -45,6 +46,8 @@ export function* userInitSaga() {
         yield put(actions.resetAccount());
         NavigationService.replace(LoginScreen.RouteName);
       }
+    } else {
+      NavigationService.replace(TutorialScreen.RouteName);
     }
   });
 }

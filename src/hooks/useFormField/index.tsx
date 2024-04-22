@@ -11,6 +11,7 @@ const useFormField = <T,>({ name }: useFormFieldProps) => {
     formState: { isSubmitted },
     setValue: _setValue,
     getFieldState,
+    clearErrors,
   } = useFormContext();
 
   const value: T = useWatch({
@@ -35,6 +36,7 @@ const useFormField = <T,>({ name }: useFormFieldProps) => {
     value,
     setValue,
     error,
+    clearErrors,
   };
 };
 

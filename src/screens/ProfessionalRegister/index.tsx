@@ -188,7 +188,11 @@ export const ProfessionalRegisterScreen = () => {
           value={currentStepCompletionPercentage}
           duration={250}
         />
-        <ScrollView style={styles.scrollView}>
+        <ScrollView
+          style={styles.scrollView}
+          automaticallyAdjustKeyboardInsets
+          keyboardShouldPersistTaps="handled"
+        >
           <View style={styles.stepContent}>
             {stepperIndex === 1 ? (
               renderStep1()

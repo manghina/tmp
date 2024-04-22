@@ -10,7 +10,7 @@ export type FormGooglePlacesTextFieldProps = {
 
 export const FormGooglePlacesTextField = memo(
   ({ name, placeholder, ...props }: FormGooglePlacesTextFieldProps) => {
-    const { isFocused, onBlur, onFocus, handleChange } =
+    const { isFocused, onBlur, onFocus, handleChange, error, handleSelect } =
       useFormGooglePlacesTextField(name);
 
     return (
@@ -19,7 +19,7 @@ export const FormGooglePlacesTextField = memo(
         <GooglePlacesAutocomplete
           placeholder={placeholder ?? "Cerca..."}
           onPress={(data) => {
-            handleChange(data.description);
+            handleSelect(data.description);
           }}
           fetchDetails={true}
           query={{
@@ -39,17 +39,20 @@ export const FormGooglePlacesTextField = memo(
             onFocus,
             onBlur,
             style: styles.input,
+            onChange: (e) => handleChange(e.nativeEvent.text),
           }}
           styles={{
             textInputContainer: [
               styles.field,
               isFocused ? styles.focused : undefined,
+              Boolean(error) ? styles.fieldWithError : undefined,
             ],
             poweredContainer: styles.poweredByGoogleContainer,
             listView: styles.listView,
             row: styles.listRow,
           }}
         />
+        {Boolean(error) && <Text style={styles.textError}>{error}</Text>}
       </View>
     );
   },
