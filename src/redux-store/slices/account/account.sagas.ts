@@ -41,56 +41,52 @@ export function* userInitSaga() {
           default:
             break;
         }
+
+        // @ts-ignore
+        const action = yield take([
+          actions.getUsersMe.success,
+          actions.getProfessionalsMe.success,
+          actions.getUsersMe.fail,
+          actions.getProfessionalsMe.fail,
+        ]);
+
+        switch (action.type) {
+          case actions.getUsersMe.success.type:
+            NavigationService.replace(UserHomeScreen.RouteName);
+            break;
+          case actions.getProfessionalsMe.success.type:
+            NavigationService.replace(ProfessionalHomeScreen.RouteName);
+            break;
+          default:
+            const { status } = action.payload as ApiFailData<
+              GetUsersMeParams | GetProfessionalsMeParams
+            >;
+
+            switch (status) {
+              case 401:
+                yield put(actions.resetAccount());
+                NavigationService.replace(LoginScreen.RouteName);
+                break;
+              case 403:
+                yield put(actions.resetAccount());
+                NavigationService.replace(LoginScreen.RouteName);
+                break;
+              case 404:
+                // Here we need to create a page only for account creation without email and password
+
+                break;
+              default:
+                yield put(actions.resetAccount());
+                break;
+            }
+            break;
+        }
       } else {
         yield put(actions.resetAccount());
         NavigationService.replace(LoginScreen.RouteName);
       }
     }
   });
-}
-
-export function* autoLoginSaga() {
-  yield takeEvery(
-    [
-      actions.getUsersMe.success,
-      actions.getProfessionalsMe.success,
-      actions.getUsersMe.fail,
-      actions.getProfessionalsMe.fail,
-    ],
-    function* (action) {
-      switch (action.type) {
-        case actions.getUsersMe.success.type:
-          NavigationService.replace(UserHomeScreen.RouteName);
-          break;
-        case actions.getProfessionalsMe.success.type:
-          NavigationService.replace(ProfessionalHomeScreen.RouteName);
-          break;
-        default:
-          const { status } = action.payload as ApiFailData<
-            GetUsersMeParams | GetProfessionalsMeParams
-          >;
-
-          switch (status) {
-            case 401:
-              yield put(actions.resetAccount());
-              NavigationService.replace(LoginScreen.RouteName);
-              break;
-            case 403:
-              yield put(actions.resetAccount());
-              NavigationService.replace(LoginScreen.RouteName);
-              break;
-            case 404:
-              // Here we need to create a page only for account creation without email and password
-
-              break;
-            default:
-              yield put(actions.resetAccount());
-              break;
-          }
-          break;
-      }
-    },
-  );
 }
 
 function* createAccountAndLogin(email: string, password: string) {

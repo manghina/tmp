@@ -7,6 +7,7 @@ export { default as getUsersMeRequests } from "./get-users-me-requests";
 export { default as getUsersMeRequestsByRequestId } from "./get-users-me-requests-by-request-id";
 export { default as getUsersMeRequestsProfessionalOffersByRequestId } from "./get-users-me-requests-professional-offers-by-request-id";
 export { default as patchPasswords } from "./patch-passwords";
+export { default as patchProfessionalsMe } from "./patch-professionals-me";
 export { default as patchProfessionalsMeProfessionalOffersByProfessionalOfferId } from "./patch-professionals-me-professional-offers-by-professional-offer-id";
 export { default as patchUsersMe } from "./patch-users-me";
 export { default as patchUsersMeRequestsByRequestId } from "./patch-users-me-requests-by-request-id";

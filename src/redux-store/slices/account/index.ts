@@ -92,6 +92,13 @@ export const accountStore = createSlice({
         state.professionalMe = action.payload.data.professional;
       },
     );
+    builder.addCase(
+      extraActions.patchProfessionalsMe.success,
+      (state, action) => {
+        state.userMe = null;
+        state.professionalMe = action.payload.data.professional;
+      },
+    );
     builder.addCase(extraActions.postProfessionals.success, (state, action) => {
       state.account = action.payload.data.account;
       state.userMe = null;

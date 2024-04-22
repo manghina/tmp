@@ -25,7 +25,7 @@ import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
-import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { UserProfileScreen } from "src/screens/UserProfileScreen";
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
@@ -34,6 +34,7 @@ import { colorTokens } from "@app/theme/colors/tokens";
 import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
 import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
+import { ProfessionalProfileScreen } from "@app/screens/ProfessionalProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -200,6 +201,14 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={UserProfileScreen.RouteName}
             component={UserProfileScreen}
+            options={{
+              animation: "slide_from_bottom",
+              header: () => <HeaderProfileGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name={ProfessionalProfileScreen.RouteName}
+            component={ProfessionalProfileScreen}
             options={{
               animation: "slide_from_bottom",
               header: () => <HeaderProfileGoBack />,

@@ -10,7 +10,7 @@ import {
 import { userProfileStyles } from "./styles";
 import ImageIcon from "@app/components/SvgIcons/ImageIcon";
 import { colorTokens } from "@app/theme/colors/tokens";
-import EditImageIcon from "@app/screens/ProfileScreen/EditImageIcon";
+import EditImageIcon from "@app/components/SvgIcons/EditImageIcon";
 
 export const UserProfileScreen = () => {
   const {
@@ -28,7 +28,7 @@ export const UserProfileScreen = () => {
         <View
           style={[
             userProfileStyles.avatarContainer,
-            !isUploadingMedia && !me?.profileImage
+            !isUploadingMedia && !me?.profilePicture
               ? userProfileStyles.accentBackground
               : undefined,
           ]}
@@ -37,10 +37,10 @@ export const UserProfileScreen = () => {
             <View style={userProfileStyles.loadingIndicatorContainer}>
               <ActivityIndicator size="large" />
             </View>
-          ) : me?.profileImage ? (
+          ) : me?.profilePicture ? (
             <Image
               style={userProfileStyles.profileImage}
-              source={{ uri: me.profileImage.getUrlFromKeyAndExtension() }}
+              source={{ uri: me.profilePicture.getUrlFromKeyAndExtension() }}
               width={50}
               height={50}
             />
@@ -111,4 +111,4 @@ export const UserProfileScreen = () => {
 };
 
 UserProfileScreen.displayName = "UserProfileScreen";
-UserProfileScreen.RouteName = "user-settings" as const;
+UserProfileScreen.RouteName = "user-profile" as const;
