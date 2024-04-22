@@ -27,7 +27,10 @@ export const mediaStore = createSlice({
         data: Uint8Array;
         isPrivate: boolean;
       }>,
-    ) => {},
+    ) => {
+      state.uploadData = initialState.uploadData;
+      state.uploadedMedia = initialState.uploadedMedia;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(extraActions.appStartup, (state) => {

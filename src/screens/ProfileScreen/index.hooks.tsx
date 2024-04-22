@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useMemo } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
@@ -41,16 +41,11 @@ export const useUserProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
+  const [shouldSaveProfileImage, setShouldSaveProfileImage] = useState(false);
+
   const me: User | null = useSelector(selectors.getMe);
   const uploadedImage = useSelector(selectors.getUploadedMedia);
   const isUploadingMedia = useSelector(selectors.getIsUploadingMedia);
-
-  const mediaUrl = useMemo(
-    () =>
-      uploadedImage?.getUrlFromKeyAndExtension() ||
-      me?.media?.getUrlFromKeyAndExtension(),
-    [uploadedImage, me],
-  );
 
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
@@ -157,6 +152,8 @@ export const useUserProfileScreen = () => {
     async (image: Asset) => {
       const imageBytes = await convertImageToBlob(image.uri!);
 
+      setShouldSaveProfileImage(true);
+
       dispatch(
         actions.mediaUpload({
           data: imageBytes,
@@ -184,11 +181,19 @@ export const useUserProfileScreen = () => {
     dispatch(actions.getUsersMeRequests.request({}));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (uploadedImage && shouldSaveProfileImage) {
+      dispatch(
+        actions.patchUsersMe.request({ profilePictureId: uploadedImage._id }),
+      );
+      setShouldSaveProfileImage(false);
+    }
+  }, [dispatch, uploadedImage, shouldSaveProfileImage]);
+
   return {
     isUploadingMedia,
     me,
     uploadedImage,
-    mediaUrl,
     profileMenuItems,
     dialog,
     onImagePickerPressed,

@@ -17,7 +17,6 @@ export const UserProfileScreen = () => {
     isUploadingMedia,
     me,
     uploadedImage,
-    mediaUrl,
     profileMenuItems,
     dialog,
     onImagePickerPressed,
@@ -29,7 +28,7 @@ export const UserProfileScreen = () => {
         <View
           style={[
             userProfileStyles.avatarContainer,
-            !isUploadingMedia && !mediaUrl
+            !isUploadingMedia && !me?.profileImage
               ? userProfileStyles.accentBackground
               : undefined,
           ]}
@@ -38,10 +37,10 @@ export const UserProfileScreen = () => {
             <View style={userProfileStyles.loadingIndicatorContainer}>
               <ActivityIndicator size="large" />
             </View>
-          ) : mediaUrl ? (
+          ) : me?.profileImage ? (
             <Image
               style={userProfileStyles.profileImage}
-              source={{ uri: mediaUrl }}
+              source={{ uri: me.profileImage.getUrlFromKeyAndExtension() }}
               width={50}
               height={50}
             />

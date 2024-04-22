@@ -7,16 +7,16 @@ export interface IUser {
   email: string;
   birthDate: string;
   accountId: string;
-  media?: IMedia;
+  profileImage?: IMedia;
 }
 
-export class User implements Modify<IUser, { media?: Media }> {
+export class User implements Modify<IUser, { profileImage?: Media }> {
   name: string;
   lastName: string;
   email: string;
   birthDate: string;
   accountId: string;
-  media?: Media;
+  profileImage?: Media;
 
   constructor(iUser: IUser) {
     this.name = iUser.name;
@@ -24,6 +24,8 @@ export class User implements Modify<IUser, { media?: Media }> {
     this.email = iUser.email;
     this.birthDate = iUser.birthDate;
     this.accountId = iUser.accountId;
-    this.media = iUser.media ? new Media(iUser.media) : undefined;
+    this.profileImage = iUser.profileImage
+      ? new Media(iUser.profileImage)
+      : undefined;
   }
 }
