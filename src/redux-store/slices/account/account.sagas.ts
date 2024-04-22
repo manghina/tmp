@@ -34,10 +34,10 @@ export function* userInitSaga() {
 
         switch (account.type) {
           case "user":
-            yield put(actions.getUsersMe.request({}));
+            yield put(actions.getUsersMe.request({ autoLogin: true }));
             break;
           case "professional":
-            yield put(actions.getProfessionalsMe.request({}));
+            yield put(actions.getProfessionalsMe.request({ autoLogin: true }));
             break;
           default:
             break;
@@ -47,7 +47,9 @@ export function* userInitSaga() {
         NavigationService.replace(LoginScreen.RouteName);
       }
     } else {
-      NavigationService.replace(TutorialScreen.RouteName);
+      setTimeout(() => {
+        NavigationService.replace(TutorialScreen.RouteName);
+      }, 2000);
     }
   });
 }
@@ -61,12 +63,17 @@ export function* autoLoginSaga() {
       actions.getProfessionalsMe.fail,
     ],
     function* (action) {
+      const redirectDelay = action.payload.prepareParams.autoLogin ? 2000 : 0;
       switch (action.type) {
         case actions.getUsersMe.success.type:
-          NavigationService.replace(UserHomeScreen.RouteName);
+          setTimeout(() => {
+            NavigationService.replace(UserHomeScreen.RouteName);
+          }, redirectDelay);
           break;
         case actions.getProfessionalsMe.success.type:
-          NavigationService.replace(ProfessionalHomeScreen.RouteName);
+          setTimeout(() => {
+            NavigationService.replace(ProfessionalHomeScreen.RouteName);
+          }, redirectDelay);
           break;
         default:
           const { status } = action.payload as ApiFailData<
