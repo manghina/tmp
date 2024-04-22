@@ -25,6 +25,7 @@ import { Asset } from "react-native-image-picker";
 import { convertImageToBlob, MediaTypes } from "@app/models/Media";
 import { useImagePicker } from "@app/hooks/useImagePicker";
 import { Professional } from "@app/models/Professional";
+import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 
 type ProfessionalProfileMenuItem = {
   label: string;
@@ -153,10 +154,10 @@ export const useProfessionalProfileScreen = () => {
       const imageBytes = await convertImageToBlob(image.uri!);
 
       setShouldSaveProfileImage(true);
+      MediaManagerSingleton.imageData = imageBytes;
 
       dispatch(
         actions.mediaUpload({
-          data: imageBytes,
           fileName: image.fileName!,
           mime: image.type!,
           type: MediaTypes.IMAGE,

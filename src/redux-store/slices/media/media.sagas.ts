@@ -2,6 +2,7 @@ import { call, put, select, take, takeEvery } from "redux-saga/effects";
 import { actions, selectors } from "@app/redux-store";
 import { UploadData } from "@app/redux-store/slices/media/media.interfaces";
 import axios, { AxiosResponse } from "axios";
+import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 
 type SignedUrlAction =
   | typeof actions.postS3SignedUrls.success
@@ -9,9 +10,15 @@ type SignedUrlAction =
 
 export function* mediaCreationSaga() {
   yield takeEvery(actions.mediaUpload, function* (action) {
+    const data = MediaManagerSingleton.imageData;
+
+    if (!data) {
+      return;
+    }
+
     yield put(actions.setIsUploadingMedia(true));
 
-    const { type, fileName, mime, isPrivate, data } = action.payload;
+    const { type, fileName, mime, isPrivate } = action.payload;
 
     yield put(actions.postS3SignedUrls.request({ fileName, mime, isPrivate }));
 
@@ -58,6 +65,7 @@ export function* mediaCreationSaga() {
       }),
     );
 
+    MediaManagerSingleton.imageData = null;
     yield put(actions.setIsUploadingMedia(false));
   });
 }

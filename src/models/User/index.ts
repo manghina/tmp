@@ -7,7 +7,7 @@ export interface IUser {
   email: string;
   birthDate: string;
   accountId: string;
-  profilePicture?: IMedia;
+  profilePictureUrl?: string;
 }
 
 export class User implements Modify<IUser, { profilePicture?: Media }> {
@@ -16,7 +16,7 @@ export class User implements Modify<IUser, { profilePicture?: Media }> {
   email: string;
   birthDate: string;
   accountId: string;
-  profilePicture?: Media;
+  profilePictureUrl?: string;
 
   constructor(iUser: IUser) {
     this.name = iUser.name;
@@ -24,8 +24,6 @@ export class User implements Modify<IUser, { profilePicture?: Media }> {
     this.email = iUser.email;
     this.birthDate = iUser.birthDate;
     this.accountId = iUser.accountId;
-    this.profilePicture = iUser.profilePicture
-      ? new Media(iUser.profilePicture)
-      : undefined;
+    this.profilePictureUrl = iUser.profilePictureUrl;
   }
 }

@@ -1,33 +1,26 @@
 import { memo } from "react";
-import { Avatar, TouchableOpacity, View } from "react-native-ui-lib";
+import { View } from "react-native-ui-lib";
 import { useUserHeader } from "./index.hooks";
 import { Logo } from "@app/components/Logo";
-import { SafeAreaView } from "react-native";
+import { Pressable, SafeAreaView } from "react-native";
+import { Avatar } from "@app/components/Avatar";
+import { styles } from "./styles";
 
 export const UserHeader = memo(({}) => {
-  const { initials, goToProfile } = useUserHeader();
+  const { me, goToProfile } = useUserHeader();
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#F2F2F2" }}>
-      <TouchableOpacity onPress={goToProfile}>
-        <View
-          paddingH-20
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: "transparent",
-          }}
-        >
+    <SafeAreaView style={styles.headerContainer}>
+      <Pressable onPress={goToProfile}>
+        <View style={styles.headerRow}>
           <Logo color="#000" />
-          <Avatar
-            label={initials}
-            size={40}
-            labelColor="#FFF"
-            backgroundColor="#3C77E8"
-          />
+          {me && (
+            <View style={styles.avatarContainer}>
+              <Avatar data={me} size="small" />
+            </View>
+          )}
         </View>
-      </TouchableOpacity>
+      </Pressable>
     </SafeAreaView>
   );
 });

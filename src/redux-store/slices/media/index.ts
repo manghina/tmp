@@ -24,7 +24,6 @@ export const mediaStore = createSlice({
         fileName: string;
         mime: string;
         type: MediaTypes;
-        data: Uint8Array;
         isPrivate: boolean;
       }>,
     ) => {

@@ -5,6 +5,19 @@ import { SafeAreaView, ScrollView } from "react-native";
 import SweepSvg from "@app/components/SweepSvg";
 import { userHomeStyles } from "./styles";
 import { UserRequestsList } from "@app/components/_users/UserRequestsList";
+import { colorTokens } from "@app/theme/colors/tokens";
+
+const introText = `Sweep sa che ogni problema di salute è urgente!
+            
+• Raccontagli il tuo, spiegagli tutto quello che ritieni fondamentale e quando preferiresti ricevere la visita
+
+• Sweep processerà milioni di dati per trovare i medici ideali per risolvere il tuo problema e li contatterà direttamente per sottoporgli il tuo caso
+
+• Nell'arco di un'ora, potrai scegliere tra le proposte di visita dei migliori specialisti
+
+• Comincia a stare meglio!
+
+Lancia una Richiesta facendo tap su Sweep!`;
 
 const HomeGraphics = memo(() => {
   return (
@@ -27,28 +40,15 @@ export const UserHomeScreen = () => {
 
   const renderPageContent = () => (
     <View
-      padding-20
-      paddingB-90={requestsList.length > 0}
-      style={userHomeStyles.mainViewContainer}
+      style={[
+        userHomeStyles.mainViewContainer,
+        { paddingBottom: requestsList.length > 0 ? 90 : 0 },
+      ]}
     >
       <View style={userHomeStyles.greetingsContainer}>
-        <Text h3 style={userHomeStyles.greetingsTitle}>
-          Ciao {me?.name},
-        </Text>
-        <Text>
-          {requestsList.length > 2
-            ? "Ecco le tue visite!"
-            : `Sweep sa che ogni problema di salute è urgente!
-            
-• Raccontagli il tuo, spiegagli tutto quello che ritieni fondamentale e quando preferiresti ricevere la visita
-
-• Sweep processerà milioni di dati per trovare i medici ideali per risolvere il tuo problema e li contatterà direttamente per sottoporgli il tuo caso
-
-• Nell'arco di un'ora, potrai scegliere tra le proposte di visita dei migliori specialisti
-
-• Comincia a stare meglio!
-
-Lancia una Richiesta facendo tap su Sweep!`}
+        <Text style={userHomeStyles.greetingsTitle}>Ciao {me?.name},</Text>
+        <Text style={userHomeStyles.pageSubtitleText}>
+          {requestsList.length > 2 ? "Ecco le tue visite!" : introText}
         </Text>
         <View marginT-20>
           {requestsList.length > 0 && <UserRequestsList />}
@@ -91,7 +91,7 @@ Lancia una Richiesta facendo tap su Sweep!`}
               bottom: 0,
               left: 0,
               right: 0,
-              backgroundColor: "#3C77E8",
+              backgroundColor: colorTokens.colorBackgroundInformationBold,
               justifyContent: "center",
               alignItems: "center",
               gap: 10,
@@ -108,13 +108,12 @@ Lancia una Richiesta facendo tap su Sweep!`}
                   height: 20,
                 }}
               >
-                <SweepSvg color="#3C77E8" />
+                <SweepSvg color={colorTokens.colorIconInformation} />
               </View>
               <Text style={{ color: "#FFF", fontWeight: "900" }}>
                 Sweep Now
               </Text>
             </View>
-
             <Text
               style={{ color: "#FFF", fontWeight: "400", fontStyle: "italic" }}
             >

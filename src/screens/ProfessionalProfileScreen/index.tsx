@@ -11,6 +11,7 @@ import { styles } from "./styles";
 import ImageIcon from "@app/components/SvgIcons/ImageIcon";
 import { colorTokens } from "@app/theme/colors/tokens";
 import EditImageIcon from "@app/components/SvgIcons/EditImageIcon";
+import { Avatar } from "@app/components/Avatar";
 
 export const ProfessionalProfileScreen = () => {
   const {
@@ -22,36 +23,22 @@ export const ProfessionalProfileScreen = () => {
     onImagePickerPressed,
   } = useProfessionalProfileScreen();
 
+  if (!me) {
+    return <View />;
+  }
+
   const renderProfileData = () => (
     <View style={styles.profileInfoContainer}>
       <Pressable onPress={isUploadingMedia ? undefined : onImagePickerPressed}>
         <View
           style={[
             styles.avatarContainer,
-            !isUploadingMedia && !me?.profilePicture
+            !isUploadingMedia && !me?.profilePictureUrl
               ? styles.accentBackground
               : undefined,
           ]}
         >
-          {isUploadingMedia ? (
-            <View style={styles.loadingIndicatorContainer}>
-              <ActivityIndicator size="large" />
-            </View>
-          ) : me?.profilePicture ? (
-            <Image
-              style={styles.profileImage}
-              source={{ uri: me.profilePicture.getUrlFromKeyAndExtension() }}
-              width={50}
-              height={50}
-            />
-          ) : (
-            <View style={styles.profileImageTextContainer}>
-              <Text style={styles.profileImageText}>
-                {me?.name[0]}
-                {me?.lastName[0]}
-              </Text>
-            </View>
-          )}
+          <Avatar data={me} size="large" />
           <View style={styles.editImageButton}>
             {uploadedImage ? (
               <EditImageIcon

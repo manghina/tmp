@@ -37,25 +37,6 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  profileImageTextContainer: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  profileImageText: {
-    ...textVariants.h1MediumNormal,
-    color: colorTokens.colorTextInverse,
-    textAlign: "center",
-  },
-  loadingIndicatorContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  profileImage: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 100,
-  },
   editImageButton: {
     position: "absolute",
     bottom: -10,

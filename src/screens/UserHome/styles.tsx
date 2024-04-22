@@ -1,4 +1,7 @@
 import { StyleSheet } from "react-native";
+import { dimensionsTokens } from "@app/theme/spacings/tokens";
+import { textVariants } from "@app/theme/typographies/variants";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const userHomeStyles = StyleSheet.create({
   graphicsMainContainer: {
@@ -68,13 +71,19 @@ export const userHomeStyles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     gap: 10,
+    padding: dimensionsTokens.paddingSm,
     height: "100%",
+    backgroundColor: colorTokens.elevationSurface,
   },
   greetingsContainer: {
     flexDirection: "column",
     gap: 10,
   },
-  greetingsTitle: { fontWeight: "900" },
+  greetingsTitle: { ...textVariants.h3CondensedBlackNormal },
+  pageSubtitleText: {
+    ...textVariants.p1MediumNormal,
+    color: colorTokens.colorTextSubtle,
+  },
   bottomActionsContainer: {
     flexDirection: "column",
     gap: 10,

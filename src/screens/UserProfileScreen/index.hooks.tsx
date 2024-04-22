@@ -25,6 +25,7 @@ import { LoginScreen } from "@app/screens/Login";
 import { Asset } from "react-native-image-picker";
 import { convertImageToBlob, MediaTypes } from "@app/models/Media";
 import { useImagePicker } from "@app/hooks/useImagePicker";
+import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 
 type UserProfileMenuItem = {
   label: string;
@@ -153,10 +154,10 @@ export const useUserProfileScreen = () => {
       const imageBytes = await convertImageToBlob(image.uri!);
 
       setShouldSaveProfileImage(true);
+      MediaManagerSingleton.imageData = imageBytes;
 
       dispatch(
         actions.mediaUpload({
-          data: imageBytes,
           fileName: image.fileName!,
           mime: image.type!,
           type: MediaTypes.IMAGE,

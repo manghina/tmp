@@ -10,6 +10,7 @@ import EllipseIcon from "@app/components/SvgIcons/EllipseIcon";
 import ExpandListIcon from "@app/components/SvgIcons/ExpandListIcon";
 import { ProfessionalActiveProfessionalOffersList } from "@app/components/_professionals/ProfessionalActiveProfessionalOffersList";
 import { ProfessionalArchivedProfessionalOffersList } from "@app/components/_professionals/ProfessionalArchivedProfessionalOffersList";
+import { Avatar } from "@app/components/Avatar";
 
 export const ProfessionalHomeScreen = () => {
   const {
@@ -27,19 +28,29 @@ export const ProfessionalHomeScreen = () => {
     onGoToProfile,
   } = useProfessionalHomeScreen();
 
+  if (!professionalMe) {
+    return <View />;
+  }
+
   return (
     <SafeAreaView style={styles.page}>
       <ScrollView>
         <View style={styles.pageHeader}>
           <SweepLogoSvg width={110} height={32} color={"#000"}></SweepLogoSvg>
           <TouchableOpacity onPress={onGoToProfile}>
-            <Image
-              width={40}
-              height={40}
-              source={{
-                uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
-              }}
-            />
+            {professionalMe ? (
+              <View style={styles.avatarContainer}>
+                <Avatar data={professionalMe} size="small" />
+              </View>
+            ) : (
+              <Image
+                width={40}
+                height={40}
+                source={{
+                  uri: "https://cdn.pixabay.com/photo/2023/05/02/10/35/avatar-7964945_1280.png",
+                }}
+              />
+            )}
           </TouchableOpacity>
         </View>
 

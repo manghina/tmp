@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { useNavigation } from "@react-navigation/native";
 import { ProfessionalProfileScreen } from "@app/screens/ProfessionalProfileScreen";
+import { Professional } from "@app/models/Professional";
 
 export const useProfessionalHomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const professionalMe = useSelector(selectors.getMe);
+  const professionalMe = useSelector(selectors.getMe) as Professional | null;
   const activeProfessionalOffers = useSelector(
     selectors.getActiveProfessionalOffersList,
   );

@@ -14,7 +14,7 @@ export interface IProfessional {
   city: string;
   alboId: string;
   created: Date;
-  profilePicture?: IMedia;
+  profilePictureUrl?: string;
   v: number;
 }
 
@@ -37,7 +37,7 @@ export class Professional
   city!: string;
   alboId!: string;
   created!: Date;
-  profilePicture?: Media;
+  profilePictureUrl?: string;
   v!: number;
 
   constructor(iProfessional: IProfessional) {
@@ -55,9 +55,7 @@ export class Professional
     this.specializations = iProfessional.specializations;
     this.city = iProfessional.city;
     this.alboId = iProfessional.alboId;
-    this.profilePicture = iProfessional.profilePicture
-      ? new Media(iProfessional.profilePicture)
-      : undefined;
+    this.profilePictureUrl = iProfessional.profilePictureUrl;
     this.created = iProfessional.created;
     this.v = iProfessional.v;
   }
