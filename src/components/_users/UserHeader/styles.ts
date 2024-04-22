@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: dimensionsTokens.paddingSm,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
     backgroundColor: "transparent",
   },
   avatarContainer: {

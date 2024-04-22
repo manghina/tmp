@@ -1,10 +1,11 @@
 import { memo } from "react";
 import { View } from "react-native-ui-lib";
 import { useUserHeader } from "./index.hooks";
-import { Logo } from "@app/components/Logo";
 import { Pressable, SafeAreaView } from "react-native";
 import { Avatar } from "@app/components/Avatar";
 import { styles } from "./styles";
+import SweepLogoSvg from "@app/components/SweepLogoSvg";
+import { colorTokens } from "@app/theme/colors/tokens";
 
 export const UserHeader = memo(({}) => {
   const { me, goToProfile } = useUserHeader();
@@ -13,7 +14,7 @@ export const UserHeader = memo(({}) => {
     <SafeAreaView style={styles.headerContainer}>
       <Pressable onPress={goToProfile}>
         <View style={styles.headerRow}>
-          <Logo color="#000" />
+          <SweepLogoSvg size={32} color={colorTokens.colorTextDefault} />
           {me && (
             <View style={styles.avatarContainer}>
               <Avatar data={me} size="small" />
