@@ -14,7 +14,7 @@ export const useFormImagePicker = (
       setValue(image.uri);
       onImagePickedCallback?.(image);
     },
-    [setValue],
+    [setValue, onImagePickedCallback],
   );
 
   const { dialog, onImagePickerPressed } = useImagePicker(onImagePicked);

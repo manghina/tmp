@@ -34,16 +34,21 @@ export function* mediaCreationSaga() {
 
     const uploadData: UploadData = yield select(selectors.getMediaUploadData);
 
+    const headers: any = {
+      "Content-Type": mime,
+    };
+
+    if (!isPrivate) {
+      headers["Access-Control-Allow-Origin"] = "*";
+    }
+
     // upload media to the signed url
     const s3Response: AxiosResponse = yield call(
       axios.put,
       uploadData.signedUrl,
       data,
       {
-        headers: {
-          "Content-Type": mime,
-          "Access-Control-Allow-Origin": "*",
-        },
+        headers,
       },
     );
 

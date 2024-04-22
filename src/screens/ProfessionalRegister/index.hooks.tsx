@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
+import { Asset } from "react-native-image-picker";
+import { convertImageToBlob, MediaTypes } from "@app/models/Media";
+import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 
 YupPassword(yup);
 
@@ -299,6 +302,22 @@ export const useProfessionalRegister = () => {
     [dispatch, handleSubmit, macroSpecializations],
   );
 
+  const startImageUpload = useCallback(
+    async (image: Asset) => {
+      MediaManagerSingleton.imageData = await convertImageToBlob(image.uri!);
+
+      dispatch(
+        actions.mediaUpload({
+          fileName: image.fileName!,
+          mime: image.type!,
+          type: MediaTypes.IMAGE,
+          isPrivate: true,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
   const onNextStepButtonPressed = useCallback(async () => {
     let stepValid = false;
 
@@ -357,5 +376,6 @@ export const useProfessionalRegister = () => {
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     triggerProfessionalRegisterSubmit,
+    startImageUpload,
   };
 };
