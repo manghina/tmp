@@ -3,7 +3,7 @@ import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 
-export const userHomeStyles = StyleSheet.create({
+export const styles = StyleSheet.create({
   graphicsMainContainer: {
     position: "absolute",
     top: 0,
@@ -66,6 +66,7 @@ export const userHomeStyles = StyleSheet.create({
   },
   safeAreaView: {
     height: "100%",
+    backgroundColor: colorTokens.elevationSurface,
   },
   mainViewContainer: {
     flexDirection: "column",
@@ -73,7 +74,6 @@ export const userHomeStyles = StyleSheet.create({
     gap: 10,
     padding: dimensionsTokens.paddingSm,
     height: "100%",
-    backgroundColor: colorTokens.elevationSurface,
   },
   greetingsContainer: {
     flexDirection: "column",
@@ -84,9 +84,31 @@ export const userHomeStyles = StyleSheet.create({
     ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextSubtle,
   },
+  floatingBottomContainer: {
+    position: "absolute",
+    paddingVertical: dimensionsTokens.paddingXs,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: colorTokens.colorBackgroundInformationBold,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  sweepText: {
+    ...textVariants.p1BoldNormal,
+    color: colorTokens.colorTextInverse,
+    paddingBottom: dimensionsTokens.paddingMd,
+  },
   bottomActionsContainer: {
     flexDirection: "column",
     gap: 10,
+  },
+  ctaButton: {
+    paddingVertical: dimensionsTokens.paddingXs,
+  },
+  ctaText: {
+    ...textVariants.p1BoldItalic,
+    color: colorTokens.colorTextInverse,
   },
   secondaryActionsContainer: {
     flexDirection: "row",
