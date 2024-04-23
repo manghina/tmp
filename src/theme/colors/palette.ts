@@ -191,5 +191,8 @@ export const Colors = {
   },
   Unlisted: {
     LoginBackground: withOpacity("#4377e8", 0.15),
+    GreenBackground: "#023440",
+    BackgroundAlpha: withOpacity("#fefefe", 0.1),
+    IconAlternativeDisabled: "#ABB0BC",
   },
 };

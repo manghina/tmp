@@ -2,6 +2,7 @@ import { Dimensions } from "./dimensions";
 
 export const dimensionsTokens = {
   padding4Xs: Dimensions.small.spacing_050,
+  padding3_5Xs: Dimensions.small.spacing_075,
   padding3Xs: Dimensions.small.spacing_100,
   padding2Xs: Dimensions.medium.spacing_150,
   paddingXs: Dimensions.medium.spacing_200,

@@ -1,19 +1,15 @@
 import { FC, memo } from "react";
+import { Platform } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { useAppContent } from "./index.hooks";
-
-import { TutorialScreen } from "@app/screens/Tutorial";
-import { LoaderScreen } from "@app/screens/Loader";
-import { HomeScreen } from "@app/screens/Home";
-import { LoginScreen } from "src/screens/Login";
-import { UserRegisterScreen } from "src/screens/UserRegister";
-import { CustomToast } from "@app/components/CustomToast";
-import NavigationService from "@app/models/NavigationService";
-import { UserHomeScreen } from "@app/screens/UserHome";
-import { UserHeader } from "@app/components/_users/UserHeader";
+import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
+import { HomeScreen } from "@app/screens/Home";
+import { LoaderScreen } from "@app/screens/Loader";
+import { LoginScreen } from "@app/screens/Login";
+import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestSearchProfessionalsScreen } from "src/screens/RequestSearchProfessionals";
@@ -21,20 +17,29 @@ import { HeaderGoBack } from "@app/components/HeaderGoBack";
 import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
-import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { RequestPaymentSucceededScreen } from "@app/screens/RequestPaymentSucceeded";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
-import { UserProfileScreen } from "@app/screens/ProfileScreen";
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
+import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
+import { TutorialScreen } from "@app/screens/Tutorial";
+import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
+import { UserHomeScreen } from "@app/screens/UserHome";
+import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { UserRegisterScreen } from "@app/screens/UserRegister";
+import { UserRequestAppointmentDetailsScreen } from "@app/screens/UserRequestAppointmentDetails";
+
 import { BackButton } from "@app/components/BackButton";
+import { CustomToast } from "@app/components/CustomToast";
+import { UserHeader } from "@app/components/_users/UserHeader";
+
+import NavigationService from "@app/models/NavigationService";
+
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
-import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
-import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
-import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
-import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
+
+import { useAppContent } from "./index.hooks";
 
 const Stack = createNativeStackNavigator();
 
@@ -241,9 +246,10 @@ export const AppContent: FC = memo(({}) => {
             component={RequestChatScreen}
             options={{
               animation: "slide_from_bottom",
-              headerTintColor: "transparent",
               headerTransparent: true,
-              header: () => <HeaderGoBack />,
+              headerTitle: "",
+              headerLeft: () => <BackButton variant="dark" />,
+              statusBarStyle: Platform.OS === "ios" ? "inverted" : "dark",
             }}
           />
           <Stack.Screen
