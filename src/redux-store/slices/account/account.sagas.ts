@@ -84,7 +84,6 @@ export function* autoLoginSaga() {
           const { status } = action.payload as ApiFailData<
             GetUsersMeParams | GetProfessionalsMeParams
           >;
-          console.log("status", status);
 
           switch (status) {
             case 401:
