@@ -16,6 +16,7 @@ import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDet
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
+import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
@@ -39,10 +40,6 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 
 import { useAppContent } from "./index.hooks";
-import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
-import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
-import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
-import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 
 const Stack = createNativeStackNavigator();
 
