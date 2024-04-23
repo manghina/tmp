@@ -179,10 +179,6 @@ export const useUserProfileScreen = () => {
   }, [me, navigation]);
 
   useEffect(() => {
-    dispatch(actions.getUsersMeRequests.request({}));
-  }, [dispatch]);
-
-  useEffect(() => {
     if (uploadedImage && shouldSaveProfileImage) {
       dispatch(
         actions.patchUsersMe.request({ profilePictureId: uploadedImage._id }),

@@ -179,10 +179,6 @@ export const useProfessionalProfileScreen = () => {
   }, [me, navigation]);
 
   useEffect(() => {
-    dispatch(actions.getProfessionalsMe.request({}));
-  }, [dispatch]);
-
-  useEffect(() => {
     if (uploadedImage && shouldSaveProfileImage) {
       dispatch(
         actions.patchProfessionalsMe.request({
