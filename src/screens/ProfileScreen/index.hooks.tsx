@@ -147,9 +147,5 @@ export const useUserProfileScreen = () => {
     }
   }, [me, navigation]);
 
-  useEffect(() => {
-    dispatch(actions.getUsersMeRequests.request({}));
-  }, [dispatch]);
-
   return { me, profileMenuItems, handleLogout };
 };

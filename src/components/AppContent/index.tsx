@@ -39,6 +39,10 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 
 import { useAppContent } from "./index.hooks";
+import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
+import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
+import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
+import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -179,6 +183,18 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
+            }}
+          />
+          <Stack.Screen
+            name={RequestCancelByUserScreen.RouteName}
+            component={RequestCancelByUserScreen}
+            options={{
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen

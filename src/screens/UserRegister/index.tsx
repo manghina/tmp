@@ -72,12 +72,21 @@ export const UserRegisterScreen = ({}: UserRegisterScreenProps) => {
             />
             <View style={styles.formColumn}>
               <FormTextField
+                textContentType="emailAddress"
                 keyboardType={"email-address"}
                 name="email"
                 label="Email"
+                autoComplete="email"
               />
-              <FormTextField name="password" label="Password" type="password" />
+              <FormTextField 
+                textContentType="password"
+                autoComplete="password"
+                name="password" 
+                label="Password" 
+                type="password" />
               <FormTextField
+                textContentType="password"
+                autoComplete="password"
                 name="confirmPassword"
                 label="Conferma password"
                 type="password"
