@@ -1,4 +1,4 @@
-import { put, select, take, takeEvery, call } from "redux-saga/effects";
+import { put, select, take, takeEvery, call, delay } from "redux-saga/effects";
 import { actions, RootState, selectors } from "@app/redux-store";
 import { getCookie } from "./account.selectors";
 import NavigationService from "@app/models/NavigationService";
@@ -48,9 +48,8 @@ export function* userInitSaga() {
         NavigationService.replace(LoginScreen.RouteName);
       }
     } else {
-      setTimeout(() => {
-        NavigationService.replace(TutorialScreen.RouteName);
-      }, 2000);
+      yield delay(2000);
+      NavigationService.replace(TutorialScreen.RouteName);
     }
   });
 }
@@ -66,27 +65,20 @@ export function* autoLoginSaga() {
     function* (action) {
       const account: IAccount = yield select(selectors.getAccount);
       const redirectDelay = action.payload.prepareParams.autoLogin ? 2000 : 0;
+      yield delay(redirectDelay);
+
+      if (!account.emailVerified) {
+        NavigationService.replace(EmailVerificationScreen.RouteName);
+        return;
+      }
+
       switch (action.type) {
-        case actions.getUsersMe.success.type: {
-          setTimeout(() => {
-            if (account.emailVerified) {
-              NavigationService.replace(UserHomeScreen.RouteName);
-            } else {
-              NavigationService.replace(EmailVerificationScreen.RouteName);
-            }
-          }, redirectDelay);
+        case actions.getUsersMe.success.type:
+          NavigationService.replace(UserHomeScreen.RouteName);
           break;
-        }
-        case actions.getProfessionalsMe.success.type: {
-          setTimeout(() => {
-            if (account.emailVerified) {
-              NavigationService.replace(ProfessionalHomeScreen.RouteName);
-            } else {
-              NavigationService.replace(EmailVerificationScreen.RouteName);
-            }
-          }, redirectDelay);
+        case actions.getProfessionalsMe.success.type:
+          NavigationService.replace(ProfessionalHomeScreen.RouteName);
           break;
-        }
         default:
           const { status } = action.payload as ApiFailData<
             GetUsersMeParams | GetProfessionalsMeParams
