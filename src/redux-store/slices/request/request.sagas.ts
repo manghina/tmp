@@ -11,7 +11,7 @@ import { actions, selectors } from "@app/redux-store";
 import { IRequest, Request, RequestStatus } from "@app/models/Request";
 import NavigationService from "@app/models/NavigationService";
 import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
-import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestPaymentSucceeded";
 
 export function* sendMessageSaga() {
   yield takeEvery(actions.messageSubmitted, function* (messageSubmittedAction) {

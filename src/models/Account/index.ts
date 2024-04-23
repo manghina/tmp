@@ -1,8 +1,13 @@
+import { Flags } from "@app/models/Flags";
+
 export interface IAccount {
   _id: string;
   email: string;
   emailVerified: boolean;
   type: "professional" | "user";
+  flags?: {
+    [key in Flags]?: boolean;
+  };
 }
 
 export class Account implements IAccount {
@@ -10,6 +15,9 @@ export class Account implements IAccount {
   email: string;
   emailVerified: boolean;
   type: "professional" | "user";
+  flags?: {
+    [key in Flags]?: boolean;
+  };
 
   constructor(iAccount: IAccount) {
     this._id = iAccount._id;

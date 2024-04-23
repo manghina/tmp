@@ -22,7 +22,7 @@ import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { ProfessionalRegisterScreen } from "@app/screens/ProfessionalRegister";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
-import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestPaymentSucceeded";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { ProfessionalOfferDetailScreen } from "@app/screens/ProfessionalOfferDetail";
 import { UserProfileScreen } from "@app/screens/ProfileScreen";
