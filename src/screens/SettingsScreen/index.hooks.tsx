@@ -22,20 +22,19 @@ import {
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoginScreen } from "@app/screens/Login";
-import { SettingsScreen } from "../SettingsScreen";
 
-type UserProfileMenuItem = {
+type MenuItem = {
   label: string;
   icon: ReactElement;
   onPress: () => void;
 };
 
-type UserProfileMenu = {
+type SettingsMenu = {
   category: string;
-  items: UserProfileMenuItem[];
+  items: MenuItem[];
 }[];
 
-export const useUserProfileScreen = () => {
+export const useSettingsProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
@@ -46,10 +45,10 @@ export const useUserProfileScreen = () => {
     navigation.replace(TutorialScreen.RouteName);
   }, [dispatch, navigation]);
 
-  const profileMenuItems: UserProfileMenu = useMemo(
+  const profileMenuItems: SettingsMenu = useMemo(
     () => [
       {
-        category: "Principale",
+        category: "Configura",
         items: [
           {
             label: "Modifica profilo",
@@ -64,7 +63,7 @@ export const useUserProfileScreen = () => {
           {
             label: "Configura",
             icon: <ConfigureIcon />,
-            onPress: () => navigation.navigate(SettingsScreen.RouteName),
+            onPress: () => console.log("Configure"),
           },
           {
             label: "Metodi di pagamento",
@@ -77,67 +76,7 @@ export const useUserProfileScreen = () => {
             onPress: () => console.log("Documents"),
           },
         ],
-      },
-      {
-        category: "Supporto",
-        items: [
-          {
-            label: "Rivedi app tutorials",
-            icon: <PlayIcon />,
-            onPress: () => console.log("Review app tutorials"),
-          },
-          {
-            label: "Termini e condizioni",
-            icon: <TermsAndConditionsIcon />,
-            onPress: () => console.log("Terms and conditions"),
-          },
-          {
-            label: "Privacy Policy",
-            icon: <PrivacyIcon />,
-            onPress: () => console.log("Privacy Policy"),
-          },
-          {
-            label: "FAQs",
-            icon: <FAQIcon />,
-            onPress: () => console.log("FAQs"),
-          },
-        ],
-      },
-      {
-        category: "La tua opinione è importante",
-        items: [
-          {
-            label: "Contattaci",
-            icon: <ContactIcon />,
-            onPress: () => console.log("Contattaci"),
-          },
-          {
-            label: "Rispondi al sondaggio",
-            icon: <SurveyIcon />,
-            onPress: () => console.log("Rispondi al sondaggio"),
-          },
-          {
-            label: "Lascia 5 stelle sull'App Store",
-            icon: <StarIcon />,
-            onPress: () => console.log("Lascia 5 stelle sull'App Store"),
-          },
-        ],
-      },
-      {
-        category: "Altro",
-        items: [
-          {
-            label: "Esegui il Logout",
-            icon: <LogoutIcon />,
-            onPress: handleLogout,
-          },
-          {
-            label: "Gestisci profilo",
-            icon: <ProfileIcon />,
-            onPress: () => console.log("Gestisci profilo"),
-          },
-        ],
-      },
+      }
     ],
     [navigation],
   );
