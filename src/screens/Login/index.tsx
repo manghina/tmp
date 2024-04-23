@@ -42,13 +42,12 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
           <View style={styles.formColumn}>
             <FormTextField
               autoCompleteType="email"
-              autoCorrect={false}
               clearTextOnFocus={false}
               keyboardType="email-address"
               name="email"
               label="Indirizzo email"
             />
-            <FormTextField password={true} secureTextEntry={true} autoCorrect={false} name="password" label="Password" type="password" />
+            <FormTextField name="password" label="Password" autoComplete="password" type="password" />
           </View>
           <View style={styles.mainActionContainer}>
             <Text

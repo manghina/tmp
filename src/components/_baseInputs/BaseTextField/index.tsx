@@ -24,9 +24,6 @@ export const BaseTextField = memo(
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"
-            secureTextEntry={true}
-            autoCorrect={false}
-
             autoCorrect={false}
             containerStyle={[
               styles.field,

@@ -26,6 +26,7 @@ export const ForgotPasswordScreen = memo(() => {
       <FormTextField
         keyboardType="email-address"
         name="email"
+        autoComplete="email"
         label="Indirizzo email usato in fase di registrazione"
       />
       <View style={styles.mainActionContainer}>
@@ -91,6 +92,7 @@ export const ForgotPasswordScreen = memo(() => {
         name="newPassword"
         label="Crea nuova password"
         type="password"
+        
       />
       <FormTextField
         name="confirmNewPassword"

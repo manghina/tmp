@@ -75,6 +75,7 @@ export const UserRegisterScreen = memo(({}: UserRegisterScreenProps) => {
                 keyboardType={"email-address"}
                 name="email"
                 label="Email"
+                autoComplete="email"
               />
               <FormTextField name="password" label="Password" type="password" />
               <FormTextField

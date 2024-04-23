@@ -116,7 +116,11 @@ export const ProfessionalRegisterScreen = () => {
   );
   const renderStep3 = () => (
     <View style={styles.fieldsColumn}>
-      <FormTextField key="email" name="email" label="Indirizzo email" />
+      <FormTextField 
+        key="email" name="email" 
+        autoComplete="email" 
+        keyboardType="email-address" 
+        label="Indirizzo email" />
       <FormTextField
         key="password"
         name="password"
