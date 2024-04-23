@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, TextField, TouchableOpacity, View } from "react-native-ui-lib";
+import { Text, TextField, View } from "react-native-ui-lib";
 import { useRequestChatScreen } from "./index.hooks";
 import {
   ActivityIndicator,
