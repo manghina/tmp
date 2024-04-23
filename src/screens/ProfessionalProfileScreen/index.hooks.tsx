@@ -59,24 +59,19 @@ export const useProfessionalProfileScreen = () => {
         category: "Principale",
         items: [
           {
-            label: "Modifica profilo",
+            label: "Dettagli personali (privato)",
             icon: <EditIcon />,
             onPress: () => navigation.navigate(ProfileEditScreen.RouteName),
           },
           {
-            label: "Credenziali di accesso",
+            label: "Info professionali (pubblico)",
             icon: <CredentialsIcon />,
-            onPress: () => console.log("Credentials"),
+            onPress: () => console.log("Professional profile"),
           },
           {
             label: "Configura",
             icon: <ConfigureIcon />,
             onPress: () => console.log("Configure"),
-          },
-          {
-            label: "Metodi di pagamento",
-            icon: <PaymentsIcon />,
-            onPress: () => console.log("Payment methods"),
           },
           {
             label: "Documenti",
