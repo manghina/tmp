@@ -47,15 +47,9 @@ const schema = yup.object().shape({
     .required("Conferma la tua password"),
   birthDate: yup.date()
   .required("Inserisci la tua data di nascita")
-  .test(
-    "age-check",
+  .max(
+    moment().subtract(21, "years"),
     "Devi avere compiuto almeno 21 anni per registrarti al servizio",
-    function (value) {
-      const today = moment();
-      const birthDate = moment(value);
-      const age = today.diff(birthDate, "years");
-      return age >= 21;
-    },
   ),
 });
 
@@ -73,11 +67,7 @@ const secondStepFieldKeys = [
 export const useUserRegisterScreen = () => {
   const dispatch = useDispatch();
   const [stepperCounter, setStepperCounter] = useState(1);
-
-  const stepperIndex: number = useSelector(
-    selectors.getProfessionalRegisterStepperCounter,
-  );
-  
+ 
   const navigation = useNavigation<any>();
 
   const formData = useForm<SignUpFormData>({
@@ -112,21 +102,17 @@ export const useUserRegisterScreen = () => {
       ],
     });
 
-    
-
-    const onNextStepButtonPressed = useCallback(async () => {
+    const onNextStepButtonPressed = async () => {
       let stepValid = false;
-  
-
           stepValid = await trigger(firstStepFieldKeys);
       if(stepValid)
         setStepperCounter(2)
   
-    }, [dispatch, stepperIndex, trigger]);
+    };
   
-    const onPreviousStepButtonPressed = useCallback(() => {
+    const onPreviousStepButtonPressed = () => {
         setStepperCounter(1)
-    }, [dispatch, stepperIndex]);
+    };
 
   const firstStepFilled = useMemo(
     () => Boolean(firstName) && Boolean(lastName) && Boolean(birthDate),
