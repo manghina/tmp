@@ -9,18 +9,28 @@ export const styles = StyleSheet.create({
     ...textVariants.p2MediumNormal,
   },
   listContainer: { gap: dimensionsTokens.padding3Xs },
+  list: {
+    flexGrow: 0,
+    borderWidth: 1.5,
+    borderRadius: Dimensions.small.spacing_100,
+    borderColor: colorTokens.colorBorder,
+  },
+  listWithError: {
+    borderColor: "#FF0000",
+  },
   listItem: {
-    borderWidth: 1,
+    borderTopWidth: 1.5,
     borderColor: colorTokens.colorBorder,
     justifyContent: "space-between",
     padding: dimensionsTokens.paddingXs,
+    alignItems: "center",
   },
   firstListItem: {
+    borderTopWidth: 0,
     borderTopLeftRadius: Dimensions.small.spacing_100,
     borderTopRightRadius: Dimensions.small.spacing_100,
   },
   lastListItem: {
-    borderTopWidth: 0,
     borderBottomRightRadius: Dimensions.small.spacing_100,
     borderBottomLeftRadius: Dimensions.small.spacing_100,
   },
@@ -28,6 +38,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.colorBackgroundNeutralBold,
   },
   optionText: {
+    ...textVariants.p1MediumNormal,
     color: colorTokens.colorTextDefault,
   },
   optionIcon: {
@@ -38,5 +49,9 @@ export const styles = StyleSheet.create({
   },
   optionIconSelected: {
     color: colorTokens.colorBorderInverse,
+  },
+  errorText: {
+    ...textVariants.p2MediumNormal,
+    color: "#FF0000",
   },
 });

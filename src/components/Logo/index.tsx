@@ -12,6 +12,7 @@ export const Logo = memo(({ color }: LogoProps) => {
       style={{
         fontStyle: "italic",
         fontWeight: "bold",
+        fontSize : 28,
         color: color ?? "#FFF",
       }}
     >

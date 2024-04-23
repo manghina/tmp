@@ -35,10 +35,10 @@ export function* userInitSaga() {
 
         switch (account.type) {
           case "user":
-            yield put(actions.getUsersMe.request({}));
+            yield put(actions.getUsersMe.request({ autoLogin: true }));
             break;
           case "professional":
-            yield put(actions.getProfessionalsMe.request({}));
+            yield put(actions.getProfessionalsMe.request({ autoLogin: true }));
             break;
           default:
             break;
@@ -48,7 +48,9 @@ export function* userInitSaga() {
         NavigationService.replace(LoginScreen.RouteName);
       }
     } else {
-      NavigationService.replace(TutorialScreen.RouteName);
+      setTimeout(() => {
+        NavigationService.replace(TutorialScreen.RouteName);
+      }, 2000);
     }
   });
 }
@@ -63,21 +65,26 @@ export function* autoLoginSaga() {
     ],
     function* (action) {
       const account: IAccount = yield select(selectors.getAccount);
+      const redirectDelay = action.payload.prepareParams.autoLogin ? 2000 : 0;
       switch (action.type) {
         case actions.getUsersMe.success.type: {
-          if (account.emailVerified) {
-            NavigationService.replace(UserHomeScreen.RouteName);
-          } else {
-            NavigationService.replace(EmailVerificationScreen.RouteName);
-          }
+          setTimeout(() => {
+            if (account.emailVerified) {
+              NavigationService.replace(UserHomeScreen.RouteName);
+            } else {
+              NavigationService.replace(EmailVerificationScreen.RouteName);
+            }
+          }, redirectDelay);
           break;
         }
         case actions.getProfessionalsMe.success.type: {
-          if (account.emailVerified) {
-            NavigationService.replace(ProfessionalHomeScreen.RouteName);
-          } else {
-            NavigationService.replace(EmailVerificationScreen.RouteName);
-          }
+          setTimeout(() => {
+            if (account.emailVerified) {
+              NavigationService.replace(ProfessionalHomeScreen.RouteName);
+            } else {
+              NavigationService.replace(EmailVerificationScreen.RouteName);
+            }
+          }, redirectDelay);
           break;
         }
         default:
