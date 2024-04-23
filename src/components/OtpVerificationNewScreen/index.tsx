@@ -1,4 +1,4 @@
-import React, { JSX, ReactElement, memo } from "react";
+import React, { PropsWithChildren, memo } from "react";
 import { TouchableOpacity, View } from "react-native-ui-lib";
 import { useOtpVerificationNewScreen } from "./index.hooks";
 
@@ -9,7 +9,6 @@ type OtpVerificationNewScreenProps = {
   };
   handleVerification: (otp: string) => void;
   handleResendCode: () => void;
-  children: ReactElement;
   handleGoBack?: () => void;
   disableChildrenPointerEvents?: boolean;
   hideGoBack?: boolean;
@@ -26,7 +25,7 @@ export const OtpVerificationNewScreen = memo(
     hideGoBack,
     hideHeader,
     handleResendCode,
-  }: OtpVerificationNewScreenProps) => {
+  }: PropsWithChildren<OtpVerificationNewScreenProps>) => {
     const { onOpenScreenClicked } = useOtpVerificationNewScreen({
       componentProps,
       handleGoBack,
