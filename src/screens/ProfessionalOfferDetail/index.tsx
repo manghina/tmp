@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { SafeAreaView, ScrollView } from "react-native";
 import { Button, Image, ProgressBar, Text, View } from "react-native-ui-lib";
 
@@ -196,7 +196,7 @@ export const ProfessionalOfferDetailScreen = () => {
                         const dayString = moment(slot.startDate).format("dddd");
 
                         return (
-                          <>
+                          <Fragment key={slot._id}>
                             {index !== 0 && <View style={styles.divider} />}
                             <View key={slot._id} style={styles.slotContainer}>
                               <Text style={styles.optionCounterText}>
@@ -223,7 +223,7 @@ export const ProfessionalOfferDetailScreen = () => {
                                 </Text>
                               </View>
                             </View>
-                          </>
+                          </Fragment>
                         );
                       },
                     )}
@@ -247,3 +247,7 @@ export const ProfessionalOfferDetailScreen = () => {
     </SafeAreaView>
   );
 };
+
+ProfessionalOfferDetailScreen.displayName = "ProfessionalOfferDetailsScreen";
+ProfessionalOfferDetailScreen.RouteName =
+  "professional-offers/details" as const;

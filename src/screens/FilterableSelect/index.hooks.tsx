@@ -1,20 +1,20 @@
-import { JSX, useCallback, useEffect, useMemo, useState } from "react";
+import { JSX, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
+type SelectValue = string | string[];
+
 type FilterableSelectScreenRouteParams = {
-  value: string;
-  onGoBack?: (value: string) => void;
-  options: { label: string; value: string }[];
+  value: SelectValue;
+  onGoBack?: (value: SelectValue) => void;
+  options: SelectOption[];
+  multipleSelection?: boolean;
+  showSubOptions?: boolean;
   pageProps: {
     pageTitle: string;
     pageDescription?: string;
     searchTextLabel?: string;
     listTitle?: string;
-    renderItem?: (
-      item: { label: string; value: string },
-      index: number,
-    ) => JSX.Element;
   };
 };
 
@@ -22,64 +22,154 @@ export const useFilterableSelectScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { options, value, onGoBack, pageProps } =
-    useMemo<FilterableSelectScreenRouteParams>(
-      () =>
-        (route.params as FilterableSelectScreenRouteParams) ?? {
-          options: [],
-          value: "",
-          onGoBack: () => {},
-        },
-      [route.params],
-    );
+  const {
+    options,
+    value,
+    onGoBack,
+    pageProps,
+    multipleSelection,
+    showSubOptions,
+  } = useMemo<FilterableSelectScreenRouteParams>(
+    () =>
+      (route.params as FilterableSelectScreenRouteParams) ?? {
+        options: [],
+        value: "",
+        onGoBack: () => {},
+        multipleSelection: false,
+        showSubOptions: false,
+      },
+    [route.params],
+  );
 
-  const { pageTitle, pageDescription, searchTextLabel, listTitle, renderItem } =
-    useMemo(
-      () =>
-        pageProps ?? {
-          pageTitle: "Seleziona",
-          searchTextLabel: "Cerca",
-          listTitle: "Lista",
-        },
-      [pageProps],
-    );
+  const hasSubOptions = useMemo(
+    () => options.some((option) => option.options) && showSubOptions,
+    [options, showSubOptions],
+  );
 
+  const { pageTitle, pageDescription, searchTextLabel, listTitle } = useMemo(
+    () =>
+      pageProps ?? {
+        pageTitle: "Seleziona",
+        searchTextLabel: "Cerca",
+        listTitle: "Lista",
+      },
+    [pageProps],
+  );
+
+  const [filteredOptions, setFilteredOptions] =
+    useState<SelectOption[]>(options);
+  const [selectedOptions, setSelectedOptions] = useState<SelectValue | null>(
+    null,
+  );
   const [searchText, setSearchText] = useState<string>("");
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [openedOption, setOpenedOption] = useState<string | null>(null);
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const onTextFieldChange = useCallback(
     (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
-      setSearchText(event.nativeEvent.text);
+      const newText = event.nativeEvent.text;
+      if (newText.length > 3) {
+        if (timerRef.current) clearTimeout(timerRef.current);
+        timerRef.current = setTimeout(() => {
+          setSearchText(newText);
+        }, 150);
+      } else setSearchText("");
+      return;
     },
-    [setSearchText],
+    [setSearchText, timerRef],
   );
 
-  const onOptionSelected = useCallback(
-    (option: { label: string; value: string }) => {
-      setSelectedOption(option.value);
-      onGoBack?.(option.value);
+  const onOpenOption = useCallback(
+    (option: SelectOption) => {
+      setOpenedOption((prevValue) =>
+        option.value !== prevValue ? option.value : null,
+      );
+    },
+    [setOpenedOption],
+  );
+
+  const confirmSelection = useCallback(
+    (values?: SelectValue) => {
+      onGoBack?.(values ?? selectedOptions ?? "");
       setTimeout(() => {
         navigation.goBack();
       }, 50);
     },
-    [setSelectedOption, onGoBack, navigation],
+    [selectedOptions, onGoBack, navigation, multipleSelection, hasSubOptions],
   );
 
-  const filteredOptions = useMemo(
-    () =>
-      options.filter((option) =>
-        option.label.toLowerCase().includes(searchText.toLowerCase()),
-      ),
-    [options, searchText],
+  const onOptionSelected = useCallback(
+    (optionValue: string) => {
+      let newValue: SelectValue;
+      if (multipleSelection) {
+        if (
+          Array.isArray(selectedOptions) &&
+          selectedOptions.includes(optionValue)
+        ) {
+          newValue = selectedOptions.filter(
+            (prevValue) => prevValue !== optionValue,
+          );
+        } else {
+          newValue = [...(selectedOptions ?? []), optionValue];
+        }
+        setSelectedOptions(newValue);
+      } else {
+        newValue = optionValue;
+        setSelectedOptions(newValue);
+        confirmSelection(newValue);
+      }
+    },
+    [selectedOptions, onGoBack, navigation, multipleSelection],
+  );
+
+  const isSelected = useCallback(
+    (option: SelectOption) => selectedOptions?.includes(option.value),
+    [selectedOptions],
+  );
+
+  const selectedQuantity = useCallback(
+    (item: SelectOption) => {
+      if (item) {
+        return item.options?.filter((option) => {
+          return selectedOptions?.includes(option.value);
+        }).length;
+      }
+    },
+    [selectedOptions],
   );
 
   useEffect(() => {
+    if (!searchText) {
+      setFilteredOptions(options);
+    } else {
+      const newOptions = [...options]
+        .map((option) => {
+          if (option.label.toLowerCase().includes(searchText.toLowerCase())) {
+            return option;
+          } else if (hasSubOptions) {
+            const subOptions = option.options?.filter((subOption) =>
+              subOption.label.toLowerCase().includes(searchText.toLowerCase()),
+            );
+            if (subOptions?.length) {
+              return { ...option, options: subOptions };
+            }
+          }
+          return null;
+        })
+        .filter(Boolean) as SelectOption[];
+      setFilteredOptions(newOptions);
+    }
+  }, [options, searchText, hasSubOptions]);
+
+  useEffect(() => {
     // Get initial value from route params
-    setSelectedOption(value);
-  }, [value]);
+    if (value && options.length) {
+      setSelectedOptions(value);
+    }
+  }, [value, options]);
 
   return {
-    selectedOption,
     filteredOptions,
     onTextFieldChange,
     pageTitle,
@@ -88,6 +178,12 @@ export const useFilterableSelectScreen = () => {
     searchTextLabel,
     listTitle,
     onOptionSelected,
-    renderItem,
+    onOpenOption,
+    openedOption,
+    hasSubOptions,
+    multipleSelection,
+    isSelected,
+    selectedQuantity,
+    confirmSelection,
   };
 };

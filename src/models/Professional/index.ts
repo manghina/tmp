@@ -1,4 +1,4 @@
-import { Specialization } from "@app/models/common/DoctorCommon";
+import { Specialization } from "src/models/common/DoctorCommon";
 
 export interface IProfessional {
   _id: string;

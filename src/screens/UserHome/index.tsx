@@ -22,7 +22,7 @@ const HomeGraphics = memo(() => {
   );
 });
 
-export const UserHomeScreen = memo(() => {
+export const UserHomeScreen = () => {
   const { me, requestsList, onSweepNowButtonPressed } = useUserHomeScreen();
 
   const renderPageContent = () => (
@@ -125,6 +125,7 @@ Lancia una Richiesta facendo tap su Sweep!`}
       )}
     </>
   );
-});
+};
 
 UserHomeScreen.displayName = "UserHomeScreen";
+UserHomeScreen.RouteName = "user-home" as const;

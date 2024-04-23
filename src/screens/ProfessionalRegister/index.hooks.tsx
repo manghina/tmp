@@ -2,18 +2,16 @@ import {
   phonePrefixOptions,
   professionsOptions,
   provincesOptions,
-  //professionsOptions,
 } from "./constantData";
 import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, useWatch } from "react-hook-form";
-import React, { useCallback, useLayoutEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
 import moment from "moment/moment";
-import { Specialization } from "../../models/common/DoctorCommon";
 
 interface ProfessionalRegisterFormData {
   name: string;
@@ -24,7 +22,7 @@ interface ProfessionalRegisterFormData {
   professionalPaperPhoto: any;
   professionalRegistrationNumber: string;
   province: string;
-  specialization: Specialization;
+  specialization: string[];
   officeLocation: string;
   email: string;
   password: string;
@@ -37,12 +35,16 @@ const schema = yup.object().shape({
   birthDate: yup
     .date()
     .required("Inserisci la tua data di nascita")
-    .test("age-check", "Devi avere compiuto almeno 21 anni per registrarti come professionista", function (value) {
-      const today = moment();
-      const birthDate = moment(value);
-      const age = today.diff(birthDate, "years");
-      return age >= 21;
-    }),
+    .test(
+      "age-check",
+      "Devi avere compiuto almeno 21 anni per registrarti come professionista",
+      function (value) {
+        const today = moment();
+        const birthDate = moment(value);
+        const age = today.diff(birthDate, "years");
+        return age >= 21;
+      },
+    ),
   phonePrefix: yup.string().required("Scegli il prefisso telefonico"),
   phoneNumber: yup.string().required("Inserisci il tuo numero di telefono"),
   professionalPaperPhoto: yup.mixed().required("Inserisci la tua foto"),
@@ -52,8 +54,8 @@ const schema = yup.object().shape({
     .required(),
   province: yup.string().required("Inserisci la tua provincia"),
   specialization: yup
-    .string()
-    .oneOf(Object.values(Specialization))
+    .array()
+    .of(yup.string().required())
     .required("Inserisci la tua specializzazione"),
   officeLocation: yup.string().required("Inserisci la tua sede"),
   email: yup
@@ -118,6 +120,7 @@ export const useProfessionalRegister = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      specialization: undefined,
     },
   });
 
@@ -173,6 +176,18 @@ export const useProfessionalRegister = () => {
       specialization,
       officeLocation,
     ],
+  );
+
+  const macroSpecializations = useMemo(
+    () =>
+      professionsOptions
+        .filter((specializationData) =>
+          specializationData.options.some((pathology) =>
+            (specialization ?? []).includes(pathology.value),
+          ),
+        )
+        .map((specData) => specData.value),
+    [specialization],
   );
 
   const step3Filled = useMemo(
@@ -275,13 +290,13 @@ export const useProfessionalRegister = () => {
             lastName: data.lastName,
             birthDate: moment(data.birthDate).format("DD-MM-YYYY"),
             phones: [data.phonePrefix.split("+").join("") + data.phoneNumber],
-            specializations: [data.specialization],
+            specializations: macroSpecializations,
             city: data.officeLocation,
             alboId: data.professionalRegistrationNumber,
           }),
         );
       }),
-    [dispatch, handleSubmit],
+    [dispatch, handleSubmit, macroSpecializations],
   );
 
   const onNextStepButtonPressed = useCallback(async () => {

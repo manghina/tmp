@@ -4,50 +4,43 @@ import { View, Text, Button } from "react-native-ui-lib";
 import { FormProvider } from "react-hook-form";
 import { useLoginScreen } from "./index.hooks";
 import { FormTextField } from "@app/components/_form/FormTextField";
+import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import { styles } from "./styles";
 import LottieView from "lottie-react-native";
 
-const headerBackgroundGraphicsPercentageOverflow = 20;
-
 type LoginScreenProps = {};
 
-export const LoginScreen = memo(({}: LoginScreenProps) => {
+export const LoginScreen = ({}: LoginScreenProps) => {
   const {
     formData,
     submitDisabled,
     triggerSubmit,
     onForgotPasswordButtonPressed,
-    onRegisterButtonPressed,
     allFieldsFilled,
     showLoadingAnimation,
+    completionPercentage,
   } = useLoginScreen();
 
   return (
     <SafeAreaView style={styles.page}>
-      <View
-        style={[
-          styles.blueRoundedDecoration,
-          {
-            width: `${100 + headerBackgroundGraphicsPercentageOverflow}%`,
-            left: `${-headerBackgroundGraphicsPercentageOverflow / 2}%`,
-          },
-        ]}
-      />
+      <AnimatedProgressBar value={completionPercentage} duration={250} />
       <View style={styles.pageContentWrapper}>
-        <View>
-          <Text h1>Accedi</Text>
-          <Text style={styles.pageSubtitle}>Seleziona metodo preferito</Text>
-        </View>
         <FormProvider {...formData}>
           <View style={styles.formColumn}>
             <FormTextField
-              autoCompleteType="email"
               clearTextOnFocus={false}
+              textContentType="emailAddress"
               keyboardType="email-address"
               name="email"
               label="Indirizzo email"
+              autoComplete="email"
             />
-            <FormTextField name="password" label="Password" autoComplete="password" type="password" />
+            <FormTextField 
+            textContentType="password"
+            autoComplete="password" 
+            name="password" 
+            label="Password" 
+            type="password" />
           </View>
           <View style={styles.mainActionContainer}>
             <Text
@@ -56,7 +49,7 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
                 !allFieldsFilled ? styles.textDisabled : undefined,
               ]}
             >
-              Sblocca ingresso applicazione
+              Ci sei quasi...
             </Text>
             <Button
               onPress={triggerSubmit}
@@ -75,21 +68,6 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
                 <Text style={styles.buttonText}>Accedi</Text>
               )}
             </Button>
-            {/* {showLoadingAnimation ? (
-              <LottieView
-                source={require("../../../assets/animations/loading.json")}
-                autoPlay
-                speed={1}
-                loop={true}
-                style={{ width: "100%", height: 40 }}
-              />
-            ) : (
-              <Button
-                label="Accedi"
-                onPress={triggerSubmit}
-                disabled={submitDisabled}
-              />
-            )} */}
           </View>
           <View style={styles.secondaryActionsWrapper}>
             <View style={styles.secondaryActionContainer}>
@@ -103,22 +81,12 @@ export const LoginScreen = memo(({}: LoginScreenProps) => {
                 Clicca qui
               </Text>
             </View>
-            <View style={styles.secondaryActionContainer}>
-              <Text style={styles.secondaryActionText}>
-                Non hai un profilo?
-              </Text>
-              <Text
-                style={styles.secondaryActionLink}
-                onPress={onRegisterButtonPressed}
-              >
-                Registrati
-              </Text>
-            </View>
           </View>
         </FormProvider>
       </View>
     </SafeAreaView>
   );
-});
+};
 
 LoginScreen.displayName = "LoginScreen";
+LoginScreen.RouteName = "login" as const;

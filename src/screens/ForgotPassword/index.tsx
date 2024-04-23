@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { View, Button, Text } from "react-native-ui-lib";
 import { useForgotPasswordScreen } from "./index.hooks";
 import { FormProvider } from "react-hook-form";
@@ -7,7 +7,7 @@ import { AnimatedProgressBar } from "@app/components/AnimatedProgressBar";
 import { ScrollView } from "react-native";
 import { styles } from "./styles";
 
-export const ForgotPasswordScreen = memo(() => {
+export const ForgotPasswordScreen = () => {
   const {
     formData,
     triggerPasswordChangeSubmit,
@@ -28,6 +28,7 @@ export const ForgotPasswordScreen = memo(() => {
         name="email"
         autoComplete="email"
         label="Indirizzo email usato in fase di registrazione"
+        textContentType="emailAddress"
       />
       <View style={styles.mainActionContainer}>
         <Text
@@ -98,6 +99,8 @@ export const ForgotPasswordScreen = memo(() => {
         name="confirmNewPassword"
         label="Comferma password"
         type="password"
+        autoComplete="password"
+        textContentType="password"
       />
       <View style={styles.mainActionContainer}>
         <Text
@@ -143,6 +146,7 @@ export const ForgotPasswordScreen = memo(() => {
       </ScrollView>
     </View>
   );
-});
+};
 
 ForgotPasswordScreen.displayName = "LoginByMailScreen";
+ForgotPasswordScreen.RouteName = "forgot-password" as const;

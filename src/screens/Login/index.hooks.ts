@@ -1,10 +1,12 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useForm, useWatch } from "react-hook-form";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { actions, selectors } from "../../redux-store";
+import { actions, selectors } from "@app/redux-store";
 import { useDispatch, useSelector } from "react-redux";
+import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
+import { HomeScreen } from "@app/screens/Home";
 
 type LoginFormData = {
   email: string;
@@ -22,11 +24,20 @@ const schema = yup.object().shape({
 export const useLoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
+  const route = useRoute();
+
+  const { email: emailFromRouteProps } = useMemo<{ email: string }>(
+    () =>
+      (route.params as { email: string }) ?? {
+        email: "",
+      },
+    [route.params],
+  );
 
   const formData = useForm<LoginFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      email: emailFromRouteProps,
       password: "",
     },
   });
@@ -67,13 +78,19 @@ export const useLoginScreen = () => {
     [email, password],
   );
 
+  const completionPercentage = useMemo(() => {
+    const fields = [email, password];
+    const filledFields = fields.filter(Boolean).length;
+    return filledFields / fields.length;
+  }, [email, password]);
+
   const onForgotPasswordButtonPressed = useCallback(() => {
     dispatch(actions.setForgotPasswordStepperCounter(1));
-    navigation.navigate("forgot-password");
+    navigation.navigate(ForgotPasswordScreen.RouteName);
   }, [dispatch, navigation]);
 
   const onRegisterButtonPressed = useCallback(
-    () => navigation.replace("home"),
+    () => navigation.replace(HomeScreen.RouteName),
     [navigation],
   );
 
@@ -85,5 +102,6 @@ export const useLoginScreen = () => {
     onRegisterButtonPressed,
     allFieldsFilled,
     showLoadingAnimation,
+    completionPercentage,
   };
 };
