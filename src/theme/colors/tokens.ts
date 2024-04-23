@@ -200,6 +200,7 @@ export const colorTokensLight = {
   colorBackgroundInformationBoldPressed: Colors.Blue[900],
 
   colorBackgroundAlternativeBrand: Colors.Blue[700],
+  colorBackgroundAlternativeSubtle: Colors.Neutral[200],
 
   colorBlanket: Colors.Neutral[500],
   colorBlanketSelected: "#388BF4",

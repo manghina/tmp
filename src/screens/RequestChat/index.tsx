@@ -8,7 +8,6 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { colorTokensDark } from "@app/theme/colors/tokens";
 import moment from "moment";
 import { ChatBubble } from "@app/components/ChatBubble";
 import SendMessageSvg from "@app/components/SendMessageSvg";
@@ -63,7 +62,7 @@ export const RequestChatScreen = ({}: RequestChatProps) => {
     <SafeAreaView
       style={{
         height: "100%",
-        backgroundColor: colorTokensDark.colorBackgroundInformation,
+        backgroundColor: colorTokens.elevationSurfaceAlternative,
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",

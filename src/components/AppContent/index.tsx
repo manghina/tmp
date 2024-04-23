@@ -30,11 +30,11 @@ import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByProfessional";
 import { BackButton } from "@app/components/BackButton";
 import { textVariants } from "@app/theme/typographies/variants";
-import { colorTokens, colorTokensDark } from "@app/theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
 import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
-import { StatusBar } from "react-native";
+import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +43,6 @@ export const AppContent: FC = memo(({}) => {
 
   return (
     <>
-
       <CustomToast />
       <NavigationContainer
         ref={(navRef) => {
@@ -52,9 +51,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-   
-        <Stack.Navigator initialRouteName={LoaderScreen.RouteName} >
-
+        <Stack.Navigator initialRouteName={LoaderScreen.RouteName}>
           <Stack.Screen
             name={FilterableSelectScreen.RouteName}
             component={FilterableSelectScreen}
@@ -227,18 +224,16 @@ export const AppContent: FC = memo(({}) => {
               header: () => <HeaderGoBack />,
             }}
           />
-
-            <Stack.Screen
-              name={RequestChatScreen.RouteName}
-              component={RequestChatScreen}
-              options={{
-                animation: "slide_from_bottom",
-                headerTintColor: "transparent",
-                headerTransparent: true,
-                header: () => <HeaderGoBack backgroundColor={colorTokensDark.colorBackgroundInformation} fill="white" />,
-              }}
-            />
-
+          <Stack.Screen
+            name={RequestChatScreen.RouteName}
+            component={RequestChatScreen}
+            options={{
+              animation: "slide_from_bottom",
+              headerTransparent: true,
+              headerLeft: () => <BackButton variant="dark" />,
+              statusBarStyle: Platform.OS === "ios" ? "inverted" : "dark",
+            }}
+          />
           <Stack.Screen
             name={RequestSearchProfessionalsScreen.RouteName}
             component={RequestSearchProfessionalsScreen}
