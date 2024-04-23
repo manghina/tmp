@@ -4,6 +4,7 @@ import { View, Text } from "react-native-ui-lib";
 import { styles } from "./styles";
 import SweepCircleSvg from "../SweepCircleSvg";
 import { IMessage } from "../../models/Message";
+import { Avatar } from "@app/components/Avatar";
 
 type ChatBubbleProps = {
   outline?: boolean;
@@ -11,7 +12,7 @@ type ChatBubbleProps = {
 };
 
 export const ChatBubble = memo(({ message, outline }: ChatBubbleProps) => {
-  const {} = useChatBubble();
+  const { me } = useChatBubble();
 
   return (
     <View
@@ -34,7 +35,9 @@ export const ChatBubble = memo(({ message, outline }: ChatBubbleProps) => {
               borderRadius: 15,
               backgroundColor: "#000000",
             }}
-          />
+          >
+            {me && <Avatar data={me} />}
+          </View>
         )}
       </View>
       <Text flex style={[styles.chatBubbleText]}>
