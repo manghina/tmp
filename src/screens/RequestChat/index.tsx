@@ -1,19 +1,20 @@
 import React from "react";
-import { Text, TextField, TouchableOpacity, View } from "react-native-ui-lib";
+import { Text, TextField, View } from "react-native-ui-lib";
 import { useRequestChatScreen } from "./index.hooks";
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   SafeAreaView,
   ScrollView,
 } from "react-native";
-import { colorTokensDark } from "@app/theme/colors/tokens";
 import moment from "moment";
 import { ChatBubble } from "@app/components/ChatBubble";
 import SendMessageSvg from "@app/components/SendMessageSvg";
 import { ChatStatus } from "@app/models/Request";
 import { TypingIndicator } from "@app/components/TypingIndicator";
+import { styles } from "./styles";
 import { colorTokens } from "@app/theme/colors/tokens";
 
 type RequestChatProps = {};
@@ -30,64 +31,18 @@ export const RequestChatScreen = ({}: RequestChatProps) => {
   } = useRequestChatScreen();
 
   const renderTimingInfo = () => (
-    <View
-      flex
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 16,
-        paddingVertical: 16,
-      }}
-    >
-      <Text
-        color={colorTokens.colorTextAccentGray}
-        style={{
-          fontSize: 12,
-        }}
-      >
-        {moment().format("DD MMM YYYY")}
-      </Text>
-      <Text
-        color={colorTokens.colorTextAccentGray}
-        style={{
-          fontSize: 12,
-        }}
-      >
-        {moment().format("hh:mm A")}
-      </Text>
+    <View flex style={styles.timingContainer}>
+      <Text style={styles.timingText}>{moment().format("DD MMM YYYY")}</Text>
+      <Text style={styles.timingText}>{moment().format("hh:mm A")}</Text>
     </View>
   );
 
   return (
-    <SafeAreaView
-      style={{
-        height: "100%",
-        backgroundColor: colorTokensDark.colorBackgroundInformation,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView ref={scrollViewRef}>
-        <View
-          flex
-          style={{
-            flexDirection: "column",
-            gap: 8,
-            paddingTop: 32,
-            paddingHorizontal: 16,
-          }}
-        >
+        <View flex style={styles.mainContainer}>
           {renderTimingInfo()}
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-              paddingBottom: 8,
-            }}
-          >
+          <View style={styles.chatContainer}>
             {!isLoading && (
               <>
                 {messages.map((message, index) => (
@@ -118,17 +73,7 @@ export const RequestChatScreen = ({}: RequestChatProps) => {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              padding: 8,
-              gap: 8,
-              backgroundColor: "#023440",
-            }}
-          >
+          <View style={styles.userInputContainer}>
             <View flex>
               <TextField
                 value={userInput}
@@ -136,50 +81,39 @@ export const RequestChatScreen = ({}: RequestChatProps) => {
                 editable={!writingDisabled}
                 multiline
                 numberOfLines={4}
-                fieldStyle={{
-                  width: "100%",
-                  minHeight: 20,
-                  maxHeight: 80,
-                }}
-                containerStyle={{
-                  width: "100%",
-                  backgroundColor: "rgba(254, 254, 254, 0.10)",
-                  borderRadius: 8,
-                  paddingHorizontal: 8,
-                  paddingVertical: 6,
-                }}
-                style={{
-                  color: writingDisabled ? "#909090" : "#FFF",
-                  fontSize: 16,
-                }}
+                fieldStyle={styles.inputStyle}
+                containerStyle={styles.inputWrapperStyle}
+                style={[
+                  styles.textField,
+                  writingDisabled && styles.textFieldDisabled,
+                ]}
               />
             </View>
-            <TouchableOpacity
+            <Pressable
               disabled={!userInput || writingDisabled}
               onPress={onUserMessageSendButtonClicked}
             >
               <View
-                style={{
-                  width: 32,
-                  height: 32,
-                  paddingTop: 6,
-                  paddingRight: 6,
-                  paddingBottom: 4,
-                  paddingLeft: 4,
-                  borderRadius: 8,
-                  backgroundColor:
-                    userInput && !writingDisabled ? "#3C77E8" : "#6784BD",
-                }}
+                style={[
+                  styles.sendButtonContainer,
+                  userInput && !writingDisabled
+                    ? styles.sendButtonActive
+                    : styles.sendButtonDisabled,
+                ]}
               >
                 {writingDisabled ? (
                   <ActivityIndicator color="#FFF" />
                 ) : (
                   <SendMessageSvg
-                    color={userInput && !writingDisabled ? "#FFF" : "#ABB0BC"}
+                    color={
+                      userInput && !writingDisabled
+                        ? colorTokens.colorIconInverse
+                        : colorTokens.colorIconAlternativeDisabled
+                    }
                   />
                 )}
               </View>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </KeyboardAvoidingView>
       )}
