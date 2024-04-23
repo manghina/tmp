@@ -20,6 +20,7 @@ export const UserRequestAppointmentDetailsScreen =
       chosenSlot,
       visitDay,
       onAddToCalendarPressed,
+      onCancelRequestPressed,
     } = useUserRequestAppointmentDetailsScreen();
 
     const renderProfessionalCard = () => (
@@ -146,7 +147,10 @@ export const UserRequestAppointmentDetailsScreen =
           RequestStatus.VERIFYING_PAYMENT,
           RequestStatus.APPOINTMENT_SCHEDULED,
         ].includes(currentRequest?.currentStatus!) && (
-          <Button style={[styles.actionButton, styles.actionDanger]}>
+          <Button
+            style={[styles.actionButton, styles.actionDanger]}
+            onPress={onCancelRequestPressed}
+          >
             <Text style={styles.actionText}>Annulla appuntamento</Text>
           </Button>
         )}
