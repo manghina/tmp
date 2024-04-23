@@ -33,6 +33,7 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { OtpVerificationScreen } from "@app/screens/OtpVerificationScreen";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
+import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
 import { UserRequestAppointmentDetailsScreen } from "src/screens/UserRequestAppointmentDetails";
 import { ProfessionalProfileScreen } from "@app/screens/ProfessionalProfileScreen";
 
@@ -51,7 +52,7 @@ export const AppContent: FC = memo(({}) => {
           }
         }}
       >
-        <Stack.Navigator initialRouteName={TutorialScreen.RouteName}>
+        <Stack.Navigator initialRouteName={LoaderScreen.RouteName}>
           <Stack.Screen
             name={FilterableSelectScreen.RouteName}
             component={FilterableSelectScreen}
@@ -175,6 +176,18 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
+            }}
+          />
+          <Stack.Screen
+            name={RequestCancelByUserScreen.RouteName}
+            component={RequestCancelByUserScreen}
+            options={{
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              statusBarAnimation: "slide",
+              statusBarStyle: "dark",
+              statusBarColor: "white",
+              header: () => <HeaderGoBack />,
             }}
           />
           <Stack.Screen

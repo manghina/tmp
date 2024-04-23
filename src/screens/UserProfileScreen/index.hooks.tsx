@@ -194,5 +194,6 @@ export const useUserProfileScreen = () => {
     profileMenuItems,
     dialog,
     onImagePickerPressed,
+    handleLogout
   };
 };

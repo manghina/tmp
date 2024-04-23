@@ -126,18 +126,28 @@ export const ProfessionalRegisterScreen = () => {
   );
   const renderStep3 = () => (
     <View style={styles.fieldsColumn}>
-      <FormTextField key="email" name="email" label="Indirizzo email" />
+      <FormTextField 
+        key="email"
+        autoComplete="email" 
+        keyboardType="email-address" 
+        textContentType="emailAddress"
+        name="email" 
+        label="Indirizzo email" />
       <FormTextField
         key="password"
         name="password"
         type="password"
+        autoComplete="password"
         label="Password"
-      />
+        textContentType="password"
+/>
       <FormTextField
         key="confirmPassword"
         name="confirmPassword"
         type="password"
+        autoComplete="password"
         label="Conferma password"
+        textContentType="password"
       />
     </View>
   );
@@ -190,7 +200,11 @@ export const ProfessionalRegisterScreen = () => {
           value={currentStepCompletionPercentage}
           duration={250}
         />
-        <ScrollView style={styles.scrollView}>
+        <ScrollView
+          style={styles.scrollView}
+          automaticallyAdjustKeyboardInsets
+          keyboardShouldPersistTaps="handled"
+        >
           <View style={styles.stepContent}>
             {stepperIndex === 1 ? (
               renderStep1()

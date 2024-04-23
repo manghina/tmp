@@ -19,6 +19,9 @@ export const BaseTextField = memo(
     validationMessage,
     style,
     editable,
+    textContentType,
+    autoCorrect,
+    keyboardType,
     focus,
     blur,
     subText,
@@ -42,7 +45,9 @@ export const BaseTextField = memo(
             onFocus={onFocus}
             onBlur={onBlur}
             autoCapitalize="none"
-            autoCorrect={false}
+            textContentType={textContentType}
+            autoCorrect= {autoCorrect}
+            keyboardType= {keyboardType}
             containerStyle={[
               styles.field,
               style,

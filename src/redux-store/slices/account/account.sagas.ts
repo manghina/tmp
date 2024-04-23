@@ -13,6 +13,7 @@ import { LoginScreen } from "@app/screens/Login";
 import { UserHomeScreen } from "@app/screens/UserHome";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
+import { TutorialScreen } from "@app/screens/Tutorial";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -33,10 +34,10 @@ export function* userInitSaga() {
 
         switch (account.type) {
           case "user":
-            yield put(actions.getUsersMe.request({}));
+            yield put(actions.getUsersMe.request({ autoLogin: true }));
             break;
           case "professional":
-            yield put(actions.getProfessionalsMe.request({}));
+            yield put(actions.getProfessionalsMe.request({ autoLogin: true }));
             break;
           default:
             break;
@@ -45,6 +46,10 @@ export function* userInitSaga() {
         yield put(actions.resetAccount());
         NavigationService.replace(LoginScreen.RouteName);
       }
+    } else {
+      setTimeout(() => {
+        NavigationService.replace(TutorialScreen.RouteName);
+      }, 2000);
     }
   });
 }
@@ -58,12 +63,17 @@ export function* autoLoginSaga() {
       actions.getProfessionalsMe.fail,
     ],
     function* (action) {
+      const redirectDelay = action.payload.prepareParams.autoLogin ? 2000 : 0;
       switch (action.type) {
         case actions.getUsersMe.success.type:
-          NavigationService.replace(UserHomeScreen.RouteName);
+          setTimeout(() => {
+            NavigationService.replace(UserHomeScreen.RouteName);
+          }, redirectDelay);
           break;
         case actions.getProfessionalsMe.success.type:
-          NavigationService.replace(ProfessionalHomeScreen.RouteName);
+          setTimeout(() => {
+            NavigationService.replace(ProfessionalHomeScreen.RouteName);
+          }, redirectDelay);
           break;
         default:
           const { status } = action.payload as ApiFailData<

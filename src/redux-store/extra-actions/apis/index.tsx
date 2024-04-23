@@ -5,6 +5,8 @@ export { default as getProfessionalsMeProfessionalOffersByProfessionalOfferId } 
 export { default as getUsersMe } from "./get-users-me";
 export { default as getUsersMeRequests } from "./get-users-me-requests";
 export { default as getUsersMeRequestsByRequestId } from "./get-users-me-requests-by-request-id";
+export { default as deleteUsersMeAppointmentsByAppointmentId } from "./delete-users-me-appointment-by-appointment-id";
+export { default as patchUsersMe } from "./patch-users-me";
 export { default as getUsersMeRequestsProfessionalOffersByRequestId } from "./get-users-me-requests-professional-offers-by-request-id";
 export { default as patchPasswords } from "./patch-passwords";
 export { default as patchProfessionalsMe } from "./patch-professionals-me";
