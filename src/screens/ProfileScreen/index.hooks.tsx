@@ -22,6 +22,7 @@ import {
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoginScreen } from "@app/screens/Login";
+import { reviewInAppStore } from "@app/utils/appStore";
 
 type UserProfileMenuItem = {
   label: string;
@@ -118,7 +119,7 @@ export const useUserProfileScreen = () => {
           {
             label: "Lascia 5 stelle sull'App Store",
             icon: <StarIcon />,
-            onPress: () => console.log("Lascia 5 stelle sull'App Store"),
+            onPress: () => reviewInAppStore(),
           },
         ],
       },

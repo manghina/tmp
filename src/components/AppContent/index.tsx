@@ -7,6 +7,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { EmailVerificationScreen } from "@app/screens/EmailVerificationScreen";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
+import { HeaderGoBack } from "@app/components/HeaderGoBack";
+import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { HomeScreen } from "@app/screens/Home";
 import { LoaderScreen } from "@app/screens/Loader";
 import { LoginScreen } from "@app/screens/Login";
@@ -20,7 +22,7 @@ import { RequestCancelByProfessionalScreen } from "@app/screens/RequestCancelByP
 import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
-import { RequestPaymentSucceededScreen } from "@app/screens/RequestProfessionalSuccess";
+import { RequestPaymentSucceededScreen } from "@app/screens/RequestPaymentSucceeded";
 import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
@@ -31,8 +33,6 @@ import { UserRequestAppointmentDetailsScreen } from "@app/screens/UserRequestApp
 
 import { BackButton } from "@app/components/BackButton";
 import { CustomToast } from "@app/components/CustomToast";
-import { HeaderGoBack } from "@app/components/HeaderGoBack";
-import { HeaderProfileGoBack } from "@app/components/HeaderProfileGoBack";
 import { UserHeader } from "@app/components/_users/UserHeader";
 
 import NavigationService from "@app/models/NavigationService";
