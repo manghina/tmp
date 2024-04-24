@@ -121,7 +121,7 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={LoginScreen.RouteName}
             component={LoginScreen}
-            options={({ route }) => ({
+            options={{
               title: "Accedi",
               headerTitleAlign: "center",
               headerTitleStyle: {
@@ -130,11 +130,9 @@ export const AppContent: FC = memo(({}) => {
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              headerLeft: () =>
-                // @ts-ignore
-                route.params?.hideGoBack ? false : <BackButton />,
+              headerLeft: () => <BackButton />,
               headerShadowVisible: false,
-            })}
+            }}
           />
           <Stack.Screen
             name={ForgotPasswordScreen.RouteName}
@@ -153,6 +151,7 @@ export const AppContent: FC = memo(({}) => {
             component={PasswordResetSuccessScreen}
             options={{
               headerShown: false,
+              gestureEnabled: false,
             }}
           />
           <Stack.Screen
