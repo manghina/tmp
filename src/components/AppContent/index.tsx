@@ -4,6 +4,7 @@ import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { EmailVerificationScreen } from "@app/screens/EmailVerificationScreen";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { HomeScreen } from "@app/screens/Home";
@@ -38,7 +39,6 @@ import NavigationService from "@app/models/NavigationService";
 
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
-import { EmailVerificationScreen } from "@app/screens/EmailVerificationScreen";
 
 import { useAppContent } from "./index.hooks";
 
