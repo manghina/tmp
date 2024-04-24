@@ -20,7 +20,12 @@ export interface IProfessional {
 
 export type IProfessionalSummary = Pick<
   IProfessional,
-  "_id" | "name" | "lastName" | "email" | "specializations"
+  | "_id"
+  | "name"
+  | "lastName"
+  | "email"
+  | "specializations"
+  | "profilePictureUrl"
 >;
 
 export class Professional
