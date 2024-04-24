@@ -23,7 +23,7 @@ import { RequestCancelByUserScreen } from "@app/screens/RequestCancelByUser";
 import { RequestChatScreen } from "@app/screens/RequestChat";
 import { RequestConfirmPaymentScreen } from "@app/screens/RequestConfirmPayment";
 import { RequestPaymentSucceededScreen } from "@app/screens/RequestPaymentSucceeded";
-import { RequestSearchProfessionalsScreen } from "src/screens/RequestSearchProfessionals";
+import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProfessionals";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
 import { UserHomeScreen } from "@app/screens/UserHome";
