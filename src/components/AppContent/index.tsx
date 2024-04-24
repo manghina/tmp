@@ -121,7 +121,7 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={LoginScreen.RouteName}
             component={LoginScreen}
-            options={{
+            options={({ route }) => ({
               title: "Accedi",
               headerTitleAlign: "center",
               headerTitleStyle: {
@@ -130,9 +130,11 @@ export const AppContent: FC = memo(({}) => {
               },
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
-              headerLeft: () => <BackButton />,
+              headerLeft: () =>
+                // @ts-ignore
+                route.params?.hideGoBack ? false : <BackButton />,
               headerShadowVisible: false,
-            }}
+            })}
           />
           <Stack.Screen
             name={ForgotPasswordScreen.RouteName}
