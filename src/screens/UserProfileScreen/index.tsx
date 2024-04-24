@@ -38,7 +38,7 @@ export const UserProfileScreen = () => {
               : undefined,
           ]}
         >
-          <Avatar data={me} size="large" />
+          <Avatar data={me} size="large" type="user" />
           <View style={userProfileStyles.editImageButton}>
             {uploadedImage ? (
               <EditImageIcon

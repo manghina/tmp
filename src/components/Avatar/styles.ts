@@ -16,7 +16,12 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  profileImageUserInitialsContainer: {
     backgroundColor: colorTokens.colorBackgroundAccentMagentaSubtle,
+  },
+  profileImageProfessionalInitialsContainer: {
+    backgroundColor: colorTokens.colorBackgroundAccentBlueSubtle,
   },
   profileImageText: {
     color: colorTokens.colorTextInverse,

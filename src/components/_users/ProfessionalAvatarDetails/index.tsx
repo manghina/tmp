@@ -17,7 +17,7 @@ export const ProfessionalAvatarDetails = memo(
     return (
       <View style={styles.doctorGeneralitiesContainer}>
         <View style={styles.doctorAvatar}>
-          <Avatar data={professional} />
+          <Avatar data={professional} type="professional" />
         </View>
         <View>
           <Text style={styles.doctorNameText}>

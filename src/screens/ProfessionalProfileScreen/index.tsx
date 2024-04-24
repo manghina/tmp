@@ -38,7 +38,7 @@ export const ProfessionalProfileScreen = () => {
               : undefined,
           ]}
         >
-          <Avatar data={me} size="large" />
+          <Avatar data={me} size="large" type="professional" />
           <View style={styles.editImageButton}>
             {uploadedImage ? (
               <EditImageIcon

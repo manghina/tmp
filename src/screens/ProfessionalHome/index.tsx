@@ -40,7 +40,11 @@ export const ProfessionalHomeScreen = () => {
           <TouchableOpacity onPress={onGoToProfile}>
             {professionalMe ? (
               <View style={styles.avatarContainer}>
-                <Avatar data={professionalMe} size="small" />
+                <Avatar
+                  data={professionalMe}
+                  size="small"
+                  type="professional"
+                />
               </View>
             ) : (
               <Image

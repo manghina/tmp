@@ -17,7 +17,7 @@ export const UserHeader = memo(({}) => {
           <SweepLogoSvg size={32} color={colorTokens.colorTextDefault} />
           {me && (
             <View style={styles.avatarContainer}>
-              <Avatar data={me} size="small" />
+              <Avatar data={me} size="small" type="user" />
             </View>
           )}
         </View>

@@ -28,7 +28,7 @@ export const ChatBubble = memo(({ message, outline }: ChatBubbleProps) => {
         {message.role === "assistant" ? (
           <SweepCircleSvg />
         ) : me ? (
-          <Avatar data={me} />
+          <Avatar data={me} type="user" />
         ) : (
           <View style={styles.avatarEmpty} />
         )}

@@ -1,7 +1,10 @@
-import { IMedia, Media } from "@app/models/Media";
-import { Modify } from "@app/models/common/TSUtility";
+export type IUserSummary = Pick<
+  IUser,
+  "_id" | "name" | "lastName" | "email" | "profilePictureUrl"
+>;
 
 export interface IUser {
+  _id: string;
   name: string;
   lastName: string;
   email: string;
@@ -10,7 +13,8 @@ export interface IUser {
   profilePictureUrl?: string;
 }
 
-export class User implements Modify<IUser, { profilePicture?: Media }> {
+export class User implements IUser {
+  _id: string;
   name: string;
   lastName: string;
   email: string;
@@ -19,6 +23,7 @@ export class User implements Modify<IUser, { profilePicture?: Media }> {
   profilePictureUrl?: string;
 
   constructor(iUser: IUser) {
+    this._id = iUser._id;
     this.name = iUser.name;
     this.lastName = iUser.lastName;
     this.email = iUser.email;

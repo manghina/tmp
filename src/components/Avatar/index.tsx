@@ -7,12 +7,14 @@ import { useAvatar } from "./index.hooks";
 type AvatarProps<T> = {
   data: T;
   size?: "small" | "large";
+  type?: "user" | "professional";
 };
 
 export const Avatar = memo(
   <T extends { name: string; lastName: string; profilePictureUrl?: string }>({
     data: { name, lastName, profilePictureUrl },
     size = "small",
+    type = "user",
   }: AvatarProps<T>) => {
     const { isUploadingMedia } = useAvatar();
 
@@ -23,7 +25,15 @@ export const Avatar = memo(
     ) : profilePictureUrl ? (
       <Image style={styles.profileImage} source={{ uri: profilePictureUrl }} />
     ) : (
-      <View style={[styles.profileImage, styles.profileImageTextContainer]}>
+      <View
+        style={[
+          styles.profileImage,
+          styles.profileImageTextContainer,
+          type === "user"
+            ? styles.profileImageUserInitialsContainer
+            : styles.profileImageProfessionalInitialsContainer,
+        ]}
+      >
         <Text
           style={[
             styles.profileImageText,
