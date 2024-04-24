@@ -3,7 +3,8 @@ import { useChatBubble } from "./index.hooks";
 import { View, Text } from "react-native-ui-lib";
 import { styles } from "./styles";
 import SweepCircleSvg from "../SweepCircleSvg";
-import { IMessage } from "../../models/Message";
+import { IMessage } from "@app/models/Message";
+import { Avatar } from "@app/components/Avatar";
 
 type ChatBubbleProps = {
   outline?: boolean;
@@ -11,7 +12,7 @@ type ChatBubbleProps = {
 };
 
 export const ChatBubble = memo(({ message, outline }: ChatBubbleProps) => {
-  const {} = useChatBubble();
+  const { me } = useChatBubble();
 
   return (
     <View
@@ -23,18 +24,13 @@ export const ChatBubble = memo(({ message, outline }: ChatBubbleProps) => {
         outline ? styles.outlinedGptChatBubble : undefined,
       ]}
     >
-      <View style={{ width: 30, height: 30 }}>
+      <View style={styles.avatarContainer}>
         {message.role === "assistant" ? (
           <SweepCircleSvg />
+        ) : me ? (
+          <Avatar data={me} type="user" />
         ) : (
-          <View
-            style={{
-              width: 30,
-              height: 30,
-              borderRadius: 15,
-              backgroundColor: "#000000",
-            }}
-          />
+          <View style={styles.avatarEmpty} />
         )}
       </View>
       <Text flex style={[styles.chatBubbleText]}>

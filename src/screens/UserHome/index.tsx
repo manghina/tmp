@@ -3,42 +3,10 @@ import { useUserHomeScreen } from "./index.hooks";
 import { View, Text, Button, TouchableOpacity } from "react-native-ui-lib";
 import { SafeAreaView, ScrollView } from "react-native";
 import SweepSvg from "@app/components/SweepSvg";
-import { userHomeStyles } from "./styles";
+import { styles } from "./styles";
 import { UserRequestsList } from "@app/components/_users/UserRequestsList";
 
-const HomeGraphics = memo(() => {
-  return (
-    <View style={userHomeStyles.graphicsMainContainer}>
-      <View style={userHomeStyles.graphicsRelativeContainer}>
-        <View style={userHomeStyles.graphicsRightBlob} />
-        <View style={userHomeStyles.graphicsLeftBlob} />
-        <View style={userHomeStyles.graphicsSweepCircle3} />
-        <View style={userHomeStyles.graphicsSweepCircle2} />
-        <View style={userHomeStyles.graphicsSweepCircle1} />
-        <View style={userHomeStyles.graphicsSweepCircle0} />
-        <SweepSvg />
-      </View>
-    </View>
-  );
-});
-
-export const UserHomeScreen = () => {
-  const { me, requestsList, onSweepNowButtonPressed } = useUserHomeScreen();
-
-  const renderPageContent = () => (
-    <View
-      padding-20
-      paddingB-90={requestsList.length > 0}
-      style={userHomeStyles.mainViewContainer}
-    >
-      <View style={userHomeStyles.greetingsContainer}>
-        <Text h3 style={userHomeStyles.greetingsTitle}>
-          Ciao {me?.name},
-        </Text>
-        <Text>
-          {requestsList.length > 2
-            ? "Ecco le tue visite!"
-            : `Sweep sa che ogni problema di salute è urgente!
+const introText = `Sweep sa che ogni problema di salute è urgente!
             
 • Raccontagli il tuo, spiegagli tutto quello che ritieni fondamentale e quando preferiresti ricevere la visita
 
@@ -48,24 +16,50 @@ export const UserHomeScreen = () => {
 
 • Comincia a stare meglio!
 
-Lancia una Richiesta facendo tap su Sweep!`}
+Lancia una Richiesta facendo tap su Sweep!`;
+
+const HomeGraphics = memo(() => {
+  return (
+    <View style={styles.graphicsMainContainer}>
+      <View style={styles.graphicsRelativeContainer}>
+        <View style={styles.graphicsRightBlob} />
+        <View style={styles.graphicsLeftBlob} />
+        <View style={styles.graphicsSweepCircle3} />
+        <View style={styles.graphicsSweepCircle2} />
+        <View style={styles.graphicsSweepCircle1} />
+        <View style={styles.graphicsSweepCircle0} />
+        <SweepSvg />
+      </View>
+    </View>
+  );
+});
+
+export const UserHomeScreen = () => {
+  const { me, requestsList, onSweepButtonPressed } = useUserHomeScreen();
+
+  const renderPageContent = () => (
+    <View
+      style={[
+        styles.mainViewContainer,
+        { paddingBottom: requestsList.length > 0 ? 90 : 0 },
+      ]}
+    >
+      <View style={styles.greetingsContainer}>
+        <Text style={styles.greetingsTitle}>Ciao {me?.name},</Text>
+        <Text style={styles.pageSubtitleText}>
+          {requestsList.length > 2
+            ? "Non vediamo l’ora di aiutarti a stare meglio!\nEcco le tue Visite."
+            : introText}
         </Text>
         <View marginT-20>
           {requestsList.length > 0 && <UserRequestsList />}
         </View>
       </View>
       {requestsList.length === 0 && (
-        <View style={userHomeStyles.bottomActionsContainer}>
-          <Text center>Lancia una nuova ricerca</Text>
-          <Button label="Sweep Now" onPress={onSweepNowButtonPressed} />
-          <View marginT-20 style={userHomeStyles.secondaryActionsContainer}>
-            <Text center>Bisogno di supporto?</Text>
-            <Button link>
-              <Text color="#3C77E8" style={{ fontStyle: "italic" }}>
-                Guarda i tutorial
-              </Text>
-            </Button>
-          </View>
+        <View style={styles.bottomActionsContainer}>
+          <Button style={styles.ctaButton} onPress={onSweepButtonPressed}>
+            <Text style={styles.ctaText}>SWEEP</Text>
+          </Button>
         </View>
       )}
     </View>
@@ -73,7 +67,7 @@ Lancia una Richiesta facendo tap su Sweep!`}
 
   return (
     <>
-      <SafeAreaView style={userHomeStyles.safeAreaView}>
+      <SafeAreaView style={styles.safeAreaView}>
         {requestsList.length === 0 ? <HomeGraphics /> : <></>}
         {requestsList.length === 0 ? (
           renderPageContent()
@@ -82,44 +76,9 @@ Lancia una Richiesta facendo tap su Sweep!`}
         )}
       </SafeAreaView>
       {requestsList.length > 0 && (
-        <TouchableOpacity onPress={onSweepNowButtonPressed}>
-          <View
-            paddingB-30
-            paddingT-20
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              backgroundColor: "#3C77E8",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 10,
-            }}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
-            >
-              <View
-                style={{
-                  backgroundColor: "#FFF",
-                  borderRadius: 100,
-                  width: 20,
-                  height: 20,
-                }}
-              >
-                <SweepSvg color="#3C77E8" />
-              </View>
-              <Text style={{ color: "#FFF", fontWeight: "900" }}>
-                Sweep Now
-              </Text>
-            </View>
-
-            <Text
-              style={{ color: "#FFF", fontWeight: "400", fontStyle: "italic" }}
-            >
-              Lancia una nuova ricerca
-            </Text>
+        <TouchableOpacity onPress={onSweepButtonPressed}>
+          <View style={styles.floatingBottomContainer}>
+            <Text style={styles.sweepText}>SWEEP</Text>
           </View>
         </TouchableOpacity>
       )}

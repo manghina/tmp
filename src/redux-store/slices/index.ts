@@ -5,6 +5,7 @@ import * as ui from "./ui";
 import * as account from "./account";
 import * as request from "./request";
 import * as professionalOffer from "./professional-offer";
+import * as media from "./media";
 
 export const reducers = {
   ajax: ajax.ajaxStore.reducer,
@@ -13,6 +14,7 @@ export const reducers = {
   account: account.accountStore.reducer,
   request: request.requestStore.reducer,
   professionalOffer: professionalOffer.professionalOfferStore.reducer,
+  media: media.mediaStore.reducer,
 };
 
 export const actions = {
@@ -23,6 +25,7 @@ export const actions = {
   ...account.accountStore.actions,
   ...request.requestStore.actions,
   ...professionalOffer.professionalOfferStore.actions,
+  ...media.mediaStore.actions,
 };
 
 export const selectors = {
@@ -32,6 +35,7 @@ export const selectors = {
   ...account.selectors,
   ...request.selectors,
   ...professionalOffer.selectors,
+  ...media.selectors,
 };
 
 export const sagas = [
@@ -41,4 +45,5 @@ export const sagas = [
   ...Object.values(account.sagas),
   ...Object.values(request.sagas),
   ...Object.values(professionalOffer.sagas),
+  ...Object.values(media.sagas),
 ];

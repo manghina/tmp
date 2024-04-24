@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useMemo } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
@@ -22,6 +22,10 @@ import {
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoginScreen } from "@app/screens/Login";
+import { Asset } from "react-native-image-picker";
+import { convertImageToBlob, MediaTypes } from "@app/models/Media";
+import { useImagePicker } from "@app/hooks/useImagePicker";
+import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 import { reviewInAppStore } from "@app/utils/appStore";
 
 type UserProfileMenuItem = {
@@ -39,7 +43,11 @@ export const useUserProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
+  const [shouldSaveProfileImage, setShouldSaveProfileImage] = useState(false);
+
   const me: User | null = useSelector(selectors.getMe);
+  const uploadedImage = useSelector(selectors.getUploadedMedia);
+  const isUploadingMedia = useSelector(selectors.getIsUploadingMedia);
 
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
@@ -142,11 +150,51 @@ export const useUserProfileScreen = () => {
     [navigation],
   );
 
+  const onProfilePictureChosen = useCallback(
+    async (image: Asset) => {
+      const imageBytes = await convertImageToBlob(image.uri!);
+
+      setShouldSaveProfileImage(true);
+      MediaManagerSingleton.imageData = imageBytes;
+
+      dispatch(
+        actions.mediaUpload({
+          fileName: image.fileName!,
+          mime: image.type!,
+          type: MediaTypes.IMAGE,
+          isPrivate: false,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
+  const { dialog, onImagePickerPressed } = useImagePicker(
+    onProfilePictureChosen,
+  );
+
   useEffect(() => {
     if (!me) {
       navigation.replace(LoginScreen.RouteName);
     }
   }, [me, navigation]);
 
-  return { me, profileMenuItems, handleLogout };
+  useEffect(() => {
+    if (uploadedImage && shouldSaveProfileImage) {
+      dispatch(
+        actions.patchUsersMe.request({ profilePictureId: uploadedImage._id }),
+      );
+      setShouldSaveProfileImage(false);
+    }
+  }, [dispatch, uploadedImage, shouldSaveProfileImage]);
+
+  return {
+    isUploadingMedia,
+    me,
+    uploadedImage,
+    profileMenuItems,
+    dialog,
+    onImagePickerPressed,
+    handleLogout,
+  };
 };

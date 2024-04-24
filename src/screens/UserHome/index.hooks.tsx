@@ -12,7 +12,7 @@ export const useUserHomeScreen = () => {
   const me: User | null = useSelector(selectors.getMe);
   const requestsList = useSelector(selectors.getRequestsList);
 
-  const onSweepNowButtonPressed = useCallback(() => {
+  const onSweepButtonPressed = useCallback(() => {
     dispatch(actions.setCurrentRequest(null));
     navigation.navigate(RequestChatScreen.RouteName);
   }, [dispatch, navigation]);
@@ -21,5 +21,5 @@ export const useUserHomeScreen = () => {
     dispatch(actions.getUsersMeRequests.request({}));
   }, [dispatch]);
 
-  return { me, requestsList, onSweepNowButtonPressed };
+  return { me, requestsList, onSweepButtonPressed };
 };

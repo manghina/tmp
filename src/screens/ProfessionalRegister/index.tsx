@@ -26,6 +26,7 @@ export const ProfessionalRegisterScreen = () => {
     onNextStepButtonPressed,
     onPreviousStepButtonPressed,
     triggerProfessionalRegisterSubmit,
+    startImageUpload,
   } = useProfessionalRegister();
 
   const renderStep1 = () => (
@@ -75,6 +76,7 @@ export const ProfessionalRegisterScreen = () => {
         key="professionalPaperPhoto"
         name="professionalPaperPhoto"
         label="Carica foto libretto"
+        onImagePickedCallback={startImageUpload}
       />
       <FormTextField
         key="professionalRegistrationNumber"

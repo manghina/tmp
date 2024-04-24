@@ -194,5 +194,7 @@ export const Colors = {
     GreenBackground: "#023440",
     BackgroundAlpha: withOpacity("#fefefe", 0.1),
     IconAlternativeDisabled: "#ABB0BC",
+    AiChatBubbleBg: withOpacity("#3c77e8", 0.2),
+    UserChatBubbleBg: withOpacity("#ABB0BA", 0.2),
   },
 };
