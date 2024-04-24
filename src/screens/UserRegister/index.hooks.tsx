@@ -48,8 +48,8 @@ const schema = yup.object().shape({
   birthDate: yup.date()
   .required("Inserisci la tua data di nascita")
   .max(
-    moment().subtract(21, "years"),
-    "Devi avere compiuto almeno 21 anni per registrarti al servizio",
+    moment().subtract(18, "years"),
+    "Devi avere compiuto almeno 18 anni per registrarti al servizio",
   ),
 });
 
