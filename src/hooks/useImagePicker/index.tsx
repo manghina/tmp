@@ -129,9 +129,7 @@ export const useImagePicker = (onImagePicked: (image: Asset) => void) => {
                 gap: dimensionsTokens.paddingSm,
               }}
             >
-              <View style={{ width: 40, height: 40 }}>
-                <CameraIcon />
-              </View>
+              <CameraIcon size={30} />
               <Text
                 style={{
                   ...textVariants.p2MediumNormal,
@@ -150,9 +148,7 @@ export const useImagePicker = (onImagePicked: (image: Asset) => void) => {
                 gap: dimensionsTokens.paddingSm,
               }}
             >
-              <View style={{ width: 40, height: 40 }}>
-                <PictureIcon />
-              </View>
+              <PictureIcon size={30} />
               <Text
                 style={{
                   ...textVariants.p2MediumNormal,
