@@ -12,6 +12,7 @@ const initialState: UiState = {
   isDialogOpen: {},
   forgotPasswordStepperCounter: 1,
   professionalRegisterStepperCounter: 1,
+  isOtpError: null,
 };
 
 export const uiStore = createSlice({
@@ -36,6 +37,9 @@ export const uiStore = createSlice({
     ) => {
       state.professionalRegisterStepperCounter = action.payload;
     },
+    setIsOtpError: (state, action: PayloadAction<boolean | null>) => {
+      state.isOtpError = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(extraActions.appStartup, (state) => {
@@ -46,6 +50,7 @@ export const uiStore = createSlice({
         initialState.forgotPasswordStepperCounter;
       state.professionalRegisterStepperCounter =
         initialState.professionalRegisterStepperCounter;
+      state.isOtpError = initialState.isOtpError;
     });
     builder.addCase(extraActions.clearSession, (state, action) => {
       state.isDialogOpen = initialState.isDialogOpen;
@@ -53,6 +58,7 @@ export const uiStore = createSlice({
         initialState.forgotPasswordStepperCounter;
       state.professionalRegisterStepperCounter =
         initialState.professionalRegisterStepperCounter;
+      state.isOtpError = initialState.isOtpError;
     });
   },
 });
