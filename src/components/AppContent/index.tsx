@@ -4,6 +4,7 @@ import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { EmailVerificationScreen } from "@app/screens/EmailVerificationScreen";
 import { FilterableSelectScreen } from "@app/screens/FilterableSelect";
 import { ForgotPasswordScreen } from "@app/screens/ForgotPassword";
 import { HomeScreen } from "@app/screens/Home";
@@ -70,11 +71,26 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={OtpVerificationScreen.RouteName}
             component={OtpVerificationScreen}
-            options={{
+            options={({ route }) => ({
               headerTitle: "",
               animationTypeForReplace: "push",
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
+              // @ts-ignore
+              headerShown: route.params?.hideHeader ? false : true,
+              // @ts-ignore
+              gestureEnabled: route.params?.hideGoBack ? false : true,
+            })}
+          />
+          <Stack.Screen
+            name={EmailVerificationScreen.RouteName}
+            component={EmailVerificationScreen}
+            options={{
+              headerTitle: "",
+              animationTypeForReplace: "push",
+              animation: "slide_from_bottom",
+              headerShown: false,
+              gestureEnabled: false,
             }}
           />
           <Stack.Screen
@@ -89,6 +105,7 @@ export const AppContent: FC = memo(({}) => {
             component={TutorialScreen}
             options={{
               headerShown: false,
+              gestureEnabled: false,
             }}
           />
           <Stack.Screen
@@ -180,6 +197,7 @@ export const AppContent: FC = memo(({}) => {
               statusBarAnimation: "slide",
               statusBarStyle: "dark",
               statusBarColor: "white",
+              gestureEnabled: false,
             }}
           />
           <Stack.Screen
@@ -213,6 +231,7 @@ export const AppContent: FC = memo(({}) => {
             component={UserHomeScreen}
             options={{
               header: () => <UserHeader />,
+              gestureEnabled: false,
             }}
           />
           <Stack.Screen

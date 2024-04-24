@@ -29,6 +29,7 @@ export const ProfileEditScreen = () => {
     handleGoBackFromOtpVerification,
     handleOtpVerification,
     submitDisabled,
+    handleResendOtpCode,
   } = useUserProfileEditScreen();
 
   const OtpNewScreenWrapper = ({ children }: { children: JSX.Element }) => {
@@ -37,6 +38,7 @@ export const ProfileEditScreen = () => {
         componentProps={otpComponentProps}
         handleGoBack={handleGoBackFromOtpVerification}
         handleVerification={handleOtpVerification}
+        handleResendCode={handleResendOtpCode}
       >
         {children}
       </OtpVerificationNewScreen>

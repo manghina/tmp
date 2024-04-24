@@ -13,6 +13,7 @@ export { default as patchProfessionalsMeProfessionalOffersByProfessionalOfferId 
 export { default as patchUsersMe } from "./patch-users-me";
 export { default as patchUsersMeRequestsByRequestId } from "./patch-users-me-requests-by-request-id";
 export { default as postAccounts } from "./post-accounts";
+export { default as patchAccountsMe } from "./patch-accounts-me";
 export { default as postAccountsSessions } from "./post-accounts-sessions";
 export { default as postMedias } from "./post-medias";
 export { default as postPaymentIntents } from "./post-payment-intents";
