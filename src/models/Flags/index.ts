@@ -1,0 +1,4 @@
+export enum Flags {
+  FIRST_PAYMENT = "FIRST_PAYMENT",
+  FIRST_USER_MET = "FIRST_USER_MET",
+}

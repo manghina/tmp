@@ -26,6 +26,7 @@ import { Asset } from "react-native-image-picker";
 import { convertImageToBlob, MediaTypes } from "@app/models/Media";
 import { useImagePicker } from "@app/hooks/useImagePicker";
 import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
+import { reviewInAppStore } from "@app/utils/appStore";
 
 type UserProfileMenuItem = {
   label: string;
@@ -126,7 +127,7 @@ export const useUserProfileScreen = () => {
           {
             label: "Lascia 5 stelle sull'App Store",
             icon: <StarIcon />,
-            onPress: () => console.log("Lascia 5 stelle sull'App Store"),
+            onPress: () => reviewInAppStore(),
           },
         ],
       },
