@@ -204,6 +204,8 @@ export const colorTokensLight = {
   colorBackgroundAlternativeSubtle: Colors.Neutral[200],
   colorBackgroundAlternativeTextInputBox: Colors.Unlisted.GreenBackground,
   colorBackgroundAlternativeTextInput: Colors.Unlisted.BackgroundAlpha,
+  colorBackgroundAlternativeCardBg: Colors.Unlisted.AiChatBubbleBg,
+  colorBackgroundAlternativeCardBg2: Colors.Unlisted.UserChatBubbleBg,
 
   colorBlanket: Colors.Neutral[500],
   colorBlanketSelected: "#388BF4",
