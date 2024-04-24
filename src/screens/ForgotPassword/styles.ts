@@ -7,7 +7,6 @@ import { colorTokens } from "@app/theme/colors/tokens";
 export const styles = StyleSheet.create({
   mainContainer: {
     height: "100%",
-    padding: dimensionsTokens.paddingSm,
     backgroundColor: colorTokens.elevationSurface,
   },
   pageContent: {
@@ -19,6 +18,10 @@ export const styles = StyleSheet.create({
   },
   pageSubtitle: {
     ...textVariants.p1MediumNormal,
+  },
+  stepContainer: {
+    padding: dimensionsTokens.paddingSm,
+    gap: dimensionsTokens.paddingMd,
   },
   formColumn: {
     display: "flex",

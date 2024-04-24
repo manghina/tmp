@@ -86,7 +86,9 @@ export const useLoginScreen = () => {
 
   const onForgotPasswordButtonPressed = useCallback(() => {
     dispatch(actions.setForgotPasswordStepperCounter(1));
-    navigation.navigate(ForgotPasswordScreen.RouteName);
+    navigation.navigate(ForgotPasswordScreen.RouteName, {
+      email,
+    });
   }, [dispatch, navigation]);
 
   const onRegisterButtonPressed = useCallback(
