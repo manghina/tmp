@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { User } from "@app/models/User";
 import { RequestChatScreen } from "@app/screens/RequestChat";
-import { LoginScreen } from "@app/screens/Login";
 
 export const useUserHomeScreen = () => {
   const dispatch = useDispatch();
@@ -17,12 +16,6 @@ export const useUserHomeScreen = () => {
     dispatch(actions.setCurrentRequest(null));
     navigation.navigate(RequestChatScreen.RouteName);
   }, [dispatch, navigation]);
-
-  useEffect(() => {
-    if (!me) {
-      navigation.replace(LoginScreen.RouteName);
-    }
-  }, [me, navigation]);
 
   useEffect(() => {
     dispatch(actions.getUsersMeRequests.request({}));

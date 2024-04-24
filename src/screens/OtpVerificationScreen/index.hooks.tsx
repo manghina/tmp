@@ -6,8 +6,10 @@ type OtpVerificationScreenRouteParams = {
     componentTitle: string;
     componentDescription: string;
   };
-  handleGoBack: () => void;
+  handleGoBack?: () => void;
   handleVerification: (otp: string) => void;
+  handleResendCode: () => void;
+  hideGoBack?: boolean;
 };
 
 export const useOtpVerificationScreen = () => {
@@ -20,8 +22,10 @@ export const useOtpVerificationScreen = () => {
           componentTitle: "",
           componentDescription: "",
         },
-        handleGoBack: () => {},
         handleVerification: () => {},
+        handleResendCode: () => {},
+        handleGoBack: undefined,
+        hideGoBack: false,
       },
     [route.params],
   );
@@ -30,6 +34,8 @@ export const useOtpVerificationScreen = () => {
     componentProps: { componentDescription, componentTitle },
     handleGoBack,
     handleVerification,
+    hideGoBack,
+    handleResendCode,
   } = useMemo(
     () =>
       componentRouteData ?? {
@@ -37,8 +43,10 @@ export const useOtpVerificationScreen = () => {
           componentTitle: "",
           componentDescription: "",
         },
-        handleGoBack: () => {},
         handleVerification: () => {},
+        handleResendCode: () => {},
+        handleGoBack: undefined,
+        hideGoBack: false,
       },
     [componentRouteData],
   );
@@ -48,5 +56,7 @@ export const useOtpVerificationScreen = () => {
     componentTitle,
     handleGoBack,
     handleVerification,
+    hideGoBack,
+    handleResendCode,
   };
 };
