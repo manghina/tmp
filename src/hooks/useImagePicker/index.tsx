@@ -8,11 +8,10 @@ import {
 import { actions } from "@app/redux-store";
 import { useDispatch } from "react-redux";
 import { Dialog, PanningProvider, Text, View } from "react-native-ui-lib";
-import { dimensionsTokens } from "@app/theme/spacings/tokens";
-import { textVariants } from "@app/theme/typographies/variants";
 import CameraIcon from "@app/components/SvgIcons/CameraIcon";
 import PictureIcon from "@app/components/SvgIcons/PictureIcon";
 import { Pressable } from "react-native";
+import { styles } from "./styles";
 
 export const useImagePicker = (onImagePicked: (image: Asset) => void) => {
   const dispatch = useDispatch();
@@ -94,68 +93,20 @@ export const useImagePicker = (onImagePicked: (image: Asset) => void) => {
         visible={chooseMediaSourceDialogOpen}
         onDismiss={onDialogClose}
         panDirection={PanningProvider.Directions.DOWN}
-        containerStyle={{
-          backgroundColor: "#FFF",
-          padding: dimensionsTokens.paddingSm,
-          borderRadius: 10,
-          // Shadow
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 1,
-        }}
+        containerStyle={styles.dialogContainer}
       >
-        <View
-          style={{
-            display: "flex",
-            gap: dimensionsTokens.paddingSm,
-          }}
-        >
-          <Text
-            style={{
-              ...textVariants.p1BoldNormal,
-            }}
-          >
-            Seleziona immagine
-          </Text>
+        <View style={styles.dialogContent}>
+          <Text style={styles.dialogTitle}>Seleziona immagine</Text>
           <Pressable onPress={onChooseFromCameraClicked}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: dimensionsTokens.paddingSm,
-              }}
-            >
+            <View style={styles.option}>
               <CameraIcon size={30} />
-              <Text
-                style={{
-                  ...textVariants.p2MediumNormal,
-                }}
-              >
-                Scatta una foto
-              </Text>
+              <Text style={styles.optionText}>Scatta una foto</Text>
             </View>
           </Pressable>
           <Pressable onPress={onChooseFromLibraryClicked}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                gap: dimensionsTokens.paddingSm,
-              }}
-            >
+            <View style={styles.option}>
               <PictureIcon size={30} />
-              <Text
-                style={{
-                  ...textVariants.p2MediumNormal,
-                }}
-              >
-                Scegli dalla galleria
-              </Text>
+              <Text style={styles.optionText}>Scegli dalla galleria</Text>
             </View>
           </Pressable>
         </View>
