@@ -27,10 +27,9 @@ import { RequestSearchProfessionalsScreen } from "@app/screens/RequestSearchProf
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { UserChooseProfessionalOfferScreen } from "@app/screens/UserChooseProfessionalOffer";
 import { UserHomeScreen } from "@app/screens/UserHome";
-import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { UserProfileScreen } from "src/screens/UserProfileScreen";
 import { UserRegisterScreen } from "@app/screens/UserRegister";
 import { UserRequestAppointmentDetailsScreen } from "@app/screens/UserRequestAppointmentDetails";
-
 import { BackButton } from "@app/components/BackButton";
 import { CustomToast } from "@app/components/CustomToast";
 import { UserHeader } from "@app/components/_users/UserHeader";
@@ -41,6 +40,7 @@ import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 
 import { useAppContent } from "./index.hooks";
+import { ProfessionalProfileScreen } from "@app/screens/ProfessionalProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -239,6 +239,14 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={UserProfileScreen.RouteName}
             component={UserProfileScreen}
+            options={{
+              animation: "slide_from_bottom",
+              header: () => <HeaderProfileGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name={ProfessionalProfileScreen.RouteName}
+            component={ProfessionalProfileScreen}
             options={{
               animation: "slide_from_bottom",
               header: () => <HeaderProfileGoBack />,

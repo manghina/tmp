@@ -6,7 +6,7 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
-import { IUser } from "../../../../models/User";
+import { IUser } from "@app/models/User";
 
 export interface GetUsersMeParams {}
 export interface GetUsersMeResponseData {
