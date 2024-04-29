@@ -41,6 +41,8 @@ import { colorTokens } from "@app/theme/colors/tokens";
 
 import { useAppContent } from "./index.hooks";
 import { ProfessionalProfileScreen } from "@app/screens/ProfessionalProfileScreen";
+import { SettingsScreen } from "@app/screens/SettingsScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -253,6 +255,14 @@ export const AppContent: FC = memo(({}) => {
           <Stack.Screen
             name={ProfileEditScreen.RouteName}
             component={ProfileEditScreen}
+            options={{
+              animation: "slide_from_bottom",
+              header: () => <HeaderGoBack />,
+            }}
+          />
+          <Stack.Screen
+            name={SettingsScreen.RouteName}
+            component={SettingsScreen}
             options={{
               animation: "slide_from_bottom",
               header: () => <HeaderGoBack />,
