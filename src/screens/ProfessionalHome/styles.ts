@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "flex-end",
   },
+  avatarContainer: { width: 40, height: 40 },
   pageTitle: {
     ...textVariants.h3CondensedBlackNormal,
   },

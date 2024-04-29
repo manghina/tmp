@@ -5,3 +5,4 @@ export const getForgotPasswordStepperCounter = (state: RootState) =>
   state?.ui?.forgotPasswordStepperCounter;
 export const getProfessionalRegisterStepperCounter = (state: RootState) =>
   state?.ui?.professionalRegisterStepperCounter;
+export const getIsOtpError = (state: RootState) => state?.ui?.isOtpError;

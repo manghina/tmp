@@ -9,8 +9,8 @@ import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import * as yup from "yup";
-import YupPassword from "yup-password";
 import { actions } from "@app/redux-store";
+import YupPassword from "yup-password";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { HeaderStepperCounter } from "@app/components/HeaderStepperCounter";
@@ -45,13 +45,29 @@ const schema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password")], "Le password devono coincidere")
     .required("Conferma la tua password"),
-  birthDate: yup.date().required("Inserisci la tua data di nascita"),
+  birthDate: yup.date()
+  .required("Inserisci la tua data di nascita")
+  .max(
+    moment().subtract(18, "years"),
+    "Devi avere compiuto almeno 18 anni per registrarti al servizio",
+  ),
 });
+
+const firstStepFieldKeys = [
+  "firstName",
+  "lastName",
+  "birthDate",
+] as const;
+const secondStepFieldKeys = [
+  "email",
+  "password",
+  "confirmPassword",
+] as const;
 
 export const useUserRegisterScreen = () => {
   const dispatch = useDispatch();
-
   const [stepperCounter, setStepperCounter] = useState(1);
+ 
   const navigation = useNavigation<any>();
 
   const formData = useForm<SignUpFormData>({
@@ -86,14 +102,17 @@ export const useUserRegisterScreen = () => {
       ],
     });
 
-  const onNextStepButtonPressed = useCallback(
-    () => setStepperCounter(2),
-    [setStepperCounter],
-  );
-  const onPreviousStepButtonPressed = useCallback(
-    () => setStepperCounter(1),
-    [setStepperCounter],
-  );
+    const onNextStepButtonPressed = async () => {
+      let stepValid = false;
+          stepValid = await trigger(firstStepFieldKeys);
+      if(stepValid)
+        setStepperCounter(2)
+  
+    };
+  
+    const onPreviousStepButtonPressed = () => {
+        setStepperCounter(1)
+    };
 
   const firstStepFilled = useMemo(
     () => Boolean(firstName) && Boolean(lastName) && Boolean(birthDate),
@@ -121,7 +140,7 @@ export const useUserRegisterScreen = () => {
       !errors.firstName &&
       !errors.lastName &&
       !errors.birthDate,
-    [firstStepFilled, secondStepFilled],
+    [firstStepFilled],
   );
 
   const triggerSubmit = useMemo(
@@ -170,8 +189,8 @@ export const useUserRegisterScreen = () => {
 
   return {
     formData,
-    stepperCounter,
     firstStepFilled,
+    stepperCounter,
     firstStepCompletionPercentage,
     secondStepFilled,
     secondStepCompletionPercentage,

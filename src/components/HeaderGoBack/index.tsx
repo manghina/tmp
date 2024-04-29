@@ -4,10 +4,15 @@ import { SafeAreaView } from "react-native";
 import { BackButton } from "@app/components/BackButton";
 import { styles } from "./styles";
 
-export const HeaderGoBack = memo(() => {
+type HeaderProps = {
+  backgroundColor?: string;
+};
+
+export const HeaderGoBack = memo(({ backgroundColor }: HeaderProps) => {
+  // i need to pass background color as parameter here
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor }]}>
         <BackButton />
       </View>
     </SafeAreaView>

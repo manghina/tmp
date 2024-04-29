@@ -3,14 +3,14 @@ import { Animated } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { useNavigation } from "@react-navigation/native";
-import { UserSettingsScreen } from "@app/screens/UserSettings";
-import { UserProfileScreen } from "@app/screens/ProfileScreen";
+import { ProfessionalProfileScreen } from "@app/screens/ProfessionalProfileScreen";
+import { Professional } from "@app/models/Professional";
 
 export const useProfessionalHomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const professionalMe = useSelector(selectors.getMe);
+  const professionalMe = useSelector(selectors.getMe) as Professional | null;
   const activeProfessionalOffers = useSelector(
     selectors.getActiveProfessionalOffersList,
   );
@@ -61,8 +61,8 @@ export const useProfessionalHomeScreen = () => {
   }, [dispatch]);
 
   const onGoToProfile = useCallback(() => {
-    navigation.navigate(UserProfileScreen.RouteName);
-  }, []);
+    navigation.navigate(ProfessionalProfileScreen.RouteName);
+  }, [navigation]);
 
   return {
     professionalMe,

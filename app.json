@@ -22,14 +22,16 @@
         "NSPhotoLibraryUsageDescription": "This app requires access to the photo library to upload images.",
         "NSCameraUsageDescription": "This app requires access to the camera to take and upload photos."
       },
-      "buildNumber": "21"
+      "buildNumber": "21",
+      "appStoreUrl": "https://apps.apple.com/it/app/sweepit/id6479641704"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#011820"
       },
-      "package": "ai.sweepit.sweep"
+      "package": "ai.sweepit.sweep",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=ai.sweepit.sweep"
     },
     "web": {
       "favicon": "./assets/favicon.png"

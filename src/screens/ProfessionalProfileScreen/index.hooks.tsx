@@ -1,8 +1,7 @@
-import { ReactElement, useCallback, useEffect, useMemo } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
-import { User } from "@app/models/User";
 import {
   ConfigureIcon,
   ContactIcon,
@@ -22,54 +21,57 @@ import {
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
 import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoginScreen } from "@app/screens/Login";
-import { SettingsScreen } from "../SettingsScreen";
+import { Asset } from "react-native-image-picker";
+import { convertImageToBlob, MediaTypes } from "@app/models/Media";
+import { useImagePicker } from "@app/hooks/useImagePicker";
+import { Professional } from "@app/models/Professional";
+import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 
-type UserProfileMenuItem = {
+type ProfessionalProfileMenuItem = {
   label: string;
   icon: ReactElement;
   onPress: () => void;
 };
 
-type UserProfileMenu = {
+type ProfessionalProfileMenu = {
   category: string;
-  items: UserProfileMenuItem[];
+  items: ProfessionalProfileMenuItem[];
 }[];
 
-export const useUserProfileScreen = () => {
+export const useProfessionalProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<any>();
 
-  const me: User | null = useSelector(selectors.getMe);
+  const [shouldSaveProfileImage, setShouldSaveProfileImage] = useState(false);
+
+  const me = useSelector(selectors.getMe) as Professional | null;
+  const uploadedImage = useSelector(selectors.getUploadedMedia);
+  const isUploadingMedia = useSelector(selectors.getIsUploadingMedia);
 
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
     navigation.replace(TutorialScreen.RouteName);
   }, [dispatch, navigation]);
 
-  const profileMenuItems: UserProfileMenu = useMemo(
+  const profileMenuItems: ProfessionalProfileMenu = useMemo(
     () => [
       {
         category: "Principale",
         items: [
           {
-            label: "Modifica profilo",
+            label: "Dettagli personali (privato)",
             icon: <EditIcon />,
             onPress: () => navigation.navigate(ProfileEditScreen.RouteName),
           },
           {
-            label: "Credenziali di accesso",
+            label: "Info professionali (pubblico)",
             icon: <CredentialsIcon />,
-            onPress: () => console.log("Credentials"),
+            onPress: () => console.log("Professional profile"),
           },
           {
             label: "Configura",
             icon: <ConfigureIcon />,
-            onPress: () => navigation.navigate(SettingsScreen.RouteName),
-          },
-          {
-            label: "Metodi di pagamento",
-            icon: <PaymentsIcon />,
-            onPress: () => console.log("Payment methods"),
+            onPress: () => console.log("Configure"),
           },
           {
             label: "Documenti",
@@ -142,6 +144,29 @@ export const useUserProfileScreen = () => {
     [navigation],
   );
 
+  const onProfilePictureChosen = useCallback(
+    async (image: Asset) => {
+      const imageBytes = await convertImageToBlob(image.uri!);
+
+      setShouldSaveProfileImage(true);
+      MediaManagerSingleton.imageData = imageBytes;
+
+      dispatch(
+        actions.mediaUpload({
+          fileName: image.fileName!,
+          mime: image.type!,
+          type: MediaTypes.IMAGE,
+          isPrivate: false,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
+  const { dialog, onImagePickerPressed } = useImagePicker(
+    onProfilePictureChosen,
+  );
+
   useEffect(() => {
     if (!me) {
       navigation.replace(LoginScreen.RouteName);
@@ -149,8 +174,22 @@ export const useUserProfileScreen = () => {
   }, [me, navigation]);
 
   useEffect(() => {
-    dispatch(actions.getUsersMeRequests.request({}));
-  }, [dispatch]);
+    if (uploadedImage && shouldSaveProfileImage) {
+      dispatch(
+        actions.patchProfessionalsMe.request({
+          profilePictureId: uploadedImage._id,
+        }),
+      );
+      setShouldSaveProfileImage(false);
+    }
+  }, [dispatch, uploadedImage, shouldSaveProfileImage]);
 
-  return { me, profileMenuItems, handleLogout };
+  return {
+    isUploadingMedia,
+    me,
+    uploadedImage,
+    profileMenuItems,
+    dialog,
+    onImagePickerPressed,
+  };
 };

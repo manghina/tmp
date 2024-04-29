@@ -51,7 +51,8 @@ export const colorTokensLight = {
   colorIcon: Colors.Neutral[800],
   colorIconSubtle: Colors.Neutral[700],
   colorIconInverse: Colors.Neutral[0],
-  colorIconDisabled: Colors.NeutralAlpha[400],
+  colorIconDisabled: Colors.Neutral[400],
+  colorIconAlternativeDisabled: Colors.Unlisted.IconAlternativeDisabled,
   colorIconSelected: Colors.Blue[700],
   colorIconBrand: Colors.Brand[400],
   colorIconDanger: Colors.Red[600],
@@ -200,6 +201,11 @@ export const colorTokensLight = {
   colorBackgroundInformationBoldPressed: Colors.Blue[900],
 
   colorBackgroundAlternativeBrand: Colors.Blue[700],
+  colorBackgroundAlternativeSubtle: Colors.Neutral[200],
+  colorBackgroundAlternativeTextInputBox: Colors.Unlisted.GreenBackground,
+  colorBackgroundAlternativeTextInput: Colors.Unlisted.BackgroundAlpha,
+  colorBackgroundAlternativeCardBg: Colors.Unlisted.AiChatBubbleBg,
+  colorBackgroundAlternativeCardBg2: Colors.Unlisted.UserChatBubbleBg,
 
   colorBlanket: Colors.Neutral[500],
   colorBlanketSelected: "#388BF4",
@@ -424,6 +430,9 @@ export const colorTokensDark = {
   colorBackgroundInformationBoldPressed: Colors.Blue[200],
 
   colorBackgroundAlternativeBrand: Colors.Blue[700],
+  colorBackgroundAlternativeSubtle: Colors.Neutral[200],
+  colorBackgroundAlternativeTextInputBox: Colors.Unlisted.GreenBackground,
+  colorBackgroundAlternativeTextInput: Colors.Unlisted.BackgroundAlpha,
 
   colorBlanket: "#10121499",
   colorBlanketSelected: "#101214C1",
