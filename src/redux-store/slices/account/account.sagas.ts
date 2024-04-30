@@ -1,4 +1,4 @@
-import { put, select, take, takeEvery, call } from "redux-saga/effects";
+import { put, select, take, takeEvery, call, delay } from "redux-saga/effects";
 import { actions, RootState, selectors } from "@app/redux-store";
 import { getCookie } from "./account.selectors";
 import NavigationService from "@app/models/NavigationService";
@@ -13,6 +13,8 @@ import { LoginScreen } from "@app/screens/Login";
 import { UserHomeScreen } from "@app/screens/UserHome";
 import { ProfessionalHomeScreen } from "@app/screens/ProfessionalHome";
 import { PasswordResetSuccessScreen } from "@app/screens/PasswordResetSuccess";
+import { EmailVerificationScreen } from "@app/screens/EmailVerificationScreen";
+import { TutorialScreen } from "@app/screens/Tutorial";
 
 export function* userInitSaga() {
   yield takeEvery(actions.appStartup.type, function* () {
@@ -33,10 +35,10 @@ export function* userInitSaga() {
 
         switch (account.type) {
           case "user":
-            yield put(actions.getUsersMe.request({}));
+            yield put(actions.getUsersMe.request({ autoLogin: true }));
             break;
           case "professional":
-            yield put(actions.getProfessionalsMe.request({}));
+            yield put(actions.getProfessionalsMe.request({ autoLogin: true }));
             break;
           default:
             break;
@@ -45,6 +47,9 @@ export function* userInitSaga() {
         yield put(actions.resetAccount());
         NavigationService.replace(LoginScreen.RouteName);
       }
+    } else {
+      yield delay(2000);
+      NavigationService.replace(TutorialScreen.RouteName);
     }
   });
 }
@@ -58,6 +63,15 @@ export function* autoLoginSaga() {
       actions.getProfessionalsMe.fail,
     ],
     function* (action) {
+      const account: IAccount = yield select(selectors.getAccount);
+      const redirectDelay = action.payload.prepareParams.autoLogin ? 2000 : 0;
+      yield delay(redirectDelay);
+
+      if (!account.emailVerified) {
+        NavigationService.replace(EmailVerificationScreen.RouteName);
+        return;
+      }
+
       switch (action.type) {
         case actions.getUsersMe.success.type:
           NavigationService.replace(UserHomeScreen.RouteName);
@@ -271,5 +285,38 @@ export function* postLoginSaga() {
 export function* postResetPasswordSaga() {
   yield takeEvery(actions.patchPasswords.success, function* () {
     NavigationService.replace(PasswordResetSuccessScreen.RouteName);
+  });
+}
+
+export function* verifyEmailSaga() {
+  yield takeEvery(actions.verifyEmailOtp, function* (action) {
+    yield put(
+      actions.patchAccountsMe.request({
+        emailVerificationToken: action.payload,
+      }),
+    );
+
+    // @ts-ignore
+    const patchAccountsMeResultAction = yield take([
+      actions.patchAccountsMe.success,
+      actions.patchAccountsMe.fail,
+    ]);
+
+    if (
+      patchAccountsMeResultAction.type === actions.patchAccountsMe.fail.type
+    ) {
+      yield put(actions.setIsOtpError(true));
+      return;
+    }
+
+    yield put(actions.setIsOtpError(null));
+
+    const account: IAccount = yield select(selectors.getAccount);
+
+    if (account.type === "user") {
+      NavigationService.replace(UserHomeScreen.RouteName);
+    } else {
+      NavigationService.replace(ProfessionalHomeScreen.RouteName);
+    }
   });
 }

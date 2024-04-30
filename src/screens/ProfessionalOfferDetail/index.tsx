@@ -13,6 +13,7 @@ import moment from "moment";
 import { colorTokens } from "@app/theme/colors/tokens";
 import ThumbsUpIcon from "@app/components/SvgIcons/ThumbsUpIcon";
 import ClockIcon from "@app/components/SvgIcons/ClockIcon";
+import { UserAvatarDetails } from "@app/components/_users/UserAvatarDetails";
 
 export const ProfessionalOfferDetailScreen = () => {
   const {
@@ -139,27 +140,9 @@ export const ProfessionalOfferDetailScreen = () => {
             <View style={[styles.section, styles.patientContainer]}>
               <Text style={styles.sectionName}>Paziente</Text>
               <View style={styles.patientCardContainer}>
-                <View row>
-                  <Image
-                    style={styles.profilePic}
-                    source={{
-                      uri: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
-                    }}
-                  />
-                  <View>
-                    <Text style={styles.patientName}>
-                      {currentProfessionalOffer!.request.user.name}{" "}
-                      {currentProfessionalOffer!.request.user.lastName.charAt(
-                        0,
-                      )}
-                      .
-                    </Text>
-                    <Text style={styles.patientAge}>24 anni</Text>
-                    <Text style={styles.patientIllness}>
-                      Presunto mal di testa
-                    </Text>
-                  </View>
-                </View>
+                <UserAvatarDetails
+                  user={currentProfessionalOffer!.request.user}
+                />
                 <View style={styles.requestSummaryContainer}>
                   <Text style={styles.sectionName}>Riassunto richiesta</Text>
                   <View style={styles.requestContainer}>

@@ -1,42 +1,63 @@
 import React from "react";
 import { useUserProfileScreen } from "./index.hooks";
 import { View, Text, TouchableOpacity, Image } from "react-native-ui-lib";
-import { SafeAreaView, ScrollView } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import { userProfileStyles } from "./styles";
-import profilePicture from "@assets/img/doc15.png";
 import ImageIcon from "@app/components/SvgIcons/ImageIcon";
 import { colorTokens } from "@app/theme/colors/tokens";
-import EditImageIcon from "@app/screens/ProfileScreen/EditImageIcon";
+import EditImageIcon from "@app/components/SvgIcons/EditImageIcon";
+import { Avatar } from "@app/components/Avatar";
 
 export const UserProfileScreen = () => {
-  const { me, profileMenuItems } = useUserProfileScreen();
+  const {
+    isUploadingMedia,
+    me,
+    uploadedImage,
+    profileMenuItems,
+    dialog,
+    onImagePickerPressed,
+  } = useUserProfileScreen();
+
+  if (!me) {
+    return <View />;
+  }
 
   const renderProfileData = () => (
     <View style={userProfileStyles.profileInfoContainer}>
-      <View style={userProfileStyles.profileImageContainer}>
-        {profilePicture ? (
-          <View style={userProfileStyles.profileImage}>
-            <Image
-              style={userProfileStyles.profileImage}
-              source={profilePicture}
-            />
+      <Pressable onPress={isUploadingMedia ? undefined : onImagePickerPressed}>
+        <View
+          style={[
+            userProfileStyles.avatarContainer,
+            !isUploadingMedia && !me?.profilePictureUrl
+              ? userProfileStyles.accentBackground
+              : undefined,
+          ]}
+        >
+          <Avatar data={me} size="large" type="user" />
+          <View style={userProfileStyles.editImageButton}>
+            {uploadedImage ? (
+              <EditImageIcon
+                size={48}
+                color={
+                  isUploadingMedia ? colorTokens.colorIconDisabled : undefined
+                }
+              />
+            ) : (
+              <ImageIcon
+                size={48}
+                color={
+                  isUploadingMedia ? colorTokens.colorIconDisabled : undefined
+                }
+              />
+            )}
           </View>
-        ) : (
-          <View style={userProfileStyles.profileImageTextContainer}>
-            <Text style={userProfileStyles.profileImageText}>
-              {me?.name[0]}
-              {me?.lastName[0]}
-            </Text>
-          </View>
-        )}
-        <View style={userProfileStyles.editImageButton}>
-          {profilePicture ? (
-            <EditImageIcon />
-          ) : (
-            <ImageIcon color={colorTokens.colorIconInverse} />
-          )}
         </View>
-      </View>
+      </Pressable>
       <Text style={userProfileStyles.profileInfoText}>
         {me?.name} {me?.lastName}
       </Text>
@@ -69,6 +90,7 @@ export const UserProfileScreen = () => {
         <ScrollView style={userProfileStyles.scrollView}>
           {renderProfileData()}
           {renderMenu()}
+          {dialog}
         </ScrollView>
       </SafeAreaView>
     </>
@@ -76,4 +98,4 @@ export const UserProfileScreen = () => {
 };
 
 UserProfileScreen.displayName = "UserProfileScreen";
-UserProfileScreen.RouteName = "user-settings" as const;
+UserProfileScreen.RouteName = "user-profile" as const;

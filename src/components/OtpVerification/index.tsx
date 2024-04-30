@@ -9,8 +9,11 @@ interface OtpVerificationProps {
     componentTitle: string;
     componentDescription: string;
   };
-  handleGoBack: () => void;
   handleVerification: (otp: string) => void;
+  handleResendCode: () => void;
+  handleGoBack?: () => void;
+  hideGoBack?: boolean;
+  goBackText?: string;
 }
 
 export const OtpVerification = memo(
@@ -18,14 +21,25 @@ export const OtpVerification = memo(
     componentProps: { componentTitle, componentDescription },
     handleGoBack,
     handleVerification,
+    hideGoBack,
+    handleResendCode,
+    goBackText,
   }: OtpVerificationProps) => {
     const {
       otpCode,
       onOtpChangeTextCallbacks,
       onOtpKeyPressCallbacks,
       isLoading,
-      isError,
-    } = useOtpVerification({ handleVerification, handleGoBack });
+      isOtpError,
+      triggerGoBack,
+      countdown,
+      isCountdownActive,
+      triggerResendCode,
+    } = useOtpVerification({
+      handleVerification,
+      handleGoBack,
+      handleResendCode,
+    });
 
     return (
       <View style={styles.otpContainer}>
@@ -59,18 +73,47 @@ export const OtpVerification = memo(
             ))}
           </View>
         </View>
-        <View style={styles.otpReset}>
-          <Text style={styles.otpTimerText}>
-            {isLoading
-              ? "Verifica codice in corso..."
-              : "Inserisci codice entro 00:29"}
-          </Text>
+        {isOtpError && (
+          <Text style={styles.otpErrorText}>Codice non valido. Riprova</Text>
+        )}
+        <View style={styles.otpTextContainer}>
+          {isLoading || isCountdownActive ? (
+            <Text style={styles.otpTimerText}>
+              {isLoading
+                ? "Verifica codice in corso..."
+                : `Inserisci codice entro 00:${
+                    (countdown < 10 ? `0${countdown}` : countdown) ?? "00"
+                  }`}
+            </Text>
+          ) : (
+            <View style={styles.otpResetContainer}>
+              <View>
+                <Text style={styles.otpResetText}>
+                  Non hai ricevuto il codice?
+                </Text>
+              </View>
+              <View>
+                <TouchableOpacity onPress={triggerResendCode}>
+                  <Text style={styles.otpResetCta}>Clicca qui</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
         </View>
-        <View style={styles.otpGoBackContainer}>
-          <TouchableOpacity onPress={!isLoading ? handleGoBack : () => {}}>
-            <Text style={styles.otpGoBack}>Torna indietro</Text>
-          </TouchableOpacity>
-        </View>
+        {!hideGoBack && (
+          <View style={styles.otpGoBackContainer}>
+            <TouchableOpacity onPress={!isLoading ? triggerGoBack : () => {}}>
+              <Text
+                style={[
+                  styles.otpGoBack,
+                  isLoading ? styles.otpGoBackDisabled : undefined,
+                ]}
+              >
+                {goBackText ?? "Torna indietro"}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   },

@@ -1,5 +1,5 @@
-import React, { JSX, memo } from "react";
-import { TouchableOpacity } from "react-native-ui-lib";
+import React, { PropsWithChildren, memo } from "react";
+import { TouchableOpacity, View } from "react-native-ui-lib";
 import { useOtpVerificationNewScreen } from "./index.hooks";
 
 type OtpVerificationNewScreenProps = {
@@ -7,9 +7,12 @@ type OtpVerificationNewScreenProps = {
     componentTitle: string;
     componentDescription: string;
   };
-  handleGoBack: () => void;
   handleVerification: (otp: string) => void;
-  children: JSX.Element;
+  handleResendCode: () => void;
+  handleGoBack?: () => void;
+  disableChildrenPointerEvents?: boolean;
+  hideGoBack?: boolean;
+  hideHeader?: boolean;
 };
 
 export const OtpVerificationNewScreen = memo(
@@ -18,15 +21,24 @@ export const OtpVerificationNewScreen = memo(
     children,
     handleGoBack,
     handleVerification,
-  }: OtpVerificationNewScreenProps) => {
+    disableChildrenPointerEvents,
+    hideGoBack,
+    hideHeader,
+    handleResendCode,
+  }: PropsWithChildren<OtpVerificationNewScreenProps>) => {
     const { onOpenScreenClicked } = useOtpVerificationNewScreen({
       componentProps,
       handleGoBack,
       handleVerification,
+      hideGoBack,
+      hideHeader,
+      handleResendCode,
     });
     return (
       <TouchableOpacity onPress={onOpenScreenClicked}>
-        {children}
+        <View pointerEvents={disableChildrenPointerEvents ? "none" : "auto"}>
+          {children}
+        </View>
       </TouchableOpacity>
     );
   },

@@ -3,6 +3,7 @@ import { useFormGooglePlacesTextField } from "./index.hooks";
 import { Text, TextFieldProps, View } from "react-native-ui-lib";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { styles } from "./styles";
+import { googleMapsApiKey } from "@app/config";
 
 export type FormGooglePlacesTextFieldProps = {
   name: string;
@@ -10,7 +11,7 @@ export type FormGooglePlacesTextFieldProps = {
 
 export const FormGooglePlacesTextField = memo(
   ({ name, placeholder, ...props }: FormGooglePlacesTextFieldProps) => {
-    const { isFocused, onBlur, onFocus, handleChange } =
+    const { isFocused, onBlur, onFocus, handleChange, error, handleSelect } =
       useFormGooglePlacesTextField(name);
 
     return (
@@ -19,11 +20,11 @@ export const FormGooglePlacesTextField = memo(
         <GooglePlacesAutocomplete
           placeholder={placeholder ?? "Cerca..."}
           onPress={(data) => {
-            handleChange(data.description);
+            handleSelect(data.description);
           }}
           fetchDetails={true}
           query={{
-            key: process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY,
+            key: googleMapsApiKey(),
             components: "country:it",
             language: "it",
           }}
@@ -39,17 +40,20 @@ export const FormGooglePlacesTextField = memo(
             onFocus,
             onBlur,
             style: styles.input,
+            onChange: (e) => handleChange(e.nativeEvent.text),
           }}
           styles={{
             textInputContainer: [
               styles.field,
               isFocused ? styles.focused : undefined,
+              Boolean(error) ? styles.fieldWithError : undefined,
             ],
             poweredContainer: styles.poweredByGoogleContainer,
             listView: styles.listView,
             row: styles.listRow,
           }}
         />
+        {Boolean(error) && <Text style={styles.textError}>{error}</Text>}
       </View>
     );
   },

@@ -31,13 +31,31 @@ export const styles = StyleSheet.create({
   otpInputItem: {
     width: 44,
   },
-  otpReset: {
+  otpErrorText: {
+    ...textVariants.p2MediumNormal,
+    color: "#FF0000",
+    textAlign: "center",
+  },
+  otpTextContainer: {
     padding: dimensionsTokens.padding4Xs,
   },
   otpTimerText: {
     ...textVariants.p2MediumNormal,
     textAlign: "center",
     color: colorTokens.colorTextDisabled,
+  },
+  otpResetContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: dimensionsTokens.padding4Xs,
+  },
+  otpResetText: {
+    ...textVariants.p2MediumNormal,
+  },
+  otpResetCta: {
+    ...textVariants.p2BoldItalic,
+    color: colorTokens.colorTextAccentBlue,
   },
   otpGoBackContainer: {
     alignSelf: "center",
@@ -46,5 +64,8 @@ export const styles = StyleSheet.create({
     ...textVariants.p2MediumNormal,
     padding: dimensionsTokens.padding2Xs,
     textDecorationLine: "underline",
+  },
+  otpGoBackDisabled: {
+    color: colorTokens.colorTextDisabled,
   },
 });

@@ -16,5 +16,5 @@ export const useFormRadioGroup = (name: string) => {
     setSelectedOption(value);
   }, [value]);
 
-  return { onOptionSelected, selectedOption };
+  return { onOptionSelected, selectedOption, error };
 };

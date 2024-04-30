@@ -47,7 +47,7 @@ export const LoginBottomSheet = memo(
                   keyboardType="email-address"
                   name="email"
                   label="Indirizzo email"
-                />
+                textContentType="emailAddress"/>
                 <Button
                   onPress={onProceedButtonPressed}
                   disabled={submitDisabled}

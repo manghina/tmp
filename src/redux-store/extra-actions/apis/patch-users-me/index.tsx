@@ -6,16 +6,17 @@ import {
   ApiFailAction,
   HttpMethod,
 } from "../api-builder";
-import { IUser } from "../../../../models/User";
+import { IUser } from "@app/models/User";
 
 export interface PatchUsersMeParams {
-  name: string;
-  lastName: string;
-  birthDate: string;
-  phonePrefix: string;
-  phoneNumber: string;
-  country: string;
-  gender: string;
+  name?: string;
+  lastName?: string;
+  birthDate?: string;
+  phonePrefix?: string;
+  phoneNumber?: string;
+  country?: string;
+  gender?: string;
+  profilePictureId?: string;
 }
 export interface PatchUsersMeResponseData {
   user: IUser;

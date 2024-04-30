@@ -68,9 +68,10 @@ export const userProfileStyles = StyleSheet.create({
   menuCategory: {
     flexDirection: "column",
     gap: dimensionsTokens.padding3Xs,
+    
   },
   menuCatergoryTitle: {
-    ...textVariants.h6CondensedBlackNormal,
+    ...textVariants.h3CondensedBlackNormal,
     paddingVertical: dimensionsTokens.padding3Xs,
   },
   menuItem: {

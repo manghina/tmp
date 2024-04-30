@@ -1,18 +1,30 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { actions, selectors } from "@app/redux-store";
 
 export const useOtpVerification = ({
   handleVerification,
+  handleResendCode,
   handleGoBack,
 }: {
   handleVerification: (otp: string) => void;
-  handleGoBack: () => void;
+  handleResendCode: () => void;
+  handleGoBack?: () => void;
 }) => {
+  const navigation = useNavigation<any>();
   const [otpCode, setOtpCode] = useState<string>("");
+  const isOtpError = useSelector(selectors.getIsOtpError);
+  const dispatch = useDispatch();
 
-  // fake code
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [countdown, setCountdown] = useState(600);
+  const [isCountdownActive, setIsCountdownActive] = useState(true);
+  const countdownTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // fake loader
+  const [isLoading, setIsLoading] = useState(false);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleOtpCodeChange = useCallback(
     (value: string, index: number) => {
@@ -52,27 +64,78 @@ export const useOtpVerification = ({
     () =>
       new Array(6).fill(0).map((_, index) => (value: string) => {
         handleOtpCodeChange(value, index);
+        if (isOtpError) {
+          dispatch(actions.setIsOtpError(null));
+        }
       }),
-    [otpCode],
+    [otpCode, isOtpError],
   );
 
-  useEffect(() => {
-    if (otpCode.length === 6) {
-      handleVerification(otpCode);
-      // fake code
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-        handleGoBack();
-      }, 3000);
+  const triggerGoBack = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
     }
-  }, [otpCode, handleVerification]);
+    if (handleGoBack) {
+      handleGoBack();
+    } else {
+      navigation.pop();
+    }
+  }, [handleGoBack, navigation, timerRef]);
+
+  const triggerResendCode = useCallback(() => {
+    handleResendCode();
+    setIsCountdownActive(true);
+  }, [handleResendCode, setIsCountdownActive]);
+
+  useEffect(() => {
+    if (otpCode.length === 6 && !isOtpError) {
+      handleVerification(otpCode);
+      // fake loader
+      setIsLoading(true);
+      timerRef.current = setTimeout(() => {
+        setIsLoading(false);
+      }, 5000);
+    }
+  }, [otpCode, handleVerification, isOtpError, timerRef]);
+
+  useEffect(() => {
+    if (isLoading && isOtpError && timerRef.current) {
+      setOtpCode("");
+      // fake loader
+      clearTimeout(timerRef.current);
+      setIsLoading(false);
+    }
+  }, [isLoading, isOtpError, setOtpCode, setIsLoading, timerRef]);
+
+  useEffect(() => {
+    if (isCountdownActive) {
+      countdownTimerRef.current = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 0) {
+            setIsCountdownActive(false);
+            clearInterval(countdownTimerRef.current!);
+            return 30;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (countdownTimerRef.current) {
+        clearInterval(countdownTimerRef.current);
+      }
+    };
+  }, [isCountdownActive]);
 
   return {
     otpCode,
     onOtpChangeTextCallbacks,
     onOtpKeyPressCallbacks,
     isLoading,
-    isError,
+    isOtpError,
+    triggerGoBack,
+    countdown,
+    isCountdownActive,
+    triggerResendCode,
   };
 };
