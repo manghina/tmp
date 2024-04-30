@@ -127,7 +127,7 @@ export const ForgotPasswordScreen = () => {
   return (
     <View>
       <AnimatedProgressBar value={completionPercentage} duration={250} />
-      <ScrollView style={styles.mainContainer}>
+      <ScrollView style={styles.mainContainer} automaticallyAdjustKeyboardInsets={true}>
         <View style={styles.pageContent}>
           <View>
             <Text style={styles.pageTitle}>Password dimenticata?</Text>
