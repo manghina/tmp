@@ -1,9 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 import { useForm, useWatch } from "react-hook-form";
-import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
+import React, { useCallback, useLayoutEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions, selectors } from "@app/redux-store";
 import { ForgotPasswordStepCounter } from "./ForgotPasswordStepCounter";
@@ -46,16 +46,23 @@ const schema = yup.object().shape({
 
 export const useForgotPasswordScreen = () => {
   const dispatch = useDispatch();
-
+  const route = useRoute();
   const navigation = useNavigation<any>();
 
+  const { email: emailFromRouteProps } = useMemo<{ email: string }>(
+    () =>
+      (route.params as { email: string }) ?? {
+        email: "",
+      },
+    [route.params],
+  );
+
   const stepperCounter = useSelector(selectors.getForgotPasswordStepperCounter);
-  const [recoveryPasswordTokenTimer, setRecoveryPasswordTokenTimer] =
-    useState(0);
+  const isOtpError = useSelector(selectors.getIsOtpError);
 
   const formData = useForm<PasswordResetFormData>({
     defaultValues: {
-      email: "",
+      email: emailFromRouteProps,
     },
     resolver: yupResolver(schema),
   });
@@ -65,6 +72,7 @@ export const useForgotPasswordScreen = () => {
     handleSubmit,
     formState: { isDirty, isValid, isSubmitted },
     trigger,
+    setValue,
   } = formData;
 
   const submitDisabled = !isDirty || (isSubmitted && !isValid);
@@ -91,54 +99,43 @@ export const useForgotPasswordScreen = () => {
     [dispatch, stepperCounter],
   );
 
-  const startRecoveryPasswordTokenTimer = useCallback(() => {
-    setRecoveryPasswordTokenTimer(30);
-
-    const timer = setInterval(() => {
-      setRecoveryPasswordTokenTimer((prevSeconds) => {
-        if (prevSeconds === 0) {
-          clearInterval(timer);
-          return 0;
-        } else {
-          return prevSeconds - 1;
-        }
-      });
-    }, 1000);
-  }, [setRecoveryPasswordTokenTimer]);
-
   const triggerRecoveryPasswordTokenSubmit = useCallback(
     () => dispatch(actions.postRecoveryPasswordTokens.request({ email })),
     [dispatch, email],
   );
 
   const clearFields = useCallback(() => {
-    formData.setValue("otpCode", "");
-    formData.setValue("newPassword", "");
-    formData.setValue("confirmNewPassword", "");
-  }, [formData]);
+    setValue("otpCode", "");
+    setValue("newPassword", "");
+    setValue("confirmNewPassword", "");
+    if (isOtpError) dispatch(actions.setIsOtpError(null));
+  }, [setValue, isOtpError]);
 
   const onFirstStepProceedButtonPressed = useCallback(async () => {
     const isEmailValid = await trigger("email");
 
     if (isEmailValid) {
       onNextStepButtonPressed();
-      startRecoveryPasswordTokenTimer();
       triggerRecoveryPasswordTokenSubmit();
     }
-  }, [
-    trigger,
-    onNextStepButtonPressed,
-    startRecoveryPasswordTokenTimer,
-    triggerRecoveryPasswordTokenSubmit,
-  ]);
+  }, [trigger, onNextStepButtonPressed, triggerRecoveryPasswordTokenSubmit]);
 
-  const onSecondStepProceedButtonPressed = useCallback(async () => {
-    const isOtpValid = await trigger("otpCode");
+  const handleResendOtpCode = useCallback(() => {
+    triggerRecoveryPasswordTokenSubmit();
+  }, [triggerRecoveryPasswordTokenSubmit]);
 
-    if (isOtpValid) {
-      onNextStepButtonPressed();
-    }
-  }, [trigger, onNextStepButtonPressed]);
+  const handleOtpVerification = useCallback(
+    async (otpCode: string) => {
+      setValue("otpCode", otpCode);
+      const isOtpValid = await trigger("otpCode");
+      if (isOtpValid) {
+        onNextStepButtonPressed();
+      } else {
+        dispatch(actions.setIsOtpError(true));
+      }
+    },
+    [dispatch, setValue, trigger, onNextStepButtonPressed],
+  );
 
   const onBackButtonPressed = useCallback(() => {
     clearFields();
@@ -191,7 +188,8 @@ export const useForgotPasswordScreen = () => {
     completionPercentage,
     stepperCounter,
     onFirstStepProceedButtonPressed,
-    onSecondStepProceedButtonPressed,
     onBackButtonPressed,
+    handleOtpVerification,
+    handleResendOtpCode,
   };
 };

@@ -153,6 +153,7 @@ export const AppContent: FC = memo(({}) => {
             component={PasswordResetSuccessScreen}
             options={{
               headerShown: false,
+              gestureEnabled: false,
             }}
           />
           <Stack.Screen
