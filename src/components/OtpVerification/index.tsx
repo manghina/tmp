@@ -13,6 +13,7 @@ interface OtpVerificationProps {
   handleResendCode: () => void;
   handleGoBack?: () => void;
   hideGoBack?: boolean;
+  goBackText?: string;
 }
 
 export const OtpVerification = memo(
@@ -22,6 +23,7 @@ export const OtpVerification = memo(
     handleVerification,
     hideGoBack,
     handleResendCode,
+    goBackText,
   }: OtpVerificationProps) => {
     const {
       otpCode,
@@ -107,7 +109,7 @@ export const OtpVerification = memo(
                   isLoading ? styles.otpGoBackDisabled : undefined,
                 ]}
               >
-                Torna indietro
+                {goBackText ?? "Torna indietro"}
               </Text>
             </TouchableOpacity>
           </View>
