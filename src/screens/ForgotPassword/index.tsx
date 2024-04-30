@@ -110,7 +110,7 @@ export const ForgotPasswordScreen = () => {
   return (
     <View>
       <AnimatedProgressBar value={completionPercentage} duration={250} />
-      <View style={styles.mainContainer}>
+      <View style={styles.mainContainer} automaticallyAdjustKeyboardInsets={true}>
         <View style={styles.pageContent}>
           <FormProvider {...formData}>
             {stepperCounter === 1 && renderStep1()}

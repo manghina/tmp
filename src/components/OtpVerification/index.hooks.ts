@@ -18,7 +18,7 @@ export const useOtpVerification = ({
   const isOtpError = useSelector(selectors.getIsOtpError);
   const dispatch = useDispatch();
 
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(600);
   const [isCountdownActive, setIsCountdownActive] = useState(true);
   const countdownTimerRef = useRef<NodeJS.Timeout | null>(null);
 

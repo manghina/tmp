@@ -3,7 +3,7 @@ import {
   publicS3BucketName,
   s3AwsRegion,
 } from "@app/config";
-import RNFetchBlob from "rn-fetch-blob";
+import * as FileSystem from "expo-file-system";
 
 export enum MediaTypes {
   IMAGE = "IMAGE",
@@ -59,9 +59,9 @@ export class Media implements IMedia {
 export const convertImageToBlob = async (
   imagePath: string,
 ): Promise<Uint8Array> => {
-  const filePath = imagePath.replace("file://", "");
-
-  const file = await RNFetchBlob.fs.readFile(filePath, "base64");
+  const file = await FileSystem.readAsStringAsync(imagePath, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
   const byteCharacters = atob(file);
 
   // Crea un array di byte

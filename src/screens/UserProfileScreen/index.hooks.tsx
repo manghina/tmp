@@ -27,6 +27,7 @@ import { convertImageToBlob, MediaTypes } from "@app/models/Media";
 import { useImagePicker } from "@app/hooks/useImagePicker";
 import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 import { reviewInAppStore } from "@app/utils/appStore";
+import { SettingsScreen } from "../SettingsScreen";
 
 type UserProfileMenuItem = {
   label: string;
@@ -72,7 +73,7 @@ export const useUserProfileScreen = () => {
           {
             label: "Configura",
             icon: <ConfigureIcon />,
-            onPress: () => console.log("Configure"),
+            onPress: () => navigation.navigate(SettingsScreen.RouteName),
           },
           {
             label: "Metodi di pagamento",
