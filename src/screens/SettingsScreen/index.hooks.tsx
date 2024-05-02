@@ -1,26 +1,16 @@
-import { ReactElement, useCallback, useEffect, useMemo } from "react";
+import { ReactElement, useEffect, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { actions, selectors } from "@app/redux-store";
+import { useSelector } from "react-redux";
+import {  selectors } from "@app/redux-store";
 import { User } from "@app/models/User";
 import {
   ConfigureIcon,
-  ContactIcon,
   CredentialsIcon,
   DocumentsIcon,
   EditIcon,
-  FAQIcon,
-  LogoutIcon,
   PaymentsIcon,
-  PlayIcon,
-  PrivacyIcon,
-  ProfileIcon,
-  StarIcon,
-  SurveyIcon,
-  TermsAndConditionsIcon,
 } from "@app/components/SvgIcons";
 import { ProfileEditScreen } from "@app/screens/ProfileEditScreen";
-import { TutorialScreen } from "@app/screens/Tutorial";
 import { LoginScreen } from "@app/screens/Login";
 
 type MenuItem = {
@@ -35,15 +25,11 @@ type SettingsMenu = {
 }[];
 
 export const useSettingsProfileScreen = () => {
-  const dispatch = useDispatch();
+
   const navigation = useNavigation<any>();
 
   const me: User | null = useSelector(selectors.getMe);
 
-  const handleLogout = useCallback(() => {
-    dispatch(actions.clearSession());
-    navigation.replace(TutorialScreen.RouteName);
-  }, [dispatch, navigation]);
 
   const profileMenuItems: SettingsMenu = useMemo(
     () => [
@@ -87,9 +73,6 @@ export const useSettingsProfileScreen = () => {
     }
   }, [me, navigation]);
 
-  useEffect(() => {
-    dispatch(actions.getUsersMeRequests.request({}));
-  }, [dispatch]);
 
-  return { me, profileMenuItems, handleLogout };
+  return { me, profileMenuItems };
 };
