@@ -28,6 +28,10 @@ import { useImagePicker } from "@app/hooks/useImagePicker";
 import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
 import { reviewInAppStore } from "@app/utils/appStore";
 import { SettingsScreen } from "../SettingsScreen";
+import { FAQSUsercreen } from "../FAQSUsercreen";
+import { IAccount } from "@app/models/Account";
+import { Professional } from "@app/models/Professional";
+import { select } from "redux-saga/effects";
 
 type UserProfileMenuItem = {
   label: string;
@@ -46,10 +50,11 @@ export const useUserProfileScreen = () => {
 
   const [shouldSaveProfileImage, setShouldSaveProfileImage] = useState(false);
 
-  const me: User | null = useSelector(selectors.getMe);
+  const me: User | Professional  | null = useSelector(selectors.getMe);
+
   const uploadedImage = useSelector(selectors.getUploadedMedia);
   const isUploadingMedia = useSelector(selectors.getIsUploadingMedia);
-
+    
   const handleLogout = useCallback(() => {
     dispatch(actions.clearSession());
     navigation.replace(TutorialScreen.RouteName);
@@ -108,7 +113,7 @@ export const useUserProfileScreen = () => {
           {
             label: "FAQs",
             icon: <FAQIcon />,
-            onPress: () => console.log("FAQs"),
+            onPress: () => navigation.navigate(FAQSUsercreen.RouteName),
           },
         ],
       },

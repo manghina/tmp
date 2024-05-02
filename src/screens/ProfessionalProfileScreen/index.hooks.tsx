@@ -26,6 +26,7 @@ import { convertImageToBlob, MediaTypes } from "@app/models/Media";
 import { useImagePicker } from "@app/hooks/useImagePicker";
 import { Professional } from "@app/models/Professional";
 import MediaManagerSingleton from "@app/models/MediaManagerSingleton";
+import { FAQSUsercreen } from "../FAQSUsercreen";
 
 type ProfessionalProfileMenuItem = {
   label: string;
@@ -101,7 +102,7 @@ export const useProfessionalProfileScreen = () => {
           {
             label: "FAQs",
             icon: <FAQIcon />,
-            onPress: () => console.log("FAQs"),
+            onPress: () => navigation.navigate(FAQSUsercreen.RouteName),
           },
         ],
       },
