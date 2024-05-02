@@ -4,24 +4,23 @@ import { style } from "./styles";
 import { OtpVerification } from "@app/components/OtpVerification";
 
 export const EmailVerificationScreen = () => {
-  const { handleEmailVerification, handleResendEmailOtp } =
+  const { handleEmailVerification, handleResendEmailOtp, handleGoBack } =
     useEmailVerificationScreen();
 
   return (
-    <>
-      <SafeAreaView style={style.pageContainer}>
-        <OtpVerification
-          componentProps={{
-            componentTitle: "Verifica email",
-            componentDescription:
-              "Inserisci il codice numerico che abbiamo inviato al tuo indirizzo email",
-          }}
-          handleVerification={handleEmailVerification}
-          handleResendCode={handleResendEmailOtp}
-          hideGoBack={true}
-        />
-      </SafeAreaView>
-    </>
+    <SafeAreaView style={style.pageContainer}>
+      <OtpVerification
+        componentProps={{
+          componentTitle: "Verifica email",
+          componentDescription:
+            "Inserisci il codice numerico che abbiamo inviato al tuo indirizzo email",
+        }}
+        handleVerification={handleEmailVerification}
+        handleResendCode={handleResendEmailOtp}
+        goBackText="Torna alla schermata di login"
+        handleGoBack={handleGoBack}
+      />
+    </SafeAreaView>
   );
 };
 

@@ -10,4 +10,5 @@ export const dimensionsTokens = {
   paddingMd: Dimensions.medium.spacing_300,
   paddingLg: Dimensions.large.spacing_400,
   paddingXl: Dimensions.large.spacing_500,
+  padding6Xl: Dimensions.large.spacing_1000,
 };
