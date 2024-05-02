@@ -19,15 +19,7 @@ export const useFaqScreen = () => {
   const me: User | null = useSelector(selectors.getMe);
   const account = useSelector(selectors.getAccount);
   
-  const faqItems: FaqMenu =  account?.type == "user" ?
-  useMemo(
-    () => userFaqs,
-    [navigation],
-  ) :
-  useMemo(
-    () => docFaqs,
-    [navigation],
-  );
+  const faqItems: FaqMenu =  account?.type == "user" ? userFaqs : docFaqs;
 
   useEffect(() => {
     if (!me) {
