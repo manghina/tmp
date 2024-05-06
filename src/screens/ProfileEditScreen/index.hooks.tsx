@@ -61,7 +61,7 @@ export const useUserProfileEditScreen = () => {
       phonePrefix: "+39",
       phoneNumber: "",
       country: "🇮🇹 Italy",
-      gender: "male",
+      gender: "",
     }),
     [me],
   );
