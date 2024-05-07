@@ -326,6 +326,7 @@ export const colorTokensDark = {
   colorBorderAccentYellow: Colors.Yellow[500],
   colorBorderAccentLime: Colors.Lime[500],
   colorBorderAccentGreen: Colors.Green[500],
+  colorBorderAccentGrayBolder: Colors.DarkNeutral[500],
   colorBorderAccentTeal: Colors.Teal[500],
   colorBorderAccentBlue: Colors.Blue[500],
   colorBorderAccentPurple: Colors.Purple[500],
