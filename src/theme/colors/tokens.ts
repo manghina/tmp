@@ -1,4 +1,7 @@
 import { Colors } from "./palette";
+import {Appearance} from 'react-native';
+
+const colorScheme = Appearance.getColorScheme();
 
 export const colorTokensLight = {
   colorTextDefault: Colors.Neutral[1000],
@@ -38,7 +41,6 @@ export const colorTokensLight = {
   colorTextAccentGraySubtle: Colors.Neutral[400],
   colorTextAccentGray: Colors.Neutral[800],
   colorTextAccentGrayBolder: Colors.Neutral[1100],
-
   colorTextAlternativeDefault: Colors.Neutral[0],
   colorTextAlternativeSubtle: Colors.Neutral[200],
   colorTextAlternativeSubtlest: Colors.Neutral[400],
@@ -270,6 +272,10 @@ export const colorTokensDark = {
   colorTextAccentGray: Colors.Neutral[800],
   colorTextAccentGrayBolder: Colors.Neutral[1100],
 
+  colorTextAccentGraySubtlest: Colors.Neutral[100],
+  colorTextAccentGraySubtler: Colors.Neutral[200],
+  colorTextAccentGraySubtle: Colors.Neutral[400],
+
   colorTextAlternativeDefault: Colors.Neutral[0],
   colorTextAlternativeSubtle: Colors.Neutral[200],
   colorTextAlternativeSubtlest: Colors.Neutral[400],
@@ -461,4 +467,4 @@ export const colorTokensDark = {
   elevationShadowRaised: "0px 8px 12px rgba(0, 0, 0, 0.36)",
 };
 
-export const colorTokens = colorTokensLight;
+export const colorTokens = colorScheme === 'dark' ? colorTokensLight : colorTokensDark;

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { dimensionsTokens } from "../../theme/spacings/tokens";
-import { colorTokens, colorTokensLight } from "../../theme/colors/tokens";
+import { colorTokens } from "../../theme/colors/tokens";
 import { headerHeight } from "../../theme/spacings/dimensions";
 import { FontSizes, FontWeights } from "../../theme/typographies/properties";
 
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colorTokens.elevationSurface,
   },
   title: {
-    color: colorTokensLight.colorTextDanger,
+    color: colorTokens.colorTextDanger,
     fontSize: FontSizes.H3 - 2,
     fontWeight: FontWeights.BLACK,
     lineHeight: FontSizes.H2,

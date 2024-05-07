@@ -4,7 +4,6 @@ import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { Colors } from "@app/theme/colors/palette";
 import { FontSizes } from "@app/theme/typographies/properties";
-import { colorTokensLight } from "@app/theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   pageContentWrapper: {
@@ -32,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: FontSizes.P1,
-    color: colorTokensLight.colorTextInverse,
+    color: colorTokens.colorTextInverse,
   },
   secondaryActionContainer: {
     flexDirection: "row",

@@ -1,7 +1,7 @@
 import { useFormImagePicker } from "./index.hooks";
 import { View, Text, TouchableOpacity, Image } from "react-native-ui-lib";
 import { memo } from "react";
-import { colorTokensLight } from "@app/theme/colors/tokens";
+import { colorTokens } from "@app/theme/colors/tokens";
 import { dimensionsTokens } from "@app/theme/spacings/tokens";
 import { textVariants } from "@app/theme/typographies/variants";
 import PictureIcon from "@app/components/SvgIcons/PictureIcon";
@@ -37,10 +37,10 @@ export const FormImagePicker = memo(
               height: 100,
               aspectRatio: 16 / 10,
               backgroundColor:
-                colorTokensLight.colorBackgroundAccentBlueSubtler,
+              colorTokens.colorBackgroundAccentBlueSubtler,
               borderWidth: 1.5,
               borderStyle: value ? "solid" : "dashed",
-              borderColor: colorTokensLight.colorBackgroundAccentBlueSubtle,
+              borderColor: colorTokens.colorBackgroundAccentBlueSubtle,
               borderRadius: 10,
             }}
           >

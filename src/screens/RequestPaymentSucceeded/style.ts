@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 import { dimensionsTokens } from "../../theme/spacings/tokens";
-import { colorTokensLight } from "../../theme/colors/tokens";
+import { colorTokens } from "../../theme/colors/tokens";
 import * as typographiesProps from "../../theme/typographies/properties";
 
 export const styles = StyleSheet.create({
   viewContainer: {
     width: "100%",
-    backgroundColor: colorTokensLight.elevationSurfaceAlternative,
+    backgroundColor: colorTokens.elevationSurfaceAlternative,
   },
   animation: { width: "100%", height: 300 },
   button: {
@@ -16,14 +16,14 @@ export const styles = StyleSheet.create({
     paddingVertical: dimensionsTokens.paddingXs,
   },
   title: {
-    color: colorTokensLight.colorTextAlternativeDefault,
+    color: colorTokens.colorTextAlternativeDefault,
     letterSpacing: typographiesProps.LetterSpacings.H3,
   },
   text: {
-    color: colorTokensLight.colorTextAlternativeSubtlest,
+    color: colorTokens.colorTextAlternativeSubtlest,
   },
   link: {
-    color: colorTokensLight.colorTextAlternativeSubtlest,
+    color: colorTokens.colorTextAlternativeSubtlest,
     textDecorationLine: "underline",
     paddingVertical: dimensionsTokens.paddingXs,
   },

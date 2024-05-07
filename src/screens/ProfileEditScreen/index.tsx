@@ -50,7 +50,7 @@ export const ProfileEditScreen = () => {
       <View style={userProfileEditStyles.headingContainer}>
         <Text style={userProfileEditStyles.title}>Modifica profilo</Text>
         <Text style={userProfileEditStyles.subTitle}>
-          Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus.
+          Lorem ipsum dolor sit amet consectetur. Id facilisis vestibulum metus
         </Text>
       </View>
       <View style={userProfileEditStyles.formColumn}>

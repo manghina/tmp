@@ -4,7 +4,6 @@ import { Dimensions } from "@app/theme/spacings/dimensions";
 import { textVariants } from "@app/theme/typographies/variants";
 import { colorTokens } from "@app/theme/colors/tokens";
 import { FontSizes } from "../../theme/typographies/properties";
-import { colorTokensLight } from "../../theme/colors/tokens";
 
 export const styles = StyleSheet.create({
   pageContainer: { backgroundColor: colorTokens.elevationSurface },
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: FontSizes.P1,
-    color: colorTokensLight.colorTextInverse,
+    color: colorTokens.colorTextInverse,
   },
   loadingAnimation: {
     width: "100%",
