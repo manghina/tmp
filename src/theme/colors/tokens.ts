@@ -1,7 +1,7 @@
 import { ThemeManager } from "react-native-ui-lib";
 import { Colors } from "./palette";
 import {Appearance, ColorSchemeName} from 'react-native';
-import {updateComponentThemes} from "/index";
+import {updateComponentThemes} from "index";
 const colorScheme = Appearance.getColorScheme();
 const initialColorScheme: ColorSchemeName = colorScheme;
 console.log('Current color scheme:', colorScheme);
