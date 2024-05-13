@@ -1,17 +1,11 @@
 import { Colors, ThemeManager, Typography } from "react-native-ui-lib";
-import { colorTokens } from "./colors/tokens";
+import {  subscribeToAppearanceChanges, colorTokens } from "./colors/tokens";
 import { textVariants } from "./typographies/variants";
+import { Appearance,ColorSchemeName } from "react-native";
 
-export const initTheme = () => {
-  Typography.loadTypographies({
-    h1: { ...textVariants.h1CondensedBlackNormal },
-    h2: { ...textVariants.h2CondensedBlackNormal },
-    h3: { ...textVariants.h3CondensedBlackNormal },
-    h4: { ...textVariants.h4CondensedBlackNormal },
-    h5: { ...textVariants.h5CondensedBlackNormal },
-    h6: { ...textVariants.h6CondensedBlackNormal },
-  });
 
+const updateComponentThemes = (colorScheme: ColorSchemeName) => {
+  // Update component themes based on color scheme
   ThemeManager.setComponentTheme("Text", {
     color: colorTokens.colorTextDefault,
   });
@@ -29,8 +23,8 @@ export const initTheme = () => {
         color: props.disabled
           ? colorTokens.colorTextAccentGray
           : props.GrayButton
-            ? colorTokens.colorTextDefault
-            : colorTokens.colorTextAlternativeDefault,
+          ? colorTokens.colorTextDefault
+          : colorTokens.colorTextAlternativeDefault,
         fontWeight: "500",
         fontSize: 16,
         fontFamily: "HelveticaNeue",
@@ -39,12 +33,29 @@ export const initTheme = () => {
         if (props.GrayButton) {
           return colorTokens.colorBackgroundDisabled;
         } else if (props.whiteTransparentButton) {
-          return Colors.transparent;
+          return Colors.transparent; // Set background color to transparent
         }
-        return colorTokens.colorBackgroundBrandBold;
+       
       })(),
       outlineWidth: props.whiteTransparentButton ? 2 : 0,
       outlineColor: colorTokens.colorTextAlternativeDefault,
     };
   });
+};
+
+
+export const initTheme = () => {
+  // Load typographies
+  Typography.loadTypographies({
+    h1: { ...textVariants.h1CondensedBlackNormal },
+    h2: { ...textVariants.h2CondensedBlackNormal },
+    h3: { ...textVariants.h3CondensedBlackNormal },
+    h4: { ...textVariants.h4CondensedBlackNormal },
+    h5: { ...textVariants.h5CondensedBlackNormal },
+    h6: { ...textVariants.h6CondensedBlackNormal },
+  });
+
+  // Call the subscription function to start listening to appearance changes
+  subscribeToAppearanceChanges();
+  updateComponentThemes(Appearance.getColorScheme());
 };

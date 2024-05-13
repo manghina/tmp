@@ -1,8 +1,10 @@
+import { ThemeManager } from "react-native-ui-lib";
 import { Colors } from "./palette";
-import {Appearance} from 'react-native';
-
+import {Appearance, ColorSchemeName} from 'react-native';
+import {updateComponentThemes} from "/index";
 const colorScheme = Appearance.getColorScheme();
-
+const initialColorScheme: ColorSchemeName = colorScheme;
+console.log('Current color scheme:', colorScheme);
 export const colorTokensLight = {
   colorTextDefault: Colors.Neutral[1000],
   colorTextSubtle: Colors.Neutral[700],
@@ -468,4 +470,19 @@ export const colorTokensDark = {
   elevationShadowRaised: "0px 8px 12px rgba(0, 0, 0, 0.36)",
 };
 
-export const colorTokens = colorScheme === 'dark' ? colorTokensLight : colorTokensDark;
+// Initialize color tokens with the initial color scheme
+export let colorTokens = initialColorScheme === 'dark' ? colorTokensDark : colorTokensLight;
+// Define a function to update color tokens based on the color scheme
+export const updateColorTokens = (scheme: ColorSchemeName) => {
+  colorTokens = scheme === 'dark' ? colorTokensDark : colorTokensLight;
+};
+
+export const subscribeToAppearanceChanges = () => {
+  console.log("Subscribing to appearance changes...");
+  Appearance.addChangeListener(({ colorScheme }) => {
+    console.log('Appearance changed, new color scheme:', colorScheme);
+    updateColorTokens(colorScheme);
+    // Update component themes here
+    updateComponentThemes(colorScheme);
+  });
+};
